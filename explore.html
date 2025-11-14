@@ -559,6 +559,43 @@
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .executive-summary-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(229, 228, 226, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s ease-in-out infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+        
+        .executive-summary-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(229, 228, 226, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(229, 228, 226, 0.5);
         }
         
         .executive-summary-content.visible {
@@ -572,6 +609,8 @@
             line-height: 1.9;
             letter-spacing: 0.3px;
             text-align: left;
+            position: relative;
+            z-index: 1;
         }
         
         .stat-number {
@@ -969,15 +1008,15 @@
         </div>
     </nav>
 
-    <!-- Executive Summary Section -->
+    <!-- About BHAI Holdings Section -->
     <section id="executive-summary" style="margin-top: 80px; padding: 80px 20px 60px;">
         <div class="container">
-            <div class="section-header fade-in">
+            <div class="section-header fade-in" id="about-header">
                 <div class="section-subtitle">Overview</div>
-                <h2 class="section-title">Executive Summary</h2>
+                <h2 class="section-title">About BHAI Holdings</h2>
             </div>
             
-            <div class="executive-summary-content">
+            <div class="executive-summary-content" id="about-content">
                 <p class="executive-text">
                     BHAI Holdings is a diversified investment company with strategic positions across four key sectors: Financial Technology (Fintech), Oil & Gas (Energy), Gold Mining, and Data Centers. Our portfolio encompasses wholly-owned subsidiaries, minority equity stakes, and exclusive representation agreements, positioning us as a significant player in both traditional and emerging markets.
                 </p>
@@ -1329,6 +1368,24 @@
         // Observe all fade-in elements
         document.querySelectorAll('.fade-in, .stat-card, .portfolio-card, .value-prop, .executive-summary-content').forEach(el => {
             observer.observe(el);
+        });
+        
+        // Animate About BHAI Holdings section on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const aboutHeader = document.getElementById('about-header');
+                const aboutContent = document.getElementById('about-content');
+                
+                if (aboutHeader) {
+                    aboutHeader.classList.add('visible');
+                }
+                
+                if (aboutContent) {
+                    setTimeout(() => {
+                        aboutContent.classList.add('visible');
+                    }, 200); // Slight delay for stagger effect
+                }
+            }, 100); // Small delay after page load
         });
         
         // Stagger stat cards animation
