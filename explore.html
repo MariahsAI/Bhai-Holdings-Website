@@ -1380,19 +1380,24 @@
             updateCounter();
         }
         
-        // Trigger counters when stats section is visible
+        // Trigger counters when stats section scrolls into view
+        let countersAnimated = false; // Flag to ensure counters only animate once
+        
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && !countersAnimated) {
                     const statNumbers = entry.target.querySelectorAll('.stat-number[data-target]');
                     statNumbers.forEach(stat => {
                         const target = parseInt(stat.getAttribute('data-target'));
                         animateCounter(stat, target);
                     });
-                    statsObserver.unobserve(entry.target);
+                    countersAnimated = true; // Prevent re-animation
                 }
             });
-        }, { threshold: 0.3 });
+        }, { 
+            threshold: 0.3, // Trigger when 30% of stats section is visible
+            rootMargin: '0px' // No margin adjustment
+        });
         
         const statsSection = document.querySelector('#stats');
         if (statsSection) {
