@@ -541,6 +541,39 @@
             box-shadow: 0 10px 30px rgba(229, 228, 226, 0.5);
         }
         
+        /* Executive Summary Section */
+        .executive-summary-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 60px;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.3) 10px, rgba(0, 0, 0, 0.3) 11px),
+                linear-gradient(145deg, rgba(44, 44, 44, 0.4) 0%, rgba(26, 26, 26, 0.6) 100%);
+            border: 1px solid rgba(229, 228, 226, 0.3);
+            border-left: 3px solid rgba(229, 228, 226, 0.6);
+            border-radius: 10px;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(229, 228, 226, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .executive-summary-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .executive-text {
+            font-size: 18px;
+            color: #E5E4E2;
+            line-height: 1.9;
+            letter-spacing: 0.3px;
+            text-align: left;
+        }
+        
         .stat-number {
             font-size: 56px;
             font-weight: 900;
@@ -936,6 +969,22 @@
         </div>
     </nav>
 
+    <!-- Executive Summary Section -->
+    <section id="executive-summary" style="margin-top: 80px; padding: 80px 20px 60px;">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-subtitle">Overview</div>
+                <h2 class="section-title">Executive Summary</h2>
+            </div>
+            
+            <div class="executive-summary-content">
+                <p class="executive-text">
+                    BHAI Holdings is a diversified investment company with strategic positions across four key sectors: Financial Technology (Fintech), Oil & Gas (Energy), Gold Mining, and Data Centers. Our portfolio encompasses wholly-owned subsidiaries, minority equity stakes, and exclusive representation agreements, positioning us as a significant player in both traditional and emerging markets.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Stats Section -->
     <section id="stats" style="margin-top: 60px;">
         <div class="container">
@@ -1278,7 +1327,7 @@
         }, observerOptions);
         
         // Observe all fade-in elements
-        document.querySelectorAll('.fade-in, .stat-card, .portfolio-card, .value-prop').forEach(el => {
+        document.querySelectorAll('.fade-in, .stat-card, .portfolio-card, .value-prop, .executive-summary-content').forEach(el => {
             observer.observe(el);
         });
         
