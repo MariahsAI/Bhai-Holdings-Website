@@ -1437,18 +1437,36 @@
             updateCounter();
         }
         
-        // Trigger counters when stats section scrolls into view
-        let countersAnimated = false; // Flag to ensure counters only animate once
+        // Reset counters to 0
+        function resetCounters(statNumbers) {
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                if (target >= 1000000000) {
+                    stat.textContent = '$0B+';
+                } else if (target >= 1000000) {
+                    stat.textContent = '0M';
+                } else if (target >= 1000) {
+                    stat.textContent = '0K+';
+                } else {
+                    stat.textContent = '0';
+                }
+            });
+        }
         
+        // Trigger counters when stats section scrolls into view
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && !countersAnimated) {
-                    const statNumbers = entry.target.querySelectorAll('.stat-number[data-target]');
+                const statNumbers = entry.target.querySelectorAll('.stat-number[data-target]');
+                
+                if (entry.isIntersecting) {
+                    // Animate counters when section comes into view
                     statNumbers.forEach(stat => {
                         const target = parseInt(stat.getAttribute('data-target'));
                         animateCounter(stat, target);
                     });
-                    countersAnimated = true; // Prevent re-animation
+                } else {
+                    // Reset counters when section leaves view
+                    resetCounters(statNumbers);
                 }
             });
         }, { 
