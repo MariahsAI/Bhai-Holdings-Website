@@ -21,6 +21,7 @@
         
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
         
         body {
@@ -29,6 +30,7 @@
             color: #ffffff;
             overflow-x: hidden;
             position: relative;
+            perspective: 1000px;
         }
         
         /* Animated Background */
@@ -59,15 +61,16 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 20px 40px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
             z-index: 100;
-            border-bottom: 1px solid rgba(229, 228, 226, 0.1);
+            border-bottom: 1px solid rgba(229, 228, 226, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
         
         .nav-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -75,7 +78,7 @@
         }
         
         .nav-logo {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             background: linear-gradient(135deg, #E5E4E2 0%, #FFFFFF 50%, #E5E4E2 100%);
             -webkit-background-clip: text;
@@ -84,16 +87,50 @@
             letter-spacing: 3px;
         }
         
+        .nav-tabs {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        
+        .nav-tab {
+            color: #A8A8A8;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .nav-tab:hover {
+            color: #E5E4E2;
+            background: rgba(229, 228, 226, 0.1);
+        }
+        
+        .nav-tab.active {
+            color: #000000;
+            background: linear-gradient(135deg, #E5E4E2 0%, #FFFFFF 50%, #E5E4E2 100%);
+            box-shadow: 0 4px 15px rgba(229, 228, 226, 0.3);
+        }
+        
         .nav-link {
             color: #A8A8A8;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 1px;
             transition: color 0.3s ease;
+            padding: 8px 20px;
+            border: 1px solid rgba(229, 228, 226, 0.2);
+            border-radius: 20px;
+            margin-left: 20px;
         }
         
         .nav-link:hover {
             color: #E5E4E2;
+            border-color: rgba(229, 228, 226, 0.4);
         }
         
         /* Section Styling */
@@ -196,6 +233,29 @@
             font-weight: 300;
         }
         
+        /* Section Divider */
+        .section-divider {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #FFFFFF 50%, transparent 100%);
+            margin: 60px auto;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(229, 228, 226, 0.3);
+            position: relative;
+        }
+        
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
         /* Stats Section */
         .stats-grid {
             display: grid;
@@ -229,12 +289,235 @@
         
         .stat-card:hover {
             border-color: rgba(229, 228, 226, 0.6);
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.02);
             box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.8),
-                0 0 80px rgba(229, 228, 226, 0.3),
-                0 0 120px rgba(255, 255, 255, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 30px 70px rgba(0, 0, 0, 0.9),
+                0 0 100px rgba(229, 228, 226, 0.4),
+                0 0 150px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+        
+        .stat-card.featured-stat {
+            grid-column: span 2;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.4) 10px, rgba(0, 0, 0, 0.4) 11px),
+                linear-gradient(145deg, #2C2C2C 0%, #1a1a1a 100%);
+            border: 2px solid rgba(229, 228, 226, 0.5);
+            padding: 50px;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.9),
+                0 0 80px rgba(229, 228, 226, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        .stat-card.featured-stat:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 1),
+                0 0 120px rgba(229, 228, 226, 0.6),
+                0 0 180px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+        
+        .stat-card.featured-stat .stat-number {
+            font-size: 72px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(229, 228, 226, 0.15);
+            border: 1px solid rgba(229, 228, 226, 0.4);
+            border-radius: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #E5E4E2;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .stat-growth {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #7FFF7F;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .stat-verification {
+            margin-top: 12px;
+            font-size: 11px;
+            color: #7FFF7F;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .fintech-products {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .product-badge {
+            padding: 5px 12px;
+            background: rgba(229, 228, 226, 0.1);
+            border: 1px solid rgba(229, 228, 226, 0.3);
+            border-radius: 15px;
+            font-size: 11px;
+            color: #E5E4E2;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        /* Coming Soon Section */
+        .coming-soon-container {
+            text-align: center;
+            padding: 100px 40px;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.2) 10px, rgba(0, 0, 0, 0.2) 11px),
+                linear-gradient(145deg, rgba(44, 44, 44, 0.4) 0%, rgba(26, 26, 26, 0.6) 100%);
+            border: 1px solid rgba(229, 228, 226, 0.2);
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .coming-soon-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .coming-soon-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+        
+        .coming-soon-title {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFFFFF 50%, #A8A8A8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .coming-soon-text {
+            font-size: 16px;
+            color: #A8A8A8;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Coming Soon Modal */
+        .coming-soon-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.3) 10px, rgba(0, 0, 0, 0.3) 11px),
+                linear-gradient(145deg, #2C2C2C 0%, #1a1a1a 100%);
+            border: 2px solid rgba(229, 228, 226, 0.5);
+            border-radius: 20px;
+            padding: 60px 80px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.9),
+                0 0 100px rgba(229, 228, 226, 0.3);
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .coming-soon-modal.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .modal-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E5E4E2 0%, #FFFFFF 50%, #E5E4E2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .modal-text {
+            font-size: 15px;
+            color: #A8A8A8;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .modal-close {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #E5E4E2 0%, #FFFFFF 50%, #E5E4E2 100%);
+            color: #000000;
+            border: none;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(229, 228, 226, 0.5);
         }
         
         .stat-number {
@@ -288,12 +571,12 @@
         
         .portfolio-card:hover {
             border-color: rgba(229, 228, 226, 0.6);
-            transform: translateY(-10px);
+            transform: translateY(-15px) rotateX(2deg);
             box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.8),
-                0 0 80px rgba(229, 228, 226, 0.3),
-                0 0 120px rgba(255, 255, 255, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 30px 70px rgba(0, 0, 0, 0.9),
+                0 0 100px rgba(229, 228, 226, 0.4),
+                0 0 150px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
         
         .portfolio-card.featured {
@@ -518,8 +801,31 @@
                 padding: 15px 20px;
             }
             
+            .nav-content {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
             .nav-logo {
                 font-size: 16px;
+            }
+            
+            .nav-tabs {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+            
+            .nav-link {
+                font-size: 12px;
+                padding: 6px 15px;
+                margin-left: 0;
             }
             
             section {
@@ -545,6 +851,15 @@
                 gap: 30px;
             }
             
+            .stat-card.featured-stat {
+                grid-column: span 1;
+                padding: 30px;
+            }
+            
+            .stat-card.featured-stat .stat-number {
+                font-size: 48px;
+            }
+            
             .portfolio-card.featured {
                 grid-column: span 1;
                 padding: 30px;
@@ -559,15 +874,44 @@
                 width: 100%;
                 max-width: 300px;
             }
+            
+            .coming-soon-modal {
+                padding: 40px;
+                max-width: 90%;
+            }
+            
+            .modal-title {
+                font-size: 24px;
+            }
+            
+            .modal-text {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Coming Soon Modal -->
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="coming-soon-modal" id="comingSoonModal">
+        <div class="modal-icon">🚀</div>
+        <h3 class="modal-title">Coming Soon</h3>
+        <p class="modal-text">This section is currently under development. Stay tuned for exciting updates!</p>
+        <button class="modal-close" onclick="closeModal()">Got It</button>
+    </div>
+    
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
             <div class="nav-logo">BHAI HOLDINGS</div>
-            <a href="landing-page.html" class="nav-link">← Back to Home</a>
+            <div class="nav-tabs">
+                <a href="#stats" class="nav-tab">Overview</a>
+                <a href="#" class="nav-tab coming-soon-tab" data-section="Portfolio">Portfolio</a>
+                <a href="#" class="nav-tab coming-soon-tab" data-section="Partnerships">Partnerships</a>
+                <a href="#" class="nav-tab coming-soon-tab" data-section="Affiliates">Affiliates</a>
+                <a href="#" class="nav-tab coming-soon-tab" data-section="Advantage">Advantage</a>
+            </div>
+            <a href="index.html" class="nav-link">← Back to Home</a>
         </div>
     </nav>
 
@@ -583,31 +927,44 @@
             </div>
             
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">$1B+</div>
-                    <div class="stat-label">Trading Volume<br>Processed</div>
+                <!-- Featured: $1B+ Trading Volume -->
+                <div class="stat-card featured-stat">
+                    <div class="stat-badge">Industry Leading</div>
+                    <div class="stat-number" data-target="1000000000">$0</div>
+                    <div class="stat-label">Trading Volume Processed</div>
+                    <div class="stat-growth">↑ 500%+ Growth</div>
                 </div>
                 
                 <div class="stat-card">
-                    <div class="stat-number">30K+</div>
+                    <div class="stat-number" data-target="30000">0</div>
                     <div class="stat-label">Ounces of Gold<br>Discovered (43-101 Backed)</div>
+                    <div class="stat-verification">✓ Verified Report</div>
                 </div>
                 
                 <div class="stat-card">
-                    <div class="stat-number">2.5M</div>
+                    <div class="stat-number" data-target="2500000">0</div>
                     <div class="stat-label">Barrels of Oil<br>Proved (53-101 Report)</div>
+                    <div class="stat-verification">✓ Verified Report</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="stat-number">Multiple</div>
                     <div class="stat-label">Fintech Products<br>Created</div>
+                    <div class="fintech-products">
+                        <span class="product-badge">MX1</span>
+                        <span class="product-badge">GloFi</span>
+                        <span class="product-badge">RSVIP</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
     <!-- Portfolio Preview Section -->
-    <section class="portfolio-preview">
+    <section id="wholly-owned" class="portfolio-preview">
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-subtitle">100% Ownership</div>
@@ -714,8 +1071,11 @@
         </div>
     </section>
     
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
     <!-- Joint Ventures & Partnerships Section -->
-    <section>
+    <section id="partnerships">
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-subtitle">Partial Ownership</div>
@@ -752,8 +1112,11 @@
         </div>
     </section>
     
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
     <!-- Strategic Affiliates Section -->
-    <section>
+    <section id="affiliates">
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-subtitle">Strategic Relationships</div>
@@ -805,8 +1168,11 @@
         </div>
     </section>
     
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
     <!-- Value Props Section -->
-    <section>
+    <section id="advantage">
         <div class="container">
             <div class="section-header fade-in">
                 <div class="section-subtitle">Why BHAI Holdings</div>
@@ -911,6 +1277,107 @@
         const valueProps = document.querySelectorAll('.value-prop');
         valueProps.forEach((prop, index) => {
             prop.style.transitionDelay = `${index * 0.15}s`;
+        });
+        
+        // Animated Counter Effect
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16); // 60fps
+            
+            const updateCounter = () => {
+                start += increment;
+                if (start < target) {
+                    if (target >= 1000000000) {
+                        element.textContent = '$' + (start / 1000000000).toFixed(1) + 'B+';
+                    } else if (target >= 1000000) {
+                        element.textContent = (start / 1000000).toFixed(1) + 'M';
+                    } else if (target >= 1000) {
+                        element.textContent = (start / 1000).toFixed(0) + 'K+';
+                    } else {
+                        element.textContent = Math.floor(start);
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    if (target >= 1000000000) {
+                        element.textContent = '$1B+';
+                    } else if (target >= 1000000) {
+                        element.textContent = '2.5M';
+                    } else if (target >= 1000) {
+                        element.textContent = '30K+';
+                    }
+                }
+            };
+            updateCounter();
+        }
+        
+        // Trigger counters when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number[data-target]');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        animateCounter(stat, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        const statsSection = document.querySelector('#stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+        
+        // Active tab highlighting on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navTabs = document.querySelectorAll('.nav-tab');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navTabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('href') === `#${current}`) {
+                    tab.classList.add('active');
+                }
+            });
+        });
+        
+        // Coming Soon Modal
+        const comingSoonTabs = document.querySelectorAll('.coming-soon-tab');
+        const modal = document.getElementById('comingSoonModal');
+        const backdrop = document.getElementById('modalBackdrop');
+        
+        comingSoonTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionName = tab.getAttribute('data-section');
+                modal.querySelector('.modal-text').textContent = `The ${sectionName} section is currently under development. Stay tuned for exciting updates!`;
+                modal.classList.add('show');
+                backdrop.classList.add('show');
+            });
+        });
+        
+        function closeModal() {
+            modal.classList.remove('show');
+            backdrop.classList.remove('show');
+        }
+        
+        backdrop.addEventListener('click', closeModal);
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
         });
     </script>
 </body>
