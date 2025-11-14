@@ -116,6 +116,32 @@
         .section-header {
             text-align: center;
             margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .section-header::before,
+        .section-header::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(229, 228, 226, 0.3);
+        }
+        
+        .section-header::before {
+            top: -20px;
+            left: 50%;
+            transform: translateX(-60px);
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .section-header::after {
+            top: -20px;
+            left: 50%;
+            transform: translateX(20px);
+            border-left: none;
+            border-bottom: none;
         }
         
         .section-title {
@@ -137,6 +163,38 @@
             letter-spacing: 5px;
             font-weight: 600;
             margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-subtitle::before,
+        .section-subtitle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(229, 228, 226, 0.5));
+        }
+        
+        .section-subtitle::before {
+            right: 100%;
+            margin-right: 15px;
+        }
+        
+        .section-subtitle::after {
+            left: 100%;
+            margin-left: 15px;
+            background: linear-gradient(90deg, rgba(229, 228, 226, 0.5), transparent);
+        }
+        
+        .section-description {
+            font-size: 16px;
+            color: #A8A8A8;
+            max-width: 800px;
+            margin: 20px auto 0;
+            line-height: 1.8;
+            font-weight: 300;
         }
         
         /* Stats Section */
@@ -151,12 +209,18 @@
         .stat-card {
             text-align: center;
             padding: 40px;
-            background: rgba(44, 44, 44, 0.3);
-            border: 1px solid rgba(229, 228, 226, 0.2);
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.3) 10px, rgba(0, 0, 0, 0.3) 11px),
+                linear-gradient(145deg, rgba(44, 44, 44, 0.6) 0%, rgba(26, 26, 26, 0.8) 100%);
+            border: 1px solid rgba(229, 228, 226, 0.3);
             border-radius: 20px;
             transition: all 0.4s ease;
             opacity: 0;
             transform: translateY(30px);
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(229, 228, 226, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .stat-card.visible {
@@ -165,10 +229,13 @@
         }
         
         .stat-card:hover {
-            background: rgba(44, 44, 44, 0.5);
-            border-color: rgba(229, 228, 226, 0.4);
+            border-color: rgba(229, 228, 226, 0.6);
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(229, 228, 226, 0.3),
+                0 0 120px rgba(255, 255, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         
         .stat-number {
@@ -179,6 +246,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
+            filter: drop-shadow(0 2px 10px rgba(229, 228, 226, 0.3));
         }
         
         .stat-label {
@@ -198,14 +266,20 @@
         }
         
         .portfolio-card {
-            background: rgba(44, 44, 44, 0.3);
-            border: 1px solid rgba(229, 228, 226, 0.2);
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.3) 10px, rgba(0, 0, 0, 0.3) 11px),
+                linear-gradient(145deg, rgba(44, 44, 44, 0.6) 0%, rgba(26, 26, 26, 0.8) 100%);
+            border: 1px solid rgba(229, 228, 226, 0.3);
             border-radius: 20px;
             padding: 40px;
             transition: all 0.4s ease;
             opacity: 0;
             transform: translateY(30px);
             position: relative;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(229, 228, 226, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .portfolio-card.visible {
@@ -214,30 +288,50 @@
         }
         
         .portfolio-card:hover {
-            background: rgba(44, 44, 44, 0.5);
-            border-color: rgba(229, 228, 226, 0.4);
+            border-color: rgba(229, 228, 226, 0.6);
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(229, 228, 226, 0.3),
+                0 0 120px rgba(255, 255, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         
         .portfolio-card.featured {
             grid-column: span 2;
-            background: linear-gradient(135deg, rgba(44, 44, 44, 0.4) 0%, rgba(68, 68, 68, 0.3) 100%);
-            border: 2px solid rgba(229, 228, 226, 0.3);
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.4) 10px, rgba(0, 0, 0, 0.4) 11px),
+                linear-gradient(145deg, #2C2C2C 0%, #1a1a1a 100%);
+            border: 2px solid rgba(229, 228, 226, 0.5);
             padding: 50px;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.9),
+                0 0 80px rgba(229, 228, 226, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        .portfolio-card.featured:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 1),
+                0 0 120px rgba(229, 228, 226, 0.6),
+                0 0 180px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
         
         .portfolio-card-tag {
             display: inline-block;
-            padding: 6px 16px;
-            background: rgba(229, 228, 226, 0.1);
-            border: 1px solid rgba(229, 228, 226, 0.3);
+            padding: 8px 18px;
+            background: rgba(229, 228, 226, 0.15);
+            border: 1px solid rgba(229, 228, 226, 0.4);
             border-radius: 20px;
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #E5E4E2;
             margin-bottom: 20px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .portfolio-card-title {
@@ -246,12 +340,53 @@
             color: #FFFFFF;
             margin-bottom: 20px;
             letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
         
         .portfolio-card-description {
             font-size: 15px;
             color: #A8A8A8;
             line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        /* Project Links */
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(229, 228, 226, 0.05);
+            border: 1px solid rgba(229, 228, 226, 0.2);
+            border-radius: 25px;
+            color: #E5E4E2;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background: rgba(229, 228, 226, 0.15);
+            border-color: rgba(229, 228, 226, 0.4);
+            transform: translateX(3px);
+            box-shadow: 0 5px 20px rgba(229, 228, 226, 0.2);
+        }
+        
+        .link-arrow {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-link:hover .link-arrow {
+            transform: translateX(3px);
         }
         
         /* Value Props Section */
@@ -443,6 +578,9 @@
             <div class="section-header fade-in">
                 <div class="section-subtitle">Our Portfolio at a Glance</div>
                 <h2 class="section-title">Proven Performance</h2>
+                <p class="section-description">
+                    Real results from operational businesses, backed by verified reports and institutional-grade metrics.
+                </p>
             </div>
             
             <div class="stats-grid">
@@ -473,8 +611,11 @@
     <section class="portfolio-preview">
         <div class="container">
             <div class="section-header fade-in">
-                <div class="section-subtitle">Strategic Holdings</div>
+                <div class="section-subtitle">100% Ownership</div>
                 <h2 class="section-title">Wholly Owned Ventures</h2>
+                <p class="section-description">
+                    Core companies and products fully developed, owned, and operated by Bhai Holdings, LLC.
+                </p>
             </div>
             
             <div class="portfolio-grid">
@@ -483,26 +624,68 @@
                     <span class="portfolio-card-tag">Featured</span>
                     <h3 class="portfolio-card-title">MX1 Trading Platform</h3>
                     <p class="portfolio-card-description">
-                        AI-powered cryptocurrency trading platform with proven revenue of $47K in one month, $185M trading volume, and institutional-grade technology. Powered by Mariah™ - 13 specialized AI agents working 24/7.
+                        AI-powered cryptocurrency trading platform with proven revenue of $47K in one month, $185M trading volume through testing phases, and institutional-grade technology. Powered by Mariah™ - 13 specialized AI agents working 24/7.
                     </p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>Business Overview</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="https://mariahsai.github.io/Business-Overview/index.html" class="project-link">
+                            <span>Investment Deck</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>Product Demo</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
                 
                 <!-- GloFi -->
                 <div class="portfolio-card">
                     <h3 class="portfolio-card-title">GloFi</h3>
                     <p class="portfolio-card-description">
-                        Next-generation financial technology platform solving the $100 trillion interoperability problem.
+                        Next-generation financial technology platform solving the $100 trillion interoperability problem. Enabling seamless cross-platform asset management and financial services integration.
                     </p>
                     <span class="portfolio-card-tag">Fintech</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>Business Overview</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>Investment Deck</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="https://medium.com/@glofi/the-100-trillion-problem-why-your-assets-dont-talk-to-each-other-and-how-we-re-fixing-it-e0af1ec7082b" class="project-link">
+                            <span>Articles</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
                 
                 <!-- RSVIP -->
                 <div class="portfolio-card">
                     <h3 class="portfolio-card-title">RSVIP</h3>
                     <p class="portfolio-card-description">
-                        Premium event management and networking platform for high-value communities.
+                        Premium event management and networking platform for high-value communities. Streamlining exclusive events with intelligent automation and VIP experience management.
                     </p>
                     <span class="portfolio-card-tag">Platform</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>Business Overview</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>Investment Deck</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>Product Demo</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
                 
                 <!-- NorthEast Oil & Gas -->
@@ -510,13 +693,115 @@
                     <span class="portfolio-card-tag">Energy</span>
                     <h3 class="portfolio-card-title">NorthEast Oil & Gas</h3>
                     <p class="portfolio-card-description">
-                        418-acre oil & gas asset in New York. $19.5M NPV @ 10% with 1,272 Mboe contingent resources.
+                        418-acre oil & gas asset in Cattaraugus County, NY with 100% royalty and working interest. Bradford Third formation with 1,272 Mboe contingent resources. NI 51-101 compliant valuation shows $19.5M NPV @ 10%. Phased development utilizing modern horizontal drilling techniques.
                     </p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>Business Overview</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>Investment Deck</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>NI 51-101 Report</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- Joint Ventures & Partnerships Section -->
+    <section>
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-subtitle">Partial Ownership</div>
+                <h2 class="section-title">Joint Ventures & Partnerships</h2>
+                <p class="section-description">
+                    Strategic collaborations where Bhai Holdings holds significant equity stakes and operational involvement.
+                </p>
             </div>
             
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#" class="cta-button">View Full Portfolio</a>
+            <div class="portfolio-grid">
+                <!-- Bonanza Gold Mine Card -->
+                <div class="portfolio-card">
+                    <h3 class="portfolio-card-title">Bonanza Gold Mine</h3>
+                    <p class="portfolio-card-description">
+                        Strategic gold mining operation with proven reserves and development potential. Joint venture partnership focused on sustainable extraction and value maximization.
+                    </p>
+                    <span class="portfolio-card-tag">Mining</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>Business Overview</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="https://bhaiholdings.github.io/Bonanza-Mine/bonanza-mine-buyout-pitch-deck.html" class="project-link">
+                            <span>Investment Deck</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>Technical Data</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Strategic Affiliates Section -->
+    <section>
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-subtitle">Strategic Relationships</div>
+                <h2 class="section-title">Strategic Affiliates</h2>
+                <p class="section-description">
+                    Companies and platforms we're associated with through technology partnerships, integrations, or advisory relationships.
+                </p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Nebraska Oil & Gas Card -->
+                <div class="portfolio-card">
+                    <h3 class="portfolio-card-title">Nebraska Oil & Gas</h3>
+                    <p class="portfolio-card-description">
+                        Strategic oil and gas operations in Nebraska with focus on exploration and development opportunities in proven geological basins.
+                    </p>
+                    <span class="portfolio-card-tag">Energy</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>Partnership Details</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>Technical Data</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Utah Oil & Gas Card -->
+                <div class="portfolio-card">
+                    <h3 class="portfolio-card-title">Utah Oil & Gas</h3>
+                    <p class="portfolio-card-description">
+                        Strategic oil and gas operations in Utah with focus on exploration and development opportunities in proven geological basins.
+                    </p>
+                    <span class="portfolio-card-tag">Energy</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>Partnership Details</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                        <a href="#" class="project-link">
+                            <span>Technical Data</span>
+                            <span class="link-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -527,6 +812,9 @@
             <div class="section-header fade-in">
                 <div class="section-subtitle">Why BHAI Holdings</div>
                 <h2 class="section-title">Strategic Advantage</h2>
+                <p class="section-description">
+                    Diversified portfolio across high-growth sectors with proven revenue generation and institutional-grade infrastructure.
+                </p>
             </div>
             
             <div class="value-props-grid">
