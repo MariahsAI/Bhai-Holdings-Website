@@ -5,34 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BHAI Holdings — Strategic Partnerships</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="BHAI Holdings strategic partnerships with industry leaders including NorthEast Asset Group, PrecisionX, Bitunix, OKX, LBank, Weex, BingX, Bitget, and Flex.">
-    <meta name="keywords" content="BHAI Holdings partnerships, NorthEast Asset Group, PrecisionX, cryptocurrency exchanges, strategic alliances">
-    <meta name="author" content="BHAI Holdings, LLC">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="BHAI Holdings — Strategic Partnerships">
-    <meta property="og:description" content="Strategic partnerships with industry-leading companies across fintech, energy, and digital assets.">
-    <meta property="og:image" content="https://mariahsai.github.io/Bhai-Holdings-Website/bhai-og-image.png">
-    <meta property="og:url" content="https://mariahsai.github.io/Bhai-Holdings-Website/partnerships">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="BHAI Holdings">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="BHAI Holdings — Strategic Partnerships">
-    <meta name="twitter:description" content="Strategic partnerships with industry-leading companies across fintech, energy, and digital assets.">
-    <meta name="twitter:image" content="https://mariahsai.github.io/Bhai-Holdings-Website/bhai-og-image.png">
-    
-    <!-- Mobile Meta Tags -->
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://mariahsai.github.io/Bhai-Holdings-Website/partnerships">
-    
     <style>
         * {
             margin: 0;
@@ -41,11 +13,10 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #000000 100%);
-            color: #E5E4E2;
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow: hidden;
         }
         
         /* Navigation */
@@ -54,16 +25,14 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(229, 228, 226, 0.1);
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px 40px;
             z-index: 100;
         }
         
         .nav-content {
-            max-width: 1400px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -80,209 +49,436 @@
         }
         
         .back-link {
-            color: #A8A8A8;
+            color: #ffffff;
             text-decoration: none;
             font-size: 14px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(229, 228, 226, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 10px 25px;
             border-radius: 25px;
+            transition: all 0.3s ease;
         }
         
         .back-link:hover {
-            color: #E5E4E2;
-            border-color: rgba(229, 228, 226, 0.6);
+            border-color: rgba(255, 255, 255, 0.6);
             transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
         }
         
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
+        /* Split Screen Container */
+        .split-container {
+            display: flex;
+            margin-top: 80px;
+            height: calc(100vh - 80px);
         }
         
-        /* Hero Section */
-        .hero {
-            margin-top: 120px;
-            padding: 60px 20px;
-            text-align: center;
+        /* LEFT SIDE - Partners List */
+        .left-side {
+            width: 50%;
+            background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+            overflow-y: auto;
+            padding: 60px 80px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
         
-        .section-subtitle {
-            font-size: 11px;
-            color: #A8A8A8;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            font-weight: 600;
+        .left-side::-webkit-scrollbar {
+            width: 8px;
         }
         
-        .section-title {
-            font-size: 56px;
+        .left-side::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .left-side::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        .left-side::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.2s;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .search-input::placeholder {
+            color: #666666;
+        }
+        
+        .page-title {
+            font-size: 48px;
             font-weight: 800;
             background: linear-gradient(135deg, #A8A8A8 0%, #FFFFFF 50%, #A8A8A8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-        }
-        
-        .section-description {
-            font-size: 18px;
-            color: #A8A8A8;
-            max-width: 700px;
-            margin: 0 auto 60px;
-            line-height: 1.8;
-        }
-        
-        /* Partnerships Grid */
-        .partnerships-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-        
-        .partner-card {
-            background: 
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.3) 10px, rgba(0, 0, 0, 0.3) 11px),
-                linear-gradient(145deg, rgba(44, 44, 44, 0.4) 0%, rgba(26, 26, 26, 0.6) 100%);
-            border: 1px solid rgba(229, 228, 226, 0.3);
-            border-radius: 15px;
-            padding: 50px 40px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        .partner-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .partner-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(229, 228, 226, 0.05),
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: shine 4s ease-in-out infinite;
-        }
-        
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
-        
-        .partner-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(229, 228, 226, 0.5);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.8),
-                0 0 80px rgba(229, 228, 226, 0.2);
-        }
-        
-        .partner-name {
-            font-size: 32px;
-            font-weight: 700;
-            color: #E5E4E2;
             margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
         
-        .partner-category {
-            display: inline-block;
-            font-size: 11px;
-            color: #A8A8A8;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 8px 20px;
-            border: 1px solid rgba(229, 228, 226, 0.3);
-            border-radius: 20px;
-            margin-top: 10px;
-            position: relative;
-            z-index: 1;
+        .page-subtitle {
+            font-size: 16px;
+            color: #888888;
+            margin-bottom: 60px;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.1s;
         }
         
-        /* Category Sections */
-        .category-section {
-            margin-bottom: 80px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+        
+        .category-group {
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .category-group:nth-child(1) { animation-delay: 0.3s; }
+        .category-group:nth-child(2) { animation-delay: 0.4s; }
+        .category-group:nth-child(3) { animation-delay: 0.5s; }
+        .category-group:nth-child(4) { animation-delay: 0.6s; }
+        .category-group:nth-child(5) { animation-delay: 0.7s; }
+        .category-group:nth-child(6) { animation-delay: 0.8s; }
         
         .category-header {
-            text-align: left;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(229, 228, 226, 0.2);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-header:hover .category-title {
+            color: #ffffff;
         }
         
         .category-title {
-            font-size: 32px;
-            font-weight: 700;
-            color: #E5E4E2;
-            margin-bottom: 10px;
+            font-size: 12px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
         
-        .category-description {
-            font-size: 16px;
-            color: #A8A8A8;
-            line-height: 1.6;
+        .partner-count {
+            font-size: 11px;
+            color: #666666;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 12px;
+            border-radius: 12px;
+            letter-spacing: 1px;
         }
         
-        /* Animations */
-        .fade-in {
+        .category-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #ffffff, transparent);
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .partner-item {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .partner-item:hover {
+            padding-left: 15px;
+            border-left: 2px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateX(3px);
+        }
+        
+        .partner-item.active {
+            padding-left: 15px;
+            border-left: 2px solid #ffffff;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+        }
+        
+        .partner-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-item:hover .partner-name {
+            letter-spacing: 0.5px;
+        }
+        
+        .partner-arrow {
+            font-size: 18px;
+            color: #666666;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-item:hover .partner-arrow,
+        .partner-item.active .partner-arrow {
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .back-to-top:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top::before {
+            content: '↑';
+            color: #ffffff;
+            font-size: 20px;
+        }
+        
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            z-index: 99;
+            transition: width 0.1s ease;
+        }
+        
+        /* RIGHT SIDE - Detail Panel */
+        .right-side {
+            width: 50%;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.015) 10px, rgba(255, 255, 255, 0.015) 11px),
+                linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* Animated background glow */
+        .right-side::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .detail-content {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
         }
         
-        .fade-in.visible {
+        .detail-content.visible {
             opacity: 1;
             transform: translateY(0);
         }
         
+        .detail-category {
+            font-size: 12px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .detail-name {
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFFFFF 50%, #A8A8A8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+            line-height: 1.1;
+            letter-spacing: 1px;
+        }
+        
+        .detail-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #ffffff, transparent);
+            margin-bottom: 40px;
+        }
+        
+        .detail-description {
+            font-size: 20px;
+            color: #888888;
+            line-height: 1.8;
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+        
+        .detail-meta {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .meta-label {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .meta-value {
+            font-size: 16px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .detail-placeholder {
+            text-align: center;
+            color: #666666;
+        }
+        
+        .detail-placeholder-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            opacity: 0.3;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+        
+        .detail-placeholder-text {
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+        
         /* Responsive */
+        @media (max-width: 1024px) {
+            .split-container {
+                flex-direction: column;
+            }
+            
+            .left-side,
+            .right-side {
+                width: 100%;
+                height: auto;
+            }
+            
+            .right-side {
+                min-height: 60vh;
+                position: relative;
+            }
+            
+            .back-to-top {
+                display: none;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .section-title {
-                font-size: 36px;
-            }
-            
-            .partnerships-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .partner-card {
+            .left-side {
                 padding: 40px 30px;
             }
             
-            .partner-name {
-                font-size: 26px;
+            .right-side {
+                padding: 40px 30px;
+            }
+            
+            .page-title {
+                font-size: 36px;
+            }
+            
+            .detail-name {
+                font-size: 42px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-content">
             <div class="logo">BHAI HOLDINGS</div>
@@ -290,176 +486,284 @@
         </div>
     </nav>
     
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="section-subtitle">Strategic Alliances</div>
-            <h1 class="section-title">Our Partnerships</h1>
-            <p class="section-description">
-                BHAI Holdings collaborates with industry-leading organizations across multiple sectors to deliver exceptional value and innovation.
-            </p>
-        </div>
-    </section>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
     
-    <!-- Strategic Partners -->
-    <section class="category-section">
-        <div class="container">
-            <div class="category-header fade-in">
-                <h2 class="category-title">Strategic Partners</h2>
-                <p class="category-description">Key partnerships across financial services and technology sectors.</p>
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop"></div>
+    
+    <div class="split-container">
+        <!-- LEFT SIDE: Partners List -->
+        <div class="left-side" id="leftSide">
+            <h1 class="page-title">Our Partnerships</h1>
+            <p class="page-subtitle">Strategic alliances with industry-leading organizations across multiple sectors.</p>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search partners...">
             </div>
             
-            <div class="partnerships-grid">
-                <div class="partner-card">
-                    <h3 class="partner-name">Northern Debt Management</h3>
-                    <span class="partner-category">Financial Services</span>
+            <!-- Strategic Partners -->
+            <div class="category-group">
+                <div class="category-header">
+                    <div>
+                        <div class="category-title">Strategic Partners</div>
+                        <div class="category-line"></div>
+                    </div>
+                    <div class="partner-count">1 Partner</div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Energy & Resources -->
-    <section class="category-section">
-        <div class="container">
-            <div class="category-header fade-in">
-                <h2 class="category-title">Energy & Resources</h2>
-                <p class="category-description">Partnerships in energy development and resource management.</p>
+                <div class="partner-item" data-name="Northern Debt Management" data-category="Financial Services" data-industry="Finance" data-description="Strategic financial services partnership specializing in debt management and financial restructuring solutions for institutional and commercial clients.">
+                    <div class="partner-name">Northern Debt Management</div>
+                    <div class="partner-arrow">→</div>
+                </div>
             </div>
             
-            <div class="partnerships-grid">
-                <div class="partner-card">
-                    <h3 class="partner-name">PrecisionX</h3>
-                    <span class="partner-category">Energy Technology</span>
+            <!-- Energy & Resources -->
+            <div class="category-group">
+                <div class="category-header">
+                    <div>
+                        <div class="category-title">Energy & Resources</div>
+                        <div class="category-line"></div>
+                    </div>
+                    <div class="partner-count">3 Partners</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">McCaffery Oil & Gas</h3>
-                    <span class="partner-category">Oil & Gas</span>
+                <div class="partner-item" data-name="PrecisionX" data-category="Energy Technology" data-industry="Energy" data-description="Advanced energy technology solutions provider focused on precision drilling, resource optimization, and operational efficiency in the energy sector.">
+                    <div class="partner-name">PrecisionX</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">Harquahala Gold Mine</h3>
-                    <span class="partner-category">Mining</span>
+                <div class="partner-item" data-name="McCaffery Oil & Gas" data-category="Oil & Gas" data-industry="Energy" data-description="Leading oil and gas exploration and production company with proven reserves, modern extraction techniques, and strong operational expertise.">
+                    <div class="partner-name">McCaffery Oil & Gas</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Financial Infrastructure -->
-    <section class="category-section">
-        <div class="container">
-            <div class="category-header fade-in">
-                <h2 class="category-title">Financial Infrastructure</h2>
-                <p class="category-description">Strategic partnerships with payment networks and blockchain infrastructure providers.</p>
+                <div class="partner-item" data-name="Harquahala Gold Mine" data-category="Mining" data-industry="Mining" data-description="Gold mining operation with significant mineral reserves and strategic development potential in precious metals extraction.">
+                    <div class="partner-name">Harquahala Gold Mine</div>
+                    <div class="partner-arrow">→</div>
+                </div>
             </div>
             
-            <div class="partnerships-grid">
-                <div class="partner-card">
-                    <h3 class="partner-name">Visa</h3>
-                    <span class="partner-category">Payment Network</span>
+            <!-- Financial Infrastructure -->
+            <div class="category-group">
+                <div class="category-header">
+                    <div>
+                        <div class="category-title">Financial Infrastructure</div>
+                        <div class="category-line"></div>
+                    </div>
+                    <div class="partner-count">4 Partners</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">Circle</h3>
-                    <span class="partner-category">Stablecoin & Payments</span>
+                <div class="partner-item" data-name="Visa" data-category="Payment Network" data-industry="Fintech" data-description="Global payment technology company enabling digital commerce and secure payment processing for billions of transactions worldwide.">
+                    <div class="partner-name">Visa</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">Transak</h3>
-                    <span class="partner-category">Fiat On-Ramp</span>
+                <div class="partner-item" data-name="Circle" data-category="Stablecoin & Payments" data-industry="Fintech" data-description="Leading stablecoin issuer and payment infrastructure provider powering USDC and digital dollar transactions globally.">
+                    <div class="partner-name">Circle</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">Rubic</h3>
-                    <span class="partner-category">Cross-Chain Exchange</span>
+                <div class="partner-item" data-name="Transak" data-category="Fiat On-Ramp" data-industry="Fintech" data-description="Fiat-to-crypto payment gateway enabling seamless conversion between traditional currencies and digital assets with regulatory compliance.">
+                    <div class="partner-name">Transak</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Digital Asset Exchanges -->
-    <section class="category-section">
-        <div class="container">
-            <div class="category-header fade-in">
-                <h2 class="category-title">Digital Asset Exchanges</h2>
-                <p class="category-description">Partnerships with leading cryptocurrency exchanges and trading platforms.</p>
+                <div class="partner-item" data-name="Rubic" data-category="Cross-Chain Exchange" data-industry="Fintech" data-description="Multi-chain swap protocol facilitating cross-chain token exchanges and decentralized finance integrations across 70+ blockchains.">
+                    <div class="partner-name">Rubic</div>
+                    <div class="partner-arrow">→</div>
+                </div>
             </div>
             
-            <div class="partnerships-grid">
-                <div class="partner-card">
-                    <h3 class="partner-name">Bitunix</h3>
-                    <span class="partner-category">Crypto Exchange</span>
+            <!-- Digital Asset Exchanges -->
+            <div class="category-group">
+                <div class="category-header">
+                    <div>
+                        <div class="category-title">Digital Asset Exchanges</div>
+                        <div class="category-line"></div>
+                    </div>
+                    <div class="partner-count">6 Partners</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">OKX</h3>
-                    <span class="partner-category">Crypto Exchange</span>
+                <div class="partner-item" data-name="Bitunix" data-category="Crypto Exchange" data-industry="Cryptocurrency" data-description="Cryptocurrency trading platform offering spot and derivatives trading with institutional-grade security and advanced trading tools.">
+                    <div class="partner-name">Bitunix</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">LBank</h3>
-                    <span class="partner-category">Crypto Exchange</span>
+                <div class="partner-item" data-name="OKX" data-category="Crypto Exchange" data-industry="Cryptocurrency" data-description="Leading global cryptocurrency exchange providing advanced trading tools, DeFi services, and comprehensive Web3 infrastructure.">
+                    <div class="partner-name">OKX</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">Weex</h3>
-                    <span class="partner-category">Crypto Exchange</span>
+                <div class="partner-item" data-name="LBank" data-category="Crypto Exchange" data-industry="Cryptocurrency" data-description="International digital asset exchange supporting diverse cryptocurrencies and trading pairs with global market reach.">
+                    <div class="partner-name">LBank</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">BingX</h3>
-                    <span class="partner-category">Crypto Exchange</span>
+                <div class="partner-item" data-name="Weex" data-category="Crypto Exchange" data-industry="Cryptocurrency" data-description="Modern cryptocurrency exchange platform focused on user experience, security, and innovative trading features.">
+                    <div class="partner-name">Weex</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-                
-                <div class="partner-card">
-                    <h3 class="partner-name">Bitget</h3>
-                    <span class="partner-category">Crypto Exchange</span>
+                <div class="partner-item" data-name="BingX" data-category="Crypto Exchange" data-industry="Cryptocurrency" data-description="Social trading platform combining cryptocurrency exchange services with copy trading features and AI-powered tools.">
+                    <div class="partner-name">BingX</div>
+                    <div class="partner-arrow">→</div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Utility Partners -->
-    <section class="category-section">
-        <div class="container">
-            <div class="category-header fade-in">
-                <h2 class="category-title">Utility Partners</h2>
-                <p class="category-description">Specialized utility and service providers supporting our operations.</p>
+                <div class="partner-item" data-name="Bitget" data-category="Crypto Exchange" data-industry="Cryptocurrency" data-description="Global cryptocurrency exchange offering derivatives trading, copy trading services, and comprehensive digital asset solutions.">
+                    <div class="partner-name">Bitget</div>
+                    <div class="partner-arrow">→</div>
+                </div>
             </div>
             
-            <div class="partnerships-grid">
-                <div class="partner-card">
-                    <h3 class="partner-name">Flex</h3>
-                    <span class="partner-category">Utility Services</span>
+            <!-- Utility Partners -->
+            <div class="category-group">
+                <div class="category-header">
+                    <div>
+                        <div class="category-title">Utility Partners</div>
+                        <div class="category-line"></div>
+                    </div>
+                    <div class="partner-count">1 Partner</div>
+                </div>
+                <div class="partner-item" data-name="Flex" data-category="Utility Services" data-industry="Services" data-description="Comprehensive utility service provider supporting operational infrastructure, service delivery, and business operations.">
+                    <div class="partner-name">Flex</div>
+                    <div class="partner-arrow">→</div>
                 </div>
             </div>
         </div>
-    </section>
+        
+        <!-- RIGHT SIDE: Detail Panel -->
+        <div class="right-side">
+            <div class="detail-content" id="detailContent">
+                <div class="detail-placeholder">
+                    <div class="detail-placeholder-icon">→</div>
+                    <div class="detail-placeholder-text">SELECT A PARTNER TO VIEW DETAILS</div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script>
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        const partnerItems = document.querySelectorAll('.partner-item');
+        const detailContent = document.getElementById('detailContent');
+        const leftSide = document.getElementById('leftSide');
+        const scrollProgress = document.getElementById('scrollProgress');
+        const backToTop = document.getElementById('backToTop');
+        const searchInput = document.getElementById('searchInput');
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        // Partner click handler
+        partnerItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                updatePartner(item);
             });
-        }, observerOptions);
-        
-        // Observe all animatable elements
-        document.querySelectorAll('.fade-in, .partner-card').forEach(el => {
-            observer.observe(el);
+            
+            // Keyboard navigation
+            if (index === 0) {
+                item.setAttribute('tabindex', '0');
+            }
         });
         
-        // Stagger partner cards animation
-        const partnerCards = document.querySelectorAll('.partner-card');
-        partnerCards.forEach((card, index) => {
-            card.style.transitionDelay = `${index * 0.1}s`;
+        function updatePartner(item) {
+            // Remove active from all
+            partnerItems.forEach(i => i.classList.remove('active'));
+            
+            // Add active to clicked
+            item.classList.add('active');
+            
+            // Get data
+            const name = item.getAttribute('data-name');
+            const category = item.getAttribute('data-category');
+            const industry = item.getAttribute('data-industry');
+            const description = item.getAttribute('data-description');
+            
+            // Fade out
+            detailContent.classList.remove('visible');
+            
+            setTimeout(() => {
+                detailContent.innerHTML = `
+                    <div class="detail-category">${category}</div>
+                    <div class="detail-name">${name}</div>
+                    <div class="detail-divider"></div>
+                    <div class="detail-meta">
+                        <div class="meta-item">
+                            <div class="meta-label">Industry</div>
+                            <div class="meta-value">${industry}</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Type</div>
+                            <div class="meta-value">${category}</div>
+                        </div>
+                    </div>
+                    <div class="detail-description">${description}</div>
+                `;
+                
+                setTimeout(() => {
+                    detailContent.classList.add('visible');
+                }, 50);
+            }, 250);
+        }
+        
+        // Auto-select first partner on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (partnerItems.length > 0) {
+                    updatePartner(partnerItems[0]);
+                }
+            }, 1000);
+        });
+        
+        // Scroll progress bar
+        leftSide.addEventListener('scroll', () => {
+            const scrollTop = leftSide.scrollTop;
+            const scrollHeight = leftSide.scrollHeight - leftSide.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 50; // 50% because left side is 50% width
+            scrollProgress.style.width = scrollPercent + '%';
+            
+            // Show/hide back to top
+            if (scrollTop > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Back to top
+        backToTop.addEventListener('click', () => {
+            leftSide.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            partnerItems.forEach(item => {
+                const name = item.getAttribute('data-name').toLowerCase();
+                const category = item.getAttribute('data-category').toLowerCase();
+                const industry = item.getAttribute('data-industry').toLowerCase();
+                
+                if (name.includes(searchTerm) || category.includes(searchTerm) || industry.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const activeIndex = Array.from(partnerItems).findIndex(item => item.classList.contains('active'));
+            
+            if (e.key === 'ArrowDown' && activeIndex < partnerItems.length - 1) {
+                e.preventDefault();
+                const visibleItems = Array.from(partnerItems).filter(item => item.style.display !== 'none');
+                const currentVisibleIndex = visibleItems.findIndex(item => item.classList.contains('active'));
+                if (currentVisibleIndex < visibleItems.length - 1) {
+                    updatePartner(visibleItems[currentVisibleIndex + 1]);
+                    visibleItems[currentVisibleIndex + 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            } else if (e.key === 'ArrowUp' && activeIndex > 0) {
+                e.preventDefault();
+                const visibleItems = Array.from(partnerItems).filter(item => item.style.display !== 'none');
+                const currentVisibleIndex = visibleItems.findIndex(item => item.classList.contains('active'));
+                if (currentVisibleIndex > 0) {
+                    updatePartner(visibleItems[currentVisibleIndex - 1]);
+                    visibleItems[currentVisibleIndex - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+        
+        // Category header click - scroll to category
+        document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
         });
     </script>
 </body>
