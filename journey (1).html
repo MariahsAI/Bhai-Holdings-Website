@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey — BHAI Holdings</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 24px; font-weight: 900; letter-spacing: 4px; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-back { color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 10px 25px; border-radius: 25px; transition: all 0.3s; }
+        .nav-back:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+        
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); }
+        .hero-content { text-align: center; z-index: 10; }
+        .hero-label { font-size: 14px; color: #666; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; }
+        .hero-title { font-size: 120px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; animation: shimmer 4s ease infinite; line-height: 1; }
+        @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .hero-subtitle { font-size: 28px; color: #888; letter-spacing: 2px; }
+        
+        section { padding: 120px 60px; }
+        .section-title { font-size: 72px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 80px; }
+        
+        .timeline { max-width: 1200px; margin: 0 auto; }
+        .timeline-item { margin-bottom: 80px; padding: 50px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; border-left: 4px solid #fff; transition: all 0.5s; }
+        .timeline-item:hover { background: rgba(255,255,255,0.05); transform: scale(1.02); box-shadow: 0 20px 60px rgba(255,255,255,0.1); }
+        .timeline-year { font-size: 72px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; line-height: 1; }
+        .timeline-title { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 15px; }
+        .timeline-description { font-size: 16px; color: #888; line-height: 1.6; margin-bottom: 25px; }
+        .timeline-stats { display: flex; gap: 30px; }
+        .stat-value { font-size: 24px; font-weight: 700; color: #fff; }
+        .stat-label { font-size: 11px; color: #666; letter-spacing: 2px; text-transform: uppercase; }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 48px; }
+            .section-title { font-size: 42px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-logo">BHAI HOLDINGS</div>
+            <a href="experience.html" class="nav-back">← Back</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Our Journey</div>
+            <h1 class="hero-title">JOURNEY</h1>
+            <p class="hero-subtitle">From vision to empire—the story of relentless ambition</p>
+        </div>
+    </section>
+    
+    <section style="background: linear-gradient(180deg, #000 0%, #0a0a0a 100%); text-align: center;">
+        <h2 class="section-title">The Beginning</h2>
+        <p style="font-size: 20px; color: #888; line-height: 1.8; max-width: 900px; margin: 0 auto;">
+            Every empire starts with a vision. In 2020, BHAI Holdings was founded on the belief that 
+            true innovation comes from those brave enough to challenge convention and bold enough to 
+            execute without hesitation.
+        </p>
+    </section>
+    
+    <section style="background: #000;">
+        <h2 class="section-title">Milestones</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2020</div>
+                <h3 class="timeline-title">The Foundation</h3>
+                <p class="timeline-description">
+                    BHAI Holdings is established with a clear mission: to build a diversified portfolio 
+                    of world-class ventures across multiple high-growth sectors.
+                </p>
+                <div class="timeline-stats">
+                    <div><div class="stat-value">Day 1</div><div class="stat-label">Launch</div></div>
+                    <div><div class="stat-value">Vision</div><div class="stat-label">Established</div></div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2021</div>
+                <h3 class="timeline-title">Digital Revolution</h3>
+                <p class="timeline-description">
+                    MX1 cryptocurrency exchange launches, bringing institutional-grade trading infrastructure 
+                    to the digital asset market.
+                </p>
+                <div class="timeline-stats">
+                    <div><div class="stat-value">100K+</div><div class="stat-label">Users</div></div>
+                    <div><div class="stat-value">24/7</div><div class="stat-label">Trading</div></div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2022</div>
+                <h3 class="timeline-title">Global Expansion</h3>
+                <p class="timeline-description">
+                    GloFi platform launches, revolutionizing cross-border payments. The platform expands 
+                    to 50+ countries, processing over $500M in transactions.
+                </p>
+                <div class="timeline-stats">
+                    <div><div class="stat-value">50+</div><div class="stat-label">Countries</div></div>
+                    <div><div class="stat-value">$500M+</div><div class="stat-label">Processed</div></div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2023</div>
+                <h3 class="timeline-title">Energy & Resources</h3>
+                <p class="timeline-description">
+                    Strategic acquisition of NorthEast Oil & Gas, securing 2.5 million barrels of proven 
+                    oil reserves. Partnership with Harquahala Gold Mine adds 30,000+ ounces of gold.
+                </p>
+                <div class="timeline-stats">
+                    <div><div class="stat-value">2.5M</div><div class="stat-label">Barrels Oil</div></div>
+                    <div><div class="stat-value">30K+</div><div class="stat-label">Oz Gold</div></div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2024</div>
+                <h3 class="timeline-title">Billion Dollar Empire</h3>
+                <p class="timeline-description">
+                    BHAI Holdings crosses the $1 billion mark in assets under management. Strategic 
+                    partnerships with Visa, Circle, and major crypto exchanges solidify global position.
+                </p>
+                <div class="timeline-stats">
+                    <div><div class="stat-value">$1B+</div><div class="stat-label">AUM</div></div>
+                    <div><div class="stat-value">Global</div><div class="stat-label">Reach</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section style="padding: 120px 60px; text-align: center; background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);">
+        <h2 style="font-size: 56px; font-weight: 800; color: #fff; margin-bottom: 40px;">This Is Just the Beginning</h2>
+        <div style="display: flex; gap: 30px; justify-content: center;">
+            <a href="vision.html" style="display: inline-block; padding: 20px 50px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); border-radius: 50px; color: #fff; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none;">Our Vision</a>
+            <a href="future.html" style="display: inline-block; padding: 20px 50px; background: #fff; color: #000; border: 2px solid #fff; border-radius: 50px; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none;">What's Next</a>
+        </div>
+    </section>
+</body>
+</html>
