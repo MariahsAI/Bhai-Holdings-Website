@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future — BHAI Holdings</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 24px; font-weight: 900; letter-spacing: 4px; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-back { color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 10px 25px; border-radius: 25px; transition: all 0.3s; }
+        .nav-back:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+        
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); position: relative; }
+        .hero::before { content: ''; position: absolute; top: 50%; left: 50%; width: 1000px; height: 1000px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); transform: translate(-50%, -50%); animation: pulse 4s ease infinite; }
+        @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.6; } }
+        
+        .hero-content { text-align: center; z-index: 10; }
+        .hero-label { font-size: 14px; color: #666; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; }
+        .hero-title { font-size: 140px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; animation: shimmer 3s ease infinite; line-height: 1; }
+        @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .hero-subtitle { font-size: 32px; color: #888; letter-spacing: 3px; }
+        
+        section { padding: 120px 60px; }
+        .section-title { font-size: 72px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 20px; }
+        .section-subtitle { font-size: 18px; color: #666; letter-spacing: 3px; text-transform: uppercase; text-align: center; margin-bottom: 100px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; }
+        .card { padding: 60px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.5s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-15px); border-color: rgba(255,255,255,0.3); box-shadow: 0 30px 80px rgba(255,255,255,0.2); }
+        .card-icon { font-size: 64px; margin-bottom: 30px; }
+        .card-title { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 20px; }
+        .card-description { font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 30px; }
+        .card-status { display: inline-block; padding: 8px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; font-size: 11px; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
+        
+        .roadmap-phase { margin-bottom: 60px; padding: 50px; background: rgba(255,255,255,0.03); border-left: 4px solid rgba(255,255,255,0.3); border-radius: 10px; transition: all 0.5s; }
+        .roadmap-phase:hover { background: rgba(255,255,255,0.05); border-left-color: #fff; transform: translateX(10px); box-shadow: 0 20px 60px rgba(255,255,255,0.1); }
+        .phase-number { font-size: 72px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+        .phase-title { font-size: 32px; font-weight: 700; color: #fff; margin: 20px 0 10px; }
+        .phase-timeline { font-size: 14px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; }
+        .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
+        .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 56px; }
+            .section-title { font-size: 42px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-logo">BHAI HOLDINGS</div>
+            <a href="experience.html" class="nav-back">← Back</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">What's Next</div>
+            <h1 class="hero-title">FUTURE</h1>
+            <p class="hero-subtitle">The next chapter of global dominance</p>
+        </div>
+    </section>
+    
+    <section style="background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);">
+        <h2 class="section-title">Future Ventures</h2>
+        <p class="section-subtitle">Shaping Tomorrow's Industries</p>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3 class="card-title">AI & Machine Learning</h3>
+                <p class="card-description">
+                    Building next-generation AI solutions that will revolutionize decision-making, 
+                    automation, and predictive analytics across all our ventures.
+                </p>
+                <span class="card-status">In Development</span>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3 class="card-title">Web3 Infrastructure</h3>
+                <p class="card-description">
+                    Developing decentralized solutions, smart contract platforms, and blockchain 
+                    infrastructure to power the next internet revolution.
+                </p>
+                <span class="card-status">R&D Phase</span>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">♻️</div>
+                <h3 class="card-title">Sustainable Energy</h3>
+                <p class="card-description">
+                    Expanding into renewable energy solutions, carbon capture technology, and 
+                    sustainable resource management for a greener future.
+                </p>
+                <span class="card-status">Planning</span>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3 class="card-title">Space Technology</h3>
+                <p class="card-description">
+                    Exploring opportunities in satellite technology, space mining, and aerospace 
+                    innovation to extend our reach beyond Earth.
+                </p>
+                <span class="card-status">Vision Stage</span>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🏥</div>
+                <h3 class="card-title">HealthTech Revolution</h3>
+                <p class="card-description">
+                    Investing in cutting-edge medical technology, telemedicine platforms, and 
+                    biotechnology to transform global healthcare delivery.
+                </p>
+                <span class="card-status">Research</span>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🏙️</div>
+                <h3 class="card-title">Smart Cities</h3>
+                <p class="card-description">
+                    Developing intelligent urban infrastructure, IoT solutions, and sustainable 
+                    city planning to create the metropolises of tomorrow.
+                </p>
+                <span class="card-status">Conceptual</span>
+            </div>
+        </div>
+    </section>
+    
+    <section style="background: #000;">
+        <h2 class="section-title">Strategic Roadmap</h2>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="roadmap-phase">
+                <div class="phase-number">01</div>
+                <h3 class="phase-title">Near Term</h3>
+                <p class="phase-timeline">2025 — Q1-Q4</p>
+                <div class="phase-item">Expand MX1 to 100+ countries</div>
+                <div class="phase-item">Launch AI-powered trading algorithms</div>
+                <div class="phase-item">Double GloFi transaction volume to $1B+</div>
+                <div class="phase-item">Acquire additional energy assets</div>
+                <div class="phase-item">Establish Web3 R&D division</div>
+            </div>
+            
+            <div class="roadmap-phase">
+                <div class="phase-number">02</div>
+                <h3 class="phase-title">Mid Term</h3>
+                <p class="phase-timeline">2026 — 2027</p>
+                <div class="phase-item">Launch decentralized finance platform</div>
+                <div class="phase-item">Begin renewable energy initiatives</div>
+                <div class="phase-item">Establish HealthTech venture</div>
+                <div class="phase-item">Reach $5B in assets under management</div>
+                <div class="phase-item">Expand real estate portfolio globally</div>
+            </div>
+            
+            <div class="roadmap-phase">
+                <div class="phase-number">03</div>
+                <h3 class="phase-title">Long Term</h3>
+                <p class="phase-timeline">2028 — 2030</p>
+                <div class="phase-item">Become top 10 global conglomerate</div>
+                <div class="phase-item">Launch space technology division</div>
+                <div class="phase-item">Achieve $10B+ portfolio valuation</div>
+                <div class="phase-item">Develop smart city infrastructure</div>
+                <div class="phase-item">Establish BHAI Holdings as household name</div>
+            </div>
+        </div>
+    </section>
+    
+    <section style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center;">
+        <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px;">The Future Starts Now</h2>
+        <p style="font-size: 24px; color: #888; line-height: 1.8; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
+            We're not waiting for tomorrow—we're building it today. Join us as we transform 
+            industries, create unprecedented value, and shape the future of global commerce.
+        </p>
+        <a href="explore.html" style="display: inline-block; padding: 25px 70px; background: #fff; color: #000; font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 50px; transition: all 0.5s; box-shadow: 0 0 40px rgba(255,255,255,0.3);">Explore Our Universe</a>
+    </section>
+</body>
+</html>
