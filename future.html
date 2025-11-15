@@ -33,6 +33,24 @@
         
         /* NEBULA CLOUDS - REMOVED */
         
+        /* FLOATING PARTICLES - SHOOTING STARS */
+        .particle-3d {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: float3d 10s ease-in-out infinite;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        @keyframes float3d {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+            50% { transform: translate3d(var(--x), var(--y), var(--z)) scale(1.5); opacity: 0.6; }
+        }
+        
         nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-size: 24px; font-weight: 900; letter-spacing: 4px; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -49,9 +67,22 @@
             transform-style: preserve-3d;
         }
         
+        /* Dark overlay so text is readable */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+        
         .hero-content { 
             text-align: center; 
             z-index: 10;
+            position: relative;
             transform: translateZ(100px);
             animation: heroFloat 6s ease-in-out infinite;
         }
@@ -506,6 +537,9 @@
     </style>
 </head>
 <body>
+    <!-- 3D PARTICLES -->
+    <div id="particles-3d"></div>
+    
     <nav>
         <div class="nav-content">
             <div class="nav-logo">BHAI HOLDINGS</div>
@@ -521,11 +555,14 @@
         </div>
     </section>
     
-    <section style="background: transparent; min-height: 130vh;">
-        <h2 class="section-title">Future Ventures</h2>
-        <p class="section-subtitle">A Solar System of Innovation</p>
+    <section style="background: transparent; min-height: 130vh; position: relative;">
+        <!-- Dark overlay for readability -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
         
-        <div class="orbital-container">
+        <h2 class="section-title" style="position: relative; z-index: 1;">Future Ventures</h2>
+        <p class="section-subtitle" style="position: relative; z-index: 1;">A Solar System of Innovation</p>
+        
+        <div class="orbital-container" style="position: relative; z-index: 1;">
             <!-- Central Sun -->
             <div class="orbital-center">
                 <div class="sun">
@@ -637,6 +674,21 @@
     </section>
     
     <script>
+        // CREATE 3D FLOATING PARTICLES (SHOOTING STARS)
+        const container = document.getElementById('particles-3d');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle-3d';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.setProperty('--x', (Math.random() - 0.5) * 200 + 'px');
+            particle.style.setProperty('--y', (Math.random() - 0.5) * 200 + 'px');
+            particle.style.setProperty('--z', (Math.random() - 0.5) * 400 + 'px');
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (8 + Math.random() * 8) + 's';
+            container.appendChild(particle);
+        }
+        
         // CREATE SHOOTING STARS for space sections
         const spaceSections = document.querySelectorAll('.space-section');
         spaceSections.forEach(section => {
