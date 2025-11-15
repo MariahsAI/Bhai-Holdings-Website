@@ -6,7 +6,31 @@
     <title>Our Vision — BHAI Holdings</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Striped Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.03) 2px,
+                rgba(255, 255, 255, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
         
         nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
@@ -25,7 +49,7 @@
         @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         .hero-subtitle { font-size: 28px; color: #888; letter-spacing: 2px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
         
-        section { min-height: 100vh; padding: 120px 60px; }
+        section { min-height: 100vh; padding: 120px 60px; position: relative; z-index: 1; }
         .section-title { font-size: 72px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 80px; }
         
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; max-width: 1200px; margin: 0 auto; }
@@ -88,32 +112,26 @@
         <h2 class="section-title">Core Principles</h2>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto;">
             <div class="card" style="text-align: center;">
-                <div style="font-size: 48px; margin-bottom: 30px;">⚡</div>
                 <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Speed & Execution</h3>
                 <p style="font-size: 14px; color: #888; line-height: 1.6;">In business, timing is everything. We move fast, execute flawlessly, and capitalize on opportunities.</p>
             </div>
             <div class="card" style="text-align: center;">
-                <div style="font-size: 48px; margin-bottom: 30px;">🎯</div>
                 <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Strategic Vision</h3>
                 <p style="font-size: 14px; color: #888; line-height: 1.6;">Every move is calculated. We see the big picture and position ourselves for maximum impact.</p>
             </div>
             <div class="card" style="text-align: center;">
-                <div style="font-size: 48px; margin-bottom: 30px;">💎</div>
                 <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Premium Quality</h3>
                 <p style="font-size: 14px; color: #888; line-height: 1.6;">We operate at the highest level in everything we do. Quality isn't negotiable—it's our standard.</p>
             </div>
             <div class="card" style="text-align: center;">
-                <div style="font-size: 48px; margin-bottom: 30px;">🌍</div>
                 <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Global Mindset</h3>
                 <p style="font-size: 14px; color: #888; line-height: 1.6;">We think globally, act locally, and build ventures that transcend borders and cultures.</p>
             </div>
             <div class="card" style="text-align: center;">
-                <div style="font-size: 48px; margin-bottom: 30px;">🔥</div>
                 <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Relentless Ambition</h3>
                 <p style="font-size: 14px; color: #888; line-height: 1.6;">Good is never good enough. We pursue greatness with intensity, passion, and unwavering determination.</p>
             </div>
             <div class="card" style="text-align: center;">
-                <div style="font-size: 48px; margin-bottom: 30px;">🤝</div>
                 <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Trust & Integrity</h3>
                 <p style="font-size: 14px; color: #888; line-height: 1.6;">Our word is our bond. We build relationships based on trust, transparency, and mutual respect.</p>
             </div>
