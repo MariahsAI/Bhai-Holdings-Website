@@ -48,7 +48,7 @@
         
         @keyframes float3d {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
-            50% { transform: translate3d(var(--x), var(--y), var(--z)) scale(1.5); opacity: 0.6; }
+            50% { transform: translate3d(var(--x), var(--y), 200px) scale(2); opacity: 0.8; }
         }
         
         nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
@@ -461,73 +461,6 @@
         .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
         .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
         
-        /* SPACE SECTION WITH SHOOTING STARS */
-        .space-section {
-            position: relative;
-            background: #000;
-            overflow: hidden;
-        }
-        
-        .space-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(2px 2px at 20% 30%, white, transparent),
-                radial-gradient(2px 2px at 60% 70%, white, transparent),
-                radial-gradient(1px 1px at 50% 50%, white, transparent),
-                radial-gradient(1px 1px at 80% 10%, white, transparent),
-                radial-gradient(2px 2px at 90% 60%, white, transparent),
-                radial-gradient(1px 1px at 33% 80%, white, transparent),
-                radial-gradient(1px 1px at 15% 60%, white, transparent);
-            background-size: 200% 200%;
-            animation: twinkleStars 5s ease-in-out infinite;
-        }
-        
-        @keyframes twinkleStars {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.3; }
-        }
-        
-        /* SHOOTING STARS */
-        .shooting-star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 0 4px rgba(255, 255, 255, 0.05), 0 0 8px rgba(255, 255, 255, 0.3);
-            animation: shootingStar 3s linear infinite;
-        }
-        
-        @keyframes shootingStar {
-            0% {
-                transform: translateX(0) translateY(0);
-                opacity: 1;
-            }
-            70% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(-300px) translateY(300px);
-                opacity: 0;
-            }
-        }
-        
-        .shooting-star::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, white, transparent);
-            transform: translateX(-100px);
-        }
-        
         @media (max-width: 768px) {
             .hero-title { font-size: 56px; }
             .section-title { font-size: 42px; }
@@ -557,7 +490,7 @@
     
     <section style="background: transparent; min-height: 130vh; position: relative;">
         <!-- Dark overlay for readability -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0;"></div>
         
         <h2 class="section-title" style="position: relative; z-index: 1;">Future Ventures</h2>
         <p class="section-subtitle" style="position: relative; z-index: 1;">A Solar System of Innovation</p>
@@ -626,7 +559,7 @@
         </div>
     </section>
     
-    <section class="space-section" style="background: #000; padding-top: 120px;">
+    <section style="background: #000; padding-top: 120px;">
         <h2 class="section-title">Strategic Roadmap</h2>
         <div style="max-width: 1200px; margin: 0 auto;">
             <div class="roadmap-phase">
@@ -664,7 +597,7 @@
         </div>
     </section>
     
-    <section class="space-section" style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center;">
+    <section style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center;">
         <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));">The Future Starts Now</h2>
         <p style="font-size: 24px; color: #888; line-height: 1.8; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
             We're not waiting for tomorrow—we're building it today. Join us as we transform 
@@ -688,21 +621,6 @@
             particle.style.animationDuration = (8 + Math.random() * 8) + 's';
             container.appendChild(particle);
         }
-        
-        // CREATE SHOOTING STARS for space sections
-        const spaceSections = document.querySelectorAll('.space-section');
-        spaceSections.forEach(section => {
-            // Create 5 shooting stars per section
-            for (let i = 0; i < 5; i++) {
-                const star = document.createElement('div');
-                star.className = 'shooting-star';
-                star.style.top = Math.random() * 50 + '%';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 5 + 's';
-                star.style.animationDuration = (2 + Math.random() * 2) + 's';
-                section.appendChild(star);
-            }
-        });
         
         // SCROLL ANIMATIONS FOR ROADMAP
         const observerOptions = {
