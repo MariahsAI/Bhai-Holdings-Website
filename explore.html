@@ -852,6 +852,91 @@
             box-shadow: 0 15px 40px rgba(229, 228, 226, 0.4);
         }
         
+        /* Leadership Section */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .leader-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(229, 228, 226, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            text-align: center;
+        }
+        
+        .leader-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .leader-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(229, 228, 226, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .leader-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(229, 228, 226, 0.1) 0%, rgba(168, 168, 168, 0.05) 100%);
+            border: 2px solid rgba(229, 228, 226, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .leader-card:hover .leader-image {
+            border-color: rgba(229, 228, 226, 0.4);
+            box-shadow: 0 10px 30px rgba(229, 228, 226, 0.1);
+        }
+        
+        .leader-initials {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E5E4E2 0%, #FFFFFF 50%, #E5E4E2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .leader-info {
+            text-align: center;
+        }
+        
+        .leader-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        .leader-title {
+            font-size: 14px;
+            color: #A8A8A8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .leader-bio {
+            font-size: 15px;
+            color: #888888;
+            line-height: 1.7;
+        }
+        
         /* Footer */
         .footer {
             background: rgba(0, 0, 0, 0.5);
@@ -1327,6 +1412,62 @@
         </div>
     </section>
     
+    <!-- Leadership Section -->
+    <section id="leadership" style="min-height: auto; padding: 80px 20px;">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Leadership</h2>
+                <p style="font-size: 18px; color: #A8A8A8; max-width: 700px; margin: 20px auto 0; line-height: 1.8;">
+                    A team of proven executives driving innovation across multiple sectors
+                </p>
+            </div>
+            
+            <div class="leadership-grid">
+                <!-- Leader 1 -->
+                <div class="leader-card fade-in">
+                    <div class="leader-image">
+                        <div class="leader-initials">MB</div>
+                    </div>
+                    <div class="leader-info">
+                        <h3 class="leader-name">Mariah Bhai</h3>
+                        <div class="leader-title">Founder & CEO</div>
+                        <p class="leader-bio">
+                            Visionary entrepreneur with proven track record building and scaling ventures across fintech, energy, and technology sectors.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Leader 2 - Add more team members as needed -->
+                <div class="leader-card fade-in">
+                    <div class="leader-image">
+                        <div class="leader-initials">JD</div>
+                    </div>
+                    <div class="leader-info">
+                        <h3 class="leader-name">John Doe</h3>
+                        <div class="leader-title">Chief Operating Officer</div>
+                        <p class="leader-bio">
+                            20+ years experience in operations management and portfolio optimization across global markets.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Leader 3 -->
+                <div class="leader-card fade-in">
+                    <div class="leader-image">
+                        <div class="leader-initials">JS</div>
+                    </div>
+                    <div class="leader-info">
+                        <h3 class="leader-name">Jane Smith</h3>
+                        <div class="leader-title">Chief Technology Officer</div>
+                        <p class="leader-bio">
+                            Leading AI and technology innovation with expertise in building scalable platforms and proprietary systems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
@@ -1366,7 +1507,7 @@
         }, observerOptions);
         
         // Observe all fade-in elements
-        document.querySelectorAll('.fade-in, .stat-card, .portfolio-card, .value-prop, .executive-summary-content').forEach(el => {
+        document.querySelectorAll('.fade-in, .stat-card, .portfolio-card, .value-prop, .executive-summary-content, .leader-card').forEach(el => {
             observer.observe(el);
         });
         
@@ -1404,6 +1545,12 @@
         const valueProps = document.querySelectorAll('.value-prop');
         valueProps.forEach((prop, index) => {
             prop.style.transitionDelay = `${index * 0.15}s`;
+        });
+        
+        // Stagger leader cards animation
+        const leaderCards = document.querySelectorAll('.leader-card');
+        leaderCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.2}s`;
         });
         
         // Animated Counter Effect
