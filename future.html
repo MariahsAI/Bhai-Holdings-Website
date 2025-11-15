@@ -6,52 +6,452 @@
     <title>The Future — BHAI Holdings</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #000 url('moon-background.png') center center / cover no-repeat fixed;
+            color: #fff; 
+            overflow-x: hidden;
+            perspective: 2000px;
+        }
         
-        nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        /* SPACE STARFIELD BACKGROUND */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* NEBULA CLOUDS - REMOVED */
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-size: 24px; font-weight: 900; letter-spacing: 4px; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-back { color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 10px 25px; border-radius: 25px; transition: all 0.3s; }
-        .nav-back:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+        .nav-back { color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.3); padding: 10px 25px; border-radius: 25px; transition: all 0.3s; }
+        .nav-back:hover { border-color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); }
         
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); position: relative; }
-        .hero::before { content: ''; position: absolute; top: 50%; left: 50%; width: 1000px; height: 1000px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); transform: translate(-50%, -50%); animation: pulse 4s ease infinite; }
-        @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.6; } }
+        .hero { 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            z-index: 1;
+            transform-style: preserve-3d;
+        }
         
-        .hero-content { text-align: center; z-index: 10; }
+        .hero-content { 
+            text-align: center; 
+            z-index: 10;
+            transform: translateZ(100px);
+            animation: heroFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes heroFloat {
+            0%, 100% { transform: translateZ(100px) translateY(0); }
+            50% { transform: translateZ(150px) translateY(-20px); }
+        }
+        
         .hero-label { font-size: 14px; color: #666; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; }
-        .hero-title { font-size: 140px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; animation: shimmer 3s ease infinite; line-height: 1; }
+        .hero-title { 
+            font-size: 140px; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); 
+            background-size: 200% 200%; 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            margin-bottom: 40px; 
+            animation: shimmer 3s ease infinite; 
+            line-height: 1;
+            filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.3));
+        }
+        
         @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        
         .hero-subtitle { font-size: 32px; color: #888; letter-spacing: 3px; }
         
-        section { padding: 120px 60px; }
-        .section-title { font-size: 72px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 20px; }
+        section { padding: 120px 60px; position: relative; z-index: 1; transform-style: preserve-3d; }
+        .section-title { 
+            font-size: 72px; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            text-align: center; 
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+        }
         .section-subtitle { font-size: 18px; color: #666; letter-spacing: 3px; text-transform: uppercase; text-align: center; margin-bottom: 100px; }
         
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto; }
-        .card { padding: 60px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.5s; position: relative; overflow: hidden; }
-        .card:hover { transform: translateY(-15px); border-color: rgba(255,255,255,0.3); box-shadow: 0 30px 80px rgba(255,255,255,0.2); }
-        .card-icon { font-size: 64px; margin-bottom: 30px; }
-        .card-title { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 20px; }
-        .card-description { font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 30px; }
-        .card-status { display: inline-block; padding: 8px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; font-size: 11px; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
+        /* SOLAR SYSTEM */
+        .orbital-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 1000px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+        }
         
-        .roadmap-phase { margin-bottom: 60px; padding: 50px; background: rgba(255,255,255,0.03); border-left: 4px solid rgba(255,255,255,0.3); border-radius: 10px; transition: all 0.5s; }
-        .roadmap-phase:hover { background: rgba(255,255,255,0.05); border-left-color: #fff; transform: translateX(10px); box-shadow: 0 20px 60px rgba(255,255,255,0.1); }
-        .phase-number { font-size: 72px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+        /* SUN - Central Star */
+        .orbital-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%) translateZ(0);
+            transform-style: preserve-3d;
+        }
+        
+        .sun {
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 28% 22%, #e8e8e8 0%, #cacaca 8%, #b0b0b0 18%, #969696 35%, #7d7d7d 55%, #636363 75%, #4a4a4a 95%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 60px rgba(150, 150, 150, 0.2),
+                inset -80px -80px 150px rgba(0, 0, 0, 0.9),
+                inset 40px 40px 100px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Rough surface texture */
+        .sun::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                /* Noise texture for rough surface */
+                repeating-radial-gradient(circle at 20% 30%, transparent 0px, rgba(0,0,0,0.15) 1px, transparent 2px),
+                repeating-radial-gradient(circle at 60% 50%, transparent 0px, rgba(0,0,0,0.12) 1px, transparent 2px),
+                repeating-radial-gradient(circle at 80% 70%, transparent 0px, rgba(0,0,0,0.1) 1px, transparent 2px),
+                
+                /* Large impact craters with rough edges */
+                radial-gradient(circle at 42% 38%, transparent 13%, rgba(0,0,0,0.85) 14%, rgba(0,0,0,0.75) 15%, rgba(20,20,20,0.5) 16%, rgba(40,40,40,0.3) 17%, rgba(60,60,60,0.15) 18%, transparent 20%),
+                radial-gradient(circle at 68% 28%, transparent 9%, rgba(0,0,0,0.8) 10%, rgba(0,0,0,0.7) 11%, rgba(25,25,25,0.45) 12%, rgba(50,50,50,0.25) 13%, transparent 15%),
+                radial-gradient(circle at 22% 58%, transparent 11%, rgba(0,0,0,0.9) 12%, rgba(0,0,0,0.75) 13%, rgba(20,20,20,0.5) 14%, rgba(45,45,45,0.3) 15%, transparent 17%),
+                radial-gradient(circle at 78% 62%, transparent 8%, rgba(0,0,0,0.75) 9%, rgba(0,0,0,0.65) 10%, rgba(30,30,30,0.4) 11%, rgba(55,55,55,0.2) 12%, transparent 14%),
+                
+                /* Medium craters - scattered */
+                radial-gradient(circle at 35% 25%, transparent 6%, rgba(0,0,0,0.7) 7%, rgba(0,0,0,0.55) 8%, rgba(40,40,40,0.3) 9%, transparent 11%),
+                radial-gradient(circle at 85% 45%, transparent 5%, rgba(0,0,0,0.65) 6%, rgba(0,0,0,0.5) 7%, rgba(45,45,45,0.25) 8%, transparent 10%),
+                radial-gradient(circle at 55% 72%, transparent 7%, rgba(0,0,0,0.75) 8%, rgba(0,0,0,0.6) 9%, rgba(35,35,35,0.35) 10%, transparent 12%),
+                radial-gradient(circle at 15% 40%, transparent 8%, rgba(0,0,0,0.8) 9%, rgba(0,0,0,0.65) 10%, rgba(30,30,30,0.4) 11%, transparent 13%),
+                radial-gradient(circle at 90% 75%, transparent 6%, rgba(0,0,0,0.7) 7%, rgba(0,0,0,0.55) 8%, transparent 10%),
+                
+                /* Small craters everywhere */
+                radial-gradient(circle at 50% 50%, transparent 3%, rgba(0,0,0,0.6) 4%, rgba(30,30,30,0.3) 5%, transparent 6%),
+                radial-gradient(circle at 30% 70%, transparent 2.5%, rgba(0,0,0,0.55) 3.5%, transparent 4.5%),
+                radial-gradient(circle at 72% 55%, transparent 3%, rgba(0,0,0,0.6) 4%, transparent 5%),
+                radial-gradient(circle at 25% 45%, transparent 4%, rgba(0,0,0,0.65) 5%, rgba(35,35,35,0.3) 6%, transparent 7%),
+                radial-gradient(circle at 60% 15%, transparent 2%, rgba(0,0,0,0.5) 3%, transparent 4%),
+                radial-gradient(circle at 45% 82%, transparent 3.5%, rgba(0,0,0,0.6) 4.5%, transparent 5.5%),
+                radial-gradient(circle at 88% 35%, transparent 4%, rgba(0,0,0,0.65) 5%, transparent 6%),
+                radial-gradient(circle at 12% 78%, transparent 2.5%, rgba(0,0,0,0.55) 3.5%, transparent 4.5%),
+                radial-gradient(circle at 65% 88%, transparent 3%, rgba(0,0,0,0.6) 4%, transparent 5%),
+                radial-gradient(circle at 38% 12%, transparent 2%, rgba(0,0,0,0.5) 3%, transparent 4%);
+            animation: moonRotate 180s linear infinite;
+            opacity: 0.95;
+        }
+        
+        /* Dark maria patches (lunar seas) */
+        .sun::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse 35% 40% at 52% 42%, rgba(60, 60, 60, 0.6) 0%, rgba(80, 80, 80, 0.4) 30%, rgba(100, 100, 100, 0.2) 50%, transparent 70%),
+                radial-gradient(ellipse 25% 30% at 28% 62%, rgba(70, 70, 70, 0.5) 0%, rgba(90, 90, 90, 0.3) 25%, rgba(110, 110, 110, 0.15) 45%, transparent 60%),
+                radial-gradient(ellipse 20% 25% at 75% 55%, rgba(65, 65, 65, 0.45) 0%, rgba(85, 85, 85, 0.25) 30%, transparent 50%);
+            mix-blend-mode: multiply;
+        }
+        
+        @keyframes moonRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .center-text {
+            font-size: 42px;
+            font-weight: 900;
+            text-align: center;
+            color: #fff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            z-index: 10;
+        }
+        
+        /* PLANETS - Each venture is a planet */
+        .venture-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            margin: -100px 0 0 -100px;
+            transform-style: preserve-3d;
+        }
+        
+        .planet {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            box-shadow: 
+                inset -30px -30px 60px rgba(0,0,0,0.6),
+                0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Planet shine/highlight */
+        .planet::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 15%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+        
+        .planet:hover {
+            transform: translateZ(150px) scale(1.2);
+            box-shadow: 
+                inset -30px -30px 60px rgba(0,0,0,0.4),
+                0 20px 80px rgba(255,255,255,0.3);
+        }
+        
+        /* Individual Planet Textures */
+        .planet-mars {
+            background: 
+                radial-gradient(circle at 35% 35%, #e27b58 0%, #c1440e 45%, #8b2500 100%);
+        }
+        
+        .planet-mars::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 60% 40%, transparent 15%, rgba(0,0,0,0.3) 16%, transparent 17%),
+                radial-gradient(circle at 30% 70%, transparent 10%, rgba(0,0,0,0.2) 11%, transparent 12%),
+                radial-gradient(circle at 80% 60%, transparent 8%, rgba(0,0,0,0.25) 9%, transparent 10%);
+        }
+        
+        .planet-moon {
+            background: 
+                radial-gradient(circle at 40% 30%, #d3d3d3 0%, #a9a9a9 40%, #696969 100%);
+        }
+        
+        .planet-moon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, transparent 20%, rgba(0,0,0,0.4) 21%, transparent 22%),
+                radial-gradient(circle at 70% 30%, transparent 12%, rgba(0,0,0,0.3) 13%, transparent 14%),
+                radial-gradient(circle at 25% 65%, transparent 18%, rgba(0,0,0,0.35) 19%, transparent 20%),
+                radial-gradient(circle at 60% 80%, transparent 10%, rgba(0,0,0,0.25) 11%, transparent 12%);
+        }
+        
+        .planet-jupiter {
+            background: 
+                linear-gradient(180deg, #d4a574 0%, #c7935c 20%, #f4d7b0 40%, #c7935c 60%, #a67c52 80%, #8b6f47 100%);
+        }
+        
+        .planet-earth {
+            background: 
+                radial-gradient(circle at 40% 40%, #4a90e2 0%, #357abd 30%, #2d5f8d 60%, #1a3a5c 100%);
+        }
+        
+        .planet-earth::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 30% 40%, rgba(34, 139, 34, 0.6) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 60%, rgba(34, 139, 34, 0.5) 0%, transparent 35%);
+        }
+        
+        .planet-saturn {
+            background: 
+                radial-gradient(circle at 35% 35%, #f4e7c3 0%, #e6d5a8 40%, #c9b17a 100%);
+            position: relative;
+        }
+        
+        .planet-saturn::after {
+            content: '';
+            position: absolute;
+            top: 45%;
+            left: -20%;
+            width: 140%;
+            height: 20%;
+            background: linear-gradient(90deg, transparent 0%, rgba(200, 150, 100, 0.6) 20%, rgba(200, 150, 100, 0.8) 50%, rgba(200, 150, 100, 0.6) 80%, transparent 100%);
+            border-radius: 50%;
+            transform: rotateX(75deg);
+        }
+        
+        .planet-neptune {
+            background: 
+                radial-gradient(circle at 40% 30%, #5b9bd5 0%, #4472c4 40%, #2e5c8a 100%);
+        }
+        
+        /* ORBITAL ANIMATIONS */
+        .v1 { animation: orbit1 35s linear infinite; }
+        .v2 { animation: orbit2 40s linear infinite; }
+        .v3 { animation: orbit3 45s linear infinite; }
+        .v4 { animation: orbit4 50s linear infinite; }
+        .v5 { animation: orbit5 55s linear infinite; }
+        .v6 { animation: orbit6 60s linear infinite; }
+        
+        @keyframes orbit1 {
+            from { transform: rotate(0deg) translateX(380px) rotate(0deg) translateZ(80px); }
+            to { transform: rotate(360deg) translateX(380px) rotate(-360deg) translateZ(80px); }
+        }
+        @keyframes orbit2 {
+            from { transform: rotate(60deg) translateX(380px) rotate(-60deg) translateZ(40px); }
+            to { transform: rotate(420deg) translateX(380px) rotate(-420deg) translateZ(40px); }
+        }
+        @keyframes orbit3 {
+            from { transform: rotate(120deg) translateX(380px) rotate(-120deg) translateZ(-40px); }
+            to { transform: rotate(480deg) translateX(380px) rotate(-480deg) translateZ(-40px); }
+        }
+        @keyframes orbit4 {
+            from { transform: rotate(180deg) translateX(380px) rotate(-180deg) translateZ(80px); }
+            to { transform: rotate(540deg) translateX(380px) rotate(-540deg) translateZ(80px); }
+        }
+        @keyframes orbit5 {
+            from { transform: rotate(240deg) translateX(380px) rotate(-240deg) translateZ(-40px); }
+            to { transform: rotate(600deg) translateX(380px) rotate(-600deg) translateZ(-40px); }
+        }
+        @keyframes orbit6 {
+            from { transform: rotate(300deg) translateX(380px) rotate(-300deg) translateZ(40px); }
+            to { transform: rotate(660deg) translateX(380px) rotate(-660deg) translateZ(40px); }
+        }
+        
+        .planet-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .planet-desc {
+            font-size: 11px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.3;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .planet-status {
+            font-size: 9px;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.3);
+            z-index: 10;
+            position: relative;
+        }
+        
+        /* ROADMAP */
+        .roadmap-phase { 
+            margin-bottom: 60px; 
+            padding: 50px; 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.8) 100%);
+            border-left: 4px solid rgba(255, 255, 255, 0.3); 
+            border-radius: 10px; 
+            transition: all 0.5s;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        .roadmap-phase.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .roadmap-phase:hover { 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.9) 100%);
+            border-left-color: #fff; 
+            transform: translateX(20px); 
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2); 
+        }
+        .phase-number { 
+            font-size: 72px; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            line-height: 1;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+        }
         .phase-title { font-size: 32px; font-weight: 700; color: #fff; margin: 20px 0 10px; }
-        .phase-timeline { font-size: 14px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; }
+        .phase-timeline { font-size: 14px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; }
         .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
         .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
         
         @media (max-width: 768px) {
             .hero-title { font-size: 56px; }
             .section-title { font-size: 42px; }
-            .grid { grid-template-columns: 1fr; }
+            .orbital-container { height: 700px; }
+            .planet { width: 140px; height: 140px; padding: 10px; }
         }
     </style>
 </head>
 <body>
+    <!-- SPACE BACKGROUND -->
+    <div class="space-bg" id="space"></div>
+    
     <nav>
         <div class="nav-content">
             <div class="nav-logo">BHAI HOLDINGS</div>
@@ -67,69 +467,70 @@
         </div>
     </section>
     
-    <section style="background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);">
+    <section style="background: transparent; min-height: 130vh;">
         <h2 class="section-title">Future Ventures</h2>
-        <p class="section-subtitle">Shaping Tomorrow's Industries</p>
+        <p class="section-subtitle">A Solar System of Innovation</p>
         
-        <div class="grid">
-            <div class="card">
-                <div class="card-icon">🤖</div>
-                <h3 class="card-title">AI & Machine Learning</h3>
-                <p class="card-description">
-                    Building next-generation AI solutions that will revolutionize decision-making, 
-                    automation, and predictive analytics across all our ventures.
-                </p>
-                <span class="card-status">In Development</span>
+        <div class="orbital-container">
+            <!-- Central Sun -->
+            <div class="orbital-center">
+                <div class="sun">
+                    <div class="center-text">BHAI<br>2030</div>
+                </div>
             </div>
             
-            <div class="card">
-                <div class="card-icon">🌐</div>
-                <h3 class="card-title">Web3 Infrastructure</h3>
-                <p class="card-description">
-                    Developing decentralized solutions, smart contract platforms, and blockchain 
-                    infrastructure to power the next internet revolution.
-                </p>
-                <span class="card-status">R&D Phase</span>
+            <!-- Planet 1: Mars (AI & ML) -->
+            <div class="venture-orbit v1">
+                <div class="planet planet-mars">
+                    <h3 class="planet-title">AI & ML</h3>
+                    <p class="planet-desc">Intelligence systems</p>
+                    <span class="planet-status">Active</span>
+                </div>
             </div>
             
-            <div class="card">
-                <div class="card-icon">♻️</div>
-                <h3 class="card-title">Sustainable Energy</h3>
-                <p class="card-description">
-                    Expanding into renewable energy solutions, carbon capture technology, and 
-                    sustainable resource management for a greener future.
-                </p>
-                <span class="card-status">Planning</span>
+            <!-- Planet 2: Moon (Web3) -->
+            <div class="venture-orbit v2">
+                <div class="planet planet-moon">
+                    <h3 class="planet-title">Web3</h3>
+                    <p class="planet-desc">Decentralized future</p>
+                    <span class="planet-status">R&D</span>
+                </div>
             </div>
             
-            <div class="card">
-                <div class="card-icon">🚀</div>
-                <h3 class="card-title">Space Technology</h3>
-                <p class="card-description">
-                    Exploring opportunities in satellite technology, space mining, and aerospace 
-                    innovation to extend our reach beyond Earth.
-                </p>
-                <span class="card-status">Vision Stage</span>
+            <!-- Planet 3: Jupiter (Energy) -->
+            <div class="venture-orbit v3">
+                <div class="planet planet-jupiter">
+                    <h3 class="planet-title">Energy</h3>
+                    <p class="planet-desc">Sustainable power</p>
+                    <span class="planet-status">Planning</span>
+                </div>
             </div>
             
-            <div class="card">
-                <div class="card-icon">🏥</div>
-                <h3 class="card-title">HealthTech Revolution</h3>
-                <p class="card-description">
-                    Investing in cutting-edge medical technology, telemedicine platforms, and 
-                    biotechnology to transform global healthcare delivery.
-                </p>
-                <span class="card-status">Research</span>
+            <!-- Planet 4: Earth (Space Tech) -->
+            <div class="venture-orbit v4">
+                <div class="planet planet-earth">
+                    <h3 class="planet-title">Space Tech</h3>
+                    <p class="planet-desc">Beyond Earth</p>
+                    <span class="planet-status">Vision</span>
+                </div>
             </div>
             
-            <div class="card">
-                <div class="card-icon">🏙️</div>
-                <h3 class="card-title">Smart Cities</h3>
-                <p class="card-description">
-                    Developing intelligent urban infrastructure, IoT solutions, and sustainable 
-                    city planning to create the metropolises of tomorrow.
-                </p>
-                <span class="card-status">Conceptual</span>
+            <!-- Planet 5: Saturn (HealthTech) -->
+            <div class="venture-orbit v5">
+                <div class="planet planet-saturn">
+                    <h3 class="planet-title">HealthTech</h3>
+                    <p class="planet-desc">Medical revolution</p>
+                    <span class="planet-status">Research</span>
+                </div>
+            </div>
+            
+            <!-- Planet 6: Neptune (Smart Cities) -->
+            <div class="venture-orbit v6">
+                <div class="planet planet-neptune">
+                    <h3 class="planet-title">Smart Cities</h3>
+                    <p class="planet-desc">Urban future</p>
+                    <span class="planet-status">Concept</span>
+                </div>
             </div>
         </div>
     </section>
@@ -173,12 +574,51 @@
     </section>
     
     <section style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center;">
-        <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px;">The Future Starts Now</h2>
+        <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));">The Future Starts Now</h2>
         <p style="font-size: 24px; color: #888; line-height: 1.8; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
             We're not waiting for tomorrow—we're building it today. Join us as we transform 
             industries, create unprecedented value, and shape the future of global commerce.
         </p>
-        <a href="explore.html" style="display: inline-block; padding: 25px 70px; background: #fff; color: #000; font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 50px; transition: all 0.5s; box-shadow: 0 0 40px rgba(255,255,255,0.3);">Explore Our Universe</a>
+        <a href="explore.html" style="display: inline-block; padding: 25px 70px; background: #fff; color: #000; font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 50px; transition: all 0.5s; box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">Explore Our Universe</a>
     </section>
+    
+    <script>
+        // CREATE STARFIELD
+        const space = document.getElementById('space');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            
+            // Vary star sizes
+            const size = Math.random() > 0.8 ? 3 : 2;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            
+            space.appendChild(star);
+        }
+        
+        // SCROLL ANIMATIONS FOR ROADMAP
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.roadmap-phase').forEach((phase, index) => {
+            phase.style.transitionDelay = (index * 0.2) + 's';
+            observer.observe(phase);
+        });
+    </script>
 </body>
 </html>
