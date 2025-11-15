@@ -14,33 +14,81 @@
         .nav-back { color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 10px 25px; border-radius: 25px; transition: all 0.3s; }
         .nav-back:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
         
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); }
-        .hero-content { text-align: center; z-index: 10; }
-        .hero-label { font-size: 14px; color: #666; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; }
-        .hero-title { font-size: 120px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; animation: shimmer 4s ease infinite; line-height: 1; }
+        /* FLOATING PARTICLES */
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .particle { position: absolute; width: 3px; height: 3px; background: rgba(255,255,255,0.6); border-radius: 50%; animation: float 20s linear infinite; }
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) translateX(100px) scale(1); opacity: 0; }
+        }
+        
+        .hero { height: 80vh; display: flex; align-items: center; justify-content: center; background: #000; position: relative; z-index: 2; }
+        .hero-content { text-align: center; }
+        .hero-label { font-size: 14px; color: #666; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 30px; }
+        .hero-title { font-size: 120px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; animation: shimmer 4s ease infinite; line-height: 1; }
         @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         .hero-subtitle { font-size: 28px; color: #888; letter-spacing: 2px; }
         
-        section { padding: 120px 60px; }
-        .section-title { font-size: 72px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 80px; }
+        /* Timeline Section */
+        .timeline-section { padding: 80px 60px; background: #000; position: relative; z-index: 2; }
+        .timeline-header { text-align: center; margin-bottom: 80px; }
+        .timeline-title { font-size: 72px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
         
-        .timeline { max-width: 1200px; margin: 0 auto; }
-        .timeline-item { margin-bottom: 80px; padding: 50px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; border-left: 4px solid #fff; transition: all 0.5s; }
-        .timeline-item:hover { background: rgba(255,255,255,0.05); transform: scale(1.02); box-shadow: 0 20px 60px rgba(255,255,255,0.1); }
-        .timeline-year { font-size: 72px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; line-height: 1; }
-        .timeline-title { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 15px; }
-        .timeline-description { font-size: 16px; color: #888; line-height: 1.6; margin-bottom: 25px; }
-        .timeline-stats { display: flex; gap: 30px; }
-        .stat-value { font-size: 24px; font-weight: 700; color: #fff; }
-        .stat-label { font-size: 11px; color: #666; letter-spacing: 2px; text-transform: uppercase; }
+        .timeline-container { max-width: 1200px; margin: 0 auto; position: relative; padding: 0 20px; }
+        
+        /* Vertical Line with Draw Animation */
+        .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.3) 10%, rgba(255,255,255,0.3) 90%, transparent); transform: translateX(-50%); }
+        .timeline-line::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 0; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.8), transparent); animation: drawLine 2s ease-out forwards; animation-delay: 0.5s; }
+        @keyframes drawLine { from { height: 0; } to { height: 100%; } }
+        
+        /* Timeline Item with Scroll Animation */
+        .timeline-item { position: relative; margin-bottom: 100px; display: flex; align-items: center; opacity: 0; transform: translateY(80px) scale(0.9); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .timeline-item.visible { opacity: 1; transform: translateY(0) scale(1); }
+        
+        /* Dot with Pulse */
+        .timeline-dot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: #fff; border: 4px solid #000; border-radius: 50%; z-index: 10; box-shadow: 0 0 20px rgba(255,255,255,0.5); animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.5); } 50% { box-shadow: 0 0 40px rgba(255,255,255,1); } }
+        
+        /* Card Left */
+        .timeline-item.left .timeline-card { margin-right: auto; margin-left: 0; width: 45%; }
+        .timeline-item.left { justify-content: flex-start; }
+        
+        /* Card Right */
+        .timeline-item.right .timeline-card { margin-left: auto; margin-right: 0; width: 45%; }
+        .timeline-item.right { justify-content: flex-end; }
+        
+        /* Card with 3D Tilt Effect */
+        .timeline-card { padding: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.3s; position: relative; transform-style: preserve-3d; perspective: 1000px; }
+        .timeline-card:hover { background: rgba(255,255,255,0.08); transform: scale(1.05); box-shadow: 0 20px 60px rgba(255,255,255,0.15); }
+        
+        .card-year { font-size: 14px; color: #666; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
+        .card-title { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 15px; }
+        .card-description { font-size: 16px; color: #888; line-height: 1.6; }
+        
+        /* CTA */
+        .cta { padding: 80px 60px; text-align: center; background: #000; position: relative; z-index: 2; }
+        .cta-title { font-size: 56px; font-weight: 800; color: #fff; margin-bottom: 40px; }
+        .cta-buttons { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+        .cta-button { display: inline-block; padding: 20px 50px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); border-radius: 50px; color: #fff; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; transition: all 0.5s; }
+        .cta-button:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); transform: translateY(-5px); box-shadow: 0 20px 60px rgba(255,255,255,0.2); }
+        .cta-button.primary { background: #fff; color: #000; }
+        .cta-button.primary:hover { background: #e0e0e0; }
         
         @media (max-width: 768px) {
             .hero-title { font-size: 48px; }
-            .section-title { font-size: 42px; }
+            .timeline-title { font-size: 42px; }
+            .timeline-line { left: 30px; }
+            .timeline-item.left .timeline-card, .timeline-item.right .timeline-card { width: calc(100% - 60px); margin-left: 60px !important; margin-right: 0 !important; }
+            .timeline-dot { left: 30px; }
         }
     </style>
 </head>
 <body>
+    <!-- FLOATING PARTICLES -->
+    <div class="particles" id="particles"></div>
+    
     <nav>
         <div class="nav-content">
             <div class="nav-logo">BHAI HOLDINGS</div>
@@ -56,91 +104,152 @@
         </div>
     </section>
     
-    <section style="background: linear-gradient(180deg, #000 0%, #0a0a0a 100%); text-align: center;">
-        <h2 class="section-title">The Beginning</h2>
-        <p style="font-size: 20px; color: #888; line-height: 1.8; max-width: 900px; margin: 0 auto;">
-            Every empire starts with a vision. In 2020, BHAI Holdings was founded on the belief that 
-            true innovation comes from those brave enough to challenge convention and bold enough to 
-            execute without hesitation.
-        </p>
+    <!-- The Beginning Section -->
+    <section style="padding: 80px 60px 60px; background: linear-gradient(180deg, #000 0%, #0a0a0a 100%); text-align: center; position: relative; z-index: 2;">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 style="font-size: 56px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px;">The Beginning</h2>
+            <p style="font-size: 20px; color: #888; line-height: 1.8;">
+                Every empire starts with a vision. In 2020, BHAI Holdings was founded on the belief that 
+                true innovation comes from those brave enough to challenge convention and bold enough to 
+                execute without hesitation.
+            </p>
+        </div>
     </section>
     
-    <section style="background: #000;">
-        <h2 class="section-title">Milestones</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-year">2020</div>
-                <h3 class="timeline-title">The Foundation</h3>
-                <p class="timeline-description">
-                    BHAI Holdings is established with a clear mission: to build a diversified portfolio 
-                    of world-class ventures across multiple high-growth sectors.
-                </p>
-                <div class="timeline-stats">
-                    <div><div class="stat-value">Day 1</div><div class="stat-label">Launch</div></div>
-                    <div><div class="stat-value">Vision</div><div class="stat-label">Established</div></div>
+    <section class="timeline-section">
+        <div class="timeline-header">
+            <h2 class="timeline-title">Milestones</h2>
+        </div>
+        
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <!-- 2020 - Right -->
+            <div class="timeline-item right" data-tilt>
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="card-year">2020</div>
+                    <h3 class="card-title">Foundation</h3>
+                    <p class="card-description">
+                        BHAI Holdings established with vision to revolutionize multi-sector investment
+                    </p>
                 </div>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-year">2021</div>
-                <h3 class="timeline-title">Digital Revolution</h3>
-                <p class="timeline-description">
-                    MX1 cryptocurrency exchange launches, bringing institutional-grade trading infrastructure 
-                    to the digital asset market.
-                </p>
-                <div class="timeline-stats">
-                    <div><div class="stat-value">100K+</div><div class="stat-label">Users</div></div>
-                    <div><div class="stat-value">24/7</div><div class="stat-label">Trading</div></div>
+            <!-- 2021 - Left -->
+            <div class="timeline-item left" data-tilt>
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="card-year">2021</div>
+                    <h3 class="card-title">Digital Expansion</h3>
+                    <p class="card-description">
+                        Launched MX1 cryptocurrency exchange platform
+                    </p>
                 </div>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-year">2022</div>
-                <h3 class="timeline-title">Global Expansion</h3>
-                <p class="timeline-description">
-                    GloFi platform launches, revolutionizing cross-border payments. The platform expands 
-                    to 50+ countries, processing over $500M in transactions.
-                </p>
-                <div class="timeline-stats">
-                    <div><div class="stat-value">50+</div><div class="stat-label">Countries</div></div>
-                    <div><div class="stat-value">$500M+</div><div class="stat-label">Processed</div></div>
+            <!-- 2022 - Right -->
+            <div class="timeline-item right" data-tilt>
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="card-year">2022</div>
+                    <h3 class="card-title">Global Finance</h3>
+                    <p class="card-description">
+                        GloFi platform reaches 50+ countries
+                    </p>
                 </div>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-year">2023</div>
-                <h3 class="timeline-title">Energy & Resources</h3>
-                <p class="timeline-description">
-                    Strategic acquisition of NorthEast Oil & Gas, securing 2.5 million barrels of proven 
-                    oil reserves. Partnership with Harquahala Gold Mine adds 30,000+ ounces of gold.
-                </p>
-                <div class="timeline-stats">
-                    <div><div class="stat-value">2.5M</div><div class="stat-label">Barrels Oil</div></div>
-                    <div><div class="stat-value">30K+</div><div class="stat-label">Oz Gold</div></div>
+            <!-- 2023 - Left -->
+            <div class="timeline-item left" data-tilt>
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="card-year">2023</div>
+                    <h3 class="card-title">Energy Acquisition</h3>
+                    <p class="card-description">
+                        Secured NorthEast Oil & Gas with 2.5M barrel reserves
+                    </p>
                 </div>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-year">2024</div>
-                <h3 class="timeline-title">Billion Dollar Empire</h3>
-                <p class="timeline-description">
-                    BHAI Holdings crosses the $1 billion mark in assets under management. Strategic 
-                    partnerships with Visa, Circle, and major crypto exchanges solidify global position.
-                </p>
-                <div class="timeline-stats">
-                    <div><div class="stat-value">$1B+</div><div class="stat-label">AUM</div></div>
-                    <div><div class="stat-value">Global</div><div class="stat-label">Reach</div></div>
+            <!-- 2024 - Right -->
+            <div class="timeline-item right" data-tilt>
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="card-year">2024</div>
+                    <h3 class="card-title">$1B Milestone</h3>
+                    <p class="card-description">
+                        Assets under management exceed $1 billion
+                    </p>
                 </div>
             </div>
         </div>
     </section>
     
-    <section style="padding: 120px 60px; text-align: center; background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);">
-        <h2 style="font-size: 56px; font-weight: 800; color: #fff; margin-bottom: 40px;">This Is Just the Beginning</h2>
-        <div style="display: flex; gap: 30px; justify-content: center;">
-            <a href="vision.html" style="display: inline-block; padding: 20px 50px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); border-radius: 50px; color: #fff; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none;">Our Vision</a>
-            <a href="future.html" style="display: inline-block; padding: 20px 50px; background: #fff; color: #000; border: 2px solid #fff; border-radius: 50px; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none;">What's Next</a>
+    <section class="cta">
+        <h2 class="cta-title">This Is Just the Beginning</h2>
+        <div class="cta-buttons">
+            <a href="vision.html" class="cta-button">Our Vision</a>
+            <a href="future.html" class="cta-button primary">What's Next</a>
         </div>
     </section>
+    
+    <script>
+        // CREATE FLOATING PARTICLES
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 80; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 15) + 's';
+            particle.style.width = (2 + Math.random() * 3) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+        
+        // SCROLL ANIMATION - Timeline items fade in
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            // Add stagger delay
+            item.style.transitionDelay = (index * 0.15) + 's';
+            observer.observe(item);
+        });
+        
+        // 3D TILT EFFECT on cards
+        document.querySelectorAll('[data-tilt]').forEach(item => {
+            const card = item.querySelector('.timeline-card');
+            
+            item.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
