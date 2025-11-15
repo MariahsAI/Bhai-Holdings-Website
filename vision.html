@@ -6,6 +6,7 @@
     <title>Our Vision — BHAI Holdings</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #000;
@@ -38,7 +39,7 @@
         .nav-back { color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 10px 25px; border-radius: 25px; transition: all 0.3s; }
         .nav-back:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
         
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%); animation: pulse 4s ease infinite; }
         @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
         
@@ -59,10 +60,100 @@
         .card-heading { font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 20px; }
         .card-text { font-size: 18px; color: #888; line-height: 1.8; }
         
+        /* HEXAGON GRID */
+        .hexagon-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 80px 20px;
+        }
+        
+        .hex-row {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+        
+        .hexagon {
+            position: relative;
+            width: 280px;
+            height: 323px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hexagon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .hexagon:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.6);
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255,255,255,0.3), inset 0 0 20px rgba(255,255,255,0.1);
+        }
+        
+        .hexagon:hover::before {
+            opacity: 1;
+        }
+        
+        .hex-content {
+            padding: 40px;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .hex-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .hex-text {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.6;
+        }
+        
+        /* Connecting Lines */
+        .hexagon-container::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(60deg, transparent 48%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 52%),
+                linear-gradient(120deg, transparent 48%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 52%);
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        
         @media (max-width: 768px) {
             .hero-title { font-size: 48px; }
             .section-title { font-size: 42px; }
-            .grid { grid-template-columns: 1fr; }
+            .hexagon { width: 200px; height: 231px; }
+            .hex-row { flex-direction: column; }
         }
     </style>
 </head>
@@ -108,32 +199,55 @@
         </div>
     </section>
     
-    <section style="background: #000; text-align: center;">
+    <section style="background: #000; text-align: center; position: relative;">
         <h2 class="section-title">Core Principles</h2>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto;">
-            <div class="card" style="text-align: center;">
-                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Speed & Execution</h3>
-                <p style="font-size: 14px; color: #888; line-height: 1.6;">In business, timing is everything. We move fast, execute flawlessly, and capitalize on opportunities.</p>
+        <div class="hexagon-container">
+            <!-- Row 1: 2 hexagons -->
+            <div class="hex-row">
+                <div class="hexagon">
+                    <div class="hex-content">
+                        <h3 class="hex-title">Speed & Execution</h3>
+                        <p class="hex-text">In business, timing is everything. We move fast, execute flawlessly, and capitalize on opportunities.</p>
+                    </div>
+                </div>
+                <div class="hexagon">
+                    <div class="hex-content">
+                        <h3 class="hex-title">Strategic Vision</h3>
+                        <p class="hex-text">Every move is calculated. We see the big picture and position ourselves for maximum impact.</p>
+                    </div>
+                </div>
             </div>
-            <div class="card" style="text-align: center;">
-                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Strategic Vision</h3>
-                <p style="font-size: 14px; color: #888; line-height: 1.6;">Every move is calculated. We see the big picture and position ourselves for maximum impact.</p>
+            
+            <!-- Row 2: 2 hexagons -->
+            <div class="hex-row">
+                <div class="hexagon">
+                    <div class="hex-content">
+                        <h3 class="hex-title">Premium Quality</h3>
+                        <p class="hex-text">We operate at the highest level in everything we do. Quality isn't negotiable—it's our standard.</p>
+                    </div>
+                </div>
+                <div class="hexagon">
+                    <div class="hex-content">
+                        <h3 class="hex-title">Global Mindset</h3>
+                        <p class="hex-text">We think globally, act locally, and build ventures that transcend borders and cultures.</p>
+                    </div>
+                </div>
             </div>
-            <div class="card" style="text-align: center;">
-                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Premium Quality</h3>
-                <p style="font-size: 14px; color: #888; line-height: 1.6;">We operate at the highest level in everything we do. Quality isn't negotiable—it's our standard.</p>
-            </div>
-            <div class="card" style="text-align: center;">
-                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Global Mindset</h3>
-                <p style="font-size: 14px; color: #888; line-height: 1.6;">We think globally, act locally, and build ventures that transcend borders and cultures.</p>
-            </div>
-            <div class="card" style="text-align: center;">
-                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Relentless Ambition</h3>
-                <p style="font-size: 14px; color: #888; line-height: 1.6;">Good is never good enough. We pursue greatness with intensity, passion, and unwavering determination.</p>
-            </div>
-            <div class="card" style="text-align: center;">
-                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Trust & Integrity</h3>
-                <p style="font-size: 14px; color: #888; line-height: 1.6;">Our word is our bond. We build relationships based on trust, transparency, and mutual respect.</p>
+            
+            <!-- Row 3: 2 hexagons -->
+            <div class="hex-row">
+                <div class="hexagon">
+                    <div class="hex-content">
+                        <h3 class="hex-title">Relentless Ambition</h3>
+                        <p class="hex-text">Good is never good enough. We pursue greatness with intensity, passion, and unwavering determination.</p>
+                    </div>
+                </div>
+                <div class="hexagon">
+                    <div class="hex-content">
+                        <h3 class="hex-title">Trust & Integrity</h3>
+                        <p class="hex-text">Our word is our bond. We build relationships based on trust, transparency, and mutual respect.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
