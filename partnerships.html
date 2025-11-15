@@ -19,6 +19,98 @@
             overflow: hidden;
         }
         
+        /* LOADING SCREEN */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-content {
+            text-align: center;
+        }
+        
+        .loading-logo {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFFFFF 50%, #A8A8A8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .loading-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .loading-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            animation: loading 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+        
+        /* PARTICLE BACKGROUND */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
         /* Navigation */
         nav {
             position: fixed;
@@ -30,6 +122,19 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px 40px;
             z-index: 100;
+            opacity: 0;
+            animation: slideDown 0.8s ease forwards 0.5s;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .nav-content {
@@ -46,6 +151,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            letter-spacing: 5px;
         }
         
         .back-link {
@@ -58,12 +168,32 @@
             padding: 10px 25px;
             border-radius: 25px;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+        
+        .back-link:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .back-link:hover {
             border-color: rgba(255, 255, 255, 0.6);
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
         }
         
         /* Split Screen Container */
@@ -73,7 +203,7 @@
             height: calc(100vh - 80px);
         }
         
-        /* LEFT SIDE - Partners List */
+        /* LEFT SIDE */
         .left-side {
             width: 50%;
             background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
@@ -81,6 +211,7 @@
             padding: 60px 80px;
             border-right: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
+            z-index: 1;
         }
         
         .left-side::-webkit-scrollbar {
@@ -92,43 +223,11 @@
         }
         
         .left-side::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             border-radius: 4px;
         }
         
-        .left-side::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-        
-        /* Search Bar */
-        .search-container {
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards 0.2s;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 14px;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        
-        .search-input::placeholder {
-            color: #666666;
-        }
-        
+        /* GLITCH EFFECT ON TITLE */
         .page-title {
             font-size: 48px;
             font-weight: 800;
@@ -140,6 +239,44 @@
             letter-spacing: 1px;
             opacity: 0;
             animation: fadeInUp 0.8s ease forwards;
+            position: relative;
+        }
+        
+        .page-title::before,
+        .page-title::after {
+            content: 'Our Partnerships';
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+        
+        .page-title:hover::before {
+            opacity: 0.7;
+            animation: glitch1 0.3s infinite;
+        }
+        
+        .page-title:hover::after {
+            opacity: 0.7;
+            animation: glitch2 0.3s infinite;
+        }
+        
+        @keyframes glitch1 {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes glitch2 {
+            0% { transform: translate(0); }
+            20% { transform: translate(2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(-2px, 2px); }
+            100% { transform: translate(0); }
         }
         
         .page-subtitle {
@@ -162,18 +299,50 @@
             }
         }
         
+        /* SEARCH BAR WITH GLOW */
+        .search-container {
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.2s;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .search-input::placeholder {
+            color: #666666;
+        }
+        
+        /* CATEGORY GROUPS */
         .category-group {
             margin-bottom: 50px;
             opacity: 0;
             animation: fadeInUp 0.8s ease forwards;
         }
         
-        .category-group:nth-child(1) { animation-delay: 0.3s; }
-        .category-group:nth-child(2) { animation-delay: 0.4s; }
-        .category-group:nth-child(3) { animation-delay: 0.5s; }
-        .category-group:nth-child(4) { animation-delay: 0.6s; }
-        .category-group:nth-child(5) { animation-delay: 0.7s; }
-        .category-group:nth-child(6) { animation-delay: 0.8s; }
+        .category-group:nth-child(4) { animation-delay: 0.3s; }
+        .category-group:nth-child(5) { animation-delay: 0.4s; }
+        .category-group:nth-child(6) { animation-delay: 0.5s; }
+        .category-group:nth-child(7) { animation-delay: 0.6s; }
+        .category-group:nth-child(8) { animation-delay: 0.7s; }
+        .category-group:nth-child(9) { animation-delay: 0.8s; }
         
         .category-header {
             margin-bottom: 20px;
@@ -186,6 +355,7 @@
         
         .category-header:hover .category-title {
             color: #ffffff;
+            letter-spacing: 4px;
         }
         
         .category-title {
@@ -204,6 +374,12 @@
             padding: 4px 12px;
             border-radius: 12px;
             letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-header:hover .partner-count {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
         }
         
         .category-line {
@@ -212,8 +388,14 @@
             background: linear-gradient(90deg, #ffffff, transparent);
             margin-top: 8px;
             margin-bottom: 15px;
+            transition: all 0.3s ease;
         }
         
+        .category-header:hover .category-line {
+            width: 100px;
+        }
+        
+        /* PARTNER ITEMS WITH 3D EFFECT */
         .partner-item {
             padding: 20px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -222,19 +404,36 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative;
+        }
+        
+        .partner-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
+            transition: width 0.3s ease;
+        }
+        
+        .partner-item:hover::before {
+            width: 100%;
         }
         
         .partner-item:hover {
             padding-left: 15px;
             border-left: 2px solid rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.03);
-            transform: translateX(3px);
+            transform: translateX(5px) translateZ(10px);
+            perspective: 1000px;
         }
         
         .partner-item.active {
             padding-left: 15px;
             border-left: 2px solid #ffffff;
             background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
         
         .partner-name {
@@ -245,7 +444,8 @@
         }
         
         .partner-item:hover .partner-name {
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
         
         .partner-arrow {
@@ -257,10 +457,10 @@
         .partner-item:hover .partner-arrow,
         .partner-item.active .partner-arrow {
             color: #ffffff;
-            transform: translateX(5px);
+            transform: translateX(10px) rotate(-45deg);
         }
         
-        /* Back to Top Button */
+        /* BACK TO TOP WITH RIPPLE */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -278,6 +478,7 @@
             pointer-events: none;
             transition: all 0.3s ease;
             z-index: 50;
+            overflow: hidden;
         }
         
         .back-to-top.visible {
@@ -285,30 +486,50 @@
             pointer-events: auto;
         }
         
-        .back-to-top:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
+        .back-to-top::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.6s ease;
         }
         
-        .back-to-top::before {
+        .back-to-top:hover::before {
+            transform: scale(2);
+            opacity: 0;
+        }
+        
+        .back-to-top:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        .back-to-top::after {
             content: '↑';
             color: #ffffff;
             font-size: 20px;
+            position: relative;
+            z-index: 1;
         }
         
-        /* Scroll Progress Bar */
+        /* SCROLL PROGRESS */
         .scroll-progress {
             position: fixed;
             top: 80px;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #ffffff, transparent);
             z-index: 99;
             transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
         
-        /* RIGHT SIDE - Detail Panel */
+        /* RIGHT SIDE WITH ADVANCED EFFECTS */
         .right-side {
             width: 50%;
             background: 
@@ -322,9 +543,10 @@
             flex-direction: column;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
         
-        /* Animated background glow */
+        /* ADVANCED ANIMATED BACKGROUND */
         .right-side::before {
             content: '';
             position: absolute;
@@ -332,8 +554,19 @@
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        .right-side::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+            animation: rotate 40s linear infinite reverse;
         }
         
         @keyframes rotate {
@@ -343,7 +576,7 @@
         
         .detail-content {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px) scale(0.95);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             z-index: 1;
@@ -351,7 +584,7 @@
         
         .detail-content.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
         
         .detail-category {
@@ -361,18 +594,38 @@
             letter-spacing: 3px;
             margin-bottom: 20px;
             font-weight: 600;
+            animation: slideInLeft 0.6s ease;
         }
         
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* ANIMATED GRADIENT TEXT */
         .detail-name {
             font-size: 64px;
             font-weight: 800;
             background: linear-gradient(135deg, #A8A8A8 0%, #FFFFFF 50%, #A8A8A8 100%);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 40px;
             line-height: 1.1;
             letter-spacing: 1px;
+            animation: gradientShift 3s ease infinite, slideInLeft 0.6s ease 0.1s backwards;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         
         .detail-divider {
@@ -380,6 +633,12 @@
             height: 3px;
             background: linear-gradient(90deg, #ffffff, transparent);
             margin-bottom: 40px;
+            animation: expandWidth 0.8s ease 0.2s backwards;
+        }
+        
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 80px; }
         }
         
         .detail-description {
@@ -388,18 +647,31 @@
             line-height: 1.8;
             max-width: 500px;
             margin-bottom: 40px;
+            animation: slideInLeft 0.6s ease 0.3s backwards;
         }
         
         .detail-meta {
             display: flex;
             gap: 30px;
             margin-bottom: 30px;
+            animation: slideInLeft 0.6s ease 0.4s backwards;
         }
         
         .meta-item {
             display: flex;
             flex-direction: column;
             gap: 5px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .meta-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
         }
         
         .meta-label {
@@ -415,6 +687,7 @@
             font-weight: 600;
         }
         
+        /* PLACEHOLDER WITH ANIMATION */
         .detail-placeholder {
             text-align: center;
             color: #666666;
@@ -424,17 +697,59 @@
             font-size: 80px;
             margin-bottom: 30px;
             opacity: 0.3;
-            animation: pulse 2s ease-in-out infinite;
+            animation: pulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
         }
         
         @keyframes pulse {
             0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.6; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         .detail-placeholder-text {
             font-size: 18px;
             letter-spacing: 2px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* SOUND WAVE VISUALIZER */
+        .sound-wave {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 3px;
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .sound-wave.active {
+            opacity: 1;
+        }
+        
+        .wave-bar {
+            width: 3px;
+            height: 20px;
+            background: linear-gradient(180deg, #ffffff, rgba(255, 255, 255, 0.3));
+            border-radius: 3px;
+            animation: wave 0.8s ease-in-out infinite;
+        }
+        
+        .wave-bar:nth-child(1) { animation-delay: 0s; }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(6) { animation-delay: 0.1s; }
+        
+        @keyframes wave {
+            0%, 100% { height: 20px; }
+            50% { height: 40px; }
         }
         
         /* Responsive */
@@ -452,10 +767,6 @@
             .right-side {
                 min-height: 60vh;
                 position: relative;
-            }
-            
-            .back-to-top {
-                display: none;
             }
         }
         
@@ -479,6 +790,29 @@
     </style>
 </head>
 <body>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">BHAI HOLDINGS</div>
+            <div class="loading-bar">
+                <div class="loading-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PARTICLE BACKGROUND -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- SOUND WAVE VISUALIZER -->
+    <div class="sound-wave" id="soundWave">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+    </div>
+    
     <nav>
         <div class="nav-content">
             <div class="logo">BHAI HOLDINGS</div>
@@ -486,19 +820,14 @@
         </div>
     </nav>
     
-    <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
-    
-    <!-- Back to Top Button -->
     <div class="back-to-top" id="backToTop"></div>
     
     <div class="split-container">
-        <!-- LEFT SIDE: Partners List -->
         <div class="left-side" id="leftSide">
             <h1 class="page-title">Our Partnerships</h1>
             <p class="page-subtitle">Strategic alliances with industry-leading organizations across multiple sectors.</p>
             
-            <!-- Search Bar -->
             <div class="search-container">
                 <input type="text" class="search-input" id="searchInput" placeholder="Search partners...">
             </div>
@@ -619,7 +948,6 @@
             </div>
         </div>
         
-        <!-- RIGHT SIDE: Detail Panel -->
         <div class="right-side">
             <div class="detail-content" id="detailContent">
                 <div class="detail-placeholder">
@@ -631,39 +959,45 @@
     </div>
     
     <script>
+        // LOADING SCREEN
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 2000);
+        });
+        
+        // PARTICLES
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+        
+        // PARTNER FUNCTIONALITY
         const partnerItems = document.querySelectorAll('.partner-item');
         const detailContent = document.getElementById('detailContent');
         const leftSide = document.getElementById('leftSide');
         const scrollProgress = document.getElementById('scrollProgress');
         const backToTop = document.getElementById('backToTop');
         const searchInput = document.getElementById('searchInput');
-        
-        // Partner click handler
-        partnerItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                updatePartner(item);
-            });
-            
-            // Keyboard navigation
-            if (index === 0) {
-                item.setAttribute('tabindex', '0');
-            }
-        });
+        const soundWave = document.getElementById('soundWave');
         
         function updatePartner(item) {
-            // Remove active from all
             partnerItems.forEach(i => i.classList.remove('active'));
-            
-            // Add active to clicked
             item.classList.add('active');
             
-            // Get data
             const name = item.getAttribute('data-name');
             const category = item.getAttribute('data-category');
             const industry = item.getAttribute('data-industry');
             const description = item.getAttribute('data-description');
             
-            // Fade out
+            soundWave.classList.add('active');
+            setTimeout(() => soundWave.classList.remove('active'), 800);
+            
             detailContent.classList.remove('visible');
             
             setTimeout(() => {
@@ -684,82 +1018,62 @@
                     <div class="detail-description">${description}</div>
                 `;
                 
-                setTimeout(() => {
-                    detailContent.classList.add('visible');
-                }, 50);
+                setTimeout(() => detailContent.classList.add('visible'), 50);
             }, 250);
         }
         
-        // Auto-select first partner on load
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                if (partnerItems.length > 0) {
-                    updatePartner(partnerItems[0]);
-                }
-            }, 1000);
+        partnerItems.forEach(item => {
+            item.addEventListener('click', () => updatePartner(item));
         });
         
-        // Scroll progress bar
+        // Auto-select first partner
+        setTimeout(() => {
+            if (partnerItems.length > 0) updatePartner(partnerItems[0]);
+        }, 2500);
+        
+        // Scroll progress
         leftSide.addEventListener('scroll', () => {
-            const scrollTop = leftSide.scrollTop;
-            const scrollHeight = leftSide.scrollHeight - leftSide.clientHeight;
-            const scrollPercent = (scrollTop / scrollHeight) * 50; // 50% because left side is 50% width
+            const scrollPercent = (leftSide.scrollTop / (leftSide.scrollHeight - leftSide.clientHeight)) * 50;
             scrollProgress.style.width = scrollPercent + '%';
             
-            // Show/hide back to top
-            if (scrollTop > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
+            backToTop.classList.toggle('visible', leftSide.scrollTop > 300);
         });
         
-        // Back to top
         backToTop.addEventListener('click', () => {
             leftSide.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
-        // Search functionality
+        // Search
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
-            
             partnerItems.forEach(item => {
-                const name = item.getAttribute('data-name').toLowerCase();
-                const category = item.getAttribute('data-category').toLowerCase();
-                const industry = item.getAttribute('data-industry').toLowerCase();
+                const searchText = [
+                    item.getAttribute('data-name'),
+                    item.getAttribute('data-category'),
+                    item.getAttribute('data-industry')
+                ].join(' ').toLowerCase();
                 
-                if (name.includes(searchTerm) || category.includes(searchTerm) || industry.includes(searchTerm)) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
+                item.style.display = searchText.includes(searchTerm) ? 'flex' : 'none';
             });
         });
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            const activeIndex = Array.from(partnerItems).findIndex(item => item.classList.contains('active'));
+            const visibleItems = Array.from(partnerItems).filter(i => i.style.display !== 'none');
+            const activeIndex = visibleItems.findIndex(i => i.classList.contains('active'));
             
-            if (e.key === 'ArrowDown' && activeIndex < partnerItems.length - 1) {
+            if (e.key === 'ArrowDown' && activeIndex < visibleItems.length - 1) {
                 e.preventDefault();
-                const visibleItems = Array.from(partnerItems).filter(item => item.style.display !== 'none');
-                const currentVisibleIndex = visibleItems.findIndex(item => item.classList.contains('active'));
-                if (currentVisibleIndex < visibleItems.length - 1) {
-                    updatePartner(visibleItems[currentVisibleIndex + 1]);
-                    visibleItems[currentVisibleIndex + 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
+                updatePartner(visibleItems[activeIndex + 1]);
+                visibleItems[activeIndex + 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else if (e.key === 'ArrowUp' && activeIndex > 0) {
                 e.preventDefault();
-                const visibleItems = Array.from(partnerItems).filter(item => item.style.display !== 'none');
-                const currentVisibleIndex = visibleItems.findIndex(item => item.classList.contains('active'));
-                if (currentVisibleIndex > 0) {
-                    updatePartner(visibleItems[currentVisibleIndex - 1]);
-                    visibleItems[currentVisibleIndex - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
+                updatePartner(visibleItems[activeIndex - 1]);
+                visibleItems[activeIndex - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
         
-        // Category header click - scroll to category
+        // Category scroll
         document.querySelectorAll('.category-header').forEach(header => {
             header.addEventListener('click', () => {
                 header.scrollIntoView({ behavior: 'smooth', block: 'start' });
