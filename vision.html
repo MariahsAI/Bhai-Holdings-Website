@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Vision — BHAI Holdings</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 24px; font-weight: 900; letter-spacing: 4px; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-back { color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 10px 25px; border-radius: 25px; transition: all 0.3s; }
+        .nav-back:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+        
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%); animation: pulse 4s ease infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
+        
+        .hero-content { text-align: center; z-index: 10; animation: fadeIn 2s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-label { font-size: 14px; color: #666; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; }
+        .hero-title { font-size: 120px; font-weight: 900; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; animation: shimmer 4s ease infinite; line-height: 1; }
+        @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .hero-subtitle { font-size: 28px; color: #888; letter-spacing: 2px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+        
+        section { min-height: 100vh; padding: 120px 60px; }
+        .section-title { font-size: 72px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 80px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; max-width: 1200px; margin: 0 auto; }
+        .card { padding: 60px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.5s; }
+        .card:hover { background: rgba(255,255,255,0.05); transform: translateY(-10px); box-shadow: 0 20px 60px rgba(255,255,255,0.1); }
+        .card-number { font-size: 14px; color: #666; letter-spacing: 3px; margin-bottom: 20px; }
+        .card-heading { font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 20px; }
+        .card-text { font-size: 18px; color: #888; line-height: 1.8; }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 48px; }
+            .section-title { font-size: 42px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-logo">BHAI HOLDINGS</div>
+            <a href="experience.html" class="nav-back">← Back</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Our Vision</div>
+            <h1 class="hero-title">VISION</h1>
+            <p class="hero-subtitle">Building tomorrow's empire through innovation, excellence, and unwavering ambition</p>
+        </div>
+    </section>
+    
+    <section style="background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);">
+        <h2 class="section-title">Our Manifesto</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-number">01</div>
+                <h3 class="card-heading">Innovation First</h3>
+                <p class="card-text">We don't follow trends—we create them. Every venture we undertake pushes boundaries, challenges conventions, and redefines what's possible in its industry.</p>
+            </div>
+            <div class="card">
+                <div class="card-number">02</div>
+                <h3 class="card-heading">Global Impact</h3>
+                <p class="card-text">Our reach extends across continents, industries, and sectors. We build businesses that don't just succeed—they transform markets and create lasting value worldwide.</p>
+            </div>
+            <div class="card">
+                <div class="card-number">03</div>
+                <h3 class="card-heading">Excellence Without Compromise</h3>
+                <p class="card-text">Mediocrity is not in our vocabulary. Every decision, every investment, every partnership is executed with precision, integrity, and an unwavering commitment to excellence.</p>
+            </div>
+            <div class="card">
+                <div class="card-number">04</div>
+                <h3 class="card-heading">Future-Focused</h3>
+                <p class="card-text">While others react to change, we anticipate it. Our investments are strategic bets on tomorrow's leaders, technologies, and opportunities.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section style="background: #000; text-align: center;">
+        <h2 class="section-title">Core Principles</h2>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1400px; margin: 0 auto;">
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 30px;">⚡</div>
+                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Speed & Execution</h3>
+                <p style="font-size: 14px; color: #888; line-height: 1.6;">In business, timing is everything. We move fast, execute flawlessly, and capitalize on opportunities.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 30px;">🎯</div>
+                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Strategic Vision</h3>
+                <p style="font-size: 14px; color: #888; line-height: 1.6;">Every move is calculated. We see the big picture and position ourselves for maximum impact.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 30px;">💎</div>
+                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Premium Quality</h3>
+                <p style="font-size: 14px; color: #888; line-height: 1.6;">We operate at the highest level in everything we do. Quality isn't negotiable—it's our standard.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 30px;">🌍</div>
+                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Global Mindset</h3>
+                <p style="font-size: 14px; color: #888; line-height: 1.6;">We think globally, act locally, and build ventures that transcend borders and cultures.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 30px;">🔥</div>
+                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Relentless Ambition</h3>
+                <p style="font-size: 14px; color: #888; line-height: 1.6;">Good is never good enough. We pursue greatness with intensity, passion, and unwavering determination.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 30px;">🤝</div>
+                <h3 style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;">Trust & Integrity</h3>
+                <p style="font-size: 14px; color: #888; line-height: 1.6;">Our word is our bond. We build relationships based on trust, transparency, and mutual respect.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section style="min-height: 60vh; background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); display: flex; align-items: center; justify-content: center; text-align: center;">
+        <div style="max-width: 900px;">
+            <p style="font-size: 48px; font-weight: 300; color: #fff; line-height: 1.4; margin-bottom: 40px; font-style: italic;">"We are not building companies. We are building empires that will define the future."</p>
+            <div style="font-size: 18px; color: #666; letter-spacing: 3px; text-transform: uppercase;">BHAI Holdings</div>
+        </div>
+    </section>
+    
+    <section style="padding: 120px 60px; text-align: center; background: #000;">
+        <h2 style="font-size: 56px; font-weight: 800; color: #fff; margin-bottom: 40px;">Ready to Build the Future?</h2>
+        <div style="display: flex; gap: 30px; justify-content: center;">
+            <a href="journey.html" style="display: inline-block; padding: 20px 50px; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); border-radius: 50px; color: #fff; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; transition: all 0.5s;">View Our Journey</a>
+            <a href="future.html" style="display: inline-block; padding: 20px 50px; background: #fff; color: #000; border: 2px solid #fff; border-radius: 50px; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; transition: all 0.5s;">Explore the Future</a>
+        </div>
+    </section>
+</body>
+</html>
