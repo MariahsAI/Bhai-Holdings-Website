@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHAI Holdings — Strategic Partnerships</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="BHAI Holdings strategic partnerships with industry leaders including NorthEast Asset Group, PrecisionX, Bitunix, OKX, LBank, Weex, BingX, Bitget, and Flex.">
+    <meta name="keywords" content="BHAI Holdings partnerships, NorthEast Asset Group, PrecisionX, cryptocurrency exchanges, strategic alliances">
+    <meta name="author" content="BHAI Holdings, LLC">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="BHAI Holdings — Strategic Partnerships">
+    <meta property="og:description" content="Strategic partnerships with industry-leading companies across fintech, energy, and digital assets.">
+    <meta property="og:image" content="https://mariahsai.github.io/Bhai-Holdings-Website/bhai-og-image.png">
+    <meta property="og:url" content="https://mariahsai.github.io/Bhai-Holdings-Website/partnerships">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BHAI Holdings">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BHAI Holdings — Strategic Partnerships">
+    <meta name="twitter:description" content="Strategic partnerships with industry-leading companies across fintech, energy, and digital assets.">
+    <meta name="twitter:image" content="https://mariahsai.github.io/Bhai-Holdings-Website/bhai-og-image.png">
+    
+    <!-- Mobile Meta Tags -->
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mariahsai.github.io/Bhai-Holdings-Website/partnerships">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            color: #E5E4E2;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(229, 228, 226, 0.1);
+            padding: 20px 40px;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFFFFF 50%, #A8A8A8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .back-link {
+            color: #A8A8A8;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(229, 228, 226, 0.3);
+            padding: 10px 25px;
+            border-radius: 25px;
+        }
+        
+        .back-link:hover {
+            color: #E5E4E2;
+            border-color: rgba(229, 228, 226, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 120px;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 11px;
+            color: #A8A8A8;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFFFFF 50%, #A8A8A8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+        
+        .section-description {
+            font-size: 18px;
+            color: #A8A8A8;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+        
+        /* Partnerships Grid */
+        .partnerships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .partner-card {
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.3) 10px, rgba(0, 0, 0, 0.3) 11px),
+                linear-gradient(145deg, rgba(44, 44, 44, 0.4) 0%, rgba(26, 26, 26, 0.6) 100%);
+            border: 1px solid rgba(229, 228, 226, 0.3);
+            border-radius: 15px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .partner-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(229, 228, 226, 0.05),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 4s ease-in-out infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+        
+        .partner-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(229, 228, 226, 0.5);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(229, 228, 226, 0.2);
+        }
+        
+        .partner-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #E5E4E2;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .partner-category {
+            display: inline-block;
+            font-size: 11px;
+            color: #A8A8A8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 8px 20px;
+            border: 1px solid rgba(229, 228, 226, 0.3);
+            border-radius: 20px;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 80px;
+        }
+        
+        .category-header {
+            text-align: left;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(229, 228, 226, 0.2);
+        }
+        
+        .category-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #E5E4E2;
+            margin-bottom: 10px;
+        }
+        
+        .category-description {
+            font-size: 16px;
+            color: #A8A8A8;
+            line-height: 1.6;
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .partnerships-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .partner-card {
+                padding: 40px 30px;
+            }
+            
+            .partner-name {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">BHAI HOLDINGS</div>
+            <a href="explore.html" class="back-link">← Back to Overview</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="section-subtitle">Strategic Alliances</div>
+            <h1 class="section-title">Our Partnerships</h1>
+            <p class="section-description">
+                BHAI Holdings collaborates with industry-leading organizations across multiple sectors to deliver exceptional value and innovation.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Strategic Partners -->
+    <section class="category-section">
+        <div class="container">
+            <div class="category-header fade-in">
+                <h2 class="category-title">Strategic Partners</h2>
+                <p class="category-description">Key partnerships across financial services and technology sectors.</p>
+            </div>
+            
+            <div class="partnerships-grid">
+                <div class="partner-card">
+                    <h3 class="partner-name">Northern Debt Management</h3>
+                    <span class="partner-category">Financial Services</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Energy & Resources -->
+    <section class="category-section">
+        <div class="container">
+            <div class="category-header fade-in">
+                <h2 class="category-title">Energy & Resources</h2>
+                <p class="category-description">Partnerships in energy development and resource management.</p>
+            </div>
+            
+            <div class="partnerships-grid">
+                <div class="partner-card">
+                    <h3 class="partner-name">PrecisionX</h3>
+                    <span class="partner-category">Energy Technology</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">McCaffery Oil & Gas</h3>
+                    <span class="partner-category">Oil & Gas</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">Harquahala Gold Mine</h3>
+                    <span class="partner-category">Mining</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Financial Infrastructure -->
+    <section class="category-section">
+        <div class="container">
+            <div class="category-header fade-in">
+                <h2 class="category-title">Financial Infrastructure</h2>
+                <p class="category-description">Strategic partnerships with payment networks and blockchain infrastructure providers.</p>
+            </div>
+            
+            <div class="partnerships-grid">
+                <div class="partner-card">
+                    <h3 class="partner-name">Visa</h3>
+                    <span class="partner-category">Payment Network</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">Circle</h3>
+                    <span class="partner-category">Stablecoin & Payments</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">Transak</h3>
+                    <span class="partner-category">Fiat On-Ramp</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">Rubic</h3>
+                    <span class="partner-category">Cross-Chain Exchange</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Digital Asset Exchanges -->
+    <section class="category-section">
+        <div class="container">
+            <div class="category-header fade-in">
+                <h2 class="category-title">Digital Asset Exchanges</h2>
+                <p class="category-description">Partnerships with leading cryptocurrency exchanges and trading platforms.</p>
+            </div>
+            
+            <div class="partnerships-grid">
+                <div class="partner-card">
+                    <h3 class="partner-name">Bitunix</h3>
+                    <span class="partner-category">Crypto Exchange</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">OKX</h3>
+                    <span class="partner-category">Crypto Exchange</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">LBank</h3>
+                    <span class="partner-category">Crypto Exchange</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">Weex</h3>
+                    <span class="partner-category">Crypto Exchange</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">BingX</h3>
+                    <span class="partner-category">Crypto Exchange</span>
+                </div>
+                
+                <div class="partner-card">
+                    <h3 class="partner-name">Bitget</h3>
+                    <span class="partner-category">Crypto Exchange</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Utility Partners -->
+    <section class="category-section">
+        <div class="container">
+            <div class="category-header fade-in">
+                <h2 class="category-title">Utility Partners</h2>
+                <p class="category-description">Specialized utility and service providers supporting our operations.</p>
+            </div>
+            
+            <div class="partnerships-grid">
+                <div class="partner-card">
+                    <h3 class="partner-name">Flex</h3>
+                    <span class="partner-category">Utility Services</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animatable elements
+        document.querySelectorAll('.fade-in, .partner-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Stagger partner cards animation
+        const partnerCards = document.querySelectorAll('.partner-card');
+        partnerCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>
