@@ -173,7 +173,7 @@
             width: 100%;
             height: 100%;
             background-image: url('Earth.jpg');
-            background-size: 115%;
+            background-size: 125%;
             background-position: center;
             border-radius: 50%;
             display: flex;
@@ -185,13 +185,13 @@
             overflow: hidden;
         }
         
-        /* Gradient mask to hide dark edges + text overlay */
+        /* Strong gradient mask to completely hide dark edges + text overlay */
         .sun::before {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.9) 95%, rgba(0,0,0,1) 100%);
+            background: radial-gradient(circle, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.7) 85%, rgba(0,0,0,1) 92%);
             border-radius: 50%;
             z-index: 1;
         }
