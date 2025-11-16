@@ -260,8 +260,10 @@
         
         /* Individual Planet Textures */
         .planet-mars {
-            background: 
-                radial-gradient(circle at 35% 35%, #e27b58 0%, #c1440e 45%, #8b2500 100%);
+            background-image: url('IMG_9797.PNG');
+            background-size: 200%;
+            background-position: center;
+            position: relative;
         }
         
         .planet-mars::after {
@@ -269,10 +271,8 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 60% 40%, transparent 15%, rgba(0,0,0,0.3) 16%, transparent 17%),
-                radial-gradient(circle at 30% 70%, transparent 10%, rgba(0,0,0,0.2) 11%, transparent 12%),
-                radial-gradient(circle at 80% 60%, transparent 8%, rgba(0,0,0,0.25) 9%, transparent 10%);
+            background: radial-gradient(circle, transparent 0%, transparent 40%, rgba(0,0,0,0.9) 58%, rgba(0,0,0,1) 70%);
+            border-radius: 50%;
         }
         
         .planet-moon {
