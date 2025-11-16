@@ -299,18 +299,18 @@
         
         .planet-earth {
             background-image: url('IMG_9785.PNG');
-            background-size: 120%;
+            background-size: 130%;
             background-position: center;
             position: relative;
         }
         
-        /* Gradient mask to hide black edges */
+        /* Stronger gradient mask to completely hide black edges */
         .planet-earth::after {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, transparent 0%, transparent 75%, rgba(0,0,0,0.5) 88%, rgba(0,0,0,1) 95%);
+            background: radial-gradient(circle, transparent 0%, transparent 70%, rgba(0,0,0,0.6) 82%, rgba(0,0,0,1) 90%);
             border-radius: 50%;
         }
         
