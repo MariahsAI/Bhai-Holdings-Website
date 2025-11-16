@@ -173,26 +173,25 @@
             width: 100%;
             height: 100%;
             background-image: url('Earth.jpg');
-            background-size: cover;
+            background-size: 115%;
             background-position: center;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 
-                0 0 80px rgba(100, 150, 200, 0.5),
-                inset -60px -60px 120px rgba(0, 0, 0, 0.3);
+                0 0 80px rgba(100, 150, 200, 0.5);
             position: relative;
             overflow: hidden;
         }
         
-        /* Slight dark overlay for text readability */
+        /* Gradient mask to hide dark edges + text overlay */
         .sun::before {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: radial-gradient(circle, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.9) 95%, rgba(0,0,0,1) 100%);
             border-radius: 50%;
             z-index: 1;
         }
@@ -337,36 +336,36 @@
         }
         
         /* ORBITAL ANIMATIONS */
-        .v1 { animation: orbit1 35s linear infinite; }
-        .v2 { animation: orbit2 40s linear infinite; }
-        .v3 { animation: orbit3 45s linear infinite; }
-        .v4 { animation: orbit4 50s linear infinite; }
-        .v5 { animation: orbit5 55s linear infinite; }
+        .v1 { animation: orbit1 60s linear infinite; }
+        .v2 { animation: orbit2 60s linear infinite; }
+        .v3 { animation: orbit3 60s linear infinite; }
+        .v4 { animation: orbit4 60s linear infinite; }
+        .v5 { animation: orbit5 60s linear infinite; }
         .v6 { animation: orbit6 60s linear infinite; }
         
         @keyframes orbit1 {
-            from { transform: rotate(0deg) translateX(380px) rotate(0deg) translateZ(80px); }
-            to { transform: rotate(360deg) translateX(380px) rotate(-360deg) translateZ(80px); }
+            from { transform: rotate(0deg) translateX(380px) rotate(0deg) translateZ(0); }
+            to { transform: rotate(360deg) translateX(380px) rotate(-360deg) translateZ(0); }
         }
         @keyframes orbit2 {
-            from { transform: rotate(60deg) translateX(380px) rotate(-60deg) translateZ(40px); }
-            to { transform: rotate(420deg) translateX(380px) rotate(-420deg) translateZ(40px); }
+            from { transform: rotate(60deg) translateX(380px) rotate(-60deg) translateZ(0); }
+            to { transform: rotate(420deg) translateX(380px) rotate(-420deg) translateZ(0); }
         }
         @keyframes orbit3 {
-            from { transform: rotate(120deg) translateX(380px) rotate(-120deg) translateZ(-40px); }
-            to { transform: rotate(480deg) translateX(380px) rotate(-480deg) translateZ(-40px); }
+            from { transform: rotate(120deg) translateX(380px) rotate(-120deg) translateZ(0); }
+            to { transform: rotate(480deg) translateX(380px) rotate(-480deg) translateZ(0); }
         }
         @keyframes orbit4 {
-            from { transform: rotate(180deg) translateX(380px) rotate(-180deg) translateZ(80px); }
-            to { transform: rotate(540deg) translateX(380px) rotate(-540deg) translateZ(80px); }
+            from { transform: rotate(180deg) translateX(380px) rotate(-180deg) translateZ(0); }
+            to { transform: rotate(540deg) translateX(380px) rotate(-540deg) translateZ(0); }
         }
         @keyframes orbit5 {
-            from { transform: rotate(240deg) translateX(380px) rotate(-240deg) translateZ(-40px); }
-            to { transform: rotate(600deg) translateX(380px) rotate(-600deg) translateZ(-40px); }
+            from { transform: rotate(240deg) translateX(380px) rotate(-240deg) translateZ(0); }
+            to { transform: rotate(600deg) translateX(380px) rotate(-600deg) translateZ(0); }
         }
         @keyframes orbit6 {
-            from { transform: rotate(300deg) translateX(380px) rotate(-300deg) translateZ(40px); }
-            to { transform: rotate(660deg) translateX(380px) rotate(-660deg) translateZ(40px); }
+            from { transform: rotate(300deg) translateX(380px) rotate(-300deg) translateZ(0); }
+            to { transform: rotate(660deg) translateX(380px) rotate(-660deg) translateZ(0); }
         }
         
         .planet-title {
