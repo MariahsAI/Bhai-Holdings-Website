@@ -260,10 +260,12 @@
         
         /* Individual Planet Textures */
         .planet-mars {
+            background-color: #000;
             background-image: url('IMG_9797.PNG');
-            background-size: 200%;
+            background-size: 125%;
             background-position: center;
             position: relative;
+            overflow: hidden;
         }
         
         .planet-mars::after {
@@ -271,7 +273,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, transparent 0%, transparent 40%, rgba(0,0,0,0.9) 58%, rgba(0,0,0,1) 70%);
+            background: radial-gradient(circle, transparent 0%, transparent 70%, rgba(0,0,0,0.5) 82%, rgba(0,0,0,1) 92%);
             border-radius: 50%;
         }
         
@@ -327,20 +329,32 @@
         }
         
         .planet-saturn {
+            background-color: #000;
             background-image: url('IMG_9790.PNG');
-            background-size: 200%;
+            background-size: 125%;
             background-position: center;
             position: relative;
+            overflow: hidden;
         }
         
-        /* EXTREME gradient mask - fade VERY early */
+        /* Radial fade to blend edges into black background */
+        .planet-saturn::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 0%, transparent 70%, rgba(0,0,0,0.5) 82%, rgba(0,0,0,1) 92%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
         .planet-saturn::after {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, transparent 0%, transparent 40%, rgba(0,0,0,0.9) 58%, rgba(0,0,0,1) 70%);
-            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
         }
         
         .planet-neptune {
