@@ -293,8 +293,20 @@
         }
         
         .planet-jupiter {
-            background: 
-                linear-gradient(180deg, #d4a574 0%, #c7935c 20%, #f4d7b0 40%, #c7935c 60%, #a67c52 80%, #8b6f47 100%);
+            background-image: url('IMG_9787.PNG');
+            background-size: 125%;
+            background-position: center;
+            position: relative;
+        }
+        
+        /* Gradient mask to hide any dark edges */
+        .planet-jupiter::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 0%, transparent 70%, rgba(0,0,0,0.6) 82%, rgba(0,0,0,1) 90%);
+            border-radius: 50%;
         }
         
         .planet-earth {
