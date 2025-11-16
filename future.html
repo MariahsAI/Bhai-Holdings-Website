@@ -276,6 +276,13 @@
             display: none !important;
         }
         
+        .planet-mars .planet-title,
+        .planet-mars .planet-subtitle,
+        .planet-mars .planet-status {
+            position: relative;
+            z-index: 10;
+        }
+        
         .planet-moon {
             background: 
                 radial-gradient(circle at 40% 30%, #d3d3d3 0%, #a9a9a9 40%, #696969 100%);
@@ -333,6 +340,7 @@
             background-position: center;
             position: relative;
             box-shadow: none !important;
+            padding: 0 !important;
         }
         
         .planet-saturn::before {
@@ -341,6 +349,13 @@
         
         .planet-saturn::after {
             display: none !important;
+        }
+        
+        .planet-saturn .planet-title,
+        .planet-saturn .planet-subtitle,
+        .planet-saturn .planet-status {
+            position: relative;
+            z-index: 10;
         }
         
         .planet-neptune {
