@@ -8,94 +8,13 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: #000;
+            background: #000 url('https://mariahsai.github.io/Bhai-Holdings-Website/moon-background.png') center center / cover no-repeat fixed;
             color: #fff; 
             overflow-x: hidden;
             perspective: 2000px;
-            display: flex;
         }
         
-        /* SIDEBAR */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 280px;
-            height: 100vh;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            overflow-y: auto;
-            z-index: 1000;
-        }
-        
-        .sidebar-logo {
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: 3px;
-            background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 40px;
-        }
-        
-        .sidebar-nav {
-            list-style: none;
-        }
-        
-        .sidebar-nav li {
-            margin-bottom: 20px;
-        }
-        
-        .sidebar-nav a {
-            color: #888;
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s;
-            display: block;
-            padding: 10px 0;
-        }
-        
-        .sidebar-nav a:hover,
-        .sidebar-nav a.active {
-            color: #fff;
-            padding-left: 10px;
-        }
-        
-        .sidebar-back {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .sidebar-back a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-        
-        .sidebar-back a:hover {
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-        }
-        
-        /* MAIN CONTENT */
-        .main-content {
-            margin-left: 280px;
-            width: calc(100% - 280px);
-            background: #000 url('https://mariahsai.github.io/Bhai-Holdings-Website/moon-background.png') center center / cover no-repeat fixed;
-        }
+        /* SPACE STARFIELD BACKGROUND - REMOVED (using real moon image instead) */
         
         .star {
             position: absolute;
@@ -112,12 +31,14 @@
             50% { opacity: 1; }
         }
         
-        /* HYPERDRIVE STAR FIELD */
+        /* NEBULA CLOUDS - REMOVED */
+        
+        /* HYPERDRIVE STAR FIELD - Everywhere */
         .particles { 
             position: fixed; 
             top: 0; 
-            left: 280px;
-            width: calc(100% - 280px); 
+            left: 0; 
+            width: 100%; 
             height: 100%; 
             pointer-events: none; 
             z-index: 100;
@@ -134,6 +55,7 @@
             animation: warpSpeed 3s linear infinite;
         }
         
+        /* Stars expand from center outward - hyperdrive effect */
         @keyframes warpSpeed {
             0% { 
                 transform: translate(0, 0) scale(0);
@@ -154,6 +76,12 @@
             }
         }
         
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 30px 60px; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 24px; font-weight: 900; letter-spacing: 4px; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-back { color: #fff; text-decoration: none; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.3); padding: 10px 25px; border-radius: 25px; transition: all 0.3s; }
+        .nav-back:hover { border-color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); }
+        
         .hero { 
             height: 100vh; 
             display: flex; 
@@ -164,6 +92,7 @@
             transform-style: preserve-3d;
         }
         
+        /* Dark overlay so text is readable */
         .hero::before {
             content: '';
             position: absolute;
@@ -229,6 +158,7 @@
             transform-style: preserve-3d;
         }
         
+        /* SUN - Central Star */
         .orbital-center {
             position: absolute;
             top: 50%;
@@ -255,6 +185,7 @@
             overflow: hidden;
         }
         
+        /* Strong gradient mask to completely hide dark edges + text overlay */
         .sun::before {
             content: '';
             position: absolute;
@@ -276,6 +207,7 @@
             position: relative;
         }
         
+        /* PLANETS - Each venture is a planet */
         .venture-orbit {
             position: absolute;
             top: 50%;
@@ -306,6 +238,7 @@
             overflow: hidden;
         }
         
+        /* Planet shine/highlight */
         .planet::before {
             content: '';
             position: absolute;
@@ -325,6 +258,7 @@
                 0 20px 80px rgba(255,255,255,0.3);
         }
         
+        /* Individual Planet Textures */
         .planet-mars {
             background-image: url('IMG_9797.PNG');
             background-size: 125%;
@@ -373,6 +307,7 @@
             position: relative;
         }
         
+        /* Gradient mask to hide any dark edges */
         .planet-jupiter::after {
             content: '';
             position: absolute;
@@ -389,6 +324,7 @@
             position: relative;
         }
         
+        /* Stronger gradient mask to completely hide black edges */
         .planet-earth::after {
             content: '';
             position: absolute;
@@ -441,6 +377,7 @@
             display: none !important;
         }
         
+        /* ORBITAL ANIMATIONS */
         .v1 { animation: orbit1 60s linear infinite; }
         .v2 { animation: orbit2 60s linear infinite; }
         .v3 { animation: orbit3 60s linear infinite; }
@@ -509,6 +446,7 @@
             position: relative;
         }
         
+        /* ROADMAP */
         .roadmap-phase { 
             margin-bottom: 60px; 
             padding: 50px; 
@@ -543,36 +481,7 @@
         .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
         .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
         
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 240px;
-            }
-            .main-content {
-                margin-left: 240px;
-                width: calc(100% - 240px);
-            }
-            .particles {
-                left: 240px;
-                width: calc(100% - 240px);
-            }
-        }
-        
         @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-            }
-            .particles {
-                left: 0;
-                width: 100%;
-            }
             .hero-title { font-size: 56px; }
             .section-title { font-size: 42px; }
             .orbital-container { height: 700px; }
@@ -581,172 +490,176 @@
     </style>
 </head>
 <body>
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-logo">BHAI HOLDINGS</div>
-        <ul class="sidebar-nav">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#ventures" class="active">Future Ventures</a></li>
-            <li><a href="#roadmap">Roadmap</a></li>
-            <li><a href="#cta">Get Started</a></li>
-        </ul>
-        <div class="sidebar-back">
-            <a href="experience.html">← Back</a>
-        </div>
-    </aside>
+    <!-- HYPERDRIVE STAR FIELD -->
+    <div class="particles" id="particles"></div>
     
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-        <!-- HYPERDRIVE STAR FIELD -->
-        <div class="particles" id="particles"></div>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-logo">BHAI HOLDINGS</div>
+            <a href="experience.html" class="nav-back">← Back</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">What's Next</div>
+            <h1 class="hero-title">FUTURE</h1>
+            <p class="hero-subtitle">The next chapter of global dominance</p>
+        </div>
+    </section>
+    
+    <section style="background: transparent; min-height: 130vh; position: relative;">
+        <!-- Dark overlay for readability -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0;"></div>
         
-        <section class="hero" id="hero">
-            <div class="hero-content">
-                <div class="hero-label">What's Next</div>
-                <h1 class="hero-title">FUTURE</h1>
-                <p class="hero-subtitle">The next chapter of global dominance</p>
+        <h2 class="section-title" style="position: relative; z-index: 1;">Future Ventures</h2>
+        <p class="section-subtitle" style="position: relative; z-index: 1;">A Solar System of Innovation</p>
+        
+        <div class="orbital-container" style="position: relative; z-index: 1;">
+            <!-- Central Sun -->
+            <div class="orbital-center">
+                <div class="sun">
+                    <div class="center-text">BHAI<br>2030</div>
+                </div>
             </div>
-        </section>
-        
-        <section id="ventures" style="background: transparent; min-height: 130vh; position: relative;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0;"></div>
             
-            <h2 class="section-title" style="position: relative; z-index: 1;">Future Ventures</h2>
-            <p class="section-subtitle" style="position: relative; z-index: 1;">A Solar System of Innovation</p>
+            <!-- Planet 1: Mars (AI & ML) -->
+            <div class="venture-orbit v1">
+                <div class="planet planet-mars">
+                    <h3 class="planet-title">AI & ML</h3>
+                    <p class="planet-desc">Intelligence systems</p>
+                    <span class="planet-status">Active</span>
+                </div>
+            </div>
             
-            <div class="orbital-container" style="position: relative; z-index: 1;">
-                <div class="orbital-center">
-                    <div class="sun">
-                        <div class="center-text">BHAI<br>2030</div>
-                    </div>
-                </div>
-                
-                <div class="venture-orbit v1">
-                    <div class="planet planet-mars">
-                        <h3 class="planet-title">AI & ML</h3>
-                        <p class="planet-desc">Intelligence systems</p>
-                        <span class="planet-status">Active</span>
-                    </div>
-                </div>
-                
-                <div class="venture-orbit v2">
-                    <div class="planet planet-moon">
-                        <h3 class="planet-title">Web3</h3>
-                        <p class="planet-desc">Decentralized future</p>
-                        <span class="planet-status">R&D</span>
-                    </div>
-                </div>
-                
-                <div class="venture-orbit v3">
-                    <div class="planet planet-jupiter">
-                        <h3 class="planet-title">Energy</h3>
-                        <p class="planet-desc">Sustainable power</p>
-                        <span class="planet-status">Planning</span>
-                    </div>
-                </div>
-                
-                <div class="venture-orbit v4">
-                    <div class="planet planet-earth">
-                        <h3 class="planet-title">Space Tech</h3>
-                        <p class="planet-desc">Beyond Earth</p>
-                        <span class="planet-status">Vision</span>
-                    </div>
-                </div>
-                
-                <div class="venture-orbit v5">
-                    <div class="planet planet-saturn">
-                        <h3 class="planet-title">HealthTech</h3>
-                        <p class="planet-desc">Medical revolution</p>
-                        <span class="planet-status">Research</span>
-                    </div>
-                </div>
-                
-                <div class="venture-orbit v6">
-                    <div class="planet planet-neptune">
-                        <h3 class="planet-title">Smart Cities</h3>
-                        <p class="planet-desc">Urban future</p>
-                        <span class="planet-status">Concept</span>
-                    </div>
+            <!-- Planet 2: Moon (Web3) -->
+            <div class="venture-orbit v2">
+                <div class="planet planet-moon">
+                    <h3 class="planet-title">Web3</h3>
+                    <p class="planet-desc">Decentralized future</p>
+                    <span class="planet-status">R&D</span>
                 </div>
             </div>
-        </section>
-        
-        <section id="roadmap" style="background: #000; padding-top: 120px; position: relative; z-index: 1;">
-            <h2 class="section-title" style="position: relative; z-index: 2;">Strategic Roadmap</h2>
-            <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
-                <div class="roadmap-phase">
-                    <div class="phase-number">01</div>
-                    <h3 class="phase-title">Near Term</h3>
-                    <p class="phase-timeline">2025 — Q1-Q4</p>
-                    <div class="phase-item">Expand MX1 to 100+ countries</div>
-                    <div class="phase-item">Launch AI-powered trading algorithms</div>
-                    <div class="phase-item">Double GloFi transaction volume to $1B+</div>
-                    <div class="phase-item">Acquire additional energy assets</div>
-                    <div class="phase-item">Establish Web3 R&D division</div>
-                </div>
-                
-                <div class="roadmap-phase">
-                    <div class="phase-number">02</div>
-                    <h3 class="phase-title">Mid Term</h3>
-                    <p class="phase-timeline">2026 — 2027</p>
-                    <div class="phase-item">Launch decentralized finance platform</div>
-                    <div class="phase-item">Begin renewable energy initiatives</div>
-                    <div class="phase-item">Establish HealthTech venture</div>
-                    <div class="phase-item">Reach $5B in assets under management</div>
-                    <div class="phase-item">Expand real estate portfolio globally</div>
-                </div>
-                
-                <div class="roadmap-phase">
-                    <div class="phase-number">03</div>
-                    <h3 class="phase-title">Long Term</h3>
-                    <p class="phase-timeline">2028 — 2030</p>
-                    <div class="phase-item">Become top 10 global conglomerate</div>
-                    <div class="phase-item">Launch space technology division</div>
-                    <div class="phase-item">Achieve $10B+ portfolio valuation</div>
-                    <div class="phase-item">Develop smart city infrastructure</div>
-                    <div class="phase-item">Establish BHAI Holdings as household name</div>
+            
+            <!-- Planet 3: Jupiter (Energy) -->
+            <div class="venture-orbit v3">
+                <div class="planet planet-jupiter">
+                    <h3 class="planet-title">Energy</h3>
+                    <p class="planet-desc">Sustainable power</p>
+                    <span class="planet-status">Planning</span>
                 </div>
             </div>
-        </section>
-        
-        <section id="cta" style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center; position: relative;">
-            <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));">The Future Starts Now</h2>
-            <p style="font-size: 24px; color: #888; line-height: 1.8; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
-                We're not waiting for tomorrow—we're building it today. Join us as we transform 
-                industries, create unprecedented value, and shape the future of global commerce.
-            </p>
-            <a href="explore.html" style="display: inline-block; padding: 25px 70px; background: #fff; color: #000; font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 50px; transition: all 0.5s; box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">Explore Our Universe</a>
-        </section>
-    </div>
+            
+            <!-- Planet 4: Earth (Space Tech) -->
+            <div class="venture-orbit v4">
+                <div class="planet planet-earth">
+                    <h3 class="planet-title">Space Tech</h3>
+                    <p class="planet-desc">Beyond Earth</p>
+                    <span class="planet-status">Vision</span>
+                </div>
+            </div>
+            
+            <!-- Planet 5: Saturn (HealthTech) -->
+            <div class="venture-orbit v5">
+                <div class="planet planet-saturn">
+                    <h3 class="planet-title">HealthTech</h3>
+                    <p class="planet-desc">Medical revolution</p>
+                    <span class="planet-status">Research</span>
+                </div>
+            </div>
+            
+            <!-- Planet 6: Neptune (Smart Cities) -->
+            <div class="venture-orbit v6">
+                <div class="planet planet-neptune">
+                    <h3 class="planet-title">Smart Cities</h3>
+                    <p class="planet-desc">Urban future</p>
+                    <span class="planet-status">Concept</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section style="background: #000; padding-top: 120px; position: relative; z-index: 1;">
+        <h2 class="section-title" style="position: relative; z-index: 2;">Strategic Roadmap</h2>
+        <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
+            <div class="roadmap-phase">
+                <div class="phase-number">01</div>
+                <h3 class="phase-title">Near Term</h3>
+                <p class="phase-timeline">2025 — Q1-Q4</p>
+                <div class="phase-item">Expand MX1 to 100+ countries</div>
+                <div class="phase-item">Launch AI-powered trading algorithms</div>
+                <div class="phase-item">Double GloFi transaction volume to $1B+</div>
+                <div class="phase-item">Acquire additional energy assets</div>
+                <div class="phase-item">Establish Web3 R&D division</div>
+            </div>
+            
+            <div class="roadmap-phase">
+                <div class="phase-number">02</div>
+                <h3 class="phase-title">Mid Term</h3>
+                <p class="phase-timeline">2026 — 2027</p>
+                <div class="phase-item">Launch decentralized finance platform</div>
+                <div class="phase-item">Begin renewable energy initiatives</div>
+                <div class="phase-item">Establish HealthTech venture</div>
+                <div class="phase-item">Reach $5B in assets under management</div>
+                <div class="phase-item">Expand real estate portfolio globally</div>
+            </div>
+            
+            <div class="roadmap-phase">
+                <div class="phase-number">03</div>
+                <h3 class="phase-title">Long Term</h3>
+                <p class="phase-timeline">2028 — 2030</p>
+                <div class="phase-item">Become top 10 global conglomerate</div>
+                <div class="phase-item">Launch space technology division</div>
+                <div class="phase-item">Achieve $10B+ portfolio valuation</div>
+                <div class="phase-item">Develop smart city infrastructure</div>
+                <div class="phase-item">Establish BHAI Holdings as household name</div>
+            </div>
+        </div>
+    </section>
+    
+    <section style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center; position: relative;">
+        <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));">The Future Starts Now</h2>
+        <p style="font-size: 24px; color: #888; line-height: 1.8; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
+            We're not waiting for tomorrow—we're building it today. Join us as we transform 
+            industries, create unprecedented value, and shape the future of global commerce.
+        </p>
+        <a href="explore.html" style="display: inline-block; padding: 25px 70px; background: #fff; color: #000; font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 50px; transition: all 0.5s; box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">Explore Our Universe</a>
+    </section>
     
     <script>
-        // CREATE HYPERDRIVE STAR FIELD
+        // CREATE HYPERDRIVE STAR FIELD - everywhere including moon section
         const particlesContainer = document.getElementById('particles');
         
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.className = 'particle';
             
+            // Stars start from center of screen
             star.style.left = '50%';
             star.style.top = '50%';
             
+            // Calculate random angle for direction
             const angle = Math.random() * Math.PI * 2;
             const distance = 800 + Math.random() * 1000;
             
+            // Calculate end position based on angle
             const tx = Math.cos(angle) * distance;
             const ty = Math.sin(angle) * distance;
             
             star.style.setProperty('--tx', tx + 'px');
             star.style.setProperty('--ty', ty + 'px');
             
+            // Varied speeds
             const speed = 6 + Math.random() * 8;
             star.style.animationDuration = speed + 's';
             star.style.animationDelay = Math.random() * 10 + 's';
             
+            // Bigger star sizes
             const size = Math.random() > 0.7 ? 5 : Math.random() > 0.4 ? 4 : 3;
             star.style.width = size + 'px';
             star.style.height = size + 'px';
             
+            // Bigger stars glow MORE
             if (size === 5) {
                 star.style.boxShadow = '0 0 10px rgba(255,255,255,1), 0 0 15px rgba(255,255,255,0.8)';
             } else if (size === 4) {
@@ -773,20 +686,6 @@
         document.querySelectorAll('.roadmap-phase').forEach((phase, index) => {
             phase.style.transitionDelay = (index * 0.2) + 's';
             observer.observe(phase);
-        });
-        
-        // SMOOTH SCROLL FOR SIDEBAR LINKS
-        document.querySelectorAll('.sidebar-nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                if (href.startsWith('#')) {
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
-            });
         });
     </script>
 </body>
