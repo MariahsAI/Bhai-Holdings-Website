@@ -14,6 +14,11 @@
             perspective: 2000px;
         }
         
+        section {
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+        
         /* SPACE STARFIELD BACKGROUND - REMOVED (using real moon image instead) */
         
         .star {
@@ -108,8 +113,9 @@
             text-align: center; 
             z-index: 10;
             position: relative;
-            transform: translateZ(100px);
             animation: heroFloat 6s ease-in-out infinite;
+            transition: transform 0.1s ease-out, opacity 0.2s ease-out;
+            will-change: transform, opacity;
         }
         
         @keyframes heroFloat {
@@ -156,6 +162,8 @@
             height: 1000px;
             margin: 0 auto;
             transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
         }
         
         /* SUN - Central Star */
@@ -229,13 +237,14 @@
             text-align: center;
             padding: 20px;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
             box-shadow: 
                 inset -30px -30px 60px rgba(0,0,0,0.6),
                 0 10px 40px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
+            will-change: transform;
         }
         
         /* Planet shine/highlight */
@@ -481,6 +490,11 @@
         .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
         .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
         
+        /* 3D SCROLL EFFECTS */
+        .parallax-layer {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
         @media (max-width: 768px) {
             .hero-title { font-size: 56px; }
             .section-title { font-size: 42px; }
@@ -500,7 +514,7 @@
         </div>
     </nav>
     
-    <section class="hero">
+    <section class="hero parallax-layer">
         <div class="hero-content">
             <div class="hero-label">What's Next</div>
             <h1 class="hero-title">FUTURE</h1>
@@ -508,7 +522,7 @@
         </div>
     </section>
     
-    <section style="background: transparent; min-height: 130vh; position: relative;">
+    <section class="parallax-layer" style="background: transparent; min-height: 130vh; position: relative;">
         <!-- Dark overlay for readability -->
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0;"></div>
         
@@ -579,7 +593,7 @@
         </div>
     </section>
     
-    <section style="background: #000; padding-top: 120px; position: relative; z-index: 1;">
+    <section class="parallax-layer" style="background: #000; padding-top: 120px; position: relative; z-index: 1;">
         <h2 class="section-title" style="position: relative; z-index: 2;">Strategic Roadmap</h2>
         <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
             <div class="roadmap-phase">
@@ -617,7 +631,7 @@
         </div>
     </section>
     
-    <section style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center; position: relative;">
+    <section class="parallax-layer" style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center; position: relative;">
         <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));">The Future Starts Now</h2>
         <p style="font-size: 24px; color: #888; line-height: 1.8; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
             We're not waiting for tomorrow—we're building it today. Join us as we transform 
@@ -687,6 +701,106 @@
             phase.style.transitionDelay = (index * 0.2) + 's';
             observer.observe(phase);
         });
+        
+        // 3D PARALLAX ILLUSION - Multiple layers moving at different speeds
+        let ticking = false;
+        
+        function update3DParallax() {
+            const scrolled = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            
+            // Background moves slowest (creates depth)
+            document.body.style.backgroundPositionY = (scrolled * 0.3) + 'px';
+            
+            // Hero content - moves at medium speed
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                const heroProgress = scrolled / windowHeight;
+                heroContent.style.transform = `translate3d(0, ${scrolled * 0.5}px, 0)`;
+                heroContent.style.opacity = 1 - (heroProgress * 0.7);
+            }
+            
+            // Particles move faster (foreground effect)
+            const particles = document.getElementById('particles');
+            if (particles) {
+                particles.style.transform = `translate3d(0, ${scrolled * -0.2}px, 0)`;
+            }
+            
+            // Orbital container - parallax depth
+            const orbitalContainer = document.querySelector('.orbital-container');
+            if (orbitalContainer) {
+                const rect = orbitalContainer.getBoundingClientRect();
+                const elementTop = rect.top;
+                const elementHeight = rect.height;
+                
+                if (elementTop < windowHeight && elementTop + elementHeight > 0) {
+                    const scrollProgress = (windowHeight - elementTop) / (windowHeight + elementHeight);
+                    const parallaxOffset = (scrollProgress - 0.5) * 200;
+                    
+                    orbitalContainer.style.transform = `translate3d(0, ${parallaxOffset}px, 0) rotateX(${scrollProgress * 10 - 5}deg) rotateY(${scrollProgress * 15 - 7.5}deg)`;
+                }
+            }
+            
+            // Planets - each moves at slightly different speed for depth
+            const planets = document.querySelectorAll('.planet');
+            planets.forEach((planet, index) => {
+                const rect = planet.getBoundingClientRect();
+                const planetTop = rect.top;
+                
+                if (planetTop < windowHeight && planetTop > -rect.height) {
+                    // Each planet has different parallax speed based on index
+                    const speed = 0.05 + (index * 0.02);
+                    const offset = (scrolled - (planetTop + scrolled)) * speed;
+                    const currentTransform = planet.style.transform;
+                    
+                    // Preserve orbit animation, add parallax
+                    planet.style.transform = currentTransform + ` translate3d(0, ${offset}px, ${index * 20}px)`;
+                }
+            });
+            
+            // Section titles - float at different speeds
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles.forEach((title, index) => {
+                const rect = title.getBoundingClientRect();
+                const titleTop = rect.top;
+                
+                if (titleTop < windowHeight && titleTop > -rect.height) {
+                    const offset = (scrolled - (titleTop + scrolled)) * 0.15;
+                    title.style.transform = `translate3d(0, ${offset}px, 50px)`;
+                }
+            });
+            
+            // Roadmap phases - parallax with depth
+            const phases = document.querySelectorAll('.roadmap-phase');
+            phases.forEach((phase, index) => {
+                const rect = phase.getBoundingClientRect();
+                const phaseTop = rect.top;
+                
+                if (phaseTop < windowHeight && phaseTop > -rect.height) {
+                    const progress = (windowHeight - phaseTop) / (windowHeight + rect.height);
+                    const translateX = -30 + (progress * 50);
+                    const parallaxY = (scrolled - (phaseTop + scrolled)) * 0.1;
+                    const depth = index * 30;
+                    
+                    phase.style.transform = `translate3d(${translateX}px, ${parallaxY}px, ${depth}px) rotateY(${progress * 5 - 2.5}deg)`;
+                }
+            });
+            
+            ticking = false;
+        }
+        
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(update3DParallax);
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', requestTick);
+        window.addEventListener('resize', update3DParallax);
+        
+        // Initial call
+        update3DParallax();
     </script>
 </body>
 </html>
