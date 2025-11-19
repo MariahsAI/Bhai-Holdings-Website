@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: #000 url('https://mariahsai.github.io/Bhai-Holdings-Website/moon-background.png') center center / cover no-repeat fixed;
+            background: #000 url('https://mariahsai.github.io/Bhai-Holdings-Website/moon-background.png') center top / cover no-repeat;
             color: #fff; 
             overflow-x: hidden;
             perspective: 2000px;
@@ -716,9 +716,9 @@
             // Calculate overall scroll progress (0 to 1)
             const scrollProgress = scrolled / (docHeight - windowHeight);
             
-            // Zoom effect on body - scales everything
+            // Zoom effect on body - scales everything including background
             const minScale = 1;
-            const maxScale = 1.5;
+            const maxScale = 1.3; // Less aggressive zoom
             const scale = minScale + (scrollProgress * (maxScale - minScale));
             
             document.body.style.transform = `scale(${scale})`;
@@ -728,9 +728,9 @@
             const heroContent = document.querySelector('.hero-content');
             if (heroContent) {
                 const heroProgress = Math.min(scrolled / windowHeight, 1);
-                const heroScale = 1 + (heroProgress * 0.3);
+                const heroScale = 1 + (heroProgress * 0.2);
                 heroContent.style.transform = `scale(${heroScale})`;
-                heroContent.style.opacity = 1 - (heroProgress * 0.8);
+                heroContent.style.opacity = 1 - (heroProgress * 0.7);
             }
             
             // Sections zoom in as they enter viewport
@@ -742,15 +742,15 @@
                 
                 // Check if section is in viewport
                 if (sectionTop < windowHeight && sectionTop + sectionHeight > 0) {
-                    // Calculate how far into viewport (0 = just entering, 1 = center of screen)
+                    // Calculate how far into viewport
                     const progress = (windowHeight - sectionTop) / (windowHeight + sectionHeight);
                     
-                    // Scale from 0.8 to 1 as it enters
-                    const sectionScale = 0.8 + (progress * 0.2);
-                    const clampedScale = Math.max(0.8, Math.min(1, sectionScale));
+                    // Scale from 0.9 to 1 as it enters
+                    const sectionScale = 0.9 + (progress * 0.1);
+                    const clampedScale = Math.max(0.9, Math.min(1, sectionScale));
                     
                     section.style.transform = `scale(${clampedScale})`;
-                    section.style.opacity = Math.max(0.3, progress);
+                    section.style.opacity = Math.max(0.5, progress * 1.2);
                 }
             });
             
@@ -764,7 +764,7 @@
                 const normalizedDistance = distanceFromCenter / windowHeight;
                 
                 // Scale up when in center
-                const containerScale = 1 + ((1 - normalizedDistance) * 0.2);
+                const containerScale = 1 + ((1 - normalizedDistance) * 0.15);
                 orbitalContainer.style.transform = `scale(${containerScale})`;
             }
             
@@ -778,13 +778,10 @@
                 const normalizedDistance = distanceFromCenter / windowHeight;
                 
                 // Scale based on distance from center
-                const planetScale = 0.9 + ((1 - normalizedDistance) * 0.3);
-                const clampedScale = Math.max(0.7, Math.min(1.2, planetScale));
+                const planetScale = 0.95 + ((1 - normalizedDistance) * 0.15);
+                const clampedScale = Math.max(0.85, Math.min(1.1, planetScale));
                 
-                // Add slight rotation
-                const rotation = (planetCenter - screenCenter) / 50;
-                
-                planet.style.transform = `scale(${clampedScale}) rotate(${rotation}deg)`;
+                planet.style.transform = `scale(${clampedScale})`;
             });
             
             // Roadmap phases zoom in
@@ -793,8 +790,8 @@
                 const rect = phase.getBoundingClientRect();
                 if (rect.top < windowHeight && rect.bottom > 0) {
                     const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    const phaseScale = 0.85 + (progress * 0.15);
-                    const clampedScale = Math.max(0.85, Math.min(1, phaseScale));
+                    const phaseScale = 0.9 + (progress * 0.1);
+                    const clampedScale = Math.max(0.9, Math.min(1, phaseScale));
                     
                     const translateX = -30 + (progress * 50);
                     
