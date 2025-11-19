@@ -217,6 +217,13 @@
             padding: 20px;
             border-radius: 15px;
             backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .center-text:hover {
+            background: rgba(0,0,0,0.5);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255,255,255,0.3);
         }
         
         /* PLANETS - Each venture is a planet */
@@ -527,8 +534,6 @@
     </section>
     
     <section class="parallax-layer" style="background: transparent; min-height: 130vh; position: relative;">
-        <!-- Dark overlay for readability -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0;"></div>
         
         <h2 class="section-title" style="position: relative; z-index: 1;">Future Ventures</h2>
         <p class="section-subtitle" style="position: relative; z-index: 1;">A Solar System of Innovation</p>
@@ -537,7 +542,9 @@
             <!-- Central Sun -->
             <div class="orbital-center">
                 <div class="sun">
-                    <div class="center-text">BHAI<br>2030</div>
+                    <a href="#roadmap" class="center-text" style="text-decoration: none; color: #fff; cursor: pointer; transition: all 0.3s;">
+                        CLICK HERE
+                    </a>
                 </div>
             </div>
             
