@@ -208,15 +208,13 @@
             color: #fff;
             letter-spacing: 3px;
             text-shadow: 
-                0 0 30px rgba(0,0,0,1),
+                0 0 40px rgba(0,0,0,1),
+                0 0 20px rgba(0,0,0,1),
                 0 2px 15px rgba(0,0,0,1),
-                0 0 60px rgba(0,0,0,0.8);
+                2px 2px 4px rgba(0,0,0,1),
+                -2px -2px 4px rgba(0,0,0,1);
             z-index: 10;
             position: relative;
-            background: rgba(0,0,0,0.3);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
         }
         
         /* PLANETS - Each venture is a planet */
@@ -716,23 +714,16 @@
             // Background moves slowest (creates depth)
             document.body.style.backgroundPositionY = (scrolled * 0.3) + 'px';
             
-            // Earth/Sun DRAMATIC zoom in effect as you scroll
+            // Earth/Sun DRAMATIC zoom in effect as you scroll down the entire page
             const sun = document.querySelector('.sun');
             if (sun) {
-                const sunContainer = document.querySelector('.orbital-container');
-                if (sunContainer) {
-                    const rect = sunContainer.getBoundingClientRect();
-                    const containerTop = rect.top;
-                    const containerHeight = rect.height;
-                    
-                    // Calculate zoom based on scroll position
-                    if (containerTop < windowHeight && containerTop + containerHeight > 0) {
-                        const progress = (windowHeight - containerTop) / (windowHeight + containerHeight);
-                        // DRAMATIC zoom from 100% to 300% as you scroll
-                        const zoomLevel = 100 + (progress * 200);
-                        sun.style.backgroundSize = `${zoomLevel}%`;
-                    }
-                }
+                // Zoom based on total page scroll
+                const docHeight = document.documentElement.scrollHeight - windowHeight;
+                const scrollProgress = scrolled / docHeight;
+                
+                // DRAMATIC zoom from 100% to 350% as you scroll down the entire page
+                const zoomLevel = 100 + (scrollProgress * 250);
+                sun.style.backgroundSize = `${zoomLevel}%`;
             }
             
             // Hero content - moves at medium speed
