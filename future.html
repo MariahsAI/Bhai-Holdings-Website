@@ -208,13 +208,15 @@
             color: #fff;
             letter-spacing: 3px;
             text-shadow: 
-                0 0 40px rgba(0,0,0,1),
-                0 0 20px rgba(0,0,0,1),
+                0 0 30px rgba(0,0,0,1),
                 0 2px 15px rgba(0,0,0,1),
-                2px 2px 4px rgba(0,0,0,1),
-                -2px -2px 4px rgba(0,0,0,1);
+                0 0 60px rgba(0,0,0,0.8);
             z-index: 10;
             position: relative;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
         }
         
         /* PLANETS - Each venture is a planet */
@@ -755,20 +757,20 @@
                 }
             }
             
-            // Planets - each moves at slightly different speed for depth
+            // Planets - each moves at slightly different speed for depth BUT stay visible
             const planets = document.querySelectorAll('.planet');
             planets.forEach((planet, index) => {
                 const rect = planet.getBoundingClientRect();
                 const planetTop = rect.top;
                 
                 if (planetTop < windowHeight && planetTop > -rect.height) {
-                    // Each planet has different parallax speed based on index
-                    const speed = 0.05 + (index * 0.02);
+                    // Much smaller parallax speed so planets don't fly off screen
+                    const speed = 0.01 + (index * 0.005);
                     const offset = (scrolled - (planetTop + scrolled)) * speed;
-                    const currentTransform = planet.style.transform;
+                    const depth = index * 5; // Smaller depth values
                     
-                    // Preserve orbit animation, add parallax
-                    planet.style.transform = currentTransform + ` translate3d(0, ${offset}px, ${index * 20}px)`;
+                    // Keep the transform minimal so orbit animations still work
+                    planet.style.transform = `translate3d(0, ${offset}px, ${depth}px)`;
                 }
             });
             
