@@ -481,6 +481,11 @@
         .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
         .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
         
+        /* 3D SCROLL EFFECTS */
+        .parallax-layer {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
         @media (max-width: 768px) {
             .hero-title { font-size: 56px; }
             .section-title { font-size: 42px; }
@@ -500,7 +505,7 @@
         </div>
     </nav>
     
-    <section class="hero">
+    <section class="hero parallax-layer">
         <div class="hero-content">
             <div class="hero-label">What's Next</div>
             <h1 class="hero-title">FUTURE</h1>
@@ -508,7 +513,7 @@
         </div>
     </section>
     
-    <section style="background: transparent; min-height: 130vh; position: relative;">
+    <section class="parallax-layer" style="background: transparent; min-height: 130vh; position: relative;">
         <!-- Dark overlay for readability -->
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0;"></div>
         
@@ -579,7 +584,7 @@
         </div>
     </section>
     
-    <section style="background: #000; padding-top: 120px; position: relative; z-index: 1;">
+    <section class="parallax-layer" style="background: #000; padding-top: 120px; position: relative; z-index: 1;">
         <h2 class="section-title" style="position: relative; z-index: 2;">Strategic Roadmap</h2>
         <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
             <div class="roadmap-phase">
@@ -617,7 +622,7 @@
         </div>
     </section>
     
-    <section style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center; position: relative;">
+    <section class="parallax-layer" style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center; position: relative;">
         <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));">The Future Starts Now</h2>
         <p style="font-size: 24px; color: #888; line-height: 1.8; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
             We're not waiting for tomorrow—we're building it today. Join us as we transform 
@@ -687,6 +692,93 @@
             phase.style.transitionDelay = (index * 0.2) + 's';
             observer.observe(phase);
         });
+        
+        // 3D PARALLAX SCROLL EFFECT
+        let ticking = false;
+        
+        function update3DScroll() {
+            const scrolled = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            
+            // Hero content 3D effect
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                const heroOffset = scrolled * 0.5;
+                heroContent.style.transform = `translateZ(${100 - heroOffset}px) translateY(${heroOffset * 0.3}px) rotateX(${scrolled * 0.02}deg)`;
+                heroContent.style.opacity = 1 - (scrolled / windowHeight) * 0.8;
+            }
+            
+            // Orbital container 3D rotation
+            const orbitalContainer = document.querySelector('.orbital-container');
+            if (orbitalContainer) {
+                const rect = orbitalContainer.getBoundingClientRect();
+                const elementCenter = rect.top + rect.height / 2;
+                const screenCenter = windowHeight / 2;
+                const distance = elementCenter - screenCenter;
+                const rotateX = (distance / windowHeight) * 20;
+                const rotateY = (distance / windowHeight) * 15;
+                
+                orbitalContainer.style.transform = `perspective(2000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+            }
+            
+            // Planets individual parallax
+            const planets = document.querySelectorAll('.planet');
+            planets.forEach((planet, index) => {
+                const rect = planet.getBoundingClientRect();
+                const elementCenter = rect.top + rect.height / 2;
+                const screenCenter = windowHeight / 2;
+                const distance = (elementCenter - screenCenter) / windowHeight;
+                const speed = 0.3 + (index * 0.05);
+                
+                const translateZ = distance * 200 * speed;
+                const scale = 1 - (Math.abs(distance) * 0.1);
+                
+                planet.style.transform = `translateZ(${translateZ}px) scale(${Math.max(0.8, scale)})`;
+            });
+            
+            // Roadmap phases parallax
+            const phases = document.querySelectorAll('.roadmap-phase');
+            phases.forEach((phase, index) => {
+                const rect = phase.getBoundingClientRect();
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+                    const translateX = -30 + (progress * 50);
+                    const translateZ = (progress - 0.5) * 100;
+                    const rotateY = (progress - 0.5) * 5;
+                    
+                    phase.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
+                }
+            });
+            
+            // Section titles depth effect
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles.forEach(title => {
+                const rect = title.getBoundingClientRect();
+                const elementCenter = rect.top + rect.height / 2;
+                const screenCenter = windowHeight / 2;
+                const distance = (elementCenter - screenCenter) / windowHeight;
+                
+                const translateZ = distance * 150;
+                const scale = 1 - (Math.abs(distance) * 0.15);
+                
+                title.style.transform = `translateZ(${translateZ}px) scale(${Math.max(0.85, scale)})`;
+            });
+            
+            ticking = false;
+        }
+        
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(update3DScroll);
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', requestTick);
+        window.addEventListener('resize', update3DScroll);
+        
+        // Initial call
+        update3DScroll();
     </script>
 </body>
 </html>
