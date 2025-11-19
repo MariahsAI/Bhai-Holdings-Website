@@ -191,15 +191,17 @@
                 0 0 80px rgba(100, 150, 200, 0.5);
             position: relative;
             overflow: hidden;
+            transition: background-size 0.1s ease-out;
+            will-change: background-size;
         }
         
-        /* Strong gradient mask to completely hide dark edges + text overlay */
+        /* Lighter gradient mask - just for text readability */
         .sun::before {
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.7) 85%, rgba(0,0,0,1) 92%);
+            background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.6) 92%);
             border-radius: 50%;
             z-index: 1;
         }
@@ -711,6 +713,25 @@
             
             // Background moves slowest (creates depth)
             document.body.style.backgroundPositionY = (scrolled * 0.3) + 'px';
+            
+            // Earth/Sun zoom in effect as you scroll
+            const sun = document.querySelector('.sun');
+            if (sun) {
+                const sunContainer = document.querySelector('.orbital-container');
+                if (sunContainer) {
+                    const rect = sunContainer.getBoundingClientRect();
+                    const containerTop = rect.top;
+                    const containerHeight = rect.height;
+                    
+                    // Calculate zoom based on scroll position relative to the orbital container
+                    if (containerTop < windowHeight && containerTop + containerHeight > 0) {
+                        const progress = (windowHeight - containerTop) / (windowHeight + containerHeight);
+                        // Zoom from 125% to 200% as you scroll through the section
+                        const zoomLevel = 125 + (progress * 75);
+                        sun.style.backgroundSize = `${zoomLevel}%`;
+                    }
+                }
+            }
             
             // Hero content - moves at medium speed
             const heroContent = document.querySelector('.hero-content');
