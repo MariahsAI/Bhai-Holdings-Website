@@ -12,6 +12,13 @@
             color: #fff; 
             overflow-x: hidden;
             perspective: 2000px;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+        
+        section {
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            will-change: transform, opacity;
         }
         
         /* SPACE STARFIELD BACKGROUND - REMOVED (using real moon image instead) */
@@ -110,6 +117,8 @@
             position: relative;
             transform: translateZ(100px);
             animation: heroFloat 6s ease-in-out infinite;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            will-change: transform, opacity;
         }
         
         @keyframes heroFloat {
@@ -156,6 +165,8 @@
             height: 1000px;
             margin: 0 auto;
             transform-style: preserve-3d;
+            transition: transform 0.3s ease-out;
+            will-change: transform;
         }
         
         /* SUN - Central Star */
@@ -229,13 +240,14 @@
             text-align: center;
             padding: 20px;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
             box-shadow: 
                 inset -30px -30px 60px rgba(0,0,0,0.6),
                 0 10px 40px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
+            will-change: transform;
         }
         
         /* Planet shine/highlight */
@@ -693,75 +705,101 @@
             observer.observe(phase);
         });
         
-        // 3D PARALLAX SCROLL EFFECT
+        // CUBERTO-STYLE ZOOM SCROLL EFFECT
         let ticking = false;
         
-        function update3DScroll() {
+        function updateZoomScroll() {
             const scrolled = window.pageYOffset;
             const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
             
-            // Hero content 3D effect
+            // Calculate overall scroll progress (0 to 1)
+            const scrollProgress = scrolled / (docHeight - windowHeight);
+            
+            // Zoom effect on body - scales everything
+            const minScale = 1;
+            const maxScale = 1.5;
+            const scale = minScale + (scrollProgress * (maxScale - minScale));
+            
+            document.body.style.transform = `scale(${scale})`;
+            document.body.style.transformOrigin = 'center top';
+            
+            // Hero content zoom and fade
             const heroContent = document.querySelector('.hero-content');
             if (heroContent) {
-                const heroOffset = scrolled * 0.5;
-                heroContent.style.transform = `translateZ(${100 - heroOffset}px) translateY(${heroOffset * 0.3}px) rotateX(${scrolled * 0.02}deg)`;
-                heroContent.style.opacity = 1 - (scrolled / windowHeight) * 0.8;
+                const heroProgress = Math.min(scrolled / windowHeight, 1);
+                const heroScale = 1 + (heroProgress * 0.3);
+                heroContent.style.transform = `scale(${heroScale})`;
+                heroContent.style.opacity = 1 - (heroProgress * 0.8);
             }
             
-            // Orbital container 3D rotation
+            // Sections zoom in as they enter viewport
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top;
+                const sectionHeight = rect.height;
+                
+                // Check if section is in viewport
+                if (sectionTop < windowHeight && sectionTop + sectionHeight > 0) {
+                    // Calculate how far into viewport (0 = just entering, 1 = center of screen)
+                    const progress = (windowHeight - sectionTop) / (windowHeight + sectionHeight);
+                    
+                    // Scale from 0.8 to 1 as it enters
+                    const sectionScale = 0.8 + (progress * 0.2);
+                    const clampedScale = Math.max(0.8, Math.min(1, sectionScale));
+                    
+                    section.style.transform = `scale(${clampedScale})`;
+                    section.style.opacity = Math.max(0.3, progress);
+                }
+            });
+            
+            // Orbital container special zoom
             const orbitalContainer = document.querySelector('.orbital-container');
             if (orbitalContainer) {
                 const rect = orbitalContainer.getBoundingClientRect();
-                const elementCenter = rect.top + rect.height / 2;
+                const containerCenter = rect.top + rect.height / 2;
                 const screenCenter = windowHeight / 2;
-                const distance = elementCenter - screenCenter;
-                const rotateX = (distance / windowHeight) * 20;
-                const rotateY = (distance / windowHeight) * 15;
+                const distanceFromCenter = Math.abs(containerCenter - screenCenter);
+                const normalizedDistance = distanceFromCenter / windowHeight;
                 
-                orbitalContainer.style.transform = `perspective(2000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+                // Scale up when in center
+                const containerScale = 1 + ((1 - normalizedDistance) * 0.2);
+                orbitalContainer.style.transform = `scale(${containerScale})`;
             }
             
-            // Planets individual parallax
+            // Planets individual zoom
             const planets = document.querySelectorAll('.planet');
             planets.forEach((planet, index) => {
                 const rect = planet.getBoundingClientRect();
-                const elementCenter = rect.top + rect.height / 2;
+                const planetCenter = rect.top + rect.height / 2;
                 const screenCenter = windowHeight / 2;
-                const distance = (elementCenter - screenCenter) / windowHeight;
-                const speed = 0.3 + (index * 0.05);
+                const distanceFromCenter = Math.abs(planetCenter - screenCenter);
+                const normalizedDistance = distanceFromCenter / windowHeight;
                 
-                const translateZ = distance * 200 * speed;
-                const scale = 1 - (Math.abs(distance) * 0.1);
+                // Scale based on distance from center
+                const planetScale = 0.9 + ((1 - normalizedDistance) * 0.3);
+                const clampedScale = Math.max(0.7, Math.min(1.2, planetScale));
                 
-                planet.style.transform = `translateZ(${translateZ}px) scale(${Math.max(0.8, scale)})`;
+                // Add slight rotation
+                const rotation = (planetCenter - screenCenter) / 50;
+                
+                planet.style.transform = `scale(${clampedScale}) rotate(${rotation}deg)`;
             });
             
-            // Roadmap phases parallax
+            // Roadmap phases zoom in
             const phases = document.querySelectorAll('.roadmap-phase');
             phases.forEach((phase, index) => {
                 const rect = phase.getBoundingClientRect();
                 if (rect.top < windowHeight && rect.bottom > 0) {
                     const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    const translateX = -30 + (progress * 50);
-                    const translateZ = (progress - 0.5) * 100;
-                    const rotateY = (progress - 0.5) * 5;
+                    const phaseScale = 0.85 + (progress * 0.15);
+                    const clampedScale = Math.max(0.85, Math.min(1, phaseScale));
                     
-                    phase.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
+                    const translateX = -30 + (progress * 50);
+                    
+                    phase.style.transform = `translateX(${translateX}px) scale(${clampedScale})`;
                 }
-            });
-            
-            // Section titles depth effect
-            const sectionTitles = document.querySelectorAll('.section-title');
-            sectionTitles.forEach(title => {
-                const rect = title.getBoundingClientRect();
-                const elementCenter = rect.top + rect.height / 2;
-                const screenCenter = windowHeight / 2;
-                const distance = (elementCenter - screenCenter) / windowHeight;
-                
-                const translateZ = distance * 150;
-                const scale = 1 - (Math.abs(distance) * 0.15);
-                
-                title.style.transform = `translateZ(${translateZ}px) scale(${Math.max(0.85, scale)})`;
             });
             
             ticking = false;
@@ -769,16 +807,16 @@
         
         function requestTick() {
             if (!ticking) {
-                window.requestAnimationFrame(update3DScroll);
+                window.requestAnimationFrame(updateZoomScroll);
                 ticking = true;
             }
         }
         
         window.addEventListener('scroll', requestTick);
-        window.addEventListener('resize', update3DScroll);
+        window.addEventListener('resize', updateZoomScroll);
         
         // Initial call
-        update3DScroll();
+        updateZoomScroll();
     </script>
 </body>
 </html>
