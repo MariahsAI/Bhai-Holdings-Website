@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MX1 Trading Platform - Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #1a1a2e;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Header */
+        .demo-header {
+            background: linear-gradient(135deg, #8a2be2 0%, #00d4ff 100%);
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: 2px;
+        }
+        
+        .demo-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Navigation */
+        .demo-nav {
+            background: #16213e;
+            padding: 20px 40px;
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-tab {
+            padding: 12px 24px;
+            background: transparent;
+            color: #888;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab:hover {
+            background: rgba(138, 43, 226, 0.2);
+            color: #8a2be2;
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #8a2be2 0%, #00d4ff 100%);
+            color: white;
+        }
+        
+        /* Main Content */
+        .demo-content {
+            padding: 40px;
+            min-height: 600px;
+        }
+        
+        .demo-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .demo-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Dashboard View */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+            border-color: #8a2be2;
+        }
+        
+        .metric-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .metric-value {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .metric-change {
+            color: #00ff88;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .metric-change.negative {
+            color: #ff4444;
+        }
+        
+        /* AI Agents Section */
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .agent-card {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #8a2be2 0%, #00d4ff 100%);
+        }
+        
+        .agent-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00ff88;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        
+        .agent-name {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .agent-description {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .agent-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 12px;
+        }
+        
+        .agent-metric-value {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+        
+        /* Live Trading Feed */
+        .trading-feed {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            padding: 25px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .feed-header {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .live-indicator {
+            width: 8px;
+            height: 8px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: blink 1s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .trade-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #00ff88;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .trade-item.sell {
+            border-left-color: #ff4444;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .trade-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .trade-pair {
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .trade-type {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .trade-type.buy {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .trade-type.sell {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+        }
+        
+        .trade-details {
+            display: flex;
+            gap: 20px;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .trade-detail span {
+            color: white;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+        
+        /* Voice Interface */
+        .voice-container {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .voice-circle {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8a2be2 0%, #00d4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .voice-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(138, 43, 226, 0.6);
+        }
+        
+        .voice-circle.active {
+            animation: voicePulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes voicePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .voice-icon {
+            font-size: 80px;
+        }
+        
+        .voice-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .voice-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+        
+        .example-card {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .example-card:hover {
+            transform: translateY(-5px);
+            border-color: #00d4ff;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .example-command {
+            color: #00d4ff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .example-description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* Analytics Section */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-container {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        
+        .chart-header {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .chart-placeholder {
+            background: rgba(0, 0, 0, 0.3);
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        /* Risk Management */
+        .risk-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .risk-card {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        
+        .risk-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .risk-value {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .risk-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .risk-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88 0%, #00d4ff 100%);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .section-description {
+            color: #888;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .demo-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .demo-nav {
+                overflow-x: auto;
+            }
+            
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-grid,
+            .agents-grid,
+            .voice-examples {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #8a2be2;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Header -->
+        <div class="demo-header">
+            <div class="logo">MARIAH AI</div>
+            <div class="demo-badge">INTERACTIVE DEMO</div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="demo-nav">
+            <button class="nav-tab active" onclick="showSection('dashboard')">Dashboard</button>
+            <button class="nav-tab" onclick="showSection('ai-agents')">AI Agents</button>
+            <button class="nav-tab" onclick="showSection('live-trading')">Live Trading</button>
+            <button class="nav-tab" onclick="showSection('voice')">Voice Interface</button>
+            <button class="nav-tab" onclick="showSection('analytics')">Analytics</button>
+            <button class="nav-tab" onclick="showSection('risk')">Risk Management</button>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="demo-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="demo-section active">
+                <div class="section-header">
+                    <h2 class="section-title">Trading Dashboard</h2>
+                    <p class="section-description">Real-time overview of your trading performance powered by 13 specialized AI agents</p>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Total Portfolio Value</div>
+                        <div class="metric-value">$47,340</div>
+                        <div class="metric-change">↑ +23.5% This Month</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">24h Trading Volume</div>
+                        <div class="metric-value">$6.2M</div>
+                        <div class="metric-change">↑ +15.2% vs Yesterday</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Win Rate</div>
+                        <div class="metric-value">72.5%</div>
+                        <div class="metric-change">↑ Above Target (70%)</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Active Positions</div>
+                        <div class="metric-value">8</div>
+                        <div class="metric-change">5 BUY | 3 SELL</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Today's P&L</div>
+                        <div class="metric-value">+$1,847</div>
+                        <div class="metric-change">↑ +3.9% Daily Return</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">AI Agents Active</div>
+                        <div class="metric-value">13/13</div>
+                        <div class="metric-change">All Systems Operational</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Agents Section -->
+            <div id="ai-agents" class="demo-section">
+                <div class="section-header">
+                    <h2 class="section-title">AI Agents Ecosystem</h2>
+                    <p class="section-description">13 specialized AI agents working 24/7 to maximize your trading performance</p>
+                </div>
+                
+                <div class="agents-grid">
+                    <div class="agent-card">
+                        <div class="agent-status">
+                            <div class="status-dot"></div>
+                            <div class="agent-name">RSI Agent</div>
+                        </div>
+                        <div class="agent-description">Monitors Relative Strength Index for overbought/oversold conditions across all trading pairs</div>
+                        <div class="agent-metric">
+                            <span>Signals Today</span>
+                            <span class="agent-metric-value">24</span>
+                        </div>
+                        <div class="agent-metric">
+                            <span>Accuracy</span>
+                            <span class="agent-metric-value">78%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card">
+                        <div class="agent-status">
+                            <div class="status-dot"></div>
+                            <div class="agent-name">MACD Agent</div>
+                        </div>
+                        <div class="agent-description">Analyzes Moving Average Convergence Divergence for trend identification and momentum shifts</div>
+                        <div class="agent-metric">
+                            <span>Signals Today</span>
+                            <span class="agent-metric-value">18</span>
+                        </div>
+                        <div class="agent-metric">
+                            <span>Accuracy</span>
+                            <span class="agent-metric-value">81%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card">
+                        <div class="agent-status">
+                            <div class="status-dot"></div>
+                            <div class="agent-name">Whale Tracker</div>
+                        </div>
+                        <div class="agent-description">Monitors large transactions and wallet movements to detect institutional trading patterns</div>
+                        <div class="agent-metric">
+                            <span>Whales Tracked</span>
+                            <span class="agent-metric-value">147</span>
+                        </div>
+                        <div class="agent-metric">
+                            <span>Alerts Today</span>
+                            <span class="agent-metric-value">6</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card">
+                        <div class="agent-status">
+                            <div class="status-dot"></div>
+                            <div class="agent-name">Sentiment Agent</div>
+                        </div>
+                        <div class="agent-description">Real-time analysis of social media, news, and market sentiment across multiple sources</div>
+                        <div class="agent-metric">
+                            <span>Sources Monitored</span>
+                            <span class="agent-metric-value">50+</span>
+                        </div>
+                        <div class="agent-metric">
+                            <span>Sentiment Score</span>
+                            <span class="agent-metric-value">+0.72</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card">
+                        <div class="agent-status">
+                            <div class="status-dot"></div>
+                            <div class="agent-name">Volume Agent</div>
+                        </div>
+                        <div class="agent-description">Analyzes trading volume patterns to identify accumulation and distribution phases</div>
+                        <div class="agent-metric">
+                            <span>Volume Analyzed</span>
+                            <span class="agent-metric-value">$185M</span>
+                        </div>
+                        <div class="agent-metric">
+                            <span>Anomalies Found</span>
+                            <span class="agent-metric-value">3</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card">
+                        <div class="agent-status">
+                            <div class="status-dot"></div>
+                            <div class="agent-name">Risk Manager</div>
+                        </div>
+                        <div class="agent-description">Continuous portfolio risk assessment with automatic stop-loss and position sizing</div>
+                        <div class="agent-metric">
+                            <span>Risk Level</span>
+                            <span class="agent-metric-value">Low</span>
+                        </div>
+                        <div class="agent-metric">
+                            <span>Max Drawdown</span>
+                            <span class="agent-metric-value">-2.1%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card">
+                        <div class="agent-status">
+                            <div class="status-dot"></div>
+                            <div class="agent-name">ML Ensemble</div>
+                        </div>
+                        <div class="agent-description">Machine learning models trained on historical data for pattern recognition and prediction</div>
+                        <div class="agent-metric">
+                            <span>Models Active</span>
+                            <span class="agent-metric-value">5</span>
+                        </div>
+                        <div class="agent-metric">
+                            <span>Predictions/Day</span>
+                            <span class="agent-metric-value">1000+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card">
+                        <div class="agent-status">
+                            <div class="status-dot"></div>
+                            <div class="agent-name">Arbitrage Scout</div>
+                        </div>
+                        <div class="agent-description">Identifies price discrepancies across exchanges for profitable arbitrage opportunities</div>
+                        <div class="agent-metric">
+                            <span>Exchanges Monitored</span>
+                            <span class="agent-metric-value">6</span>
+                        </div>
+                        <div class="agent-metric">
+                            <span>Opportunities</span>
+                            <span class="agent-metric-value">12</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Live Trading Section -->
+            <div id="live-trading" class="demo-section">
+                <div class="section-header">
+                    <h2 class="section-title">Live Trading Feed</h2>
+                    <p class="section-description">Real-time execution of AI-recommended trades across multiple exchanges</p>
+                </div>
+                
+                <div class="trading-feed" id="tradingFeed">
+                    <div class="feed-header">
+                        <div class="live-indicator"></div>
+                        <span>LIVE TRADES</span>
+                    </div>
+                    
+                    <div class="trade-item buy">
+                        <div class="trade-header">
+                            <div class="trade-pair">BTC/USDT</div>
+                            <div class="trade-type buy">BUY</div>
+                        </div>
+                        <div class="trade-details">
+                            <div class="trade-detail">Price: <span>$43,827.50</span></div>
+                            <div class="trade-detail">Amount: <span>0.125 BTC</span></div>
+                            <div class="trade-detail">P&L: <span style="color: #00ff88;">+$247.50</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="trade-item sell">
+                        <div class="trade-header">
+                            <div class="trade-pair">ETH/USDT</div>
+                            <div class="trade-type sell">SELL</div>
+                        </div>
+                        <div class="trade-details">
+                            <div class="trade-detail">Price: <span>$2,341.80</span></div>
+                            <div class="trade-detail">Amount: <span>2.5 ETH</span></div>
+                            <div class="trade-detail">P&L: <span style="color: #00ff88;">+$128.75</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="trade-item buy">
+                        <div class="trade-header">
+                            <div class="trade-pair">SOL/USDT</div>
+                            <div class="trade-type buy">BUY</div>
+                        </div>
+                        <div class="trade-details">
+                            <div class="trade-detail">Price: <span>$98.42</span></div>
+                            <div class="trade-detail">Amount: <span>50 SOL</span></div>
+                            <div class="trade-detail">P&L: <span style="color: #00ff88;">+$186.20</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="trade-item buy">
+                        <div class="trade-header">
+                            <div class="trade-pair">AVAX/USDT</div>
+                            <div class="trade-type buy">BUY</div>
+                        </div>
+                        <div class="trade-details">
+                            <div class="trade-detail">Price: <span>$36.12</span></div>
+                            <div class="trade-detail">Amount: <span>100 AVAX</span></div>
+                            <div class="trade-detail">P&L: <span style="color: #00ff88;">+$94.30</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="trade-item sell">
+                        <div class="trade-header">
+                            <div class="trade-pair">MATIC/USDT</div>
+                            <div class="trade-type sell">SELL</div>
+                        </div>
+                        <div class="trade-details">
+                            <div class="trade-detail">Price: <span>$0.8427</span></div>
+                            <div class="trade-detail">Amount: <span>5000 MATIC</span></div>
+                            <div class="trade-detail">P&L: <span style="color: #00ff88;">+$67.40</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Voice Interface Section -->
+            <div id="voice" class="demo-section">
+                <div class="section-header">
+                    <h2 class="section-title">Voice Interface</h2>
+                    <p class="section-description">Control your trading with natural language commands powered by GPT-4</p>
+                </div>
+                
+                <div class="voice-container">
+                    <div class="voice-circle" id="voiceCircle" onclick="activateVoice()">
+                        <div class="voice-icon">🎤</div>
+                    </div>
+                    <div class="voice-text" id="voiceText">Click to activate voice commands</div>
+                    
+                    <div class="voice-examples">
+                        <div class="example-card" onclick="simulateCommand('portfolio')">
+                            <div class="example-command">"Show me my portfolio"</div>
+                            <div class="example-description">Get instant overview of all your positions, P&L, and performance metrics</div>
+                        </div>
+                        
+                        <div class="example-card" onclick="simulateCommand('btc')">
+                            <div class="example-command">"What's happening with Bitcoin?"</div>
+                            <div class="example-description">Real-time analysis of BTC price, sentiment, and AI recommendations</div>
+                        </div>
+                        
+                        <div class="example-card" onclick="simulateCommand('buy')">
+                            <div class="example-command">"Buy 0.5 ETH at market price"</div>
+                            <div class="example-description">Execute trades with simple voice commands and instant confirmation</div>
+                        </div>
+                        
+                        <div class="example-card" onclick="simulateCommand('risk')">
+                            <div class="example-command">"What's my current risk level?"</div>
+                            <div class="example-description">Check portfolio risk, exposure levels, and get AI recommendations</div>
+                        </div>
+                        
+                        <div class="example-card" onclick="simulateCommand('winners')">
+                            <div class="example-command">"Show me today's winners"</div>
+                            <div class="example-description">View best-performing trades and assets from the current session</div>
+                        </div>
+                        
+                        <div class="example-card" onclick="simulateCommand('recommendations')">
+                            <div class="example-command">"Give me AI recommendations"</div>
+                            <div class="example-description">Get personalized trading suggestions based on market conditions and your strategy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analytics Section -->
+            <div id="analytics" class="demo-section">
+                <div class="section-header">
+                    <h2 class="section-title">Advanced Analytics</h2>
+                    <p class="section-description">Professional-grade metrics and performance analysis</p>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="chart-container">
+                        <div class="chart-header">Portfolio Performance (30 Days)</div>
+                        <div class="chart-placeholder">
+                            📈 Interactive chart showing +60% monthly returns
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="chart-container">
+                            <div class="chart-header">Win Rate</div>
+                            <div class="chart-placeholder">
+                                ✓ 72.5% Success Rate
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Sharpe Ratio</div>
+                        <div class="metric-value">2.8</div>
+                        <div class="metric-change">Excellent Risk-Adjusted Returns</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Max Drawdown</div>
+                        <div class="metric-value">-5.2%</div>
+                        <div class="metric-change">Well Below 10% Threshold</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Avg Hold Time</div>
+                        <div class="metric-value">4.2h</div>
+                        <div class="metric-change">Optimal Short-term Strategy</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Total Trades</div>
+                        <div class="metric-value">347</div>
+                        <div class="metric-change">This Month</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Risk Management Section -->
+            <div id="risk" class="demo-section">
+                <div class="section-header">
+                    <h2 class="section-title">Risk Management</h2>
+                    <p class="section-description">Automatic protection with intelligent stop-loss and position sizing</p>
+                </div>
+                
+                <div class="risk-metrics">
+                    <div class="risk-card">
+                        <div class="risk-label">Portfolio Risk Level</div>
+                        <div class="risk-value">LOW</div>
+                        <div class="risk-bar">
+                            <div class="risk-bar-fill" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-label">Exposure</div>
+                        <div class="risk-value">42%</div>
+                        <div class="risk-bar">
+                            <div class="risk-bar-fill" style="width: 42%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-label">Diversification</div>
+                        <div class="risk-value">8 Assets</div>
+                        <div class="risk-bar">
+                            <div class="risk-bar-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-card">
+                        <div class="risk-label">Stop-Loss Active</div>
+                        <div class="risk-value">100%</div>
+                        <div class="risk-bar">
+                            <div class="risk-bar-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid" style="margin-top: 30px;">
+                    <div class="metric-card">
+                        <div class="metric-label">Risk Per Trade</div>
+                        <div class="metric-value">1-2%</div>
+                        <div class="metric-change">Conservative Sizing</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Uptime</div>
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-change">24/7 Monitoring</div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-label">Avg Slippage</div>
+                        <div class="metric-value">0.08%</div>
+                        <div class="metric-change">Excellent Execution</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.demo-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Voice Interface
+        let voiceActive = false;
+        function activateVoice() {
+            const circle = document.getElementById('voiceCircle');
+            const text = document.getElementById('voiceText');
+            
+            voiceActive = !voiceActive;
+            
+            if (voiceActive) {
+                circle.classList.add('active');
+                text.textContent = '🎤 Listening... Say a command';
+                
+                setTimeout(() => {
+                    voiceActive = false;
+                    circle.classList.remove('active');
+                    text.textContent = 'Click to activate voice commands';
+                }, 3000);
+            }
+        }
+        
+        function simulateCommand(type) {
+            const text = document.getElementById('voiceText');
+            const responses = {
+                'portfolio': '💼 Your portfolio is up 23.5% this month with 8 active positions',
+                'btc': '₿ Bitcoin is currently at $43,827 with bullish sentiment. AI recommends HOLD',
+                'buy': '✅ Order placed: 0.5 ETH at $2,341.80. Estimated execution in 2 seconds',
+                'risk': '🛡️ Current risk level: LOW. Portfolio exposure at 42%. All stop-losses active',
+                'winners': '🏆 Top performer: SOL (+18.6%). Total daily profit: $1,847',
+                'recommendations': '🤖 AI suggests: Consider BTC entry at $43,500 support level'
+            };
+            
+            text.textContent = responses[type];
+            
+            setTimeout(() => {
+                text.textContent = 'Click to activate voice commands';
+            }, 4000);
+        }
+        
+        // Simulate new trades
+        function addNewTrade() {
+            const feed = document.getElementById('tradingFeed');
+            const pairs = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT', 'AVAX/USDT', 'MATIC/USDT', 'LINK/USDT', 'DOT/USDT'];
+            const types = ['buy', 'sell'];
+            
+            const pair = pairs[Math.floor(Math.random() * pairs.length)];
+            const type = types[Math.floor(Math.random() * types.length)];
+            const price = (Math.random() * 1000 + 100).toFixed(2);
+            const amount = (Math.random() * 10 + 0.1).toFixed(3);
+            const profit = (Math.random() * 300 + 50).toFixed(2);
+            
+            const tradeItem = document.createElement('div');
+            tradeItem.className = `trade-item ${type}`;
+            tradeItem.innerHTML = `
+                <div class="trade-header">
+                    <div class="trade-pair">${pair}</div>
+                    <div class="trade-type ${type}">${type.toUpperCase()}</div>
+                </div>
+                <div class="trade-details">
+                    <div class="trade-detail">Price: <span>$${price}</span></div>
+                    <div class="trade-detail">Amount: <span>${amount}</span></div>
+                    <div class="trade-detail">P&L: <span style="color: #00ff88;">+$${profit}</span></div>
+                </div>
+            `;
+            
+            // Insert at the beginning (after header)
+            const feedHeader = feed.querySelector('.feed-header');
+            feed.insertBefore(tradeItem, feedHeader.nextSibling);
+            
+            // Remove oldest if more than 8 trades
+            const trades = feed.querySelectorAll('.trade-item');
+            if (trades.length > 8) {
+                trades[trades.length - 1].remove();
+            }
+        }
+        
+        // Add new trade every 5 seconds when on live trading tab
+        setInterval(() => {
+            if (document.getElementById('live-trading').classList.contains('active')) {
+                addNewTrade();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
