@@ -744,29 +744,125 @@
             background: linear-gradient(135deg, rgba(20,20,20,0.95) 0%, rgba(0,0,0,0.98) 100%);
             border-radius: 20px;
             padding: 80px 60px 60px;
-            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9);
-            animation: zoomIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 30px 100px rgba(0, 0, 0, 0.9),
+                0 0 80px var(--planet-glow, rgba(255,255,255,0.3)),
+                inset 0 0 100px rgba(255,255,255,0.05);
+            animation: zoomIn 0.6s cubic-bezier(0.4, 0, 0.2, 1), cardPulse 3s ease-in-out infinite;
+            border: 2px solid var(--planet-glow, rgba(255, 255, 255, 0.2));
             background-size: cover;
             background-position: center;
             background-blend-mode: overlay;
             overflow: hidden;
         }
         
+        /* Atmospheric glow ring */
         .planet-details-container::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
             background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.95) 100%);
             z-index: 0;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 60px var(--planet-glow, rgba(255,255,255,0.4)),
+                inset 0 0 60px var(--planet-glow, rgba(255,255,255,0.1));
+            animation: atmosphereGlow 2s ease-in-out infinite alternate;
+        }
+        
+        /* Energy waves */
+        .planet-details-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--planet-glow, rgba(255,255,255,0.1)),
+                transparent
+            );
+            z-index: 1;
+            animation: energyWave 3s ease-in-out infinite;
+        }
+        
+        @keyframes cardPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 30px 100px rgba(0, 0, 0, 0.9),
+                    0 0 80px var(--planet-glow, rgba(255,255,255,0.3)),
+                    inset 0 0 100px rgba(255,255,255,0.05);
+            }
+            50% { 
+                transform: scale(1.005);
+                box-shadow: 
+                    0 35px 120px rgba(0, 0, 0, 0.9),
+                    0 0 100px var(--planet-glow, rgba(255,255,255,0.5)),
+                    inset 0 0 120px rgba(255,255,255,0.08);
+            }
+        }
+        
+        @keyframes atmosphereGlow {
+            0% {
+                box-shadow: 
+                    0 0 60px var(--planet-glow, rgba(255,255,255,0.4)),
+                    inset 0 0 60px var(--planet-glow, rgba(255,255,255,0.1));
+            }
+            100% {
+                box-shadow: 
+                    0 0 100px var(--planet-glow, rgba(255,255,255,0.6)),
+                    inset 0 0 80px var(--planet-glow, rgba(255,255,255,0.15));
+            }
+        }
+        
+        @keyframes energyWave {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
         }
         
         #planetDetailsContent {
             position: relative;
-            z-index: 1;
+            z-index: 2;
+        }
+        
+        /* Floating particles */
+        .planet-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--planet-glow, rgba(255,255,255,0.8));
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 3;
+            box-shadow: 0 0 10px var(--planet-glow, rgba(255,255,255,0.8));
+            animation: floatParticle 4s ease-in-out infinite;
+        }
+        
+        @keyframes floatParticle {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0.5);
+                opacity: 0;
+            }
         }
         
         @keyframes zoomIn {
@@ -1155,6 +1251,7 @@
                 subtitle: 'Intelligence Systems Powering the Future',
                 description: 'Leveraging cutting-edge artificial intelligence and machine learning technologies to revolutionize industries and create unprecedented value.',
                 background: 'IMG_9797.PNG',
+                glowColor: 'rgba(255, 100, 80, 0.6)', // Mars red glow
                 sections: [
                     {
                         title: 'Our Vision',
@@ -1181,6 +1278,7 @@
                 subtitle: 'The Decentralized Future',
                 description: 'Building the infrastructure for Web3, blockchain technology, and decentralized applications that will power the next generation of the internet.',
                 background: 'mercury.png',
+                glowColor: 'rgba(180, 180, 180, 0.6)', // Mercury grey glow
                 sections: [
                     {
                         title: 'Our Approach',
@@ -1207,6 +1305,7 @@
                 subtitle: 'Sustainable Power Solutions',
                 description: 'Investing in renewable energy infrastructure and innovative power generation technologies to create a sustainable future.',
                 background: 'IMG_9787.PNG',
+                glowColor: 'rgba(255, 180, 100, 0.6)', // Jupiter orange glow
                 sections: [
                     {
                         title: 'Mission',
@@ -1233,6 +1332,7 @@
                 subtitle: 'Beyond Earth',
                 description: 'Pioneering space technology and exploration initiatives to expand humanity\'s reach beyond our planet.',
                 background: 'IMG_9785.PNG',
+                glowColor: 'rgba(100, 150, 255, 0.6)', // Earth blue glow
                 sections: [
                     {
                         title: 'Vision',
@@ -1259,6 +1359,7 @@
                 subtitle: 'Medical Revolution',
                 description: 'Transforming healthcare through technology, improving patient outcomes, and making quality care accessible to all.',
                 background: 'IMG_9790.PNG',
+                glowColor: 'rgba(255, 220, 150, 0.6)', // Saturn golden glow
                 sections: [
                     {
                         title: 'Our Mission',
@@ -1285,6 +1386,7 @@
                 subtitle: 'Urban Future',
                 description: 'Designing and implementing smart city solutions that make urban living more efficient, sustainable, and connected.',
                 background: 'Uranus.jpg',
+                glowColor: 'rgba(100, 200, 255, 0.6)', // Uranus cyan glow
                 sections: [
                     {
                         title: 'Vision',
@@ -1316,8 +1418,35 @@
             
             if (!data) return;
             
-            // Set the planet background image
+            // Set the planet background image and glow color
             container.style.backgroundImage = `url('${data.background}')`;
+            container.style.setProperty('--planet-glow', data.glowColor);
+            
+            // Clear any existing particles
+            const existingParticles = container.querySelectorAll('.planet-particle');
+            existingParticles.forEach(p => p.remove());
+            
+            // Create floating particles
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'planet-particle';
+                
+                // Random starting position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Random movement direction
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = (Math.random() - 0.5) * 200;
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 2) + 's';
+                
+                container.appendChild(particle);
+            }
             
             // Build HTML content
             let html = `
