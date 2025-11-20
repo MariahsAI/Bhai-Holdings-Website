@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhai Holdings - Investment Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(33, 150, 243, 0.03) 0%, transparent 50%);
+            animation: pulseGlow 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        /* Floating particles effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(33, 150, 243, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(33, 150, 243, 0.2), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.1), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(33, 150, 243, 0.25), transparent);
+            background-size: 200% 200%;
+            background-position: 0% 0%;
+            animation: floatingParticles 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatingParticles {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: relative;
+            page-break-after: always;
+            z-index: 1;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide glow effect on scroll */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(33, 150, 243, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .slide:hover::before {
+            opacity: 1;
+        }
+
+        /* Slide 1 - Cover */
+        .slide-1 {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            text-align: center;
+        }
+
+        .slide-1 h1 {
+            font-size: 5em;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 50%, #ffffff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite, float 3s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(33, 150, 243, 0.5);
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .slide-1 .subtitle {
+            font-size: 2.5em;
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-1 .tagline {
+            font-size: 1.5em;
+            color: #a0a0a0;
+            max-width: 800px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Slide 2 - The Opportunity */
+        .slide-2 {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+        }
+
+        .slide-title {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 60px;
+            text-align: center;
+            width: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 0.8s ease-out, textGlow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes textGlow {
+            from {
+                filter: drop-shadow(0 0 10px rgba(33, 150, 243, 0.3));
+            }
+            to {
+                filter: drop-shadow(0 0 20px rgba(33, 150, 243, 0.6));
+            }
+        }
+
+        .big-number-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .big-number {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .big-number::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(33, 150, 243, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .big-number:hover {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: #2196f3;
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(33, 150, 243, 0.3);
+        }
+
+        .big-number:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .big-number .number {
+            font-size: 4.5em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            animation: numberPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes numberPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .big-number .label {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Slide 3 - Investment Highlights */
+        .slide-3 {
+            background: linear-gradient(135deg, #0a0a0a 0%, #16213e 100%);
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 40px;
+            border-left: 5px solid #ffffff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideInLeft 0.8s ease-out both;
+        }
+
+        .highlight-card:nth-child(1) { animation-delay: 0.1s; }
+        .highlight-card:nth-child(2) { animation-delay: 0.2s; }
+        .highlight-card:nth-child(3) { animation-delay: 0.3s; }
+        .highlight-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .highlight-card:hover {
+            background: rgba(33, 150, 243, 0.1);
+            border-left-color: #2196f3;
+            transform: translateX(10px);
+            box-shadow: -5px 0 30px rgba(33, 150, 243, 0.3);
+        }
+
+        .highlight-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .highlight-card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #d0d0d0;
+        }
+
+        /* Slide 4 - The Asset */
+        .slide-4 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .asset-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .asset-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .asset-left h3 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .asset-specs {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-size: 1.1em;
+            color: #b0b0b0;
+        }
+
+        .spec-value {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .asset-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .location-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .location-box h4 {
+            font-size: 1.5em;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        .location-box .location {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        /* Slide 5 - Value Breakdown */
+        .slide-5 {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        .value-visual {
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 40px;
+        }
+
+        .value-bar {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-left: 8px solid;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(33, 150, 243, 0.1) 50%, 
+                transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .value-bar:hover {
+            transform: translateX(20px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px rgba(33, 150, 243, 0.2);
+        }
+
+        .value-bar:hover::after {
+            transform: translateX(100%);
+        }
+
+        .value-bar.proved {
+            border-color: #2196f3;
+        }
+
+        .value-bar.contingent {
+            border-color: #ff9800;
+        }
+
+        .value-bar.total {
+            border-color: #2196f3;
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .value-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .value-header h3 {
+            font-size: 2em;
+            font-weight: 800;
+        }
+
+        .value-header .amount {
+            font-size: 2.5em;
+            font-weight: 900;
+        }
+
+        .value-details {
+            font-size: 1.2em;
+            color: #b0b0b0;
+        }
+
+        /* Slide 6 - Three Phase Plan */
+        .slide-6 {
+            background: linear-gradient(135deg, #16213e 0%, #0a0a0a 100%);
+        }
+
+        .phases {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+            margin-top: 40px;
+        }
+
+        .phase {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .phase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2196f3, #1976d2);
+            transition: height 0.4s ease;
+        }
+
+        .phase:hover {
+            transform: translateY(-20px) rotateX(5deg);
+            border-color: #2196f3;
+            background: rgba(33, 150, 243, 0.08);
+            box-shadow: 0 30px 80px rgba(33, 150, 243, 0.4);
+        }
+
+        .phase:hover::before {
+            height: 100%;
+            opacity: 0.05;
+        }
+
+        .phase-number {
+            font-size: 4em;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .phase-title {
+            font-size: 1.8em;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .phase-cost {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: #2196f3;
+            margin-bottom: 20px;
+            animation: costGlow 2s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+        }
+
+        @keyframes costGlow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(33, 150, 243, 0.8);
+            }
+        }
+
+        .phase-timeline {
+            font-size: 1.2em;
+            color: #ff9800;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .phase-details {
+            text-align: left;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #c0c0c0;
+        }
+
+        .phase-details li {
+            margin-bottom: 10px;
+            list-style: none;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .phase-details li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #2196f3;
+            font-weight: 900;
+        }
+
+        /* Slide 7 - Economics */
+        .slide-7 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .economics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 40px;
+        }
+
+        .econ-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .econ-card .metric {
+            font-size: 1.3em;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .econ-card .value {
+            font-size: 4em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .econ-card .subtext {
+            font-size: 1.2em;
+            color: #b0b0b0;
+            margin-top: 15px;
+        }
+
+        /* Slide 8 - Why Now */
+        .slide-8 {
+            background: linear-gradient(135deg, #0a0a0a 0%, #16213e 100%);
+        }
+
+        .why-now-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+            margin-top: 40px;
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .why-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .why-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .why-card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #c0c0c0;
+        }
+
+        /* Slide 9 - Risk Mitigation */
+        .slide-9 {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+        }
+
+        .risk-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 40px;
+        }
+
+        .risk-section h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .risk-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .risk-item h4 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #2196f3;
+        }
+
+        .risk-item p {
+            font-size: 1.1em;
+            color: #c0c0c0;
+            line-height: 1.6;
+        }
+
+        /* Slide 10 - Comparables */
+        .slide-10 {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        .comp-table {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comp-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comp-table th {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            text-align: left;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comp-table td {
+            padding: 25px;
+            font-size: 1.2em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .comp-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .highlight-row {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid #2196f3;
+        }
+
+        /* Slide 11 - The Ask */
+        .slide-11 {
+            background: linear-gradient(135deg, #16213e 0%, #0a0a0a 100%);
+            text-align: center;
+        }
+
+        .ask-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 80px;
+            max-width: 900px;
+            margin-top: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .ask-box:hover {
+            border-color: #2196f3;
+            box-shadow: 0 0 60px rgba(33, 150, 243, 0.4), inset 0 0 60px rgba(33, 150, 243, 0.1);
+            transform: scale(1.02);
+        }
+
+        .ask-amount {
+            font-size: 6em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            animation: askPulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(33, 150, 243, 0.6));
+        }
+
+        @keyframes askPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .ask-for {
+            font-size: 2em;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+        }
+
+        .ask-details {
+            text-align: left;
+            font-size: 1.3em;
+            line-height: 2;
+            color: #d0d0d0;
+        }
+
+        .ask-details li {
+            list-style: none;
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .ask-details li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2196f3;
+            font-weight: 900;
+            font-size: 1.5em;
+        }
+
+        /* Slide 12 - Exit Strategy */
+        .slide-12 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .exit-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+            margin-top: 40px;
+        }
+
+        .exit-option {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .exit-option h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .exit-value {
+            font-size: 3em;
+            font-weight: 900;
+            color: #2196f3;
+            margin-bottom: 20px;
+        }
+
+        .exit-timing {
+            font-size: 1.3em;
+            color: #ff9800;
+            margin-bottom: 25px;
+        }
+
+        .exit-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #c0c0c0;
+        }
+
+        /* Slide 13 - Contact */
+        .slide-13 {
+            background: linear-gradient(135deg, #0a0a0a 0%, #16213e 100%);
+            text-align: center;
+        }
+
+        .contact-box {
+            max-width: 800px;
+        }
+
+        .contact-box h2 {
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 60px;
+        }
+
+        .contact-info {
+            font-size: 1.8em;
+            line-height: 2.5;
+            color: #b0b0b0;
+        }
+
+        .contact-info strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .cta {
+            margin-top: 60px;
+            font-size: 2.5em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Print Styles */
+        @media print {
+            .slide {
+                page-break-after: always;
+                min-height: 100vh;
+            }
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 40px 30px;
+            }
+
+            .slide-title {
+                font-size: 2.5em;
+                margin-bottom: 40px;
+            }
+
+            .big-number-grid,
+            .highlight-cards,
+            .asset-grid,
+            .economics-grid,
+            .risk-grid,
+            .strategic-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .phases,
+            .why-now-grid,
+            .exit-options {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .big-number {
+                padding: 35px;
+            }
+
+            .big-number .number {
+                font-size: 3.5em;
+            }
+
+            .phase {
+                padding: 30px;
+            }
+
+            .phase-cost {
+                font-size: 2em;
+            }
+
+            .econ-card .value {
+                font-size: 3em;
+            }
+
+            .exit-value {
+                font-size: 2.5em;
+            }
+
+            .comp-table {
+                overflow-x: auto;
+            }
+
+            .comp-table table {
+                min-width: 600px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+                min-height: auto;
+                padding-top: 80px;
+                padding-bottom: 80px;
+            }
+
+            .slide-1 h1 {
+                font-size: 3em;
+                letter-spacing: -1px;
+            }
+
+            .slide-1 .subtitle {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+
+            .slide-1 .tagline {
+                font-size: 1.2em;
+            }
+
+            .slide-title {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+
+            .big-number {
+                padding: 30px 25px;
+            }
+
+            .big-number .number {
+                font-size: 3em;
+            }
+
+            .big-number .label {
+                font-size: 1.1em;
+            }
+
+            .highlight-card {
+                padding: 30px;
+            }
+
+            .highlight-card h3 {
+                font-size: 1.5em;
+            }
+
+            .highlight-card p {
+                font-size: 1.1em;
+            }
+
+            .asset-left h3 {
+                font-size: 2em;
+            }
+
+            .spec-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .spec-label,
+            .spec-value {
+                font-size: 1em;
+            }
+
+            .location-box {
+                padding: 30px;
+            }
+
+            .location-box .location {
+                font-size: 2em;
+            }
+
+            .value-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .value-header h3 {
+                font-size: 1.5em;
+            }
+
+            .value-header .amount {
+                font-size: 2em;
+            }
+
+            .value-details {
+                font-size: 1em;
+            }
+
+            .phase-number {
+                font-size: 3em;
+            }
+
+            .phase-title {
+                font-size: 1.5em;
+            }
+
+            .phase-cost {
+                font-size: 1.8em;
+            }
+
+            .phase-timeline {
+                font-size: 1em;
+            }
+
+            .phase-details {
+                font-size: 1em;
+            }
+
+            .econ-card {
+                padding: 35px;
+            }
+
+            .econ-card .metric {
+                font-size: 1em;
+            }
+
+            .econ-card .value {
+                font-size: 2.5em;
+            }
+
+            .econ-card .subtext {
+                font-size: 1em;
+            }
+
+            .why-card {
+                padding: 30px;
+            }
+
+            .why-icon {
+                font-size: 3em;
+            }
+
+            .why-card h3 {
+                font-size: 1.5em;
+            }
+
+            .why-card p {
+                font-size: 1em;
+            }
+
+            .risk-section h3 {
+                font-size: 1.5em;
+            }
+
+            .risk-item h4 {
+                font-size: 1.2em;
+            }
+
+            .risk-item p {
+                font-size: 1em;
+            }
+
+            .comp-table th,
+            .comp-table td {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+
+            .ask-box {
+                padding: 40px 30px;
+            }
+
+            .ask-amount {
+                font-size: 4em;
+            }
+
+            .ask-for {
+                font-size: 1.5em;
+            }
+
+            .ask-details {
+                font-size: 1.1em;
+            }
+
+            .exit-option h3 {
+                font-size: 1.5em;
+            }
+
+            .exit-value {
+                font-size: 2em;
+            }
+
+            .exit-timing {
+                font-size: 1.1em;
+            }
+
+            .exit-description {
+                font-size: 1em;
+            }
+
+            .contact-box h2 {
+                font-size: 2.5em;
+            }
+
+            .contact-info {
+                font-size: 1.3em;
+            }
+
+            .cta {
+                font-size: 1.8em;
+            }
+
+            .slide-number {
+                font-size: 1em;
+                bottom: 20px;
+                right: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 25px 15px;
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+
+            .slide-1 h1 {
+                font-size: 2.2em;
+            }
+
+            .slide-1 .subtitle {
+                font-size: 1.4em;
+            }
+
+            .slide-1 .tagline {
+                font-size: 1em;
+            }
+
+            .slide-title {
+                font-size: 1.6em;
+                margin-bottom: 25px;
+            }
+
+            .big-number {
+                padding: 25px 20px;
+            }
+
+            .big-number .number {
+                font-size: 2.5em;
+            }
+
+            .big-number .label {
+                font-size: 1em;
+                letter-spacing: 1px;
+            }
+
+            .highlight-card {
+                padding: 25px;
+            }
+
+            .highlight-card h3 {
+                font-size: 1.3em;
+            }
+
+            .highlight-card p {
+                font-size: 1em;
+            }
+
+            .asset-left h3 {
+                font-size: 1.6em;
+                margin-bottom: 20px;
+            }
+
+            .location-box {
+                padding: 25px;
+            }
+
+            .location-box h4 {
+                font-size: 1.2em;
+            }
+
+            .location-box .location {
+                font-size: 1.8em;
+            }
+
+            .value-bar {
+                padding: 25px;
+            }
+
+            .value-header h3 {
+                font-size: 1.2em;
+            }
+
+            .value-header .amount {
+                font-size: 1.8em;
+            }
+
+            .value-details {
+                font-size: 0.9em;
+            }
+
+            .phase {
+                padding: 25px;
+            }
+
+            .phase-number {
+                font-size: 2.5em;
+            }
+
+            .phase-title {
+                font-size: 1.3em;
+            }
+
+            .phase-cost {
+                font-size: 1.6em;
+            }
+
+            .phase-timeline {
+                font-size: 0.9em;
+            }
+
+            .phase-details {
+                font-size: 0.95em;
+            }
+
+            .econ-card {
+                padding: 30px 25px;
+            }
+
+            .econ-card .value {
+                font-size: 2.2em;
+            }
+
+            .why-card {
+                padding: 25px;
+            }
+
+            .why-icon {
+                font-size: 2.5em;
+            }
+
+            .why-card h3 {
+                font-size: 1.3em;
+            }
+
+            .risk-section h3 {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+
+            .risk-item {
+                padding: 20px;
+            }
+
+            .risk-item h4 {
+                font-size: 1.1em;
+            }
+
+            .comp-table th,
+            .comp-table td {
+                padding: 12px 8px;
+                font-size: 0.8em;
+            }
+
+            .ask-box {
+                padding: 35px 25px;
+            }
+
+            .ask-amount {
+                font-size: 3em;
+            }
+
+            .ask-for {
+                font-size: 1.3em;
+            }
+
+            .ask-details {
+                font-size: 1em;
+                line-height: 1.8;
+            }
+
+            .ask-details li {
+                padding-left: 25px;
+                margin-bottom: 12px;
+            }
+
+            .exit-option {
+                padding: 30px 25px;
+            }
+
+            .exit-option h3 {
+                font-size: 1.3em;
+            }
+
+            .exit-value {
+                font-size: 1.8em;
+            }
+
+            .exit-timing {
+                font-size: 1em;
+            }
+
+            .exit-description {
+                font-size: 0.95em;
+            }
+
+            .contact-box h2 {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+
+            .contact-info {
+                font-size: 1.1em;
+                line-height: 2.2;
+            }
+
+            .cta {
+                font-size: 1.5em;
+                margin-top: 40px;
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .slide {
+                min-height: auto;
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+
+            .slide-1 {
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+        }
+
+        /* Touch device optimization */
+        @media (hover: none) and (pointer: coarse) {
+            .big-number:hover,
+            .highlight-card:hover,
+            .phase:hover,
+            .value-bar:hover,
+            .ask-box:hover {
+                transform: none;
+            }
+
+            .big-number:active,
+            .highlight-card:active,
+            .phase:active {
+                transform: scale(0.98);
+            }
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 700;
+        }
+
+        /* Revenue streams visual */
+        .revenue-streams {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 40px;
+        }
+
+        .stream {
+            text-align: center;
+            flex: 1;
+            padding: 30px;
+        }
+
+        .stream-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .stream h4 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .stream p {
+            font-size: 1.2em;
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide slide-1">
+        <h1>BHAI HOLDINGS</h1>
+        <div class="subtitle">Oil & Gas Investment Opportunity</div>
+        <div class="tagline">
+            Proven Assets. Modern Technology. Phased Risk Mitigation.
+        </div>
+        <div class="slide-number">01</div>
+    </div>
+
+    <!-- SLIDE 2: THE OPPORTUNITY -->
+    <div class="slide slide-2">
+        <div class="slide-title">The Opportunity</div>
+        <div class="big-number-grid">
+            <div class="big-number">
+                <div class="number">$21.9M</div>
+                <div class="label">Total Asset Value</div>
+            </div>
+            <div class="big-number">
+                <div class="number">1.3M</div>
+                <div class="label">BOE Resources</div>
+            </div>
+            <div class="big-number">
+                <div class="number">100%</div>
+                <div class="label">Working Interest</div>
+            </div>
+            <div class="big-number">
+                <div class="number">$120K</div>
+                <div class="label">Phase I Entry</div>
+            </div>
+        </div>
+        <div class="slide-number">02</div>
+    </div>
+
+    <!-- SLIDE 3: INVESTMENT HIGHLIGHTS -->
+    <div class="slide slide-3">
+        <div class="slide-title">Investment Highlights</div>
+        <div class="highlight-cards">
+            <div class="highlight-card">
+                <h3>Proven Resource Base</h3>
+                <p>Operating oil field since 1871. 650M+ barrels produced historically. Proven geology with modern upside potential.</p>
+            </div>
+            <div class="highlight-card">
+                <h3>Low Entry, High Upside</h3>
+                <p>$120K gets you in. Phase I validates assumptions. $11.6M risk-adjusted value at full development.</p>
+            </div>
+            <div class="highlight-card">
+                <h3>Technology Advantage</h3>
+                <p>Modern horizontal drilling and EOR can unlock 3x more recovery than historical vertical wells.</p>
+            </div>
+            <div class="highlight-card">
+                <h3>Decision Gates</h3>
+                <p>Phased approach. Prove concept before major capital. Walk away or scale up based on data.</p>
+            </div>
+        </div>
+        <div class="slide-number">03</div>
+    </div>
+
+    <!-- SLIDE 4: THE ASSET -->
+    <div class="slide slide-4">
+        <div class="slide-title">The Asset</div>
+        <div class="asset-grid">
+            <div class="asset-left">
+                <h3>Bradford Third Formation</h3>
+                <div class="asset-specs">
+                    <div class="spec-row">
+                        <span class="spec-label">Location</span>
+                        <span class="spec-value">Cattaraugus County, NY</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Acreage</span>
+                        <span class="spec-value">418.18 acres</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Oil Quality</span>
+                        <span class="spec-value">45° API (Premium)</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Depth</span>
+                        <span class="spec-value">~1,200 feet</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Formation</span>
+                        <span class="spec-value">Devonian Sandstone</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Working Interest</span>
+                        <span class="spec-value">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="asset-right">
+                <div class="location-box">
+                    <h4>STRATEGIC LOCATION</h4>
+                    <div class="location">New York</div>
+                    <div style="font-size: 1.3em; color: #c0c0c0; line-height: 1.8;">
+                        • Established infrastructure<br>
+                        • Proximity to markets<br>
+                        • Existing pipeline access<br>
+                        • Proven field history
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">04</div>
+    </div>
+
+    <!-- SLIDE 5: VALUE BREAKDOWN -->
+    <div class="slide slide-5">
+        <div class="slide-title">Value Breakdown</div>
+        <div class="value-visual">
+            <div class="value-bar proved">
+                <div class="value-header">
+                    <h3>Proved + Probable Reserves</h3>
+                    <div class="amount">$2.4M</div>
+                </div>
+                <div class="value-details">
+                    72,300 barrels | >80% certainty | Existing wells ready to complete
+                </div>
+            </div>
+
+            <div class="value-bar contingent">
+                <div class="value-header">
+                    <h3>Contingent Resources</h3>
+                    <div class="amount">$19.5M</div>
+                </div>
+                <div class="value-details">
+                    1.27M BOE | 50% probability | Full development with EOR technology
+                </div>
+            </div>
+
+            <div class="value-bar total">
+                <div class="value-header">
+                    <h3>Risk-Adjusted Total Value</h3>
+                    <div class="amount">$11.6M</div>
+                </div>
+                <div class="value-details">
+                    Weighted probability | Conservative pricing | Phase-gate approach de-risks over time
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">05</div>
+    </div>
+
+    <!-- SLIDE 6: THREE PHASE PLAN -->
+    <div class="slide slide-6">
+        <div class="slide-title">Three-Phase Development Strategy</div>
+        <div class="phases">
+            <div class="phase">
+                <div class="phase-number">01</div>
+                <div class="phase-title">Proof of Concept</div>
+                <div class="phase-cost">$120K</div>
+                <div class="phase-timeline">2-3 Months</div>
+                <ul class="phase-details">
+                    <li>Complete 2 existing wells</li>
+                    <li>Validate production rates</li>
+                    <li>Collect modern data</li>
+                    <li>10 bbl/d per well target</li>
+                </ul>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">02</div>
+                <div class="phase-title">EOR Pilot</div>
+                <div class="phase-cost">$500K</div>
+                <div class="phase-timeline">12-15 Months</div>
+                <ul class="phase-details">
+                    <li>Install compressor system</li>
+                    <li>Test gas injection EOR</li>
+                    <li>Monitor production lift</li>
+                    <li>Target: 3x production increase</li>
+                </ul>
+            </div>
+
+            <div class="phase">
+                <div class="phase-number">03</div>
+                <div class="phase-title">Full Development</div>
+                <div class="phase-cost">$15.15M</div>
+                <div class="phase-timeline">18-24 Months</div>
+                <ul class="phase-details">
+                    <li>Drill 40 wells (5 pods)</li>
+                    <li>Horizontal drilling + EOR</li>
+                    <li>Modern completions</li>
+                    <li>Expected IRR: 15-25%</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide-number">06</div>
+    </div>
+
+    <!-- SLIDE 7: ECONOMICS -->
+    <div class="slide slide-7">
+        <div class="slide-title">Project Economics</div>
+        <div class="economics-grid">
+            <div class="econ-card">
+                <div class="metric">Expected IRR</div>
+                <div class="value">15-25%</div>
+                <div class="subtext">If EOR successful</div>
+            </div>
+            <div class="econ-card">
+                <div class="metric">Payback Period</div>
+                <div class="value">5-7 Yrs</div>
+                <div class="subtext">Full development scenario</div>
+            </div>
+            <div class="econ-card">
+                <div class="metric">Break-Even Oil Price</div>
+                <div class="value">$45/bbl</div>
+                <div class="subtext">Current: $65/bbl</div>
+            </div>
+            <div class="econ-card">
+                <div class="metric">Multiple Revenue Streams</div>
+                <div class="value">3</div>
+                <div class="subtext">Oil, NGL, Future Gas</div>
+            </div>
+        </div>
+        <div class="slide-number">07</div>
+    </div>
+
+    <!-- SLIDE 8: WHY NOW -->
+    <div class="slide slide-8">
+        <div class="slide-title">Why Now?</div>
+        <div class="why-now-grid">
+            <div class="why-card">
+                <div class="why-icon">01</div>
+                <h3>Technology Ready</h3>
+                <p>Horizontal drilling and EOR proven in similar formations. What failed in 1950s works today.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">02</div>
+                <h3>Favorable Economics</h3>
+                <p>Oil at $65/bbl. 45° API premium product. Break-even at $45. Strong margin cushion.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">03</div>
+                <h3>Low Competition</h3>
+                <p>Small, overlooked assets. No major operators. 100% WI available. Clean acquisition.</p>
+            </div>
+        </div>
+        <div class="slide-number">08</div>
+    </div>
+
+    <!-- SLIDE 9: RISK MITIGATION -->
+    <div class="slide slide-9">
+        <div class="slide-title">Risk Mitigation Strategy</div>
+        <div class="risk-grid">
+            <div class="risk-section">
+                <h3>How We De-Risk:</h3>
+                <div class="risk-item">
+                    <h4>Phased Approach</h4>
+                    <p>Each phase validates next. Decision gates before major capital. Walk away if data doesn't support.</p>
+                </div>
+                <div class="risk-item">
+                    <h4>Proven Resource</h4>
+                    <p>Field produced 650M+ barrels historically. Resource presence not in question - recovery method is key.</p>
+                </div>
+                <div class="risk-item">
+                    <h4>100% Working Interest</h4>
+                    <p>No partner conflicts. Full control. All upside to us. No revenue sharing except royalties.</p>
+                </div>
+            </div>
+            <div class="risk-section">
+                <h3>Multiple Exit Options:</h3>
+                <div class="risk-item">
+                    <h4>Phase I Exit</h4>
+                    <p>Sell proved reserves after validation. $3-5M potential value. Quick flip option.</p>
+                </div>
+                <div class="risk-item">
+                    <h4>Phase II Exit</h4>
+                    <p>Sell after EOR pilot proves concept. $8-12M potential. De-risked asset commands premium.</p>
+                </div>
+                <div class="risk-item">
+                    <h4>Full Development</h4>
+                    <p>Operate and cash flow or sell to strategic buyer at maximum value.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">09</div>
+    </div>
+
+    <!-- SLIDE 10: COMPARABLES -->
+    <div class="slide slide-10">
+        <div class="slide-title">Comparable Transactions</div>
+        <div class="comp-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transaction</th>
+                        <th>Location</th>
+                        <th>BOE</th>
+                        <th>$/BOE</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Appalachian Basin Sale</td>
+                        <td>Pennsylvania</td>
+                        <td>850K</td>
+                        <td>$12-15</td>
+                        <td>2024</td>
+                    </tr>
+                    <tr>
+                        <td>Marcellus Development</td>
+                        <td>NY/PA Border</td>
+                        <td>1.2M</td>
+                        <td>$10-14</td>
+                        <td>2023</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td><strong>Bhai Holdings (Implied)</strong></td>
+                        <td><strong>Cattaraugus, NY</strong></td>
+                        <td><strong>1.3M</strong></td>
+                        <td><strong>$9-17</strong></td>
+                        <td><strong>2025</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Bradford Field Package</td>
+                        <td>McKean County, PA</td>
+                        <td>600K</td>
+                        <td>$8-11</td>
+                        <td>2023</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top: 40px; font-size: 1.3em; text-align: center; color: #b0b0b0; max-width: 1200px;">
+            Our risk-adjusted value of $9/BOE is conservative compared to market. Full development upside of $17/BOE represents 88% premium.
+        </div>
+        <div class="slide-number">10</div>
+    </div>
+
+    <!-- SLIDE 11: THE ASK -->
+    <div class="slide slide-11">
+        <div class="slide-title">The Ask</div>
+        <div class="ask-box">
+            <div class="ask-amount">$120,000</div>
+            <div class="ask-for">Phase I Capital</div>
+            <ul class="ask-details">
+                <li>Complete two existing wells</li>
+                <li>Full production testing (60-90 days)</li>
+                <li>Modern reservoir data collection</li>
+                <li>Phase II decision gate analysis</li>
+                <li>Closing: Q4 2025</li>
+            </ul>
+        </div>
+        <div style="margin-top: 60px; font-size: 1.5em; color: #b0b0b0; max-width: 900px;">
+            <strong style="color: white;">What You Get:</strong> Validation of $2.4M proved reserves in 90 days. Data to make informed Phase II decision. Multiple exit options. Ground floor entry into $11.6M opportunity.
+        </div>
+        <div class="slide-number">11</div>
+    </div>
+
+    <!-- SLIDE 12: EXIT STRATEGY -->
+    <div class="slide slide-12">
+        <div class="slide-title">Exit Strategy & Returns</div>
+        <div class="exit-options">
+            <div class="exit-option">
+                <h3>Quick Exit</h3>
+                <div class="exit-value">$3-5M</div>
+                <div class="exit-timing">3-6 Months</div>
+                <div class="exit-description">
+                    After Phase I validation, sell proved reserves to operator. Quick return on minimal capital. 25-40x return on Phase I investment.
+                </div>
+            </div>
+
+            <div class="exit-option">
+                <h3>Optimal Exit</h3>
+                <div class="exit-value">$8-12M</div>
+                <div class="exit-timing">18-24 Months</div>
+                <div class="exit-description">
+                    After successful EOR pilot, sell de-risked development project. Technology proven. Strategic buyers pay premium. 13-20x total return.
+                </div>
+            </div>
+
+            <div class="exit-option">
+                <h3>Full Development</h3>
+                <div class="exit-value">$15-25M</div>
+                <div class="exit-timing">5-7 Years</div>
+                <div class="exit-description">
+                    Develop all 40 wells, operate for cash flow, then exit to major operator or hold for long-term production income.
+                </div>
+            </div>
+        </div>
+        <div class="slide-number">12</div>
+    </div>
+
+    <!-- SLIDE 13: CONTACT -->
+    <div class="slide slide-13">
+        <div class="contact-box">
+            <h2>Let's Make This Happen</h2>
+            <div class="contact-info">
+                <strong>Bhai Holdings, LLC</strong><br>
+                Jonathan Ferrucci, CEO<br>
+                Cattaraugus County, New York
+            </div>
+            <div class="cta">
+                Ready to Invest?
+            </div>
+        </div>
+        <div class="slide-number">13</div>
+    </div>
+
+</body>
+</html>
+<script>
+// Mobile menu toggle (if needed in future)
+// Touch optimization
+document.addEventListener('DOMContentLoaded', function() {
+    // Disable hover effects on touch devices for better performance
+    if ('ontouchstart' in window) {
+        document.body.classList.add('touch-device');
+    }
+    
+    // Smooth scroll for better mobile experience
+    const slides = document.querySelectorAll('.slide');
+    
+    // Optional: Add swipe navigation for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+            // Swipe left - next slide
+            const currentSlide = document.querySelector('.slide:hover') || slides[0];
+            const nextSlide = currentSlide.nextElementSibling;
+            if (nextSlide && nextSlide.classList.contains('slide')) {
+                nextSlide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        if (touchEndX > touchStartX + swipeThreshold) {
+            // Swipe right - previous slide
+            const currentSlide = document.querySelector('.slide:hover') || slides[0];
+            const prevSlide = currentSlide.previousElementSibling;
+            if (prevSlide && prevSlide.classList.contains('slide')) {
+                prevSlide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    }
+});
+</script>
