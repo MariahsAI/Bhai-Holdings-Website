@@ -176,8 +176,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             transform: translate(-50%, -50%) translateZ(0);
             transform-style: preserve-3d;
         }
@@ -219,16 +219,15 @@
             z-index: 10;
             position: relative;
             padding: 12px 24px;
-            border: 2px solid rgba(255,255,255,0.5);
+            border: none;
             border-radius: 50px;
             background: rgba(0,0,0,0.2);
             transition: all 0.3s ease;
         }
         
         .center-text:hover {
-            border-color: rgba(255,255,255,1);
             background: rgba(0,0,0,0.4);
-            transform: scale(1.1);
+            transform: scale(1.05);
             text-shadow: 
                 0 0 30px rgba(255,255,255,0.8),
                 0 2px 20px rgba(0,0,0,0.9);
@@ -415,56 +414,56 @@
         
         /* Inner Ring - Planet 1 (AI & ML) - Fast orbit with spiral */
         @keyframes orbit1 {
-            0% { transform: rotate(0deg) translateX(300px) rotate(0deg) translateZ(40px) scale(1); }
-            25% { transform: rotate(90deg) translateX(350px) rotate(-90deg) translateZ(60px) scale(1.1); }
-            50% { transform: rotate(180deg) translateX(300px) rotate(-180deg) translateZ(40px) scale(1); }
-            75% { transform: rotate(270deg) translateX(250px) rotate(-270deg) translateZ(20px) scale(0.9); }
-            100% { transform: rotate(360deg) translateX(300px) rotate(-360deg) translateZ(40px) scale(1); }
+            0% { transform: rotate(0deg) translateX(400px) rotate(0deg) translateZ(40px) scale(1); }
+            25% { transform: rotate(90deg) translateX(450px) rotate(-90deg) translateZ(60px) scale(1.1); }
+            50% { transform: rotate(180deg) translateX(400px) rotate(-180deg) translateZ(40px) scale(1); }
+            75% { transform: rotate(270deg) translateX(350px) rotate(-270deg) translateZ(20px) scale(0.9); }
+            100% { transform: rotate(360deg) translateX(400px) rotate(-360deg) translateZ(40px) scale(1); }
         }
         
         /* Inner Ring - Planet 2 (Web3) - Fast orbit with spiral */
         @keyframes orbit2 {
-            0% { transform: rotate(180deg) translateX(300px) rotate(-180deg) translateZ(40px) scale(1); }
-            25% { transform: rotate(270deg) translateX(350px) rotate(-270deg) translateZ(60px) scale(1.1); }
-            50% { transform: rotate(360deg) translateX(300px) rotate(-360deg) translateZ(40px) scale(1); }
-            75% { transform: rotate(450deg) translateX(250px) rotate(-450deg) translateZ(20px) scale(0.9); }
-            100% { transform: rotate(540deg) translateX(300px) rotate(-540deg) translateZ(40px) scale(1); }
+            0% { transform: rotate(180deg) translateX(400px) rotate(-180deg) translateZ(40px) scale(1); }
+            25% { transform: rotate(270deg) translateX(450px) rotate(-270deg) translateZ(60px) scale(1.1); }
+            50% { transform: rotate(360deg) translateX(400px) rotate(-360deg) translateZ(40px) scale(1); }
+            75% { transform: rotate(450deg) translateX(350px) rotate(-450deg) translateZ(20px) scale(0.9); }
+            100% { transform: rotate(540deg) translateX(400px) rotate(-540deg) translateZ(40px) scale(1); }
         }
         
         /* Middle Ring - Planet 3 (Energy) - Medium speed with spiral */
         @keyframes orbit3 {
-            0% { transform: rotate(60deg) translateX(420px) rotate(-60deg) translateZ(30px) scale(1); }
-            25% { transform: rotate(150deg) translateX(470px) rotate(-150deg) translateZ(50px) scale(1.15); }
-            50% { transform: rotate(240deg) translateX(420px) rotate(-240deg) translateZ(30px) scale(1); }
-            75% { transform: rotate(330deg) translateX(370px) rotate(-330deg) translateZ(10px) scale(0.85); }
-            100% { transform: rotate(420deg) translateX(420px) rotate(-420deg) translateZ(30px) scale(1); }
+            0% { transform: rotate(60deg) translateX(540px) rotate(-60deg) translateZ(30px) scale(1); }
+            25% { transform: rotate(150deg) translateX(590px) rotate(-150deg) translateZ(50px) scale(1.15); }
+            50% { transform: rotate(240deg) translateX(540px) rotate(-240deg) translateZ(30px) scale(1); }
+            75% { transform: rotate(330deg) translateX(490px) rotate(-330deg) translateZ(10px) scale(0.85); }
+            100% { transform: rotate(420deg) translateX(540px) rotate(-420deg) translateZ(30px) scale(1); }
         }
         
         /* Middle Ring - Planet 4 (Space Tech) - Medium speed with spiral */
         @keyframes orbit4 {
-            0% { transform: rotate(240deg) translateX(420px) rotate(-240deg) translateZ(30px) scale(1); }
-            25% { transform: rotate(330deg) translateX(470px) rotate(-330deg) translateZ(50px) scale(1.15); }
-            50% { transform: rotate(420deg) translateX(420px) rotate(-420deg) translateZ(30px) scale(1); }
-            75% { transform: rotate(510deg) translateX(370px) rotate(-510deg) translateZ(10px) scale(0.85); }
-            100% { transform: rotate(600deg) translateX(420px) rotate(-600deg) translateZ(30px) scale(1); }
+            0% { transform: rotate(240deg) translateX(540px) rotate(-240deg) translateZ(30px) scale(1); }
+            25% { transform: rotate(330deg) translateX(590px) rotate(-330deg) translateZ(50px) scale(1.15); }
+            50% { transform: rotate(420deg) translateX(540px) rotate(-420deg) translateZ(30px) scale(1); }
+            75% { transform: rotate(510deg) translateX(490px) rotate(-510deg) translateZ(10px) scale(0.85); }
+            100% { transform: rotate(600deg) translateX(540px) rotate(-600deg) translateZ(30px) scale(1); }
         }
         
         /* Outer Ring - Planet 5 (HealthTech) - Slow orbit with spiral */
         @keyframes orbit5 {
-            0% { transform: rotate(120deg) translateX(520px) rotate(-120deg) translateZ(20px) scale(1); }
-            25% { transform: rotate(210deg) translateX(570px) rotate(-210deg) translateZ(40px) scale(1.2); }
-            50% { transform: rotate(300deg) translateX(520px) rotate(-300deg) translateZ(20px) scale(1); }
-            75% { transform: rotate(390deg) translateX(470px) rotate(-390deg) translateZ(0px) scale(0.8); }
-            100% { transform: rotate(480deg) translateX(520px) rotate(-480deg) translateZ(20px) scale(1); }
+            0% { transform: rotate(120deg) translateX(660px) rotate(-120deg) translateZ(20px) scale(1); }
+            25% { transform: rotate(210deg) translateX(710px) rotate(-210deg) translateZ(40px) scale(1.2); }
+            50% { transform: rotate(300deg) translateX(660px) rotate(-300deg) translateZ(20px) scale(1); }
+            75% { transform: rotate(390deg) translateX(610px) rotate(-390deg) translateZ(0px) scale(0.8); }
+            100% { transform: rotate(480deg) translateX(660px) rotate(-480deg) translateZ(20px) scale(1); }
         }
         
         /* Outer Ring - Planet 6 (Smart Cities) - Slow orbit with spiral */
         @keyframes orbit6 {
-            0% { transform: rotate(300deg) translateX(520px) rotate(-300deg) translateZ(20px) scale(1); }
-            25% { transform: rotate(390deg) translateX(570px) rotate(-390deg) translateZ(40px) scale(1.2); }
-            50% { transform: rotate(480deg) translateX(520px) rotate(-480deg) translateZ(20px) scale(1); }
-            75% { transform: rotate(570deg) translateX(470px) rotate(-570deg) translateZ(0px) scale(0.8); }
-            100% { transform: rotate(660deg) translateX(520px) rotate(-660deg) translateZ(20px) scale(1); }
+            0% { transform: rotate(300deg) translateX(660px) rotate(-300deg) translateZ(20px) scale(1); }
+            25% { transform: rotate(390deg) translateX(710px) rotate(-390deg) translateZ(40px) scale(1.2); }
+            50% { transform: rotate(480deg) translateX(660px) rotate(-480deg) translateZ(20px) scale(1); }
+            75% { transform: rotate(570deg) translateX(610px) rotate(-570deg) translateZ(0px) scale(0.8); }
+            100% { transform: rotate(660deg) translateX(660px) rotate(-660deg) translateZ(20px) scale(1); }
         }
         
         .planet-title {
