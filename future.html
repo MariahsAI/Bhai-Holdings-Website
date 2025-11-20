@@ -747,6 +747,26 @@
             box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9);
             animation: zoomIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            overflow: hidden;
+        }
+        
+        .planet-details-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.95) 100%);
+            z-index: 0;
+        }
+        
+        #planetDetailsContent {
+            position: relative;
+            z-index: 1;
         }
         
         @keyframes zoomIn {
@@ -1134,6 +1154,7 @@
                 title: 'AI & ML',
                 subtitle: 'Intelligence Systems Powering the Future',
                 description: 'Leveraging cutting-edge artificial intelligence and machine learning technologies to revolutionize industries and create unprecedented value.',
+                background: 'IMG_9797.PNG',
                 sections: [
                     {
                         title: 'Our Vision',
@@ -1159,6 +1180,7 @@
                 title: 'Web3',
                 subtitle: 'The Decentralized Future',
                 description: 'Building the infrastructure for Web3, blockchain technology, and decentralized applications that will power the next generation of the internet.',
+                background: 'mercury.png',
                 sections: [
                     {
                         title: 'Our Approach',
@@ -1184,6 +1206,7 @@
                 title: 'Energy',
                 subtitle: 'Sustainable Power Solutions',
                 description: 'Investing in renewable energy infrastructure and innovative power generation technologies to create a sustainable future.',
+                background: 'IMG_9787.PNG',
                 sections: [
                     {
                         title: 'Mission',
@@ -1209,6 +1232,7 @@
                 title: 'Space Tech',
                 subtitle: 'Beyond Earth',
                 description: 'Pioneering space technology and exploration initiatives to expand humanity\'s reach beyond our planet.',
+                background: 'IMG_9785.PNG',
                 sections: [
                     {
                         title: 'Vision',
@@ -1234,6 +1258,7 @@
                 title: 'HealthTech',
                 subtitle: 'Medical Revolution',
                 description: 'Transforming healthcare through technology, improving patient outcomes, and making quality care accessible to all.',
+                background: 'IMG_9790.PNG',
                 sections: [
                     {
                         title: 'Our Mission',
@@ -1259,6 +1284,7 @@
                 title: 'Smart Cities',
                 subtitle: 'Urban Future',
                 description: 'Designing and implementing smart city solutions that make urban living more efficient, sustainable, and connected.',
+                background: 'Uranus.jpg',
                 sections: [
                     {
                         title: 'Vision',
@@ -1284,10 +1310,14 @@
         
         function showPlanetDetails(planetId) {
             const modal = document.getElementById('planetDetailsModal');
+            const container = document.querySelector('.planet-details-container');
             const content = document.getElementById('planetDetailsContent');
             const data = planetData[planetId];
             
             if (!data) return;
+            
+            // Set the planet background image
+            container.style.backgroundImage = `url('${data.background}')`;
             
             // Build HTML content
             let html = `
