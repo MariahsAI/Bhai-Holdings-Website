@@ -551,6 +551,8 @@
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+            padding: 40px 20px;
         }
         
         .video-modal.active {
@@ -571,6 +573,7 @@
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
             animation: scaleIn 0.4s ease;
+            margin: auto;
         }
         
         @keyframes scaleIn {
@@ -583,7 +586,6 @@
             height: auto;
             display: block;
             object-fit: contain;
-            max-height: 80vh;
         }
         
         .close-modal {
@@ -840,6 +842,12 @@
         let ticking = false;
         
         function update3DParallax() {
+            // Don't run parallax when modal is open
+            if (modalOpen) {
+                ticking = false;
+                return;
+            }
+            
             const scrolled = window.pageYOffset;
             const windowHeight = window.innerHeight;
             
@@ -949,12 +957,15 @@
         update3DParallax();
         
         // VIDEO MODAL FUNCTIONS
+        let modalOpen = false;
+        
         function openVideoModal() {
             const modal = document.getElementById('videoModal');
             const video = document.getElementById('modalVideo');
             modal.classList.add('active');
             video.play();
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            modalOpen = true;
+            // Don't prevent body scroll - let modal handle it
         }
         
         function closeVideoModal() {
@@ -963,7 +974,7 @@
             modal.classList.remove('active');
             video.pause();
             video.currentTime = 0;
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
+            modalOpen = false;
         }
         
         // Close modal when clicking outside video
