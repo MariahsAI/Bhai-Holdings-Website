@@ -641,6 +641,227 @@
         .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
         .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
         
+        /* VIDEO MODAL */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            animation: scaleIn 0.4s ease;
+            margin: auto;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: rotate(90deg);
+        }
+        
+        /* PLANET DETAILS MODAL */
+        .planet-details-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+            overflow-y: auto;
+            padding: 60px 20px;
+        }
+        
+        .planet-details-modal.active {
+            display: flex;
+        }
+        
+        .planet-details-container {
+            position: relative;
+            width: 90%;
+            max-width: 1400px;
+            background: linear-gradient(135deg, rgba(20,20,20,0.95) 0%, rgba(0,0,0,0.98) 100%);
+            border-radius: 20px;
+            padding: 80px 60px 60px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9);
+            animation: zoomIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close-details {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-details:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .return-earth-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .return-earth-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateX(-5px);
+        }
+        
+        #planetDetailsContent {
+            color: #fff;
+        }
+        
+        .planet-detail-title {
+            font-size: 64px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .planet-detail-desc {
+            font-size: 24px;
+            color: #888;
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+        
+        .planet-detail-section {
+            margin-bottom: 40px;
+        }
+        
+        .planet-detail-section h3 {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .planet-detail-section p {
+            font-size: 18px;
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .planet-detail-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .planet-detail-section li {
+            font-size: 18px;
+            color: #aaa;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .planet-detail-section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #666;
+        }
+        
         @media (max-width: 768px) {
             .hero-title { font-size: 56px; }
             .section-title { font-size: 42px; }
@@ -676,16 +897,16 @@
         <p class="section-subtitle" style="position: relative; z-index: 1;">A Solar System of Innovation</p>
         
         <div class="orbital-container" style="position: relative; z-index: 1;">
-            <!-- Central Sun -->
+            <!-- Central Sun - Clickable for Video -->
             <div class="orbital-center">
-                <div class="sun">
+                <div class="sun" onclick="openVideoModal()" style="cursor: pointer;">
                     <div class="center-text">BHAI<br>2030</div>
                 </div>
             </div>
             
             <!-- Planet 1: Mars (AI & ML) -->
             <div class="venture-orbit v1">
-                <div class="planet planet-mars">
+                <div class="planet planet-mars" onclick="showPlanetDetails('ai')">
                     <h3 class="planet-title">AI & ML</h3>
                     <p class="planet-desc">Intelligence systems</p>
                     <span class="planet-status">Active</span>
@@ -694,7 +915,7 @@
             
             <!-- Planet 2: Moon (Web3) -->
             <div class="venture-orbit v2">
-                <div class="planet planet-moon">
+                <div class="planet planet-moon" onclick="showPlanetDetails('web3')">
                     <h3 class="planet-title">Web3</h3>
                     <p class="planet-desc">Decentralized future</p>
                     <span class="planet-status">R&D</span>
@@ -703,7 +924,7 @@
             
             <!-- Planet 3: Jupiter (Energy) -->
             <div class="venture-orbit v3">
-                <div class="planet planet-jupiter">
+                <div class="planet planet-jupiter" onclick="showPlanetDetails('energy')">
                     <h3 class="planet-title">Energy</h3>
                     <p class="planet-desc">Sustainable power</p>
                     <span class="planet-status">Planning</span>
@@ -712,7 +933,7 @@
             
             <!-- Planet 4: Earth (Space Tech) -->
             <div class="venture-orbit v4">
-                <div class="planet planet-earth">
+                <div class="planet planet-earth" onclick="showPlanetDetails('space')">
                     <h3 class="planet-title">Space Tech</h3>
                     <p class="planet-desc">Beyond Earth</p>
                     <span class="planet-status">Vision</span>
@@ -721,7 +942,7 @@
             
             <!-- Planet 5: Saturn (HealthTech) -->
             <div class="venture-orbit v5">
-                <div class="planet planet-saturn">
+                <div class="planet planet-saturn" onclick="showPlanetDetails('health')">
                     <h3 class="planet-title">HealthTech</h3>
                     <p class="planet-desc">Medical revolution</p>
                     <span class="planet-status">Research</span>
@@ -730,7 +951,7 @@
             
             <!-- Planet 6: Neptune (Smart Cities) -->
             <div class="venture-orbit v6">
-                <div class="planet planet-neptune">
+                <div class="planet planet-neptune" onclick="showPlanetDetails('cities')">
                     <h3 class="planet-title">Smart Cities</h3>
                     <p class="planet-desc">Urban future</p>
                     <span class="planet-status">Concept</span>
@@ -785,6 +1006,26 @@
         </p>
         <a href="explore.html" style="display: inline-block; padding: 25px 70px; background: #fff; color: #000; font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 50px; transition: all 0.5s; box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">Explore Our Universe</a>
     </section>
+    
+    <!-- VIDEO MODAL FOR EARTH -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <div class="close-modal" onclick="closeVideoModal()">×</div>
+            <video id="modalVideo" controls autoplay>
+                <source src="https://mariahsai.github.io/Bhai-Holdings-Website/My%20Video-3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    
+    <!-- PLANET DETAILS MODAL -->
+    <div class="planet-details-modal" id="planetDetailsModal">
+        <div class="planet-details-container">
+            <div class="close-details" onclick="closePlanetDetails()">×</div>
+            <button class="return-earth-btn" onclick="closePlanetDetails()">← Return to Earth</button>
+            <div id="planetDetailsContent"></div>
+        </div>
+    </div>
     
     <script>
         // CREATE HYPERDRIVE STAR FIELD - everywhere including moon section
@@ -856,6 +1097,241 @@
         
         window.addEventListener('scroll', updateBackgroundParallax);
         window.addEventListener('resize', updateBackgroundParallax);
+        
+        // VIDEO MODAL FUNCTIONS
+        function openVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            modal.classList.add('active');
+            video.play();
+        }
+        
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            modal.classList.remove('active');
+            video.pause();
+            video.currentTime = 0;
+        }
+        
+        // Close video modal when clicking outside or ESC
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+                closePlanetDetails();
+            }
+        });
+        
+        // PLANET DETAILS FUNCTIONS
+        const planetData = {
+            ai: {
+                title: 'AI & ML',
+                subtitle: 'Intelligence Systems Powering the Future',
+                description: 'Leveraging cutting-edge artificial intelligence and machine learning technologies to revolutionize industries and create unprecedented value.',
+                sections: [
+                    {
+                        title: 'Our Vision',
+                        content: 'Building the most advanced AI systems that augment human capabilities and solve complex global challenges.'
+                    },
+                    {
+                        title: 'Key Initiatives',
+                        items: [
+                            'Advanced neural networks for predictive analytics',
+                            'Natural language processing systems',
+                            'Computer vision and image recognition',
+                            'Autonomous decision-making algorithms',
+                            'AI-powered trading and investment strategies'
+                        ]
+                    },
+                    {
+                        title: 'Impact',
+                        content: 'Our AI solutions are already processing millions of data points daily, driving efficiency gains of 40%+ across our portfolio companies.'
+                    }
+                ]
+            },
+            web3: {
+                title: 'Web3',
+                subtitle: 'The Decentralized Future',
+                description: 'Building the infrastructure for Web3, blockchain technology, and decentralized applications that will power the next generation of the internet.',
+                sections: [
+                    {
+                        title: 'Our Approach',
+                        content: 'Creating decentralized solutions that prioritize security, transparency, and user ownership in the digital economy.'
+                    },
+                    {
+                        title: 'Focus Areas',
+                        items: [
+                            'Blockchain infrastructure development',
+                            'Smart contract platforms',
+                            'Decentralized finance (DeFi) protocols',
+                            'NFT marketplace technologies',
+                            'Web3 security and auditing'
+                        ]
+                    },
+                    {
+                        title: 'Current Stage',
+                        content: 'In active R&D phase with pilot programs launching Q2 2025. Early partnerships established with leading blockchain networks.'
+                    }
+                ]
+            },
+            energy: {
+                title: 'Energy',
+                subtitle: 'Sustainable Power Solutions',
+                description: 'Investing in renewable energy infrastructure and innovative power generation technologies to create a sustainable future.',
+                sections: [
+                    {
+                        title: 'Mission',
+                        content: 'Transitioning global energy systems to clean, renewable sources while ensuring reliability and affordability.'
+                    },
+                    {
+                        title: 'Portfolio',
+                        items: [
+                            'Solar energy installations and development',
+                            'Wind farm investments',
+                            'Energy storage solutions',
+                            'Smart grid technologies',
+                            'Green hydrogen production'
+                        ]
+                    },
+                    {
+                        title: 'Planning Phase',
+                        content: 'Strategic acquisitions and partnerships being finalized for Q3 2025 launch. Target: 1GW renewable capacity by 2027.'
+                    }
+                ]
+            },
+            space: {
+                title: 'Space Tech',
+                subtitle: 'Beyond Earth',
+                description: 'Pioneering space technology and exploration initiatives to expand humanity\'s reach beyond our planet.',
+                sections: [
+                    {
+                        title: 'Vision',
+                        content: 'Making space accessible for commerce, research, and future human habitation through innovative technology.'
+                    },
+                    {
+                        title: 'Focus Areas',
+                        items: [
+                            'Satellite technology and deployment',
+                            'Space-based communications',
+                            'Asteroid mining research',
+                            'Space tourism infrastructure',
+                            'Interplanetary logistics'
+                        ]
+                    },
+                    {
+                        title: 'Long-term Vision',
+                        content: 'Currently in conceptual phase with partnerships being explored. Full initiative launch targeted for 2028-2030.'
+                    }
+                ]
+            },
+            health: {
+                title: 'HealthTech',
+                subtitle: 'Medical Revolution',
+                description: 'Transforming healthcare through technology, improving patient outcomes, and making quality care accessible to all.',
+                sections: [
+                    {
+                        title: 'Our Mission',
+                        content: 'Leveraging technology to revolutionize healthcare delivery, diagnostics, and treatment globally.'
+                    },
+                    {
+                        title: 'Innovation Areas',
+                        items: [
+                            'AI-powered diagnostics',
+                            'Telemedicine platforms',
+                            'Wearable health monitoring',
+                            'Genomics and personalized medicine',
+                            'Healthcare data analytics'
+                        ]
+                    },
+                    {
+                        title: 'Research Phase',
+                        content: 'Active research partnerships with leading medical institutions. Clinical trials and pilot programs planned for 2026.'
+                    }
+                ]
+            },
+            cities: {
+                title: 'Smart Cities',
+                subtitle: 'Urban Future',
+                description: 'Designing and implementing smart city solutions that make urban living more efficient, sustainable, and connected.',
+                sections: [
+                    {
+                        title: 'Vision',
+                        content: 'Creating intelligent urban ecosystems that improve quality of life through integrated technology and sustainable design.'
+                    },
+                    {
+                        title: 'Key Technologies',
+                        items: [
+                            'IoT sensor networks',
+                            'Smart traffic management',
+                            'Intelligent energy grids',
+                            'Waste management systems',
+                            'Connected public services'
+                        ]
+                    },
+                    {
+                        title: 'Concept Stage',
+                        content: 'Collaborating with city planners and governments to develop pilot smart city districts. First implementation targeted for 2027.'
+                    }
+                ]
+            }
+        };
+        
+        function showPlanetDetails(planetId) {
+            const modal = document.getElementById('planetDetailsModal');
+            const content = document.getElementById('planetDetailsContent');
+            const data = planetData[planetId];
+            
+            if (!data) return;
+            
+            // Build HTML content
+            let html = `
+                <h1 class="planet-detail-title">${data.title}</h1>
+                <p class="planet-detail-desc">${data.subtitle}</p>
+                <div class="planet-detail-section">
+                    <p style="font-size: 20px; color: #fff; line-height: 1.8;">${data.description}</p>
+                </div>
+            `;
+            
+            data.sections.forEach(section => {
+                html += `<div class="planet-detail-section">`;
+                html += `<h3>${section.title}</h3>`;
+                
+                if (section.content) {
+                    html += `<p>${section.content}</p>`;
+                }
+                
+                if (section.items) {
+                    html += `<ul>`;
+                    section.items.forEach(item => {
+                        html += `<li>${item}</li>`;
+                    });
+                    html += `</ul>`;
+                }
+                
+                html += `</div>`;
+            });
+            
+            content.innerHTML = html;
+            modal.classList.add('active');
+        }
+        
+        function closePlanetDetails() {
+            const modal = document.getElementById('planetDetailsModal');
+            modal.classList.remove('active');
+        }
+        
+        // Close planet details when clicking outside
+        document.getElementById('planetDetailsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePlanetDetails();
+            }
+        });
     </script>
 </body>
 </html>
