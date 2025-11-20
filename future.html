@@ -538,6 +538,77 @@
         .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
         .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
         
+        /* VIDEO MODAL */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .video-modal.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            animation: scaleIn 0.4s ease;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: rotate(90deg);
+        }
+        
         /* 3D SCROLL EFFECTS */
         .parallax-layer {
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -581,7 +652,7 @@
             <!-- Central Sun -->
             <div class="orbital-center">
                 <div class="sun">
-                    <a href="#roadmap" class="center-text" style="text-decoration: none; color: #fff; cursor: pointer; transition: all 0.3s;">
+                    <a href="#" class="center-text" onclick="openVideoModal(); return false;">
                         CLICK HERE
                     </a>
                 </div>
@@ -689,6 +760,17 @@
         </p>
         <a href="explore.html" style="display: inline-block; padding: 25px 70px; background: #fff; color: #000; font-size: 16px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 50px; transition: all 0.5s; box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">Explore Our Universe</a>
     </section>
+    
+    <!-- VIDEO MODAL -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <div class="close-modal" onclick="closeVideoModal()">×</div>
+            <video id="modalVideo" controls autoplay>
+                <source src="GITHUB_URL_HERE" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
     
     <script>
         // CREATE HYPERDRIVE STAR FIELD - everywhere including moon section
@@ -863,6 +945,38 @@
         
         // Initial call
         update3DParallax();
+        
+        // VIDEO MODAL FUNCTIONS
+        function openVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            modal.classList.add('active');
+            video.play();
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            modal.classList.remove('active');
+            video.pause();
+            video.currentTime = 0;
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Close modal when clicking outside video
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+        
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
     </script>
 </body>
 </html>
