@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +12,6 @@
             color: #fff; 
             overflow-x: hidden;
             perspective: 2000px;
-        }
-        
-        section {
-            transition: transform 0.1s ease-out;
-            will-change: transform;
         }
         
         /* SPACE STARFIELD BACKGROUND - REMOVED (using real moon image instead) */
@@ -106,12 +100,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 0.8) 0%,
-                rgba(0, 0, 0, 0.6) 50%,
-                rgba(0, 0, 0, 0) 100%
-            );
+            background: rgba(0, 0, 0, 0.6);
             z-index: 0;
         }
         
@@ -119,9 +108,8 @@
             text-align: center; 
             z-index: 10;
             position: relative;
+            transform: translateZ(100px);
             animation: heroFloat 6s ease-in-out infinite;
-            transition: transform 0.1s ease-out, opacity 0.2s ease-out;
-            will-change: transform, opacity;
         }
         
         @keyframes heroFloat {
@@ -168,8 +156,6 @@
             height: 1000px;
             margin: 0 auto;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-            will-change: transform;
         }
         
         /* SUN - Central Star */
@@ -187,52 +173,38 @@
             width: 100%;
             height: 100%;
             background-image: url('Earth.jpg');
-            background-size: 100%;
+            background-size: 125%;
             background-position: center;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 
-                0 0 80px rgba(100, 150, 200, 0.8),
-                0 0 120px rgba(100, 150, 200, 0.4);
+                0 0 80px rgba(100, 150, 200, 0.5);
             position: relative;
             overflow: hidden;
-            transition: background-size 0.05s linear;
-            will-change: background-size;
         }
         
-        /* NO overlay - Earth stays bright */
+        /* Strong gradient mask to completely hide dark edges + text overlay */
         .sun::before {
-            display: none;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.7) 85%, rgba(0,0,0,1) 92%);
+            border-radius: 50%;
+            z-index: 1;
         }
         
         .center-text {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 42px;
+            font-weight: 900;
             text-align: center;
             color: #fff;
             letter-spacing: 3px;
-            text-shadow: 
-                0 2px 20px rgba(0,0,0,0.9),
-                0 4px 40px rgba(0,0,0,0.7),
-                0 0 10px rgba(0,0,0,1);
+            text-shadow: 0 0 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,1);
             z-index: 10;
             position: relative;
-            padding: 12px 24px;
-            border: 2px solid rgba(255,255,255,0.5);
-            border-radius: 50px;
-            background: rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .center-text:hover {
-            border-color: rgba(255,255,255,1);
-            background: rgba(0,0,0,0.4);
-            transform: scale(1.1);
-            text-shadow: 
-                0 0 30px rgba(255,255,255,0.8),
-                0 2px 20px rgba(0,0,0,0.9);
         }
         
         /* PLANETS - Each venture is a planet */
@@ -257,14 +229,13 @@
             text-align: center;
             padding: 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
             box-shadow: 
                 inset -30px -30px 60px rgba(0,0,0,0.6),
                 0 10px 40px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
-            will-change: transform;
         }
         
         /* Planet shine/highlight */
@@ -406,66 +377,37 @@
             display: none !important;
         }
         
-        /* ORBITAL ANIMATIONS - Layered rings with spiral breathing effect */
-        .v1 { animation: orbit1 30s linear infinite; } /* Inner ring, fast */
-        .v2 { animation: orbit2 30s linear infinite; } /* Inner ring, fast */
-        .v3 { animation: orbit3 45s linear infinite; } /* Middle ring, medium */
-        .v4 { animation: orbit4 45s linear infinite; } /* Middle ring, medium */
-        .v5 { animation: orbit5 60s linear infinite; } /* Outer ring, slow */
-        .v6 { animation: orbit6 60s linear infinite; } /* Outer ring, slow */
+        /* ORBITAL ANIMATIONS */
+        .v1 { animation: orbit1 60s linear infinite; }
+        .v2 { animation: orbit2 60s linear infinite; }
+        .v3 { animation: orbit3 60s linear infinite; }
+        .v4 { animation: orbit4 60s linear infinite; }
+        .v5 { animation: orbit5 60s linear infinite; }
+        .v6 { animation: orbit6 60s linear infinite; }
         
-        /* Inner Ring - Planet 1 (AI & ML) - Fast orbit with spiral */
         @keyframes orbit1 {
-            0% { transform: rotate(0deg) translateX(300px) rotate(0deg) translateZ(40px) scale(1); }
-            25% { transform: rotate(90deg) translateX(350px) rotate(-90deg) translateZ(60px) scale(1.1); }
-            50% { transform: rotate(180deg) translateX(300px) rotate(-180deg) translateZ(40px) scale(1); }
-            75% { transform: rotate(270deg) translateX(250px) rotate(-270deg) translateZ(20px) scale(0.9); }
-            100% { transform: rotate(360deg) translateX(300px) rotate(-360deg) translateZ(40px) scale(1); }
+            from { transform: rotate(0deg) translateX(380px) rotate(0deg) translateZ(0); }
+            to { transform: rotate(360deg) translateX(380px) rotate(-360deg) translateZ(0); }
         }
-        
-        /* Inner Ring - Planet 2 (Web3) - Fast orbit with spiral */
         @keyframes orbit2 {
-            0% { transform: rotate(180deg) translateX(300px) rotate(-180deg) translateZ(40px) scale(1); }
-            25% { transform: rotate(270deg) translateX(350px) rotate(-270deg) translateZ(60px) scale(1.1); }
-            50% { transform: rotate(360deg) translateX(300px) rotate(-360deg) translateZ(40px) scale(1); }
-            75% { transform: rotate(450deg) translateX(250px) rotate(-450deg) translateZ(20px) scale(0.9); }
-            100% { transform: rotate(540deg) translateX(300px) rotate(-540deg) translateZ(40px) scale(1); }
+            from { transform: rotate(60deg) translateX(380px) rotate(-60deg) translateZ(0); }
+            to { transform: rotate(420deg) translateX(380px) rotate(-420deg) translateZ(0); }
         }
-        
-        /* Middle Ring - Planet 3 (Energy) - Medium speed with spiral */
         @keyframes orbit3 {
-            0% { transform: rotate(60deg) translateX(420px) rotate(-60deg) translateZ(30px) scale(1); }
-            25% { transform: rotate(150deg) translateX(470px) rotate(-150deg) translateZ(50px) scale(1.15); }
-            50% { transform: rotate(240deg) translateX(420px) rotate(-240deg) translateZ(30px) scale(1); }
-            75% { transform: rotate(330deg) translateX(370px) rotate(-330deg) translateZ(10px) scale(0.85); }
-            100% { transform: rotate(420deg) translateX(420px) rotate(-420deg) translateZ(30px) scale(1); }
+            from { transform: rotate(120deg) translateX(380px) rotate(-120deg) translateZ(0); }
+            to { transform: rotate(480deg) translateX(380px) rotate(-480deg) translateZ(0); }
         }
-        
-        /* Middle Ring - Planet 4 (Space Tech) - Medium speed with spiral */
         @keyframes orbit4 {
-            0% { transform: rotate(240deg) translateX(420px) rotate(-240deg) translateZ(30px) scale(1); }
-            25% { transform: rotate(330deg) translateX(470px) rotate(-330deg) translateZ(50px) scale(1.15); }
-            50% { transform: rotate(420deg) translateX(420px) rotate(-420deg) translateZ(30px) scale(1); }
-            75% { transform: rotate(510deg) translateX(370px) rotate(-510deg) translateZ(10px) scale(0.85); }
-            100% { transform: rotate(600deg) translateX(420px) rotate(-600deg) translateZ(30px) scale(1); }
+            from { transform: rotate(180deg) translateX(380px) rotate(-180deg) translateZ(0); }
+            to { transform: rotate(540deg) translateX(380px) rotate(-540deg) translateZ(0); }
         }
-        
-        /* Outer Ring - Planet 5 (HealthTech) - Slow orbit with spiral */
         @keyframes orbit5 {
-            0% { transform: rotate(120deg) translateX(520px) rotate(-120deg) translateZ(20px) scale(1); }
-            25% { transform: rotate(210deg) translateX(570px) rotate(-210deg) translateZ(40px) scale(1.2); }
-            50% { transform: rotate(300deg) translateX(520px) rotate(-300deg) translateZ(20px) scale(1); }
-            75% { transform: rotate(390deg) translateX(470px) rotate(-390deg) translateZ(0px) scale(0.8); }
-            100% { transform: rotate(480deg) translateX(520px) rotate(-480deg) translateZ(20px) scale(1); }
+            from { transform: rotate(240deg) translateX(380px) rotate(-240deg) translateZ(0); }
+            to { transform: rotate(600deg) translateX(380px) rotate(-600deg) translateZ(0); }
         }
-        
-        /* Outer Ring - Planet 6 (Smart Cities) - Slow orbit with spiral */
         @keyframes orbit6 {
-            0% { transform: rotate(300deg) translateX(520px) rotate(-300deg) translateZ(20px) scale(1); }
-            25% { transform: rotate(390deg) translateX(570px) rotate(-390deg) translateZ(40px) scale(1.2); }
-            50% { transform: rotate(480deg) translateX(520px) rotate(-480deg) translateZ(20px) scale(1); }
-            75% { transform: rotate(570deg) translateX(470px) rotate(-570deg) translateZ(0px) scale(0.8); }
-            100% { transform: rotate(660deg) translateX(520px) rotate(-660deg) translateZ(20px) scale(1); }
+            from { transform: rotate(300deg) translateX(380px) rotate(-300deg) translateZ(0); }
+            to { transform: rotate(660deg) translateX(380px) rotate(-660deg) translateZ(0); }
         }
         
         .planet-title {
@@ -539,11 +481,6 @@
         .phase-item { font-size: 16px; color: #888; padding-left: 25px; position: relative; margin-bottom: 10px; }
         .phase-item::before { content: '→'; position: absolute; left: 0; color: #666; }
         
-        /* 3D SCROLL EFFECTS */
-        .parallax-layer {
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
         @media (max-width: 768px) {
             .hero-title { font-size: 56px; }
             .section-title { font-size: 42px; }
@@ -563,7 +500,7 @@
         </div>
     </nav>
     
-    <section class="hero parallax-layer">
+    <section class="hero">
         <div class="hero-content">
             <div class="hero-label">What's Next</div>
             <h1 class="hero-title">FUTURE</h1>
@@ -571,9 +508,12 @@
         </div>
     </section>
     
-    <section class="parallax-layer" style="background: transparent; min-height: 130vh; position: relative;">
-        <!-- Gradient fade overlay instead of hard line -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 300px; background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%); z-index: 0; pointer-events: none;"></div>
+    <section style="background: transparent; min-height: 130vh; position: relative;">
+        <!-- Dark overlay for readability -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0;"></div>
+        
+        <!-- Bottom gradient fade -->
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 300px; background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%); z-index: 0; pointer-events: none;"></div>
         
         <h2 class="section-title" style="position: relative; z-index: 1;">Future Ventures</h2>
         <p class="section-subtitle" style="position: relative; z-index: 1;">A Solar System of Innovation</p>
@@ -582,9 +522,7 @@
             <!-- Central Sun -->
             <div class="orbital-center">
                 <div class="sun">
-                    <a href="#roadmap" class="center-text" style="text-decoration: none; color: #fff; cursor: pointer; transition: all 0.3s;">
-                        CLICK HERE
-                    </a>
+                    <div class="center-text">BHAI<br>2030</div>
                 </div>
             </div>
             
@@ -644,7 +582,7 @@
         </div>
     </section>
     
-    <section class="parallax-layer" style="background: #000; padding-top: 120px; position: relative; z-index: 1;">
+    <section style="background: #000; padding-top: 120px; position: relative; z-index: 1;">
         <h2 class="section-title" style="position: relative; z-index: 2;">Strategic Roadmap</h2>
         <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
             <div class="roadmap-phase">
@@ -682,7 +620,7 @@
         </div>
     </section>
     
-    <section class="parallax-layer" style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center; position: relative;">
+    <section style="background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%); text-align: center; position: relative;">
         <h2 style="font-size: 64px; font-weight: 800; background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));">The Future Starts Now</h2>
         <p style="font-size: 24px; color: #888; line-height: 1.8; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
             We're not waiting for tomorrow—we're building it today. Join us as we transform 
@@ -752,118 +690,6 @@
             phase.style.transitionDelay = (index * 0.2) + 's';
             observer.observe(phase);
         });
-        
-        // 3D PARALLAX ILLUSION - Multiple layers moving at different speeds
-        let ticking = false;
-        
-        function update3DParallax() {
-            const scrolled = window.pageYOffset;
-            const windowHeight = window.innerHeight;
-            
-            // Background moves slowest (creates depth)
-            document.body.style.backgroundPositionY = (scrolled * 0.3) + 'px';
-            
-            // Earth/Sun DRAMATIC zoom in effect as you scroll down the entire page
-            const sun = document.querySelector('.sun');
-            if (sun) {
-                // Zoom based on total page scroll
-                const docHeight = document.documentElement.scrollHeight - windowHeight;
-                const scrollProgress = scrolled / docHeight;
-                
-                // DRAMATIC zoom from 100% to 350% as you scroll down the entire page
-                const zoomLevel = 100 + (scrollProgress * 250);
-                sun.style.backgroundSize = `${zoomLevel}%`;
-            }
-            
-            // Hero content - moves at medium speed
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent) {
-                const heroProgress = scrolled / windowHeight;
-                heroContent.style.transform = `translate3d(0, ${scrolled * 0.5}px, 0)`;
-                heroContent.style.opacity = 1 - (heroProgress * 0.7);
-            }
-            
-            // Particles move faster (foreground effect)
-            const particles = document.getElementById('particles');
-            if (particles) {
-                particles.style.transform = `translate3d(0, ${scrolled * -0.2}px, 0)`;
-            }
-            
-            // Orbital container - parallax depth
-            const orbitalContainer = document.querySelector('.orbital-container');
-            if (orbitalContainer) {
-                const rect = orbitalContainer.getBoundingClientRect();
-                const elementTop = rect.top;
-                const elementHeight = rect.height;
-                
-                if (elementTop < windowHeight && elementTop + elementHeight > 0) {
-                    const scrollProgress = (windowHeight - elementTop) / (windowHeight + elementHeight);
-                    const parallaxOffset = (scrollProgress - 0.5) * 200;
-                    
-                    orbitalContainer.style.transform = `translate3d(0, ${parallaxOffset}px, 0) rotateX(${scrollProgress * 10 - 5}deg) rotateY(${scrollProgress * 15 - 7.5}deg)`;
-                }
-            }
-            
-            // Planets - each moves at slightly different speed for depth BUT stay visible
-            const planets = document.querySelectorAll('.planet');
-            planets.forEach((planet, index) => {
-                const rect = planet.getBoundingClientRect();
-                const planetTop = rect.top;
-                
-                if (planetTop < windowHeight && planetTop > -rect.height) {
-                    // Much smaller parallax speed so planets don't fly off screen
-                    const speed = 0.01 + (index * 0.005);
-                    const offset = (scrolled - (planetTop + scrolled)) * speed;
-                    const depth = index * 5; // Smaller depth values
-                    
-                    // Keep the transform minimal so orbit animations still work
-                    planet.style.transform = `translate3d(0, ${offset}px, ${depth}px)`;
-                }
-            });
-            
-            // Section titles - float at different speeds
-            const sectionTitles = document.querySelectorAll('.section-title');
-            sectionTitles.forEach((title, index) => {
-                const rect = title.getBoundingClientRect();
-                const titleTop = rect.top;
-                
-                if (titleTop < windowHeight && titleTop > -rect.height) {
-                    const offset = (scrolled - (titleTop + scrolled)) * 0.15;
-                    title.style.transform = `translate3d(0, ${offset}px, 50px)`;
-                }
-            });
-            
-            // Roadmap phases - parallax with depth
-            const phases = document.querySelectorAll('.roadmap-phase');
-            phases.forEach((phase, index) => {
-                const rect = phase.getBoundingClientRect();
-                const phaseTop = rect.top;
-                
-                if (phaseTop < windowHeight && phaseTop > -rect.height) {
-                    const progress = (windowHeight - phaseTop) / (windowHeight + rect.height);
-                    const translateX = -30 + (progress * 50);
-                    const parallaxY = (scrolled - (phaseTop + scrolled)) * 0.1;
-                    const depth = index * 30;
-                    
-                    phase.style.transform = `translate3d(${translateX}px, ${parallaxY}px, ${depth}px) rotateY(${progress * 5 - 2.5}deg)`;
-                }
-            });
-            
-            ticking = false;
-        }
-        
-        function requestTick() {
-            if (!ticking) {
-                window.requestAnimationFrame(update3DParallax);
-                ticking = true;
-            }
-        }
-        
-        window.addEventListener('scroll', requestTick);
-        window.addEventListener('resize', update3DParallax);
-        
-        // Initial call
-        update3DParallax();
     </script>
 </body>
 </html>
