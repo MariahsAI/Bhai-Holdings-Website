@@ -11,55 +11,119 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #2c3e50;
-            background: #f8f9fa;
+            color: #ffffff;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Animated background effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(33, 150, 243, 0.03) 0%, transparent 50%);
+            animation: pulseGlow 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
             color: white;
             padding: 60px 40px;
             border-radius: 20px;
             margin-bottom: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(33, 150, 243, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(33, 150, 243, 0.1) 0%, transparent 60%);
+            animation: headerGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes headerGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         .header h1 {
             font-size: 3em;
-            font-weight: 700;
+            font-weight: 900;
             margin-bottom: 10px;
             letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .header .subtitle {
             font-size: 1.3em;
             opacity: 0.9;
             font-weight: 300;
+            position: relative;
+            z-index: 1;
         }
 
         .executive-summary {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .executive-summary:hover {
+            box-shadow: 0 20px 60px rgba(33, 150, 243, 0.2);
+            transform: translateY(-5px);
         }
 
         .executive-summary h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: #1e3c72;
-            border-bottom: 3px solid #2a5298;
-            padding-bottom: 10px;
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #ffffff;
+            border-bottom: 3px solid #2196f3;
+            padding-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .info-grid {
@@ -70,39 +134,52 @@
         }
 
         .info-item {
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #2a5298;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid #2196f3;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: rgba(33, 150, 243, 0.1);
+            transform: translateX(5px);
+            box-shadow: -5px 0 20px rgba(33, 150, 243, 0.2);
         }
 
         .info-item .label {
             font-size: 0.85em;
-            color: #6c757d;
+            color: #a0a0a0;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .info-item .value {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #ffffff;
         }
 
         .highlights-section {
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #16213e 100%);
             padding: 50px;
             border-radius: 20px;
             margin-bottom: 40px;
             color: white;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .highlights-section h2 {
-            font-size: 2.2em;
+            font-size: 2.5em;
             margin-bottom: 40px;
             text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
         }
 
         .highlights-grid {
@@ -112,12 +189,44 @@
         }
 
         .highlight-card {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
-            padding: 30px;
+            padding: 35px;
             border-radius: 15px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(33, 150, 243, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .highlight-card:hover {
+            background: rgba(33, 150, 243, 0.15);
+            border-color: #2196f3;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(33, 150, 243, 0.3);
+        }
+
+        .highlight-card:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .highlight-card .title {
@@ -126,61 +235,87 @@
             letter-spacing: 2px;
             margin-bottom: 15px;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
         .highlight-card .value {
-            font-size: 3em;
-            font-weight: 700;
+            font-size: 3.5em;
+            font-weight: 900;
             margin-bottom: 10px;
             line-height: 1;
+            color: #2196f3;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
         }
 
         .highlight-card .unit {
             font-size: 0.95em;
             opacity: 0.85;
+            position: relative;
+            z-index: 1;
         }
 
         .section {
-            background: white;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            box-shadow: 0 20px 60px rgba(33, 150, 243, 0.2);
         }
 
         .section h2 {
-            font-size: 2em;
-            margin-bottom: 25px;
-            color: #1e3c72;
-            border-bottom: 3px solid #2a5298;
-            padding-bottom: 10px;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: #ffffff;
+            border-bottom: 3px solid #2196f3;
+            padding-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
         }
 
         .section h3 {
-            font-size: 1.4em;
-            margin: 25px 0 15px 0;
-            color: #2a5298;
+            font-size: 1.6em;
+            margin: 30px 0 20px 0;
+            color: #2196f3;
+            font-weight: 700;
         }
 
         .formation-details {
-            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 20px;
             color: white;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .param-table {
             width: 100%;
             margin: 20px 0;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
         }
 
         .param-table tr {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        .param-table tr:hover {
+            background: rgba(33, 150, 243, 0.1);
         }
 
         .param-table tr:last-child {
@@ -194,27 +329,32 @@
         .param-table td:first-child {
             font-weight: 600;
             width: 40%;
+            color: #a0a0a0;
+        }
+
+        .param-table td:last-child {
+            color: #ffffff;
         }
 
         .reserves-table {
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            background: white;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .reserves-table thead {
-            background: linear-gradient(135deg, #3a4d5c 0%, #4a5f6f 100%);
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
             color: white;
         }
 
         .reserves-table th {
             padding: 15px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 0.85em;
             letter-spacing: 1px;
@@ -222,38 +362,43 @@
 
         .reserves-table td {
             padding: 15px;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .reserves-table tbody tr {
+            transition: background 0.3s ease;
         }
 
         .reserves-table tbody tr:hover {
-            background: #f8f9fa;
+            background: rgba(33, 150, 243, 0.1);
         }
 
         .reserves-table tbody tr:last-child td {
             font-weight: 700;
-            background: #e7f3ff;
-            border-top: 2px solid #4facfe;
+            background: rgba(33, 150, 243, 0.2);
+            border-top: 2px solid #2196f3;
         }
 
         .contingent-table {
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            background: white;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .contingent-table thead {
-            background: linear-gradient(135deg, #424242 0%, #616161 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white;
         }
 
         .contingent-table th {
             padding: 15px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 0.85em;
             letter-spacing: 1px;
@@ -261,37 +406,50 @@
 
         .contingent-table td {
             padding: 15px;
+            color: #ffffff;
         }
 
         .alert-box {
-            background: #fff3cd;
+            background: rgba(255, 193, 7, 0.15);
             border-left: 5px solid #ffc107;
             padding: 25px;
-            border-radius: 8px;
+            border-radius: 12px;
             margin: 25px 0;
+            border: 1px solid rgba(255, 193, 7, 0.3);
         }
 
         .alert-box .title {
             font-weight: 700;
             margin-bottom: 10px;
-            font-size: 1.1em;
-            color: #856404;
+            font-size: 1.2em;
+            color: #ffc107;
+        }
+
+        .alert-box p {
+            color: #e0e0e0;
         }
 
         .phase-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
             padding: 30px;
-            border-radius: 12px;
+            border-radius: 15px;
             margin-bottom: 25px;
-            border-left: 5px solid #2a5298;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #2196f3;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .phase-card:hover {
+            background: rgba(33, 150, 243, 0.1);
+            transform: translateX(10px);
+            box-shadow: -5px 0 30px rgba(33, 150, 243, 0.3);
         }
 
         .phase-card .phase-title {
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-weight: 700;
             margin-bottom: 15px;
-            color: #1e3c72;
+            color: #2196f3;
         }
 
         .phase-card .phase-details {
@@ -302,21 +460,27 @@
         }
 
         .phase-detail {
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 6px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .phase-detail:hover {
+            background: rgba(33, 150, 243, 0.1);
         }
 
         .phase-detail .detail-label {
             font-size: 0.85em;
-            color: #6c757d;
+            color: #a0a0a0;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 5px;
         }
 
         .phase-detail .detail-value {
             font-weight: 600;
-            color: #2c3e50;
+            color: #ffffff;
             margin-top: 5px;
         }
 
@@ -331,21 +495,28 @@
             padding: 25px;
             border-radius: 12px;
             border-left: 5px solid;
+            transition: all 0.3s ease;
         }
 
         .risk-card.negative {
-            background: #f8d7da;
+            background: rgba(220, 53, 69, 0.1);
             border-color: #dc3545;
         }
 
         .risk-card.positive {
-            background: #d4edda;
-            border-color: #28a745;
+            background: rgba(33, 150, 243, 0.1);
+            border-color: #2196f3;
+        }
+
+        .risk-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .risk-card h3 {
             margin-top: 0;
             margin-bottom: 15px;
+            color: #ffffff;
         }
 
         .risk-card ul {
@@ -357,6 +528,7 @@
             padding: 8px 0;
             padding-left: 20px;
             position: relative;
+            color: #e0e0e0;
         }
 
         .risk-card ul li:before {
@@ -366,55 +538,68 @@
             font-weight: bold;
         }
 
+        .risk-card.negative ul li:before {
+            color: #dc3545;
+        }
+
+        .risk-card.positive ul li:before {
+            color: #2196f3;
+        }
+
         .pricing-table {
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            background: white;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .pricing-table thead {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
             color: white;
         }
 
         .pricing-table th {
             padding: 15px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .pricing-table td {
             padding: 15px;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .pricing-table tbody tr {
+            transition: background 0.3s ease;
         }
 
         .pricing-table tbody tr:hover {
-            background: #f8f9fa;
+            background: rgba(33, 150, 243, 0.1);
         }
 
         .capital-table {
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            background: white;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .capital-table thead {
-            background: linear-gradient(135deg, #3a4d5c 0%, #4a5f6f 100%);
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
             color: white;
         }
 
         .capital-table th {
             padding: 15px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 0.85em;
             letter-spacing: 1px;
@@ -422,20 +607,29 @@
 
         .capital-table td {
             padding: 15px;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .capital-table tbody tr {
+            transition: background 0.3s ease;
+        }
+
+        .capital-table tbody tr:hover {
+            background: rgba(33, 150, 243, 0.1);
         }
 
         .capital-table tbody tr:last-child {
             font-weight: 700;
-            background: #e7f3ff;
-            border-top: 2px solid #4facfe;
+            background: rgba(33, 150, 243, 0.2);
+            border-top: 2px solid #2196f3;
         }
 
         .opex-box {
-            background: #e7f3ff;
+            background: rgba(33, 150, 243, 0.1);
             padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid #0066cc;
+            border-radius: 12px;
+            border-left: 5px solid #2196f3;
             margin: 25px 0;
         }
 
@@ -446,7 +640,8 @@
 
         .opex-box ul li {
             padding: 10px 0;
-            border-bottom: 1px solid #cce5ff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
         }
 
         .opex-box ul li:last-child {
@@ -457,28 +652,37 @@
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            background: white;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .risk-table thead {
-            background: #1e3c72;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white;
         }
 
         .risk-table th {
             padding: 15px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 0.85em;
         }
 
         .risk-table td {
             padding: 15px;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .risk-table tbody tr {
+            transition: background 0.3s ease;
+        }
+
+        .risk-table tbody tr:hover {
+            background: rgba(33, 150, 243, 0.1);
         }
 
         .strategic-grid {
@@ -490,13 +694,22 @@
 
         .strategic-card {
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid;
+            transition: all 0.4s ease;
+        }
+
+        .strategic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(33, 150, 243, 0.3);
         }
 
         .strategic-card h3 {
             margin-top: 0;
             margin-bottom: 20px;
+            color: #2196f3;
         }
 
         .strategic-card ul {
@@ -508,6 +721,7 @@
             padding: 10px 0;
             padding-left: 25px;
             position: relative;
+            color: #e0e0e0;
         }
 
         .strategic-card ul li:before {
@@ -515,28 +729,39 @@
             position: absolute;
             left: 0;
             font-weight: bold;
-            color: #28a745;
+            color: #2196f3;
         }
 
         .strategic-card.opportunities ul li:before {
             content: "◆";
-            color: #f5576c;
+            color: #2196f3;
         }
 
         .valuation-summary {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 20px;
             color: white;
             margin: 30px 0;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .valuation-summary h2 {
+            color: white;
+            border: none;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
         }
 
         .valuation-summary table {
             width: 100%;
             margin-top: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
         }
 
@@ -547,7 +772,7 @@
         }
 
         .valuation-summary thead {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(33, 150, 243, 0.2);
         }
 
         .valuation-summary tbody tr {
@@ -556,41 +781,52 @@
 
         .valuation-summary tbody tr:last-child {
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(33, 150, 243, 0.2);
         }
 
         .recommendation-box {
-            background: #eceff1;
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 20px;
             margin: 30px 0;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            border-left: 5px solid #2c3e50;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border-left: 5px solid #2196f3;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .recommendation-box h2 {
-            color: #1e3c72;
+            color: #2196f3;
             margin-bottom: 20px;
             border: none;
+            font-weight: 900;
         }
 
         .recommendation-box .thesis {
             font-size: 1.1em;
             line-height: 1.8;
-            color: #2c3e50;
+            color: #e0e0e0;
         }
 
         .step-card {
             padding: 30px;
-            border-radius: 12px;
+            border-radius: 15px;
             margin-bottom: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid #2196f3;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateX(10px);
+            box-shadow: -5px 0 30px rgba(33, 150, 243, 0.3);
         }
 
         .step-card h3 {
             margin-top: 0;
             margin-bottom: 20px;
             font-size: 1.4em;
+            color: #2196f3;
         }
 
         .step-card ul {
@@ -602,6 +838,7 @@
             padding: 8px 0;
             padding-left: 20px;
             position: relative;
+            color: #e0e0e0;
         }
 
         .step-card ul li:before {
@@ -609,19 +846,21 @@
             position: absolute;
             left: 0;
             font-weight: bold;
+            color: #2196f3;
         }
 
         .success-factors {
-            background: #fff3cd;
+            background: rgba(255, 193, 7, 0.15);
             border-left: 5px solid #ffc107;
             padding: 30px;
-            border-radius: 8px;
+            border-radius: 12px;
             margin: 30px 0;
+            border: 1px solid rgba(255, 193, 7, 0.3);
         }
 
         .success-factors h3 {
             margin-top: 0;
-            color: #856404;
+            color: #ffc107;
         }
 
         .success-factors ul {
@@ -633,6 +872,7 @@
             padding: 10px 0;
             padding-left: 25px;
             position: relative;
+            color: #e0e0e0;
         }
 
         .success-factors ul li:before {
@@ -640,23 +880,28 @@
             position: absolute;
             left: 0;
             font-weight: bold;
-            color: #856404;
+            color: #ffc107;
         }
 
         .footer {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #16213e 100%);
             color: white;
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 20px;
             text-align: center;
             margin-top: 40px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer h2 {
             margin-bottom: 20px;
             border: none;
             color: white;
+            background: linear-gradient(135deg, #ffffff 0%, #2196f3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .footer p {
@@ -668,27 +913,15 @@
             margin-top: 20px;
             font-weight: 700;
             font-size: 1.1em;
+            color: #2196f3;
         }
 
-        @media print {
-            body {
-                background: white;
-            }
-            .container {
-                padding: 20px;
-            }
-            .section {
-                page-break-inside: avoid;
-            }
-        }
-
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            /* Container and General Layout */
             .container {
                 padding: 20px 15px;
             }
 
-            /* Header */
             .header {
                 padding: 30px 20px;
                 border-radius: 15px;
@@ -703,51 +936,49 @@
                 font-size: 1em;
             }
 
-            /* Sections */
             .executive-summary,
             .section {
-                padding: 20px;
-                border-radius: 10px;
+                padding: 25px 20px;
+                border-radius: 15px;
             }
 
             .executive-summary h2,
             .section h2 {
-                font-size: 1.4em;
+                font-size: 1.6em;
             }
 
-            /* Grids */
             .two-column,
             .strategic-grid,
             .highlights-grid,
-            .info-grid,
-            .assets-grid {
+            .info-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
 
-            /* Highlights Section */
             .highlights-section {
                 padding: 30px 20px;
                 border-radius: 15px;
             }
 
             .highlights-section h2 {
-                font-size: 1.6em;
+                font-size: 1.8em;
                 margin-bottom: 25px;
             }
 
             .highlight-card {
-                padding: 20px;
+                padding: 25px 20px;
             }
 
             .highlight-card .value {
-                font-size: 2.2em;
+                font-size: 2.5em;
             }
 
-            /* Tables - Horizontal Scroll */
             table,
             .pricing-table,
-            .capital-table {
+            .capital-table,
+            .reserves-table,
+            .contingent-table,
+            .risk-table {
                 font-size: 0.85em;
                 display: block;
                 overflow-x: auto;
@@ -760,83 +991,37 @@
                 padding: 10px;
             }
 
-            /* Timeline */
-            .phase-timeline {
+            .phase-card {
                 padding: 20px;
             }
 
-            .phase-timeline h3 {
-                font-size: 1.3em;
-            }
-
-            .timeline-item {
-                padding: 15px;
-            }
-
-            /* Development Steps */
             .step-card {
                 padding: 20px;
             }
 
             .step-card h3 {
-                font-size: 1.1em;
+                font-size: 1.2em;
             }
 
-            .step-card ul {
-                font-size: 0.9em;
-            }
-
-            /* Success Factors */
-            .success-factors {
-                padding: 20px;
-            }
-
-            /* Footer */
             .footer {
-                padding: 20px;
+                padding: 25px 20px;
             }
 
             .footer h2 {
-                font-size: 1.4em;
+                font-size: 1.6em;
             }
 
-            /* Risk Cards */
             .risk-card {
                 padding: 20px;
             }
 
-            .risk-card h3 {
-                font-size: 1.2em;
-            }
-
-            /* OPEX Box */
-            .opex-box {
+            .opex-box,
+            .success-factors,
+            .alert-box {
                 padding: 20px;
-            }
-
-            /* Asset Cards */
-            .asset-card {
-                padding: 20px;
-            }
-
-            .asset-card h3 {
-                font-size: 1.2em;
-            }
-
-            /* Make numbers more readable on mobile */
-            .value {
-                word-break: break-word;
-            }
-
-            /* Improve button/link touch targets */
-            a, button {
-                min-height: 44px;
-                display: inline-flex;
-                align-items: center;
             }
         }
 
-        /* Extra Small Devices */
         @media (max-width: 480px) {
             .container {
                 padding: 15px 10px;
@@ -856,12 +1041,12 @@
 
             .executive-summary,
             .section {
-                padding: 15px;
+                padding: 20px 15px;
             }
 
             .executive-summary h2,
             .section h2 {
-                font-size: 1.2em;
+                font-size: 1.4em;
             }
 
             .highlights-section {
@@ -869,15 +1054,15 @@
             }
 
             .highlights-section h2 {
-                font-size: 1.4em;
+                font-size: 1.6em;
             }
 
             .highlight-card {
-                padding: 15px;
+                padding: 20px 15px;
             }
 
             .highlight-card .value {
-                font-size: 1.8em;
+                font-size: 2em;
             }
 
             table,
@@ -886,17 +1071,25 @@
                 font-size: 0.75em;
             }
 
-            .phase-timeline h3 {
-                font-size: 1.1em;
-            }
-
             .step-card h3 {
-                font-size: 1em;
+                font-size: 1.1em;
             }
 
             .footer .confidential {
                 font-size: 1em;
-                padding: 15px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: #000;
+            }
+            .container {
+                padding: 20px;
+            }
+            .section {
+                page-break-inside: avoid;
             }
         }
     </style>
@@ -960,9 +1153,9 @@
         </div>
 
         <div class="formation-details">
-            <h2 style="color: white; border-bottom: 3px solid rgba(255,255,255,0.3); padding-bottom: 10px;">Primary Formation: Bradford Third</h2>
+            <h2 style="color: white; border-bottom: 3px solid #2196f3; padding-bottom: 10px;">Primary Formation: Bradford Third</h2>
             
-            <h3 style="color: white; margin-top: 30px;">Reservoir Characteristics</h3>
+            <h3 style="color: #2196f3; margin-top: 30px;">Reservoir Characteristics</h3>
             <table class="param-table">
                 <tr>
                     <td>Depth</td>
@@ -986,7 +1179,7 @@
                 </tr>
             </table>
 
-            <h3 style="color: white; margin-top: 30px;">Production Potential</h3>
+            <h3 style="color: #2196f3; margin-top: 30px;">Production Potential</h3>
             <table class="param-table">
                 <tr>
                     <td>Primary Recovery</td>
@@ -1088,9 +1281,9 @@
         <div class="section">
             <h2>Development Plan</h2>
 
-            <div class="phase-card" style="border-left-color: #28a745;">
+            <div class="phase-card">
                 <div class="phase-title">PHASE I - IMMEDIATE (2025-2026)</div>
-                <p>Complete two existing wells (Hill 21, HG 2-28-17)</p>
+                <p style="color: #e0e0e0;">Complete two existing wells (Hill 21, HG 2-28-17)</p>
                 <div class="phase-details">
                     <div class="phase-detail">
                         <div class="detail-label">Capital Investment</div>
@@ -1111,9 +1304,9 @@
                 </div>
             </div>
 
-            <div class="phase-card" style="border-left-color: #ffc107;">
+            <div class="phase-card">
                 <div class="phase-title">PHASE II - SHORT-TERM (2026)</div>
-                <p>Implement gas injection Enhanced Oil Recovery (EOR)</p>
+                <p style="color: #e0e0e0;">Implement gas injection Enhanced Oil Recovery (EOR)</p>
                 <div class="phase-details">
                     <div class="phase-detail">
                         <div class="detail-label">Capital Investment</div>
@@ -1134,9 +1327,9 @@
                 </div>
             </div>
 
-            <div class="phase-card" style="border-left-color: #dc3545;">
+            <div class="phase-card">
                 <div class="phase-title">PHASE III - MEDIUM-TERM (2026-2027)</div>
-                <p>Drill 5 "pods" (40 wells total)</p>
+                <p style="color: #e0e0e0;">Drill 5 "pods" (40 wells total)</p>
                 <div class="phase-details">
                     <div class="phase-detail">
                         <div class="detail-label">Configuration</div>
@@ -1163,10 +1356,10 @@
             
             <h3>Enhanced Oil Recovery Strategy</h3>
             <ul style="list-style: none; padding-left: 0;">
-                <li style="padding: 12px 0; border-bottom: 1px solid #e9ecef;"><strong>Gas Re-injection:</strong> Produced solution gas re-injected into reservoir to improve oil displacement and recovery</li>
-                <li style="padding: 12px 0; border-bottom: 1px solid #e9ecef;"><strong>NGL Extraction:</strong> Butane stripped from gas stream (~6 bbls per MMcf) for sale</li>
-                <li style="padding: 12px 0; border-bottom: 1px solid #e9ecef;"><strong>Gas Storage:</strong> Reservoir acts as natural gas storage; gas produced after oil depletion</li>
-                <li style="padding: 12px 0;"><strong>Modern Drilling:</strong> Horizontal wells using environmentally-safe drilling fluids</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: #e0e0e0;"><strong style="color: #2196f3;">Gas Re-injection:</strong> Produced solution gas re-injected into reservoir to improve oil displacement and recovery</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: #e0e0e0;"><strong style="color: #2196f3;">NGL Extraction:</strong> Butane stripped from gas stream (~6 bbls per MMcf) for sale</li>
+                <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: #e0e0e0;"><strong style="color: #2196f3;">Gas Storage:</strong> Reservoir acts as natural gas storage; gas produced after oil depletion</li>
+                <li style="padding: 12px 0; color: #e0e0e0;"><strong style="color: #2196f3;">Modern Drilling:</strong> Horizontal wells using environmentally-safe drilling fluids</li>
             </ul>
 
             <h3 style="margin-top: 40px;">Why Enhanced Recovery is Necessary</h3>
@@ -1199,19 +1392,19 @@
             
             <h3>Revenue Streams</h3>
             <div class="highlights-grid">
-                <div class="highlight-card" style="background: #37474f; color: white;">
+                <div class="highlight-card" style="background: rgba(33, 150, 243, 0.15);">
                     <div class="title">Primary Revenue</div>
-                    <div class="value" style="font-size: 1.5em;">OIL</div>
+                    <div class="value" style="font-size: 1.8em;">OIL</div>
                     <div class="unit">45° API Condensate Production</div>
                 </div>
-                <div class="highlight-card" style="background: #455a64; color: white;">
+                <div class="highlight-card" style="background: rgba(33, 150, 243, 0.15);">
                     <div class="title">Secondary Revenue</div>
-                    <div class="value" style="font-size: 1.5em;">NGL</div>
+                    <div class="value" style="font-size: 1.8em;">NGL</div>
                     <div class="unit">Butane Extraction Sales</div>
                 </div>
-                <div class="highlight-card" style="background: #546e7a; color: white;">
+                <div class="highlight-card" style="background: rgba(33, 150, 243, 0.15);">
                     <div class="title">Future Revenue</div>
-                    <div class="value" style="font-size: 1.5em;">GAS</div>
+                    <div class="value" style="font-size: 1.8em;">GAS</div>
                     <div class="unit">Post-Oil Depletion Sales</div>
                 </div>
             </div>
@@ -1363,7 +1556,7 @@
             <h2>Strategic Considerations</h2>
             
             <div class="strategic-grid">
-                <div class="strategic-card" style="background: #f5f5f5; border-left: 5px solid #4caf50;">
+                <div class="strategic-card" style="border-left-color: #2196f3;">
                     <h3>Strengths</h3>
                     <ul>
                         <li>100% working interest (no royalty burdens except 1.5% ad valorem tax)</li>
@@ -1375,7 +1568,7 @@
                     </ul>
                 </div>
 
-                <div class="strategic-card opportunities" style="background: #f5f5f5; border-left: 5px solid #2196f3;">
+                <div class="strategic-card opportunities" style="border-left-color: #2196f3;">
                     <h3>Opportunities</h3>
                     <ul>
                         <li>50% chance of success with $19.5M NPV potential</li>
@@ -1406,35 +1599,35 @@
             
             <h3>Immediate Action Items</h3>
             <ul style="list-style: none; padding-left: 0;">
-                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid #e9ecef;">
-                    <span style="position: absolute; left: 0; color: #28a745; font-weight: bold;">✓</span>
+                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.1); color: #e0e0e0;">
+                    <span style="position: absolute; left: 0; color: #2196f3; font-weight: bold;">✓</span>
                     Secure Phase I funding ($120K)
                 </li>
-                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid #e9ecef;">
-                    <span style="position: absolute; left: 0; color: #28a745; font-weight: bold;">✓</span>
+                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.1); color: #e0e0e0;">
+                    <span style="position: absolute; left: 0; color: #2196f3; font-weight: bold;">✓</span>
                     Complete existing wells
                 </li>
-                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid #e9ecef;">
-                    <span style="position: absolute; left: 0; color: #28a745; font-weight: bold;">✓</span>
+                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.1); color: #e0e0e0;">
+                    <span style="position: absolute; left: 0; color: #2196f3; font-weight: bold;">✓</span>
                     Validate production assumptions (2-3 months)
                 </li>
-                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid #e9ecef;">
-                    <span style="position: absolute; left: 0; color: #28a745; font-weight: bold;">✓</span>
+                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.1); color: #e0e0e0;">
+                    <span style="position: absolute; left: 0; color: #2196f3; font-weight: bold;">✓</span>
                     Evaluate Phase II EOR pilot program
                 </li>
-                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid #e9ecef;">
-                    <span style="position: absolute; left: 0; color: #28a745; font-weight: bold;">✓</span>
+                <li style="padding: 12px 0; padding-left: 25px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.1); color: #e0e0e0;">
+                    <span style="position: absolute; left: 0; color: #2196f3; font-weight: bold;">✓</span>
                     Make go/no-go decision on full development
                 </li>
-                <li style="padding: 12px 0; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0; color: #28a745; font-weight: bold;">✓</span>
+                <li style="padding: 12px 0; padding-left: 25px; position: relative; color: #e0e0e0;">
+                    <span style="position: absolute; left: 0; color: #2196f3; font-weight: bold;">✓</span>
                     Secure project financing if justified
                 </li>
             </ul>
         </div>
 
         <div class="valuation-summary">
-            <h2 style="color: white; border: none;">Valuation Summary</h2>
+            <h2>Valuation Summary</h2>
             <table>
                 <thead>
                     <tr>
@@ -1482,16 +1675,16 @@
                 </tbody>
             </table>
 
-            <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.15); border-radius: 10px;">
-                <h3 style="color: white; margin-top: 0;">Valuation Notes</h3>
+            <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                <h3 style="color: #2196f3; margin-top: 0;">Valuation Notes</h3>
                 <ul style="list-style: none; padding-left: 0;">
-                    <li style="padding: 8px 0;">▸ Net Present Values (NPV) do NOT represent Fair Market Value</li>
-                    <li style="padding: 8px 0;">▸ Valuations are pre-tax and exclude corporate G&A costs</li>
-                    <li style="padding: 8px 0;">▸ Risk-adjusted value applies 50% probability to Contingent Resources</li>
-                    <li style="padding: 8px 0;">▸ Economic parameters based on September 2025 conditions</li>
-                    <li style="padding: 8px 0;">▸ All values in US Dollars</li>
-                    <li style="padding: 8px 0;">▸ 2% annual escalation applied to prices and costs</li>
-                    <li style="padding: 8px 0;">▸ Discount rate: 10% (industry standard for development projects)</li>
+                    <li style="padding: 8px 0; color: #e0e0e0;">▸ Net Present Values (NPV) do NOT represent Fair Market Value</li>
+                    <li style="padding: 8px 0; color: #e0e0e0;">▸ Valuations are pre-tax and exclude corporate G&A costs</li>
+                    <li style="padding: 8px 0; color: #e0e0e0;">▸ Risk-adjusted value applies 50% probability to Contingent Resources</li>
+                    <li style="padding: 8px 0; color: #e0e0e0;">▸ Economic parameters based on September 2025 conditions</li>
+                    <li style="padding: 8px 0; color: #e0e0e0;">▸ All values in US Dollars</li>
+                    <li style="padding: 8px 0; color: #e0e0e0;">▸ 2% annual escalation applied to prices and costs</li>
+                    <li style="padding: 8px 0; color: #e0e0e0;">▸ Discount rate: 10% (industry standard for development projects)</li>
                 </ul>
             </div>
         </div>
@@ -1503,9 +1696,9 @@
                 <strong>Investment Thesis:</strong> The property represents a high-risk, high-reward opportunity with significant upside potential if the Enhanced Oil Recovery technology proves successful. The phased development approach allows for intelligent capital allocation and risk management.
             </div>
 
-            <h3 style="margin-top: 30px; color: #1e3c72;">Recommended Path Forward</h3>
+            <h3 style="margin-top: 30px; color: #2196f3;">Recommended Path Forward</h3>
 
-            <div class="step-card" style="background: #f5f5f5; border-left: 5px solid #4caf50;">
+            <div class="step-card">
                 <h3>STEP 1: Proof of Concept ($120K)</h3>
                 <ul>
                     <li>Complete two existing wells</li>
@@ -1516,7 +1709,7 @@
                 </ul>
             </div>
 
-            <div class="step-card" style="background: #f5f5f5; border-left: 5px solid #ff9800;">
+            <div class="step-card">
                 <h3>STEP 2: EOR Pilot Program ($500K)</h3>
                 <ul>
                     <li>Install compressor and gas injection system</li>
@@ -1527,7 +1720,7 @@
                 </ul>
             </div>
 
-            <div class="step-card" style="background: #f5f5f5; border-left: 5px solid #f44336;">
+            <div class="step-card">
                 <h3>STEP 3: Full Development ($15.15M)</h3>
                 <ul>
                     <li>Proceed ONLY if Phases I & II validate assumptions</li>
