@@ -825,7 +825,7 @@
                 transparent
             );
             z-index: 1;
-            animation: energyWave 8s ease-in-out forwards;
+            animation: var(--restart-animation, energyWave 8s ease-in-out forwards);
         }
         
         /* Reset energy wave animation when class is added */
@@ -1547,11 +1547,18 @@
             container.style.backgroundImage = `url('${data.background}')`;
             container.style.setProperty('--planet-glow', data.glowColor);
             
-            // Restart energy wave animation by removing and re-adding the ::after pseudo element
-            // We do this by toggling a class that resets the animation
-            container.classList.remove('energy-wave-reset');
-            void container.offsetWidth; // Trigger reflow to restart animation
-            container.classList.add('energy-wave-reset');
+            // Restart energy wave animation
+            // Remove animation temporarily
+            const style = window.getComputedStyle(container, '::after');
+            container.style.setProperty('--restart-animation', 'none');
+            
+            // Force reflow
+            void container.offsetWidth;
+            
+            // Re-add animation
+            setTimeout(() => {
+                container.style.setProperty('--restart-animation', 'energyWave 8s ease-in-out forwards');
+            }, 10);
             
             // Clear any existing particles
             const existingParticles = container.querySelectorAll('.planet-particle');
