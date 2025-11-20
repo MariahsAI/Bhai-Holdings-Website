@@ -731,6 +731,7 @@
             animation: fadeIn 0.5s ease;
             overflow-y: auto;
             padding: 60px 20px;
+            perspective: 1500px;
         }
         
         .planet-details-modal.active {
@@ -754,6 +755,8 @@
             background-position: center;
             background-blend-mode: overlay;
             overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
         }
         
         /* Atmospheric glow ring */
@@ -788,7 +791,7 @@
                 transparent
             );
             z-index: 1;
-            animation: energyWave 3s ease-in-out infinite;
+            animation: energyWave 5s ease-in-out infinite;
         }
         
         @keyframes cardPulse {
@@ -1484,6 +1487,31 @@
             const modal = document.getElementById('planetDetailsModal');
             modal.classList.remove('active');
         }
+        
+        // 3D TILT EFFECT ON MOUSE MOVE
+        document.getElementById('planetDetailsModal').addEventListener('mousemove', function(e) {
+            if (!this.classList.contains('active')) return;
+            
+            const container = document.querySelector('.planet-details-container');
+            const rect = container.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Calculate rotation based on mouse position
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const rotateX = ((mouseY - centerY) / (rect.height / 2)) * -10; // Max 10 degrees
+            const rotateY = ((mouseX - centerX) / (rect.width / 2)) * 10;   // Max 10 degrees
+            
+            container.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1)`;
+        });
+        
+        // Reset position when mouse leaves
+        document.getElementById('planetDetailsModal').addEventListener('mouseleave', function() {
+            const container = document.querySelector('.planet-details-container');
+            container.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+        });
         
         // Close planet details when clicking outside
         document.getElementById('planetDetailsModal').addEventListener('click', function(e) {
