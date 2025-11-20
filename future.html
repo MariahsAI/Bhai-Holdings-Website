@@ -495,10 +495,43 @@
         }
         
         .planet:hover {
-            transform: translateZ(150px) scale(1.2);
+            transform: translateZ(150px) scale(1.3);
             box-shadow: 
                 inset -30px -30px 60px rgba(0,0,0,0.4),
-                0 20px 80px rgba(255,255,255,0.3);
+                0 20px 80px rgba(255,255,255,0.3),
+                0 0 60px rgba(255,255,255,0.6);
+            animation: planetPulse 0.8s ease-in-out infinite;
+        }
+        
+        @keyframes planetPulse {
+            0%, 100% { 
+                box-shadow: 
+                    inset -30px -30px 60px rgba(0,0,0,0.4),
+                    0 20px 80px rgba(255,255,255,0.3),
+                    0 0 60px rgba(255,255,255,0.6);
+            }
+            50% { 
+                box-shadow: 
+                    inset -30px -30px 60px rgba(0,0,0,0.4),
+                    0 20px 80px rgba(255,255,255,0.5),
+                    0 0 80px rgba(255,255,255,0.9);
+            }
+        }
+        
+        .planet.zooming {
+            animation: planetZoomOut 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+            z-index: 9999 !important;
+        }
+        
+        @keyframes planetZoomOut {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(8) translateZ(500px);
+                opacity: 0;
+            }
         }
         
         .planet-mars {
@@ -920,6 +953,43 @@
             transform: translateX(-5px);
         }
         
+        .nav-prev-planet,
+        .nav-next-planet {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 36px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        
+        .nav-prev-planet {
+            left: -80px;
+        }
+        
+        .nav-next-planet {
+            right: -80px;
+        }
+        
+        .nav-prev-planet:hover,
+        .nav-next-planet:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+        
         #planetDetailsContent {
             color: #fff;
         }
@@ -987,6 +1057,31 @@
             .section-title { font-size: 42px; }
             .orbital-container { height: 700px; }
             .planet { width: 140px; height: 140px; padding: 10px; }
+            .orbital-center { width: 250px; height: 250px; }
+            .center-text { font-size: 28px; }
+            .planet-details-container { 
+                padding: 60px 30px 40px; 
+                width: 95%;
+            }
+            .planet-detail-title { font-size: 42px; }
+            .planet-detail-desc { font-size: 18px; }
+            .return-earth-btn {
+                top: 10px;
+                left: 10px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .close-details {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 24px;
+            }
+            .nav-prev-planet,
+            .nav-next-planet {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -1026,7 +1121,7 @@
             
             <!-- Planet 1: Mars (AI & ML) -->
             <div class="venture-orbit v1">
-                <div class="planet planet-mars" onclick="showPlanetDetails('ai')">
+                <div class="planet planet-mars" onclick="showPlanetWithZoom(this, 'ai')">
                     <h3 class="planet-title">AI & ML</h3>
                     <p class="planet-desc">Intelligence systems</p>
                     <span class="planet-status">Active</span>
@@ -1035,7 +1130,7 @@
             
             <!-- Planet 2: Moon (Web3) -->
             <div class="venture-orbit v2">
-                <div class="planet planet-moon" onclick="showPlanetDetails('web3')">
+                <div class="planet planet-moon" onclick="showPlanetWithZoom(this, 'web3')">
                     <h3 class="planet-title">Web3</h3>
                     <p class="planet-desc">Decentralized future</p>
                     <span class="planet-status">R&D</span>
@@ -1044,7 +1139,7 @@
             
             <!-- Planet 3: Jupiter (Energy) -->
             <div class="venture-orbit v3">
-                <div class="planet planet-jupiter" onclick="showPlanetDetails('energy')">
+                <div class="planet planet-jupiter" onclick="showPlanetWithZoom(this, 'energy')">
                     <h3 class="planet-title">Energy</h3>
                     <p class="planet-desc">Sustainable power</p>
                     <span class="planet-status">Planning</span>
@@ -1053,7 +1148,7 @@
             
             <!-- Planet 4: Earth (Space Tech) -->
             <div class="venture-orbit v4">
-                <div class="planet planet-earth" onclick="showPlanetDetails('space')">
+                <div class="planet planet-earth" onclick="showPlanetWithZoom(this, 'space')">
                     <h3 class="planet-title">Space Tech</h3>
                     <p class="planet-desc">Beyond Earth</p>
                     <span class="planet-status">Vision</span>
@@ -1062,7 +1157,7 @@
             
             <!-- Planet 5: Saturn (HealthTech) -->
             <div class="venture-orbit v5">
-                <div class="planet planet-saturn" onclick="showPlanetDetails('health')">
+                <div class="planet planet-saturn" onclick="showPlanetWithZoom(this, 'health')">
                     <h3 class="planet-title">HealthTech</h3>
                     <p class="planet-desc">Medical revolution</p>
                     <span class="planet-status">Research</span>
@@ -1071,7 +1166,7 @@
             
             <!-- Planet 6: Neptune (Smart Cities) -->
             <div class="venture-orbit v6">
-                <div class="planet planet-neptune" onclick="showPlanetDetails('cities')">
+                <div class="planet planet-neptune" onclick="showPlanetWithZoom(this, 'cities')">
                     <h3 class="planet-title">Smart Cities</h3>
                     <p class="planet-desc">Urban future</p>
                     <span class="planet-status">Concept</span>
@@ -1143,6 +1238,8 @@
         <div class="planet-details-container">
             <div class="close-details" onclick="closePlanetDetails()">×</div>
             <button class="return-earth-btn" onclick="closePlanetDetails()">← Return to Earth</button>
+            <button class="nav-prev-planet" onclick="navigateToPlanet(-1)">‹</button>
+            <button class="nav-next-planet" onclick="navigateToPlanet(1)">›</button>
             <div id="planetDetailsContent"></div>
         </div>
     </div>
@@ -1414,6 +1511,21 @@
             }
         };
         
+        // PLANET ZOOM TRANSITION
+        function showPlanetWithZoom(planetElement, planetId) {
+            // Add zooming class to planet
+            planetElement.classList.add('zooming');
+            
+            // Wait for zoom animation to complete, then show details
+            setTimeout(() => {
+                showPlanetDetails(planetId);
+                planetElement.classList.remove('zooming');
+            }, 600);
+        }
+        
+        const planetOrder = ['ai', 'web3', 'energy', 'space', 'health', 'cities'];
+        let currentPlanetIndex = 0;
+        
         function showPlanetDetails(planetId) {
             const modal = document.getElementById('planetDetailsModal');
             const container = document.querySelector('.planet-details-container');
@@ -1421,6 +1533,9 @@
             const data = planetData[planetId];
             
             if (!data) return;
+            
+            // Track current planet
+            currentPlanetIndex = planetOrder.indexOf(planetId);
             
             // Set the planet background image and glow color
             container.style.backgroundImage = `url('${data.background}')`;
@@ -1483,10 +1598,35 @@
             content.innerHTML = html;
             modal.classList.add('active');
             
+            // Update navigation arrows
+            updateNavigationArrows();
+            
             // Enable 3D tilt after modal opens
             setTimeout(() => {
                 enable3DTilt(container);
             }, 100);
+        }
+        
+        function updateNavigationArrows() {
+            const prevBtn = document.querySelector('.nav-prev-planet');
+            const nextBtn = document.querySelector('.nav-next-planet');
+            
+            if (prevBtn && nextBtn) {
+                // Show/hide based on position
+                prevBtn.style.opacity = currentPlanetIndex > 0 ? '1' : '0.3';
+                nextBtn.style.opacity = currentPlanetIndex < planetOrder.length - 1 ? '1' : '0.3';
+            }
+        }
+        
+        function navigateToPlanet(direction) {
+            let newIndex = currentPlanetIndex + direction;
+            
+            // Wrap around
+            if (newIndex < 0) newIndex = planetOrder.length - 1;
+            if (newIndex >= planetOrder.length) newIndex = 0;
+            
+            const newPlanetId = planetOrder[newIndex];
+            showPlanetDetails(newPlanetId);
         }
         
         let tiltEnabled = false;
