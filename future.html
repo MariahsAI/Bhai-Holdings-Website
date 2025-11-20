@@ -792,7 +792,7 @@
                 transparent
             );
             z-index: 1;
-            animation: energyWave 8s ease-in-out infinite;
+            animation: energyWave 8s ease-in-out forwards;
         }
         
         @keyframes cardPulse {
@@ -1482,41 +1482,75 @@
             
             content.innerHTML = html;
             modal.classList.add('active');
+            
+            // Enable 3D tilt after modal opens
+            setTimeout(() => {
+                enable3DTilt(container);
+            }, 100);
+        }
+        
+        let tiltEnabled = false;
+        let tiltHandler = null;
+        let resetHandler = null;
+        
+        function enable3DTilt(container) {
+            // Remove old listeners if they exist
+            if (tiltHandler) {
+                document.removeEventListener('mousemove', tiltHandler);
+            }
+            if (resetHandler) {
+                document.removeEventListener('mouseleave', resetHandler);
+            }
+            
+            // Create new tilt handler
+            tiltHandler = function(e) {
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                // Calculate rotation based on mouse position relative to card center
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                const rotateX = ((mouseY - centerY) / (rect.height / 2)) * -20; // Max 20 degrees
+                const rotateY = ((mouseX - centerX) / (rect.width / 2)) * 20;   // Max 20 degrees
+                
+                container.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            };
+            
+            // Create reset handler
+            resetHandler = function() {
+                container.style.transform = 'perspective(1500px) rotateX(0deg) rotateY(0deg)';
+            };
+            
+            // Add listeners
+            document.addEventListener('mousemove', tiltHandler);
+            container.addEventListener('mouseleave', resetHandler);
+            tiltEnabled = true;
         }
         
         function closePlanetDetails() {
             const modal = document.getElementById('planetDetailsModal');
-            modal.classList.remove('active');
-        }
-        
-        // 3D TILT EFFECT ON MOUSE MOVE
-        document.getElementById('planetDetailsModal').addEventListener('mousemove', function(e) {
-            if (!this.classList.contains('active')) return;
-            
             const container = document.querySelector('.planet-details-container');
-            if (!container) return;
             
-            const rect = container.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
+            // Remove 3D tilt listeners
+            if (tiltHandler) {
+                document.removeEventListener('mousemove', tiltHandler);
+                tiltHandler = null;
+            }
+            if (resetHandler && container) {
+                container.removeEventListener('mouseleave', resetHandler);
+                resetHandler = null;
+            }
             
-            // Calculate rotation based on mouse position
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            const rotateX = ((mouseY - centerY) / (rect.height / 2)) * -15; // Max 15 degrees
-            const rotateY = ((mouseX - centerX) / (rect.width / 2)) * 15;   // Max 15 degrees
-            
-            container.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-        
-        // Reset position when mouse leaves
-        document.getElementById('planetDetailsModal').addEventListener('mouseleave', function() {
-            const container = document.querySelector('.planet-details-container');
+            // Reset transform
             if (container) {
                 container.style.transform = 'perspective(1500px) rotateX(0deg) rotateY(0deg)';
             }
-        });
+            
+            modal.classList.remove('active');
+            tiltEnabled = false;
+        }
         
         // Close planet details when clicking outside
         document.getElementById('planetDetailsModal').addEventListener('click', function(e) {
