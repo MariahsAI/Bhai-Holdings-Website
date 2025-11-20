@@ -514,11 +514,8 @@
     </section>
     
     <section style="background: transparent; min-height: 130vh; position: relative;">
-        <!-- Dark overlay for readability -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 0;"></div>
-        
-        <!-- Bottom fade to black -->
-        <div style="position: absolute; bottom: -1px; left: 0; width: 100%; height: 400px; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 60%, #000 100%); z-index: 0; pointer-events: none;"></div>
+        <!-- Bottom fade to black - smooth and gradual -->
+        <div style="position: absolute; bottom: -1px; left: 0; width: 100%; height: 500px; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 70%, #000 100%); z-index: 0; pointer-events: none;"></div>
         
         <h2 class="section-title" style="position: relative; z-index: 1;">Future Ventures</h2>
         <p class="section-subtitle" style="position: relative; z-index: 1;">A Solar System of Innovation</p>
