@@ -451,116 +451,159 @@
             position: relative;
         }
         
-        /* PLANET GRID */
-        .planet-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .planet-card {
-            aspect-ratio: 1;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            background-size: cover;
-            background-position: center;
-            box-shadow: 
-                0 10px 40px rgba(0,0,0,0.5),
-                inset 0 0 60px rgba(0,0,0,0.3);
-        }
-        
-        /* Planet Textures */
-        .planet-card.planet-mars {
-            background-image: url('IMG_9797.PNG');
-        }
-        
-        .planet-card.planet-moon {
-            background-image: url('mercury.png');
-        }
-        
-        .planet-card.planet-jupiter {
-            background-image: url('IMG_9787.PNG');
-        }
-        
-        .planet-card.planet-earth {
-            background-image: url('IMG_9785.PNG');
-        }
-        
-        .planet-card.planet-saturn {
-            background-image: url('IMG_9790.PNG');
-        }
-        
-        .planet-card.planet-neptune {
-            background-image: url('Uranus.jpg');
-        }
-        
-        .planet-card::before {
-            content: '';
+        /* PLANETS - Each venture is a planet */
+        .venture-orbit {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
+            width: 140px;
+            height: 140px;
+            margin: -70px 0 0 -70px;
+            transform-style: preserve-3d;
+        }
+        
+        .planet {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-            z-index: 1;
-            transition: all 0.5s;
-        }
-        
-        .planet-card:hover {
-            transform: translateY(-20px) scale(1.05);
-            box-shadow: 
-                0 30px 80px rgba(0,0,0,0.7),
-                0 0 60px rgba(255,255,255,0.2);
-        }
-        
-        .planet-card:hover::before {
-            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
-        }
-        
-        .planet-card-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            z-index: 2;
+            border-radius: 50%;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            box-shadow: 
+                inset -30px -30px 60px rgba(0,0,0,0.6),
+                0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
         }
         
-        .planet-card-title {
-            font-size: 28px;
+        .planet::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 15%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+        
+        .planet:hover {
+            transform: translateZ(150px) scale(1.2);
+            box-shadow: 
+                inset -30px -30px 60px rgba(0,0,0,0.4),
+                0 20px 80px rgba(255,255,255,0.3);
+        }
+        
+        .planet-mars {
+            background-image: url('IMG_9797.PNG');
+            background-size: 125%;
+            background-position: center;
+        }
+        
+        .planet-moon {
+            background-image: url('mercury.png');
+            background-size: 125%;
+            background-position: center;
+        }
+        
+        .planet-jupiter {
+            background-image: url('IMG_9787.PNG');
+            background-size: 125%;
+            background-position: center;
+        }
+        
+        .planet-earth {
+            background-image: url('IMG_9785.PNG');
+            background-size: 130%;
+            background-position: center;
+        }
+        
+        .planet-saturn {
+            background-image: url('IMG_9790.PNG');
+            background-size: 125%;
+            background-position: center;
+        }
+        
+        .planet-neptune {
+            background-image: url('Uranus.jpg');
+            background-size: 125%;
+            background-position: center;
+        }
+        
+        /* ORBITAL ANIMATIONS */
+        .v1 { animation: orbit1 60s linear infinite; }
+        .v2 { animation: orbit2 60s linear infinite; }
+        .v3 { animation: orbit3 60s linear infinite; }
+        .v4 { animation: orbit4 60s linear infinite; }
+        .v5 { animation: orbit5 60s linear infinite; }
+        .v6 { animation: orbit6 60s linear infinite; }
+        
+        @keyframes orbit1 {
+            from { transform: rotate(0deg) translateX(600px) rotate(0deg) translateZ(0); }
+            to { transform: rotate(360deg) translateX(600px) rotate(-360deg) translateZ(0); }
+        }
+        @keyframes orbit2 {
+            from { transform: rotate(60deg) translateX(600px) rotate(-60deg) translateZ(0); }
+            to { transform: rotate(420deg) translateX(600px) rotate(-420deg) translateZ(0); }
+        }
+        @keyframes orbit3 {
+            from { transform: rotate(120deg) translateX(600px) rotate(-120deg) translateZ(0); }
+            to { transform: rotate(480deg) translateX(600px) rotate(-480deg) translateZ(0); }
+        }
+        @keyframes orbit4 {
+            from { transform: rotate(180deg) translateX(600px) rotate(-180deg) translateZ(0); }
+            to { transform: rotate(540deg) translateX(600px) rotate(-540deg) translateZ(0); }
+        }
+        @keyframes orbit5 {
+            from { transform: rotate(240deg) translateX(600px) rotate(-240deg) translateZ(0); }
+            to { transform: rotate(600deg) translateX(600px) rotate(-600deg) translateZ(0); }
+        }
+        @keyframes orbit6 {
+            from { transform: rotate(300deg) translateX(600px) rotate(-300deg) translateZ(0); }
+            to { transform: rotate(660deg) translateX(600px) rotate(-660deg) translateZ(0); }
+        }
+        
+        .planet-title {
+            font-size: 16px;
             font-weight: 700;
             color: #fff;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.9);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            z-index: 10;
+            position: relative;
         }
         
-        .planet-card-desc {
-            font-size: 16px;
+        .planet-desc {
+            font-size: 11px;
             color: rgba(255,255,255,0.9);
-            text-shadow: 0 1px 10px rgba(0,0,0,0.9);
+            line-height: 1.3;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+            z-index: 10;
+            position: relative;
         }
         
-        .planet-card-status {
-            font-size: 12px;
+        .planet-status {
+            font-size: 9px;
             color: rgba(255,255,255,0.8);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 8px 16px;
+            letter-spacing: 1px;
+            padding: 4px 12px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 20px;
             backdrop-filter: blur(5px);
             background: rgba(0,0,0,0.3);
-            display: inline-block;
-            align-self: flex-start;
+            z-index: 10;
+            position: relative;
         }
         
         /* ROADMAP */
@@ -602,10 +645,7 @@
             .hero-title { font-size: 56px; }
             .section-title { font-size: 42px; }
             .orbital-container { height: 700px; }
-            .planet-grid { 
-                grid-template-columns: 1fr; 
-                gap: 30px;
-            }
+            .planet { width: 140px; height: 140px; padding: 10px; }
         }
     </style>
 </head>
@@ -642,63 +682,58 @@
                     <div class="center-text">BHAI<br>2030</div>
                 </div>
             </div>
-        </div>
-        
-        <!-- PLANET GRID SECTION -->
-        <div style="max-width: 1400px; margin: 100px auto 0; padding: 0 60px;">
-            <div class="planet-grid">
-                <!-- Planet Card 1: AI & ML -->
-                <div class="planet-card planet-mars">
-                    <div class="planet-card-content">
-                        <h3 class="planet-card-title">AI & ML</h3>
-                        <p class="planet-card-desc">Intelligence systems</p>
-                        <span class="planet-card-status">Active</span>
-                    </div>
+            
+            <!-- Planet 1: Mars (AI & ML) -->
+            <div class="venture-orbit v1">
+                <div class="planet planet-mars">
+                    <h3 class="planet-title">AI & ML</h3>
+                    <p class="planet-desc">Intelligence systems</p>
+                    <span class="planet-status">Active</span>
                 </div>
-                
-                <!-- Planet Card 2: Web3 -->
-                <div class="planet-card planet-moon">
-                    <div class="planet-card-content">
-                        <h3 class="planet-card-title">Web3</h3>
-                        <p class="planet-card-desc">Decentralized future</p>
-                        <span class="planet-card-status">R&D</span>
-                    </div>
+            </div>
+            
+            <!-- Planet 2: Moon (Web3) -->
+            <div class="venture-orbit v2">
+                <div class="planet planet-moon">
+                    <h3 class="planet-title">Web3</h3>
+                    <p class="planet-desc">Decentralized future</p>
+                    <span class="planet-status">R&D</span>
                 </div>
-                
-                <!-- Planet Card 3: Energy -->
-                <div class="planet-card planet-jupiter">
-                    <div class="planet-card-content">
-                        <h3 class="planet-card-title">Energy</h3>
-                        <p class="planet-card-desc">Sustainable power</p>
-                        <span class="planet-card-status">Planning</span>
-                    </div>
+            </div>
+            
+            <!-- Planet 3: Jupiter (Energy) -->
+            <div class="venture-orbit v3">
+                <div class="planet planet-jupiter">
+                    <h3 class="planet-title">Energy</h3>
+                    <p class="planet-desc">Sustainable power</p>
+                    <span class="planet-status">Planning</span>
                 </div>
-                
-                <!-- Planet Card 4: Space Tech -->
-                <div class="planet-card planet-earth">
-                    <div class="planet-card-content">
-                        <h3 class="planet-card-title">Space Tech</h3>
-                        <p class="planet-card-desc">Beyond Earth</p>
-                        <span class="planet-card-status">Vision</span>
-                    </div>
+            </div>
+            
+            <!-- Planet 4: Earth (Space Tech) -->
+            <div class="venture-orbit v4">
+                <div class="planet planet-earth">
+                    <h3 class="planet-title">Space Tech</h3>
+                    <p class="planet-desc">Beyond Earth</p>
+                    <span class="planet-status">Vision</span>
                 </div>
-                
-                <!-- Planet Card 5: HealthTech -->
-                <div class="planet-card planet-saturn">
-                    <div class="planet-card-content">
-                        <h3 class="planet-card-title">HealthTech</h3>
-                        <p class="planet-card-desc">Medical revolution</p>
-                        <span class="planet-card-status">Research</span>
-                    </div>
+            </div>
+            
+            <!-- Planet 5: Saturn (HealthTech) -->
+            <div class="venture-orbit v5">
+                <div class="planet planet-saturn">
+                    <h3 class="planet-title">HealthTech</h3>
+                    <p class="planet-desc">Medical revolution</p>
+                    <span class="planet-status">Research</span>
                 </div>
-                
-                <!-- Planet Card 6: Smart Cities -->
-                <div class="planet-card planet-neptune">
-                    <div class="planet-card-content">
-                        <h3 class="planet-card-title">Smart Cities</h3>
-                        <p class="planet-card-desc">Urban future</p>
-                        <span class="planet-card-status">Concept</span>
-                    </div>
+            </div>
+            
+            <!-- Planet 6: Neptune (Smart Cities) -->
+            <div class="venture-orbit v6">
+                <div class="planet planet-neptune">
+                    <h3 class="planet-title">Smart Cities</h3>
+                    <p class="planet-desc">Urban future</p>
+                    <span class="planet-status">Concept</span>
                 </div>
             </div>
         </div>
