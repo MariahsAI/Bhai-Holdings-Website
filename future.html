@@ -92,7 +92,7 @@
             transform-style: preserve-3d;
         }
         
-        /* Dark overlay so text is readable */
+        /* Dark overlay so text is readable - fades from dark to transparent */
         .hero::before {
             content: '';
             position: absolute;
@@ -100,7 +100,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(0, 0, 0, 0.6) 50%,
+                rgba(0, 0, 0, 0) 100%
+            );
             z-index: 0;
         }
         
