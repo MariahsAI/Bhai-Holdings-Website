@@ -756,7 +756,8 @@
             background-blend-mode: overlay;
             overflow: hidden;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
+            transform: perspective(1500px) rotateX(0deg) rotateY(0deg);
+            transition: transform 0.15s ease-out;
         }
         
         /* Atmospheric glow ring */
@@ -791,7 +792,7 @@
                 transparent
             );
             z-index: 1;
-            animation: energyWave 5s ease-in-out infinite;
+            animation: energyWave 8s ease-in-out infinite;
         }
         
         @keyframes cardPulse {
@@ -1493,6 +1494,8 @@
             if (!this.classList.contains('active')) return;
             
             const container = document.querySelector('.planet-details-container');
+            if (!container) return;
+            
             const rect = container.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
@@ -1501,16 +1504,18 @@
             const mouseX = e.clientX;
             const mouseY = e.clientY;
             
-            const rotateX = ((mouseY - centerY) / (rect.height / 2)) * -10; // Max 10 degrees
-            const rotateY = ((mouseX - centerX) / (rect.width / 2)) * 10;   // Max 10 degrees
+            const rotateX = ((mouseY - centerY) / (rect.height / 2)) * -15; // Max 15 degrees
+            const rotateY = ((mouseX - centerX) / (rect.width / 2)) * 15;   // Max 15 degrees
             
-            container.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1)`;
+            container.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
         
         // Reset position when mouse leaves
         document.getElementById('planetDetailsModal').addEventListener('mouseleave', function() {
             const container = document.querySelector('.planet-details-container');
-            container.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            if (container) {
+                container.style.transform = 'perspective(1500px) rotateX(0deg) rotateY(0deg)';
+            }
         });
         
         // Close planet details when clicking outside
