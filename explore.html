@@ -149,18 +149,23 @@
             left: 0;
             background: rgba(0, 0, 0, 0.98);
             backdrop-filter: blur(20px);
-            min-width: 200px;
+            min-width: 220px;
             border: 1px solid rgba(229, 228, 226, 0.2);
             border-radius: 10px;
-            margin-top: 10px;
+            margin-top: 5px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             z-index: 1000;
-            overflow: hidden;
+            overflow: visible;
         }
         
         .nav-dropdown:hover .dropdown-content {
             display: block;
             animation: dropdownFade 0.3s ease;
+        }
+        
+        /* Keep dropdown open when hovering over it */
+        .dropdown-content:hover {
+            display: block;
         }
         
         @keyframes dropdownFade {
@@ -187,7 +192,80 @@
         .dropdown-item:hover {
             background: rgba(229, 228, 226, 0.1);
             color: #E5E4E2;
+        }
+        
+        .dropdown-item:not(.dropdown-item-nested):hover {
             padding-left: 25px;
+        }
+        
+        /* Nested Dropdown for Projects */
+        .dropdown-item-nested {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nested-dropdown {
+            display: none;
+            position: absolute;
+            left: calc(100% - 1px);
+            top: -1px;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
+            min-width: 200px;
+            border: 1px solid rgba(229, 228, 226, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            z-index: 1001;
+        }
+        
+        .dropdown-item-nested:hover .nested-dropdown,
+        .dropdown-item-nested:focus-within .nested-dropdown {
+            display: block;
+            animation: dropdownFade 0.3s ease;
+        }
+        
+        /* Keep nested dropdown open when hovering */
+        .nested-dropdown:hover {
+            display: block;
+        }
+        
+        /* Add padding to the right of nested item to bridge gap */
+        .dropdown-item-nested::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .nested-dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #A8A8A8;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(229, 228, 226, 0.1);
+        }
+        
+        .nested-dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .nested-dropdown-item:hover {
+            background: rgba(229, 228, 226, 0.1);
+            color: #E5E4E2;
+            padding-left: 25px;
+        }
+        
+        .dropdown-arrow-right {
+            font-size: 10px;
+            margin-left: 5px;
+            float: right;
         }
         
         .dropdown-arrow {
@@ -1150,6 +1228,20 @@
                         <a href="leadership.html" class="dropdown-item">Leadership</a>
                         <a href="history.html" class="dropdown-item">History</a>
                         <a href="contacts.html" class="dropdown-item">Contacts and Locations</a>
+                        <div class="dropdown-item dropdown-item-nested">
+                            Projects <span class="dropdown-arrow-right">▶</span>
+                            <div class="nested-dropdown">
+                                <a href="#" class="nested-dropdown-item">Oil & Gas</a>
+                                <a href="#" class="nested-dropdown-item">Data Centers</a>
+                                <a href="#" class="nested-dropdown-item">Green Energy</a>
+                                <a href="#" class="nested-dropdown-item">Solar</a>
+                                <a href="#" class="nested-dropdown-item">Fintech</a>
+                                <a href="#" class="nested-dropdown-item">Ticketing</a>
+                                <a href="#" class="nested-dropdown-item">Mining</a>
+                                <a href="#" class="nested-dropdown-item">Real Estate</a>
+                                <a href="#" class="nested-dropdown-item">AI & Technology</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <a href="explore.html" class="nav-tab active">Overview</a>
