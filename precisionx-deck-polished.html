@@ -17,7 +17,7 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
+            scroll-snap-type: none;
         }
 
         body {
@@ -27,6 +27,12 @@
             overflow-x: hidden;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            scroll-padding-top: 0;
+        }
+
+        /* Enhanced smooth scrolling */
+        * {
+            scroll-behavior: smooth !important;
         }
 
         /* Custom Scrollbar */
@@ -1374,9 +1380,10 @@
                 transition: transform 0.1s ease;
             }
 
-            /* Improve scroll snapping on mobile */
+            /* Smooth scroll on mobile */
             html {
-                scroll-snap-type: y proximity;
+                scroll-snap-type: none;
+                scroll-behavior: smooth;
             }
 
             /* Better text selection on mobile */
@@ -1404,6 +1411,7 @@
 
             html {
                 scroll-snap-type: none;
+                scroll-behavior: smooth;
             }
         }
     </style>
@@ -2307,8 +2315,16 @@
             let ticking = false;
             let lastScrollY = window.scrollY;
             
+            // Ultra-smooth scroll tracking
+            let scrollTimeout;
             window.addEventListener('scroll', () => {
                 lastScrollY = window.scrollY;
+                
+                // Clear any pending update
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+                
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
                         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -2326,6 +2342,11 @@
                     });
                     ticking = true;
                 }
+                
+                // Smooth deceleration effect
+                scrollTimeout = setTimeout(() => {
+                    ticking = false;
+                }, 50);
             }, { passive: true });
 
             // Prevent zoom on double-tap for better UX
