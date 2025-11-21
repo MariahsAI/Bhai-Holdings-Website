@@ -1142,6 +1142,42 @@
                 margin-left: 0;
             }
             
+            /* Mobile Dropdown Fixes */
+            .dropdown-content {
+                position: fixed;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 60px;
+                min-width: 90%;
+                max-width: 350px;
+            }
+            
+            .nav-dropdown:hover .dropdown-content {
+                display: none; /* Disable hover on mobile */
+            }
+            
+            .nav-dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            /* Nested dropdown on mobile - stack below instead of side */
+            .nested-dropdown {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+            }
+            
+            .dropdown-item-nested:hover .nested-dropdown {
+                display: none; /* Disable hover on mobile */
+            }
+            
+            .dropdown-item-nested.active .nested-dropdown {
+                display: block;
+            }
+            
             section {
                 padding: 80px 20px;
             }
@@ -1798,6 +1834,46 @@
                 closeModal();
             }
         });
+    </script>
+
+    <script>
+        // Mobile dropdown click functionality
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+                const trigger = dropdown.querySelector('.nav-tab');
+                
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.nav-dropdown').forEach(other => {
+                        if (other !== dropdown) {
+                            other.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle this dropdown
+                    dropdown.classList.toggle('active');
+                });
+            });
+            
+            // Handle nested Projects dropdown
+            document.querySelectorAll('.dropdown-item-nested').forEach(nested => {
+                nested.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    nested.classList.toggle('active');
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.nav-dropdown')) {
+                    document.querySelectorAll('.nav-dropdown, .dropdown-item-nested').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
