@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrecisionX Investment Deck - Interactive Presentation</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { 
+            width: 12px; 
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+            border-left: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00ffff 0%, #ff5722 100%);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ffff 0%, #ff5722 100%);
+            z-index: 10000;
+            transition: width 0.3s ease;
+        }
+
+        /* Scroll Hint */
+        .scroll-hint {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ffff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            transition: opacity 0.5s ease;
+            z-index: 9999;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Slide Container */
+        .slide {
+            min-height: 100vh;
+            width: 100%;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            position: relative;
+        }
+
+        /* Slide Counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            color: #00ffff;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid #00ffff;
+        }
+
+        /* Typography */
+        .slide-title {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .slide-subtitle {
+            font-size: 24px;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 50px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.4);
+        }
+
+        .stat-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .stat-box.orange:hover {
+            box-shadow: 0 20px 60px rgba(255, 87, 34, 0.4);
+        }
+
+        .stat-value {
+            font-size: 72px;
+            font-weight: 900;
+            color: #00ffff;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .stat-box.orange .stat-value {
+            color: #ff5722;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        /* Pillar Cards */
+        .pillars-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pillar-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.4);
+        }
+
+        .pillar-card.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .pillar-title {
+            font-size: 26px;
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .pillar-card.orange .pillar-title {
+            color: #ff5722;
+        }
+
+        .pillar-card ul {
+            list-style: none;
+            padding: 0;
+            flex: 1;
+        }
+
+        .pillar-card li {
+            padding: 12px 0 12px 30px;
+            position: relative;
+            color: #e0e0e0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .pillar-card li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #00ffff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .pillar-card.orange li:before {
+            color: #ff5722;
+        }
+
+        /* Chart Container */
+        .chart-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .chart-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .chart-box canvas {
+            max-height: 400px;
+        }
+
+        .info-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .info-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .info-box.orange .info-title {
+            color: #ff5722;
+        }
+
+        .info-text {
+            font-size: 17px;
+            color: #e0e0e0;
+            line-height: 2;
+        }
+
+        .info-text p {
+            margin-bottom: 15px;
+        }
+
+        .info-highlight {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .info-box.orange .info-highlight {
+            color: #ff5722;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            color: #ffffff;
+            padding: 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .data-table td {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table .highlight {
+            color: #ff5722;
+            font-weight: bold;
+        }
+
+        /* Title Slide Specific */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 96px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite;
+            letter-spacing: 4px;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .hero-subtitle {
+            font-size: 38px;
+            color: #ff5722;
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero-tagline {
+            font-size: 26px;
+            color: #00ffff;
+            font-weight: 300;
+            margin-top: 40px;
+            letter-spacing: 1px;
+        }
+
+        /* Vision Box */
+        .vision-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px auto 0;
+            max-width: 1200px;
+        }
+
+        .vision-text {
+            font-size: 28px;
+            font-weight: 900;
+            color: #00ffff;
+            line-height: 1.6;
+        }
+
+        /* Advantage Grid */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
+        }
+
+        .advantage-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .advantage-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .advantage-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .advantage-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+
+        .advantage-box.orange .advantage-title {
+            color: #ff5722;
+        }
+
+        .advantage-desc {
+            font-size: 16px;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        /* Phase Boxes */
+        .phase-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
+        }
+
+        .phase-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px 30px;
+        }
+
+        .phase-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .phase-name {
+            font-size: 28px;
+            font-weight: 900;
+            color: #00ffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .phase-box.orange .phase-name {
+            color: #ff5722;
+        }
+
+        .phase-details {
+            font-size: 16px;
+            color: #e0e0e0;
+            line-height: 2;
+        }
+
+        .phase-details p {
+            margin-bottom: 10px;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            margin: 60px auto 0;
+            max-width: 1400px;
+        }
+
+        .timeline-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #ff5722;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .timeline-quarter {
+            font-size: 16px;
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 10px;
+        }
+
+        .timeline-milestone {
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+
+        /* Investment Boxes */
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
+        }
+
+        .investment-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .investment-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .investment-label {
+            font-size: 15px;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .investment-value {
+            font-size: 42px;
+            font-weight: 900;
+            color: #00ffff;
+        }
+
+        .investment-box.orange .investment-value {
+            color: #ff5722;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
+        }
+
+        .team-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .team-card.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .team-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 10px;
+        }
+
+        .team-card.orange .team-name {
+            color: #ff5722;
+        }
+
+        .team-title {
+            font-size: 15px;
+            color: #ff5722;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .team-card.orange .team-title {
+            color: #00ffff;
+        }
+
+        .team-bio {
+            font-size: 13px;
+            color: #a0a0a0;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        /* Trend Boxes */
+        .trend-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
+        }
+
+        .trend-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 35px;
+        }
+
+        .trend-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .trend-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+
+        .trend-box.orange .trend-title {
+            color: #ff5722;
+        }
+
+        .trend-desc {
+            font-size: 15px;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        /* Urgency Grid */
+        .urgency-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
+        }
+
+        .urgency-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 35px;
+        }
+
+        .urgency-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .urgency-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #00ffff;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .urgency-box.orange .urgency-title {
+            color: #ff5722;
+        }
+
+        .urgency-points {
+            font-size: 15px;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+
+        /* Urgency Footer */
+        .urgency-footer {
+            background: rgba(0, 0, 0, 0.5);
+            border: 3px solid #ff5722;
+            border-radius: 15px;
+            padding: 50px;
+            margin: 50px auto 0;
+            text-align: center;
+            max-width: 1400px;
+        }
+
+        .urgency-footer-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #ff5722;
+            margin-bottom: 25px;
+        }
+
+        .urgency-footer-text {
+            font-size: 16px;
+            color: #e0e0e0;
+            line-height: 2;
+        }
+
+        /* Exit Grid */
+        .exit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
+        }
+
+        .exit-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 35px;
+        }
+
+        .exit-box.orange {
+            border-color: #ff5722;
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .exit-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .exit-box.orange .exit-title {
+            color: #ff5722;
+        }
+
+        .exit-desc {
+            font-size: 15px;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+
+        /* The Ask Box */
+        .ask-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 3px solid #00ffff;
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            margin: 40px auto;
+            max-width: 900px;
+        }
+
+        .ask-amount {
+            font-size: 96px;
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 25px;
+            line-height: 1;
+        }
+
+        .ask-subtitle {
+            font-size: 22px;
+            color: #a0a0a0;
+            margin-bottom: 50px;
+        }
+
+        .proceeds-title {
+            font-size: 26px;
+            font-weight: 900;
+            color: #ff5722;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .proceeds-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .proceed-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .proceed-amount {
+            font-size: 32px;
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+
+        .proceed-desc {
+            font-size: 13px;
+            color: #a0a0a0;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 3px solid #ff5722;
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            margin: 80px auto;
+            max-width: 800px;
+        }
+
+        .contact-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ff5722;
+            margin-bottom: 35px;
+        }
+
+        .contact-info {
+            font-size: 20px;
+            color: #e0e0e0;
+            line-height: 2.2;
+        }
+
+        .contact-info a {
+            color: #00ffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ff5722;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 60px 40px;
+            }
+
+            .hero-title {
+                font-size: 64px;
+            }
+
+            .slide-title {
+                font-size: 40px;
+            }
+
+            .stats-grid,
+            .pillars-container,
+            .phase-container,
+            .investment-grid,
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .chart-section,
+            .advantage-grid,
+            .trend-grid,
+            .urgency-grid,
+            .exit-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .slide-title {
+                font-size: 32px;
+            }
+
+            .stats-grid,
+            .pillars-container,
+            .chart-section,
+            .phase-container,
+            .investment-grid,
+            .team-grid,
+            .trend-grid,
+            .urgency-grid,
+            .exit-grid,
+            .proceeds-grid,
+            .advantage-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .slide-counter {
+                bottom: 20px;
+                left: 20px;
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+
+            .timeline {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <div class="scroll-hint">SCROLL DOWN ↓</div>
+    
+    <!-- SLIDE 1: Title -->
+    <div class="slide title-slide" data-slide="1">
+        <h1 class="hero-title">PRECISION EXPLORATION</h1>
+        <p class="hero-subtitle">Integrated Energy & AI Infrastructure Platform</p>
+        <p class="hero-tagline">Building the Energy Backbone of America's AI Future</p>
+    </div>
+
+    <!-- SLIDE 2: Key Metrics -->
+    <div class="slide" data-slide="2">
+        <h2 class="slide-title">The Opportunity at a Glance</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-value counter" data-target="88">0</div>
+                <div class="stat-label">Million Barrels Oil in Place</div>
+            </div>
+            <div class="stat-box orange">
+                <div class="stat-value counter" data-target="5">0</div>
+                <div class="stat-label">Billion Hydrogen Revenue</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value counter" data-target="8">0</div>
+                <div class="stat-label">AI Data Centers</div>
+            </div>
+            <div class="stat-box orange">
+                <div class="stat-value counter" data-target="8500">0</div>
+                <div class="stat-label">Peak BOPD Production</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value counter" data-target="2.2">0</div>
+                <div class="stat-label">Billion Total Investment</div>
+            </div>
+            <div class="stat-box orange">
+                <div class="stat-value">7-15x</div>
+                <div class="stat-label">ROI Potential</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Executive Vision -->
+    <div class="slide" data-slide="3">
+        <h2 class="slide-title">Executive Vision</h2>
+        <p class="slide-subtitle">
+            Precision Exploration represents the convergence of <span style="color: #ff5722; font-weight: bold;">three transformational opportunities</span>: 
+            prolific Wolfcamp oil production, groundbreaking white hydrogen discovery, and next-generation AI data center infrastructure.
+        </p>
+        <div class="vision-box">
+            <p class="vision-text">
+                We are not just extracting resources—<br>
+                we are building the energy backbone of America's AI future.
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Three Pillars -->
+    <div class="slide" data-slide="4">
+        <h2 class="slide-title">Three Revenue Pillars | One Integrated Platform</h2>
+        <div class="pillars-container">
+            <div class="pillar-card">
+                <div class="pillar-title">PILLAR 1<br>Wolfcamp Oil</div>
+                <ul>
+                    <li>88M bbls oil in place</li>
+                    <li>1.8 TCF natural gas</li>
+                    <li>300-450 BOPD initial</li>
+                    <li>8,500+ BOPD at scale</li>
+                    <li>$333M NPV potential</li>
+                </ul>
+            </div>
+            <div class="pillar-card orange">
+                <div class="pillar-title">PILLAR 2<br>Hydrogen Discovery</div>
+                <ul>
+                    <li>29,000 tons resource</li>
+                    <li>50+ year life</li>
+                    <li>$5B total revenue</li>
+                    <li>$142M annual tax credits</li>
+                    <li>Zero-carbon energy</li>
+                </ul>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-title">PILLAR 3<br>AI Data Centers</div>
+                <ul>
+                    <li>8 facilities @ 150k sq ft</li>
+                    <li>Nebraska location</li>
+                    <li>On-site power gen</li>
+                    <li>Groundwater cooling</li>
+                    <li>$80M annual revenue</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: Wolfcamp Oil Production -->
+    <div class="slide" data-slide="5">
+        <h2 class="slide-title">Pillar 1: Wolfcamp Oil Production</h2>
+        <div class="chart-section">
+            <div class="chart-box">
+                <canvas id="productionChart"></canvas>
+            </div>
+            <div class="info-box">
+                <div class="info-title">Production Highlights</div>
+                <div class="info-text">
+                    <p>Oil in Place: <span class="info-highlight">88 Million Barrels</span></p>
+                    <p>Natural Gas: <span class="info-highlight">1.8 Trillion Cubic Feet</span></p>
+                    <p>Peak Production: <span class="info-highlight">8,500+ BOPD</span></p>
+                    <p>Modeled NPV: <span class="info-highlight">Up to $333M</span></p>
+                    <p>ROI: <span class="info-highlight">7-9x over field life</span></p>
+                    <p>Status: <span class="info-highlight">Well drilled, cased, confirmed</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: Hydrogen Discovery -->
+    <div class="slide" data-slide="6">
+        <h2 class="slide-title" style="color: #ff5722;">Pillar 2: White Hydrogen Discovery</h2>
+        <div class="chart-section">
+            <div class="chart-box orange">
+                <canvas id="hydrogenChart"></canvas>
+            </div>
+            <div class="info-box orange">
+                <div class="info-title">The Mt. Hydrogen Project</div>
+                <div class="info-text">
+                    <p>Resource: <span class="info-highlight">~29,000 tons, 50+ year life</span></p>
+                    <p>Discovery: <span class="info-highlight">Multi-TCF potential</span></p>
+                    <p>Estimated Revenue: <span class="info-highlight">$5 Billion total</span></p>
+                    <p>Type: <span class="info-highlight">Natural hydrogen</span></p>
+                    <p>Cost: <span class="info-highlight">Zero production cost</span></p>
+                    <p>Application: <span class="info-highlight">Perfect for data center power</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: AI Data Centers -->
+    <div class="slide" data-slide="7">
+        <h2 class="slide-title">Pillar 3: AI Data Center Infrastructure</h2>
+        <div class="chart-section">
+            <div class="info-box">
+                <div class="info-title">8 State-of-the-Art Facilities</div>
+                <div class="info-text">
+                    <p>• Scale: 8 × 150,000 sq ft facilities</p>
+                    <p>• Location: Nebraska (central U.S.)</p>
+                    <p>• Energy: On-site oil/gas/hydrogen</p>
+                    <p>• Cooling: Groundwater + HVAC</p>
+                    <p>• Construction: &lt;90 days per building</p>
+                    <p>• Revenue: $80M annually (full capacity)</p>
+                    <p>• Target Clients: OpenAI, Google, Microsoft, Amazon, NVIDIA</p>
+                </div>
+            </div>
+            <div class="info-box orange">
+                <div class="info-title">Capital Investment</div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Investment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Land (1,200 acres)</td>
+                            <td>$3.6M</td>
+                        </tr>
+                        <tr>
+                            <td>Construction (8 facilities)</td>
+                            <td>$1.5B</td>
+                        </tr>
+                        <tr>
+                            <td>Energy Infrastructure</td>
+                            <td>$500M</td>
+                        </tr>
+                        <tr>
+                            <td>Cooling Systems</td>
+                            <td>$200M</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">TOTAL INVESTMENT</td>
+                            <td class="highlight">$2.2B</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: Integrated Advantage -->
+    <div class="slide" data-slide="8">
+        <h2 class="slide-title">The Integrated Advantage</h2>
+        <p class="slide-subtitle">Our three pillars create unprecedented competitive moats</p>
+        <div class="advantage-grid">
+            <div class="advantage-box">
+                <div class="advantage-title">1. Energy Independence</div>
+                <div class="advantage-desc">Self-powered data centers with 30-50% cost advantage over grid-dependent competitors</div>
+            </div>
+            <div class="advantage-box orange">
+                <div class="advantage-title">2. Carbon Neutrality Pathway</div>
+                <div class="advantage-desc">Oil-to-hydrogen transition enables ESG premium positioning</div>
+            </div>
+            <div class="advantage-box">
+                <div class="advantage-title">3. Vertical Integration</div>
+                <div class="advantage-desc">Discovery through computing delivers maximum margin capture</div>
+            </div>
+            <div class="advantage-box orange">
+                <div class="advantage-title">4. Proprietary Technology</div>
+                <div class="advantage-desc">Satellite NMR mapping, Magic Mud drilling, and clean refining</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <div class="advantage-box" style="display: inline-block; max-width: 700px;">
+                <div class="advantage-title">5. Market Timing Perfection</div>
+                <div class="advantage-desc">Convergence of AI boom, energy crisis, clean mandates, and H₂ emergence</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: Phased Roadmap -->
+    <div class="slide" data-slide="9">
+        <h2 class="slide-title">Phased Development Roadmap</h2>
+        <div class="phase-container">
+            <div class="phase-box">
+                <div class="phase-name">PHASE I</div>
+                <div class="phase-details">
+                    <p><strong>Timeline:</strong> Q1 2025</p>
+                    <p><strong>Investment:</strong> $2.7M</p>
+                    <p><strong>Output:</strong> 300-450 BOPD</p>
+                    <p><strong>Cash Flow:</strong> ~10 days</p>
+                </div>
+            </div>
+            <div class="phase-box orange">
+                <div class="phase-name">PHASE II</div>
+                <div class="phase-details">
+                    <p><strong>Timeline:</strong> Q2 2025</p>
+                    <p><strong>Investment:</strong> $0.3-0.55M</p>
+                    <p><strong>Activity:</strong> Extend 700-800 ft</p>
+                    <p><strong>Value:</strong> $300M+ partnerships</p>
+                </div>
+            </div>
+            <div class="phase-box">
+                <div class="phase-name">PHASE III</div>
+                <div class="phase-details">
+                    <p><strong>Timeline:</strong> Q3 2025-Q4 2028</p>
+                    <p><strong>Investment:</strong> $20.4M</p>
+                    <p><strong>Wells:</strong> 12 horizontals</p>
+                    <p><strong>Peak:</strong> &gt;8,500 BOPD</p>
+                </div>
+            </div>
+        </div>
+        <div class="timeline-container">
+            <p class="timeline-title">Parallel Track: Data Center Construction</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p class="timeline-quarter">Q1 2025</p>
+                    <p class="timeline-milestone">Land Acquisition</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="timeline-quarter" style="color: #a0a0a0;">Q2 2025</p>
+                    <p class="timeline-milestone">Permitting</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="timeline-quarter" style="color: #ff5722;">Q3 2025</p>
+                    <p class="timeline-milestone">Construction Start</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="timeline-quarter">Q4 2025</p>
+                    <p class="timeline-milestone">First Facility Online</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="timeline-quarter" style="color: #ff5722;">Q4 2028</p>
+                    <p class="timeline-milestone">All Facilities Online</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: Investment Structure -->
+    <div class="slide" data-slide="10">
+        <h2 class="slide-title">Investment Structure</h2>
+        <div class="investment-grid">
+            <div class="investment-box">
+                <div class="investment-label">Initial Capital</div>
+                <div class="investment-value">$6.7-10M</div>
+            </div>
+            <div class="investment-box orange">
+                <div class="investment-label">Full Platform</div>
+                <div class="investment-value">$2.2B</div>
+            </div>
+            <div class="investment-box">
+                <div class="investment-label">Investor Share</div>
+                <div class="investment-value">25%</div>
+            </div>
+            <div class="investment-box orange">
+                <div class="investment-label">Break-Even</div>
+                <div class="investment-value">Year 7</div>
+            </div>
+        </div>
+        <div style="margin-top: 60px; max-width: 1400px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 28px; font-weight: 900; color: #00ffff; margin-bottom: 30px; text-align: center;">Return Structure</p>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Structure</th>
+                        <th>Peak Year Cash Flow</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Oil & Hydrogen</td>
+                        <td>50% NOI until payback, then 25%</td>
+                        <td>$37.5M @ $50/bbl oil</td>
+                    </tr>
+                    <tr>
+                        <td>Data Centers</td>
+                        <td>25% of resources + lease revenue</td>
+                        <td>Scales to $20M annually</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: Financial Projections -->
+    <div class="slide" data-slide="11">
+        <h2 class="slide-title">10-Year Financial Projections (Conservative)</h2>
+        <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 90%; max-width: 1200px; height: 500px;">
+                <canvas id="financialChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: Management Team -->
+    <div class="slide" data-slide="12">
+        <h2 class="slide-title">World-Class Management Team</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-name">James Franklin</div>
+                <div class="team-title">Founder & CEO</div>
+                <div class="team-bio">40+ years E&P experience. Inventor of Satellite NMR technology. Major discoveries sold to Exxon & Barrett.</div>
+            </div>
+            <div class="team-card orange">
+                <div class="team-name">James J. Santurro</div>
+                <div class="team-title">Vice President</div>
+                <div class="team-bio">Expanded assets from $56M to $700M. Partner: Sunbelt Energy, Contour Drilling.</div>
+            </div>
+            <div class="team-card">
+                <div class="team-name">John Jay LaValle</div>
+                <div class="team-title">VP & General Counsel</div>
+                <div class="team-bio">Current: Chief of Staff, DOE (Trump Admin). 30+ years legal/political experience.</div>
+            </div>
+            <div class="team-card orange">
+                <div class="team-name">Horatio T. de Caan</div>
+                <div class="team-title">Petroleum Engineer</div>
+                <div class="team-bio">10+ years drilling: Asia, Africa, Middle East. RNZAF Aviation Engineer.</div>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Alberto Vasquez, PhD</div>
+                <div class="team-title">Chief Financial Officer</div>
+                <div class="team-bio">PhD Engineering Science (RPI). Decision Sciences & Engineering Systems expert.</div>
+            </div>
+            <div class="team-card orange">
+                <div style="text-align: center; padding: 40px 0; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="font-size: 56px; font-weight: 900; color: #ff5722; margin-bottom: 15px;">200+</div>
+                    <div style="font-size: 18px; color: #a0a0a0; font-weight: 600;">Combined Years<br>of Experience</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 13: Five Mega-Trends -->
+    <div class="slide" data-slide="13">
+        <h2 class="slide-title">Five Unstoppable Mega-Trends</h2>
+        <p class="slide-subtitle" style="color: #ff5722;">PrecisionX sits at the exact intersection of all five simultaneously</p>
+        <div class="trend-grid">
+            <div class="trend-box">
+                <div class="trend-title">1. AI Computing Explosion</div>
+                <div class="trend-desc">Global AI market: $200B → $2T+ by 2030. Data center shortage acute.</div>
+            </div>
+            <div class="trend-box orange">
+                <div class="trend-title">2. Energy Crisis & Grid Instability</div>
+                <div class="trend-desc">Industrial electricity up 30%+. Energy independence priority.</div>
+            </div>
+            <div class="trend-box">
+                <div class="trend-title">3. Clean Energy Mandates</div>
+                <div class="trend-desc">90% Fortune 500 net-zero pledges. $369B IRA incentives.</div>
+            </div>
+            <div class="trend-box orange">
+                <div class="trend-title">4. Natural Hydrogen Emergence</div>
+                <div class="trend-desc">DOE priority. Zero production cost. Game-changer for energy.</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <div class="trend-box" style="display: inline-block; max-width: 700px;">
+                <div class="trend-title">5. Reshoring & Domestic Manufacturing</div>
+                <div class="trend-desc">$52B Chips Act. Domestic data infrastructure = national security.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 14: Competitive Positioning -->
+    <div class="slide" data-slide="14">
+        <h2 class="slide-title">Competitive Positioning</h2>
+        <div style="max-width: 1400px; margin: 40px auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Traditional Data Centers</th>
+                        <th>Traditional E&P</th>
+                        <th style="background: #ff5722;">PrecisionX</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Energy Source</strong></td>
+                        <td>Grid dependent</td>
+                        <td>Sell to commodity markets</td>
+                        <td><span class="info-highlight">Captive reserves</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Power Cost</strong></td>
+                        <td>60-70% of OpEx</td>
+                        <td>N/A</td>
+                        <td><span class="info-highlight">Controlled/minimal</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Carbon Footprint</strong></td>
+                        <td>Massive</td>
+                        <td>High</td>
+                        <td><span class="info-highlight">Transition to zero</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Revenue Streams</strong></td>
+                        <td>Single (compute)</td>
+                        <td>Single (oil/gas)</td>
+                        <td><span class="info-highlight">Triple (oil+H₂+compute)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Value Chain</strong></td>
+                        <td>Downstream only</td>
+                        <td>Upstream only</td>
+                        <td><span class="info-highlight">Fully integrated</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Technology</strong></td>
+                        <td>Standard</td>
+                        <td>Standard</td>
+                        <td><span class="info-highlight">Proprietary (NMR, Magic Mud)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Market Position</strong></td>
+                        <td>Commodity provider</td>
+                        <td>Price taker</td>
+                        <td><span class="info-highlight">Strategic differentiator</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- SLIDE 15: Why Now? -->
+    <div class="slide" data-slide="15">
+        <h2 class="slide-title" style="color: #ff5722;">Why Now? The Investment Imperative</h2>
+        <p class="slide-subtitle" style="color: #00ffff;">This opportunity will not exist in 24 months</p>
+        <div class="urgency-grid">
+            <div class="urgency-box">
+                <div class="urgency-title">First-Mover<br>Advantage Closing</div>
+                <div class="urgency-points">
+                    • Other E&P discovering opportunity<br>
+                    • Big Tech in-house development<br>
+                    • NMR + well = 18-month head start
+                </div>
+            </div>
+            <div class="urgency-box orange">
+                <div class="urgency-title">Valuation Inflection<br>Imminent</div>
+                <div class="urgency-points">
+                    • Pre-production discount<br>
+                    • Post-oil: 3-5x re-rate<br>
+                    • Hydrogen: Another step-change
+                </div>
+            </div>
+            <div class="urgency-box">
+                <div class="urgency-title">Capital Efficiency<br>Window</div>
+                <div class="urgency-points">
+                    • Lowest entry price now<br>
+                    • Phase I funds Phase II/III<br>
+                    • Later: premium for de-risked
+                </div>
+            </div>
+        </div>
+        <div class="urgency-footer">
+            <p class="urgency-footer-title">Early investors capture:</p>
+            <p class="urgency-footer-text">
+                ✓ Ground-floor entry in 3 high-growth markets &nbsp;&nbsp; ✓ Proven team (200+ years experience)<br>
+                ✓ Tangible assets already in production &nbsp;&nbsp; ✓ Multiple exit options<br>
+                ✓ Asymmetric returns: Limited downside, exponential upside
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 16: Exit Strategies -->
+    <div class="slide" data-slide="16">
+        <h2 class="slide-title">Exit Strategies & Liquidity</h2>
+        <div class="exit-grid">
+            <div class="exit-box">
+                <div class="exit-title">Strategic Acquisition</div>
+                <div class="exit-desc">
+                    <strong>Potential Buyers:</strong><br>
+                    • Big Tech (Amazon, Google, Microsoft)<br>
+                    • Traditional Energy (ExxonMobil, Chevron)<br>
+                    • Data Center REITs (Digital Realty, Equinix)<br><br>
+                    <strong>Valuation:</strong> $2-7B (Year 7)
+                </div>
+            </div>
+            <div class="exit-box orange">
+                <div class="exit-title">Asset Spin-Offs</div>
+                <div class="exit-desc">
+                    <strong>Structure:</strong><br>
+                    • Oil & Gas → Traditional E&P buyer<br>
+                    • Hydrogen → Clean energy acquirer<br>
+                    • Data Centers → REIT or tech company<br><br>
+                    <strong>Advantage:</strong> Maximize value by segment
+                </div>
+            </div>
+            <div class="exit-box">
+                <div class="exit-title">Public Markets</div>
+                <div class="exit-desc">
+                    <strong>Options:</strong><br>
+                    • Traditional IPO (Year 5-7)<br>
+                    • SPAC merger (faster path)<br>
+                    • Direct listing<br><br>
+                    <strong>Positioning:</strong> First integrated energy-AI company
+                </div>
+            </div>
+            <div class="exit-box orange">
+                <div class="exit-title">Dividend Recapitalization</div>
+                <div class="exit-desc">
+                    <strong>Structure:</strong><br>
+                    • Borrow against cash-flowing assets<br>
+                    • Return capital while maintaining ownership<br>
+                    • Partial liquidity + upside exposure<br><br>
+                    <strong>Advantage:</strong> Best of both worlds
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 17: The Ask -->
+    <div class="slide" data-slide="17">
+        <h2 class="slide-title">Investment Opportunity</h2>
+        <div class="ask-box">
+            <div class="ask-amount">$10M</div>
+            <div class="ask-subtitle">Initial Capital to Launch Phase I-III</div>
+        </div>
+        <div style="margin-top: 40px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+            <p class="proceeds-title">Use of Proceeds:</p>
+            <div class="proceeds-grid">
+                <div class="proceed-box">
+                    <div class="proceed-amount">$2.7M</div>
+                    <div class="proceed-desc">Phase I: Vertical well completion → Immediate production</div>
+                </div>
+                <div class="proceed-box">
+                    <div class="proceed-amount">$0.55M</div>
+                    <div class="proceed-desc">Phase II: Hydrogen validation → Strategic optionality</div>
+                </div>
+                <div class="proceed-box">
+                    <div class="proceed-amount">$6.75M</div>
+                    <div class="proceed-desc">Phase III: Horizontal drilling → Scale to 8,500+ BOPD</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 18: Contact -->
+    <div class="slide" data-slide="18">
+        <h2 class="slide-title" style="text-align: center; margin-bottom: 60px;">Ready to Join the Energy Revolution?</h2>
+        <div class="contact-box">
+            <div class="contact-title">Contact Information</div>
+            <div class="contact-info">
+                <strong>Sumair Mitroo</strong><br>
+                Precision Exploration Corporation<br><br>
+                <a href="mailto:sumair@precisionexploration.com">sumair@precisionexploration.com</a><br>
+                <a href="tel:+19549933091">+1 (954) 993-3091</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">18</span>
+    </div>
+
+    <script>
+        // Initialize
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress-bar');
+        const currentSlideSpan = document.getElementById('currentSlide');
+        const totalSlidesSpan = document.getElementById('totalSlides');
+        const scrollHint = document.querySelector('.scroll-hint');
+
+        totalSlidesSpan.textContent = slides.length;
+
+        // Update progress bar on scroll
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / scrollHeight) * 100;
+            progressBar.style.width = progress + '%';
+            
+            // Hide scroll hint after first scroll
+            if (scrolled > 100) {
+                scrollHint.style.opacity = '0';
+            } else {
+                scrollHint.style.opacity = '0.8';
+            }
+        });
+
+        // Intersection Observer for slide tracking
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const slideNum = Array.from(slides).indexOf(entry.target) + 1;
+                    currentSlideSpan.textContent = slideNum;
+                    
+                    // Trigger animations based on slide
+                    if (slideNum === 2) {
+                        animateCounters();
+                    }
+                    
+                    // Initialize charts
+                    if (slideNum === 5) initializeProductionChart();
+                    if (slideNum === 6) initializeHydrogenChart();
+                    if (slideNum === 11) initializeFinancialChart();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                if (counter.dataset.animated) return;
+                counter.dataset.animated = 'true';
+                
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current).toLocaleString();
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target >= 1000 ? target.toLocaleString() : target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // Chart initialization
+        let productionChart = null;
+        let hydrogenChart = null;
+        let financialChart = null;
+
+        function initializeProductionChart() {
+            if (productionChart) return;
+            const ctx = document.getElementById('productionChart');
+            if (ctx) {
+                productionChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Phase I\nVertical', 'Phase II\nEOR', 'Phase III\nHorizontals'],
+                        datasets: [{
+                            label: 'Production (BOPD)',
+                            data: [375, 900, 8500],
+                            backgroundColor: '#00ffff',
+                            borderColor: '#00ffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: { 
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'Production Trajectory (BOPD)',
+                                color: '#00ffff',
+                                font: { size: 18, weight: 'bold' }
+                            }
+                        },
+                        scales: {
+                            y: { 
+                                beginAtZero: true, 
+                                max: 10000,
+                                ticks: { color: '#a0a0a0', font: { size: 12 } },
+                                grid: { color: '#333333' }
+                            },
+                            x: { 
+                                ticks: { color: '#a0a0a0', font: { size: 12 } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeHydrogenChart() {
+            if (hydrogenChart) return;
+            const ctx = document.getElementById('hydrogenChart');
+            if (ctx) {
+                hydrogenChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Year 1\nReturn', '25% of\nReserves', 'Tax Credits\n(Annual)'],
+                        datasets: [{
+                            label: 'Revenue ($M)',
+                            data: [76.7, 427.2, 142],
+                            backgroundColor: '#ff5722',
+                            borderColor: '#ff5722',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: { 
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'Hydrogen Revenue Potential ($M)',
+                                color: '#ff5722',
+                                font: { size: 18, weight: 'bold' }
+                            }
+                        },
+                        scales: {
+                            y: { 
+                                beginAtZero: true, 
+                                max: 500,
+                                ticks: { color: '#a0a0a0', font: { size: 12 } },
+                                grid: { color: '#333333' }
+                            },
+                            x: { 
+                                ticks: { color: '#a0a0a0', font: { size: 12 } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function initializeFinancialChart() {
+            if (financialChart) return;
+            const ctx = document.getElementById('financialChart');
+            if (ctx) {
+                financialChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Year 1-2', 'Year 3-5', 'Year 7-10', '10-Year Total'],
+                        datasets: [{
+                            label: 'Investor 25% Share ($M)',
+                            data: [75, 204, 496, 1000],
+                            backgroundColor: '#00ffff',
+                            borderColor: '#00ffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: { 
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'Cumulative Cash Flow to Investors ($M)',
+                                color: '#00ffff',
+                                font: { size: 20, weight: 'bold' }
+                            }
+                        },
+                        scales: {
+                            y: { 
+                                beginAtZero: true, 
+                                max: 1200,
+                                ticks: { color: '#a0a0a0', font: { size: 14 } },
+                                grid: { color: '#333333' }
+                            },
+                            x: { 
+                                ticks: { color: '#a0a0a0', font: { size: 14 } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
