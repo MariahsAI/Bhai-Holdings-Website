@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVIP - The Future of Ticketing</title>
+    <meta name="description" content="RSVIP: Revolutionary blockchain-powered ticketing platform. From invite to inside.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #D4FF00 0%, #FFFF00 100%);
+            z-index: 10000;
+            box-shadow: 0 0 20px rgba(212, 255, 0, 0.6);
+            transition: width 0.1s ease-out;
+        }
+
+        /* Hero Section - Full Screen Cinematic */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #000000 70%);
+            z-index: 0;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 255, 0, 0.15) 0%, transparent 70%);
+            animation: pulseGlow 4s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInHero 2s ease-out forwards;
+        }
+
+        @keyframes fadeInHero {
+            to { opacity: 1; }
+        }
+
+        .hero-logo {
+            font-size: 140px;
+            font-weight: 900;
+            letter-spacing: 20px;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            text-shadow: 0 0 80px rgba(212, 255, 0, 0.5);
+        }
+
+        .hero-tagline {
+            font-size: 32px;
+            font-style: italic;
+            color: #D4FF00;
+            letter-spacing: 12px;
+            font-weight: 300;
+            margin-bottom: 60px;
+            text-shadow: 0 0 40px rgba(212, 255, 0, 0.3);
+        }
+
+        .hero-scroll {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #666666;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Cinematic Story Sections */
+        .story-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 100px 50px;
+        }
+
+        .story-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* The Problem - Dark/Dramatic */
+        .problem-story {
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+        }
+
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .reveal-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: #D4FF00;
+            margin-bottom: 30px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .story-headline {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            color: #FFFFFF;
+        }
+
+        .story-headline .highlight {
+            color: #D4FF00;
+            position: relative;
+            display: inline-block;
+        }
+
+        .story-headline .strike {
+            text-decoration: line-through;
+            text-decoration-color: #ff4444;
+            text-decoration-thickness: 4px;
+            color: #666666;
+        }
+
+        .story-body {
+            font-size: 24px;
+            line-height: 1.8;
+            color: #AAAAAA;
+            max-width: 900px;
+            margin-bottom: 60px;
+        }
+
+        /* Stat Reveals */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .stat-item {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stat-number {
+            font-size: 72px;
+            font-weight: 900;
+            color: #D4FF00;
+            line-height: 1;
+            margin-bottom: 15px;
+            text-shadow: 0 0 60px rgba(212, 255, 0, 0.4);
+        }
+
+        .stat-label {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666666;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* The Solution - Bright/Hopeful */
+        .solution-story {
+            background: linear-gradient(180deg, #000000 0%, #0d0d00 50%, #000000 100%);
+        }
+
+        /* Feature Showcase - Large Visual Style */
+        .feature-showcase {
+            margin-top: 100px;
+            display: grid;
+            gap: 120px;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .feature-item:nth-child(even) {
+            transform: translateX(50px);
+        }
+
+        .feature-item:nth-child(even) .feature-visual {
+            order: 2;
+        }
+
+        .feature-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .feature-visual {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(212, 255, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 255, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .feature-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(212, 255, 0, 0.1),
+                transparent 30deg
+            );
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .feature-icon {
+            font-size: 80px;
+            font-weight: 900;
+            color: rgba(212, 255, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .feature-content {
+            padding: 40px;
+        }
+
+        .feature-number {
+            font-size: 120px;
+            font-weight: 900;
+            color: rgba(212, 255, 0, 0.1);
+            line-height: 1;
+            margin-bottom: -40px;
+        }
+
+        .feature-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .feature-description {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #AAAAAA;
+        }
+
+        /* Mission Statement - Impactful */
+        .mission-story {
+            background: #000000;
+            text-align: center;
+            padding: 200px 50px;
+        }
+
+        .mission-quote {
+            font-size: 64px;
+            font-weight: 300;
+            line-height: 1.4;
+            color: #FFFFFF;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            font-style: italic;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .mission-quote.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .mission-quote .yellow {
+            color: #D4FF00;
+        }
+
+        .mission-author {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: #666666;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* Team Section - Premium Cards */
+        .team-story {
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+            padding: 150px 50px;
+        }
+
+        .team-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 100px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, rgba(212, 255, 0, 0.05) 0%, rgba(0, 0, 0, 0.9) 100%);
+            border: 1px solid rgba(212, 255, 0, 0.2);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .team-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-card:hover {
+            transform: translateY(-20px);
+            border-color: #D4FF00;
+            box-shadow: 0 30px 80px rgba(212, 255, 0, 0.2);
+        }
+
+        .team-initials {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D4FF00 0%, #FFFF00 100%);
+            color: #000000;
+            font-size: 48px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 0 60px rgba(212, 255, 0, 0.4);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .team-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+        }
+
+        .team-role {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #D4FF00;
+            margin-bottom: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .team-bio {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #999999;
+        }
+
+        /* Final CTA - Bold */
+        .cta-story {
+            background: linear-gradient(135deg, #D4FF00 0%, #FFFF00 100%);
+            padding: 150px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-story::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-headline {
+            font-size: 72px;
+            font-weight: 900;
+            color: #000000;
+            margin-bottom: 40px;
+            line-height: 1.1;
+        }
+
+        .cta-subtext {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 25px 70px;
+            background: #000000;
+            color: #D4FF00;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border-radius: 60px;
+            transition: all 0.4s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1000;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(212, 255, 0, 0.3);
+            color: #D4FF00;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            background: #D4FF00;
+            color: #000000;
+            border-color: #D4FF00;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-logo { font-size: 80px; }
+            .hero-tagline { font-size: 24px; }
+            .story-headline { font-size: 56px; }
+            .story-body { font-size: 20px; }
+            .stat-grid { grid-template-columns: 1fr; gap: 40px; }
+            .feature-item { grid-template-columns: 1fr; gap: 40px; }
+            .feature-item:nth-child(even) .feature-visual { order: 1; }
+            .feature-visual { height: 400px; }
+            .feature-title { font-size: 36px; }
+            .mission-quote { font-size: 40px; }
+            .cta-headline { font-size: 48px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-logo { font-size: 60px; letter-spacing: 10px; }
+            .hero-tagline { font-size: 18px; letter-spacing: 6px; }
+            .story-section { padding: 60px 30px; }
+            .story-headline { font-size: 40px; }
+            .story-body { font-size: 18px; }
+            .stat-number { font-size: 56px; }
+            .feature-visual { height: 300px; }
+            .feature-title { font-size: 28px; }
+            .feature-description { font-size: 16px; }
+            .mission-quote { font-size: 32px; padding: 0 20px; }
+            .team-grid { grid-template-columns: 1fr; }
+            .cta-headline { font-size: 36px; }
+            .cta-subtext { font-size: 18px; }
+            .back-link { top: 20px; left: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+    
+    <a href="explore.html" class="back-link">← Portfolio</a>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <div class="hero-logo">RSVIP</div>
+            <div class="hero-tagline">from invite to inside</div>
+            <div class="hero-scroll">↓ Scroll to explore</div>
+        </div>
+    </section>
+
+    <!-- The Problem Story -->
+    <section class="story-section problem-story">
+        <div class="story-container">
+            <div class="reveal-text">
+                <div class="story-label">The Crisis</div>
+                <h2 class="story-headline">
+                    Ticketing is <span class="strike">broken</span>.<br>
+                    And everyone knows it.
+                </h2>
+                <p class="story-body">
+                    For too long, traditional platforms have exploited both creators and fans. Hidden fees. Scalping bots. Fake tickets. A system designed to extract maximum profit while delivering minimum value. The magic of live events has been stolen by middlemen who add nothing but friction.
+                </p>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="85">$0B</div>
+                    <div class="stat-label">Global Ticketing Market</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="30">0%</div>
+                    <div class="stat-label">Lost to Hidden Fees</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="15">$0B</div>
+                    <div class="stat-label">Scalper Market</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Solution Story -->
+    <section class="story-section solution-story">
+        <div class="story-container">
+            <div class="reveal-text">
+                <div class="story-label">The Revolution</div>
+                <h2 class="story-headline">
+                    We're building the <span class="highlight">future</span><br>
+                    of ticketing.
+                </h2>
+                <p class="story-body">
+                    RSVIP isn't just another platform. It's a complete reimagining of how tickets work. Powered by blockchain, enforced by smart contracts, designed for fairness. No more fraud. No more scalping. No more exploitation. Just transparent, secure access to the events you love.
+                </p>
+            </div>
+
+            <div class="feature-showcase">
+                <div class="feature-item">
+                    <div class="feature-visual">
+                        <div class="feature-icon">SECURE</div>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-number">01</div>
+                        <h3 class="feature-title">Fraud-Proof by Design</h3>
+                        <p class="feature-description">
+                            Every ticket is verified on the blockchain. No counterfeits. No disputes. Just guaranteed authenticity that protects both buyers and sellers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-visual">
+                        <div class="feature-icon">SMART</div>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-number">02</div>
+                        <h3 class="feature-title">Smart Contract Control</h3>
+                        <p class="feature-description">
+                            Automated rules prevent scalping before it starts. Set pricing limits, control resales, and ensure fans get fair access—all enforced by code.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-visual">
+                        <div class="feature-icon">REVENUE</div>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-number">03</div>
+                        <h3 class="feature-title">Creator Revenue Share</h3>
+                        <p class="feature-description">
+                            Artists automatically earn from every resale. No chasing payments, no middlemen taking cuts. Smart contracts ensure creators capture the value they deserve.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-visual">
+                        <div class="feature-icon">GLOBAL</div>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-number">04</div>
+                        <h3 class="feature-title">Universal Payment Access</h3>
+                        <p class="feature-description">
+                            Crypto, credit cards, UPI, BNPL—we support them all. Breaking down payment barriers so everyone can access the experiences they want.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Statement -->
+    <section class="mission-story">
+        <div class="mission-quote">
+            "To reclaim the <span class="yellow">lost magic</span> of events and experiences by making ticketing <span class="yellow">fair, transparent,</span> and <span class="yellow">accessible</span> for everyone."
+        </div>
+        <div class="mission-author">— RSVIP Team</div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-story">
+        <div class="team-intro reveal-text">
+            <div class="story-label">Leadership</div>
+            <h2 class="story-headline">Built by Visionaries</h2>
+            <p class="story-body">
+                A team with decades of combined experience in fintech, blockchain, marketing, and event technology. United by a mission to revolutionize ticketing.
+            </p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-initials">MM</div>
+                <div class="team-name">Maaz Memon</div>
+                <div class="team-role">CP & GO</div>
+                <div class="team-bio">
+                    14+ years expanding companies to US markets. Expert in product, finance, business, and fundraising.
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-initials">JF</div>
+                <div class="team-name">Jonathan Ferrucci</div>
+                <div class="team-role">Head of BD</div>
+                <div class="team-bio">
+                    16+ years driving growth by identifying market opportunities and building high-performing teams.
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-initials">KP</div>
+                <div class="team-name">Kalind Patel</div>
+                <div class="team-role">CEO India</div>
+                <div class="team-bio">
+                    9+ years expertise in sales strategies, team leadership, and innovative digital solutions.
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-initials">PG</div>
+                <div class="team-name">Prerna Grover</div>
+                <div class="team-role">CSO</div>
+                <div class="team-bio">
+                    10+ years of client and agency experience launching, revamping and managing brands.
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-initials">SC</div>
+                <div class="team-name">Shayan Chowdhury</div>
+                <div class="team-role">CMO</div>
+                <div class="team-bio">
+                    16+ years in marketing with expertise in consumer tech. Launched successful platforms globally.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-story">
+        <div class="cta-content">
+            <h2 class="cta-headline">Ready to Join the Revolution?</h2>
+            <p class="cta-subtext">
+                Help us fix ticketing and restore fairness to live events. Together, we can build a better future for creators and fans.
+            </p>
+            <a href="/cdn-cgi/l/email-protection#d4a4bba3b1a6b1b0b6adb9b5a6bdb5bc94b3b9b5bdb8fab7bbb9eba7a1b6beb1b7a0e98687829d84f1e6e49dbaa2b1a7a0b9b1baa0f1e6e49dbaa5a1bda6ad" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Intersection Observer for scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger counter animation for stat numbers
+                    if (entry.target.classList.contains('stat-item')) {
+                        const statNumber = entry.target.querySelector('.stat-number');
+                        const target = parseInt(statNumber.getAttribute('data-target'));
+                        const text = statNumber.textContent;
+                        const hasPercent = text.includes('%');
+                        const hasDollar = text.includes('$');
+                        const hasB = text.includes('B');
+                        
+                        let count = 0;
+                        const duration = 2000; // 2 seconds
+                        const increment = target / (duration / 16); // 60fps
+                        
+                        const counter = setInterval(() => {
+                            count += increment;
+                            if (count >= target) {
+                                count = target;
+                                clearInterval(counter);
+                            }
+                            
+                            let displayText = Math.floor(count).toString();
+                            if (hasDollar) displayText = '$' + displayText;
+                            if (hasB) displayText += 'B';
+                            if (hasPercent) displayText += '%';
+                            
+                            statNumber.textContent = displayText;
+                        }, 16);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all reveal elements
+        document.querySelectorAll('.reveal-text, .stat-item, .feature-item, .mission-quote, .team-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Stagger team card animations
+        document.querySelectorAll('.team-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Stagger stat animations
+        document.querySelectorAll('.stat-item').forEach((stat, index) => {
+            stat.style.transitionDelay = `${index * 0.2}s`;
+        });
+    </script>
+
+    <script>
+        // Scroll Progress Bar
+        const progressBar = document.querySelector('.scroll-progress');
+        
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.pageYOffset / windowHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Parallax effect on hero glow - more dramatic
+        const heroGlow = document.querySelector('.hero-glow');
+        const heroSection = document.querySelector('.hero-section');
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroHeight = heroSection.offsetHeight;
+            
+            // Only apply parallax while hero is visible
+            if (scrolled < heroHeight) {
+                const parallaxSpeed = 0.3; // Lower = more dramatic movement
+                const scaleSpeed = 0.001; // Scale up effect
+                heroGlow.style.transform = `translate(-50%, -50%) translateY(${scrolled * parallaxSpeed}px) scale(${1 + scrolled * scaleSpeed})`;
+                heroGlow.style.opacity = `${1 - scrolled / heroHeight}`; // Fade out as you scroll
+            }
+        });
+    </script>
+</body>
+</html>
