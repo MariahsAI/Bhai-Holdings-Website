@@ -772,11 +772,14 @@
             .header {
                 padding: 40px 25px;
                 border-radius: 20px;
+                /* Keep full effects */
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.2), 0 0 100px rgba(255, 87, 34, 0.2);
             }
 
             .header h1 {
                 font-size: 2.2em;
                 line-height: 1.2;
+                /* Keep gradient animation */
             }
 
             .header .subtitle {
@@ -788,11 +791,15 @@
                 font-size: 1em;
                 margin-top: 15px;
                 padding-top: 15px;
+                /* Keep cyan glow */
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
             }
 
             .vision-section {
                 padding: 30px 25px;
                 border-radius: 20px;
+                /* Keep full shadow effects */
+                box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2), 0 0 80px rgba(255, 87, 34, 0.1);
             }
 
             .vision-section h2 {
@@ -806,6 +813,12 @@
             .section {
                 padding: 30px 20px;
                 border-radius: 20px;
+                /* Keep dual glow */
+                box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2), 0 0 80px rgba(255, 87, 34, 0.1);
+            }
+
+            .section:active {
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.3), 0 0 100px rgba(255, 87, 34, 0.2);
             }
 
             .section h2 {
@@ -816,6 +829,7 @@
             .section h3 {
                 font-size: 1.4em;
                 margin: 25px 0 15px 0;
+                /* Keep color glows */
             }
 
             .section p {
@@ -825,6 +839,8 @@
             .highlights-section {
                 padding: 40px 20px;
                 border-radius: 20px;
+                /* Keep dramatic shadows */
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.3), 0 0 100px rgba(255, 87, 34, 0.2);
             }
 
             .highlights-section h2 {
@@ -834,6 +850,22 @@
 
             .highlight-card {
                 padding: 30px 20px;
+                /* Keep all visual effects */
+            }
+
+            /* Make tap work like hover on mobile */
+            .highlight-card:active:nth-child(odd) {
+                background: rgba(0, 255, 255, 0.1);
+                border-color: #00ffff;
+                transform: translateY(-10px);
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.5);
+            }
+
+            .highlight-card:active:nth-child(even) {
+                background: rgba(255, 87, 34, 0.1);
+                border-color: #ff5722;
+                transform: translateY(-10px);
+                box-shadow: 0 25px 80px rgba(255, 87, 34, 0.5);
             }
 
             .highlight-card .title {
@@ -842,6 +874,7 @@
 
             .highlight-card .value {
                 font-size: 2.8em;
+                /* Keep text shadow glows */
             }
 
             .highlight-card .unit {
@@ -861,16 +894,54 @@
             .advantage-card,
             .team-card {
                 padding: 25px 20px;
+                /* Keep all shadows and glows */
+            }
+
+            /* Touch effects for pillar cards */
+            .pillar-card:active:nth-child(odd) {
+                background: rgba(0, 255, 255, 0.1);
+                transform: translateX(10px);
+                box-shadow: -8px 0 40px rgba(0, 255, 255, 0.5);
+            }
+
+            .pillar-card:active:nth-child(even) {
+                background: rgba(255, 87, 34, 0.1);
+                transform: translateX(10px);
+                box-shadow: -8px 0 40px rgba(255, 87, 34, 0.5);
+            }
+
+            /* Touch effects for advantage cards */
+            .advantage-card:active {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 60px rgba(0, 255, 255, 0.4);
+                background: rgba(0, 255, 255, 0.05);
+            }
+
+            /* Touch effects for team cards */
+            .team-card:active {
+                background: rgba(0, 255, 255, 0.1);
+                border-color: #00ffff;
+                transform: translateY(-5px);
+                box-shadow: 0 20px 60px rgba(0, 255, 255, 0.3);
             }
 
             .pillar-card .pillar-title,
             .advantage-card h3,
             .team-card .name {
                 font-size: 1.3em;
+                /* Keep text shadow effects */
             }
 
             .phase-card {
                 padding: 25px 20px;
+                /* Keep shadows */
+                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            }
+
+            .phase-card:active {
+                background: rgba(0, 255, 255, 0.1);
+                transform: translateX(8px);
+                box-shadow: -8px 0 40px rgba(0, 255, 255, 0.4);
             }
 
             .phase-card .phase-title {
@@ -886,12 +957,18 @@
                 padding: 15px;
             }
 
+            .phase-detail:active {
+                background: rgba(0, 255, 255, 0.15);
+            }
+
             .stats-table {
                 font-size: 0.8em;
                 display: block;
                 overflow-x: auto;
                 white-space: nowrap;
                 -webkit-overflow-scrolling: touch;
+                /* Keep shadows */
+                box-shadow: 0 15px 50px rgba(0, 255, 255, 0.2), 0 0 80px rgba(255, 87, 34, 0.1);
             }
 
             .stats-table th,
@@ -901,6 +978,8 @@
 
             .investment-box {
                 padding: 30px 20px;
+                /* Keep dramatic dual glow */
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.3), 0 0 100px rgba(255, 87, 34, 0.3);
             }
 
             .investment-box h2 {
@@ -913,10 +992,22 @@
 
             .investment-highlight {
                 padding: 20px 15px;
+                /* Keep glows */
+            }
+
+            .investment-highlight:active:nth-child(odd) {
+                background: rgba(0, 255, 255, 0.15);
+                box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            }
+
+            .investment-highlight:active:nth-child(even) {
+                background: rgba(255, 87, 34, 0.15);
+                box-shadow: 0 0 30px rgba(255, 87, 34, 0.4);
             }
 
             .investment-highlight .value {
                 font-size: 1.5em;
+                /* Keep text shadows */
             }
 
             .alert-box {
@@ -930,6 +1021,8 @@
 
             .cta-section {
                 padding: 40px 25px;
+                /* Keep all dramatic effects */
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.4), 0 0 120px rgba(255, 87, 34, 0.4);
             }
 
             .cta-section h2 {
@@ -942,10 +1035,14 @@
 
             .cta-section .contact-info {
                 font-size: 1em;
+                /* Keep cyan glow */
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
             }
 
             .footer {
                 padding: 30px 20px;
+                /* Keep shadows */
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
             }
 
             .footer h2 {
@@ -969,12 +1066,15 @@
             .header {
                 padding: 30px 20px;
                 border-radius: 15px;
+                /* Keep FULL shadow effects even on small screens */
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.2), 0 0 100px rgba(255, 87, 34, 0.2);
             }
 
             .header h1 {
                 font-size: 1.6em;
                 line-height: 1.2;
                 letter-spacing: -1px;
+                /* Gradient animation stays */
             }
 
             .header .subtitle {
@@ -986,11 +1086,15 @@
                 font-size: 0.85em;
                 margin-top: 12px;
                 padding-top: 12px;
+                /* Keep cyan glow */
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
             }
 
             .vision-section {
                 padding: 25px 20px;
                 border-radius: 15px;
+                /* Keep effects */
+                box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2), 0 0 80px rgba(255, 87, 34, 0.1);
             }
 
             .vision-section h2 {
@@ -1007,6 +1111,8 @@
                 padding: 25px 15px;
                 border-radius: 15px;
                 margin-bottom: 30px;
+                /* Keep dual glow */
+                box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2), 0 0 80px rgba(255, 87, 34, 0.1);
             }
 
             .section h2 {
@@ -1018,6 +1124,7 @@
             .section h3 {
                 font-size: 1.2em;
                 margin: 20px 0 12px 0;
+                /* Keep colored glows */
             }
 
             .section p {
@@ -1028,6 +1135,8 @@
             .highlights-section {
                 padding: 30px 15px;
                 border-radius: 15px;
+                /* Keep dramatic shadows */
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.3), 0 0 100px rgba(255, 87, 34, 0.2);
             }
 
             .highlights-section h2 {
@@ -1038,6 +1147,7 @@
             .highlight-card {
                 padding: 25px 15px;
                 border-radius: 15px;
+                /* All effects stay */
             }
 
             .highlight-card .title {
@@ -1048,6 +1158,7 @@
             .highlight-card .value {
                 font-size: 2.2em;
                 margin-bottom: 10px;
+                /* Text shadow glows stay */
             }
 
             .highlight-card .unit {
@@ -1059,12 +1170,14 @@
             .team-card {
                 padding: 20px 15px;
                 border-radius: 15px;
+                /* All shadows and effects stay */
             }
 
             .pillar-card .pillar-title,
             .advantage-card h3 {
                 font-size: 1.2em;
                 margin-bottom: 15px;
+                /* Text shadow effects stay */
             }
 
             .pillar-card .pillar-subtitle {
@@ -1081,6 +1194,7 @@
 
             .team-card .name {
                 font-size: 1.2em;
+                /* Glow effects stay */
             }
 
             .team-card .title {
@@ -1096,11 +1210,14 @@
                 padding: 20px 15px;
                 margin-bottom: 20px;
                 border-radius: 15px;
+                /* Keep shadows */
+                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
             }
 
             .phase-card .phase-title {
                 font-size: 1.1em;
                 margin-bottom: 15px;
+                /* Keep colored text shadows */
             }
 
             .phase-card p {
@@ -1123,6 +1240,8 @@
             .stats-table {
                 font-size: 0.7em;
                 border-radius: 10px;
+                /* Keep glows */
+                box-shadow: 0 15px 50px rgba(0, 255, 255, 0.2), 0 0 80px rgba(255, 87, 34, 0.1);
             }
 
             .stats-table th,
@@ -1133,6 +1252,8 @@
             .investment-box {
                 padding: 25px 15px;
                 border-radius: 15px;
+                /* Keep dramatic effects */
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.3), 0 0 100px rgba(255, 87, 34, 0.3);
             }
 
             .investment-box h2 {
@@ -1151,6 +1272,7 @@
             .investment-highlight {
                 padding: 15px 12px;
                 border-radius: 10px;
+                /* Keep all glows */
             }
 
             .investment-highlight .label {
@@ -1159,6 +1281,7 @@
 
             .investment-highlight .value {
                 font-size: 1.3em;
+                /* Keep text shadows */
             }
 
             .alert-box {
@@ -1180,6 +1303,8 @@
             .cta-section {
                 padding: 35px 20px;
                 border-radius: 15px;
+                /* Keep ALL dramatic effects */
+                box-shadow: 0 25px 80px rgba(0, 255, 255, 0.4), 0 0 120px rgba(255, 87, 34, 0.4);
             }
 
             .cta-section h2 {
@@ -1194,6 +1319,8 @@
 
             .cta-section .contact-info {
                 font-size: 0.9em;
+                /* Keep cyan glow */
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
             }
 
             .cta-section .contact-info > div {
@@ -1203,6 +1330,8 @@
             .footer {
                 padding: 25px 15px;
                 border-radius: 15px;
+                /* Keep shadows */
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
             }
 
             .footer h2 {
@@ -1219,15 +1348,6 @@
             .footer .confidential {
                 font-size: 0.95em;
                 margin-top: 15px;
-            }
-
-            /* Make hover effects work better on mobile */
-            .highlight-card:active,
-            .pillar-card:active,
-            .advantage-card:active,
-            .team-card:active,
-            .phase-card:active {
-                transform: scale(0.98);
             }
         }
 
