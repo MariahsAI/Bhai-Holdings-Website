@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
     <title>PrecisionX Investment Deck - Interactive Presentation</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
@@ -876,18 +879,96 @@
             color: #ff5722;
         }
 
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Animation classes */
+        .animate-title {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-subtitle {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .animate-box {
+            opacity: 0;
+            animation: scaleIn 0.6s ease forwards;
+        }
+
+        .animate-fade {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        /* Stagger animations for grids */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        .stagger-7 { animation-delay: 0.7s; }
+        .stagger-8 { animation-delay: 0.8s; }
+
         /* Mobile Responsive */
         @media (max-width: 1024px) {
             .slide {
-                padding: 60px 40px;
+                padding: 60px 30px;
             }
 
             .hero-title {
-                font-size: 64px;
+                font-size: 56px;
+                letter-spacing: 2px;
+            }
+
+            .hero-subtitle {
+                font-size: 28px;
+            }
+
+            .hero-tagline {
+                font-size: 20px;
             }
 
             .slide-title {
-                font-size: 40px;
+                font-size: 36px;
+            }
+
+            .slide-subtitle {
+                font-size: 20px;
             }
 
             .stats-grid,
@@ -896,6 +977,7 @@
             .investment-grid,
             .team-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
 
             .chart-section,
@@ -904,20 +986,52 @@
             .urgency-grid,
             .exit-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .stat-value {
+                font-size: 56px;
+            }
+
+            .info-title {
+                font-size: 26px;
+            }
+
+            .ask-amount {
+                font-size: 72px;
             }
         }
 
         @media (max-width: 768px) {
             .slide {
-                padding: 40px 20px;
+                padding: 50px 20px;
+                min-height: 100vh;
             }
 
             .hero-title {
-                font-size: 48px;
+                font-size: 42px;
+                letter-spacing: 1px;
+                margin-bottom: 20px;
+            }
+
+            .hero-subtitle {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+
+            .hero-tagline {
+                font-size: 18px;
+                margin-top: 20px;
             }
 
             .slide-title {
-                font-size: 32px;
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
+
+            .slide-subtitle {
+                font-size: 18px;
+                margin-bottom: 30px;
             }
 
             .stats-grid,
@@ -932,18 +1046,364 @@
             .proceeds-grid,
             .advantage-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            .slide-counter {
-                bottom: 20px;
-                left: 20px;
+            .stat-box {
+                padding: 35px 25px;
+            }
+
+            .stat-value {
+                font-size: 48px;
+                margin-bottom: 15px;
+            }
+
+            .stat-label {
                 font-size: 14px;
-                padding: 8px 15px;
+            }
+
+            .pillar-card,
+            .advantage-box,
+            .phase-box,
+            .trend-box,
+            .urgency-box,
+            .exit-box {
+                padding: 25px 20px;
+            }
+
+            .pillar-title {
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+
+            .pillar-card li {
+                font-size: 14px;
+                padding: 10px 0 10px 25px;
+            }
+
+            .chart-box,
+            .info-box {
+                padding: 25px 20px;
+            }
+
+            .info-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .info-text {
+                font-size: 15px;
+            }
+
+            .data-table {
+                font-size: 13px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+
+            .vision-box {
+                padding: 40px 25px;
+            }
+
+            .vision-text {
+                font-size: 22px;
+                line-height: 1.5;
+            }
+
+            .phase-name {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .phase-details {
+                font-size: 14px;
+            }
+
+            .timeline-container {
+                margin: 40px auto 0;
             }
 
             .timeline {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
+            }
+
+            .timeline-quarter {
+                font-size: 14px;
+            }
+
+            .timeline-milestone {
+                font-size: 12px;
+            }
+
+            .investment-box {
+                padding: 30px 20px;
+            }
+
+            .investment-value {
+                font-size: 36px;
+            }
+
+            .investment-label {
+                font-size: 13px;
+            }
+
+            .team-card {
+                padding: 25px 20px;
+            }
+
+            .team-name {
+                font-size: 18px;
+            }
+
+            .team-title {
+                font-size: 14px;
+            }
+
+            .team-bio {
+                font-size: 12px;
+            }
+
+            .advantage-title {
+                font-size: 20px;
+            }
+
+            .advantage-desc {
+                font-size: 14px;
+            }
+
+            .trend-title {
+                font-size: 18px;
+            }
+
+            .trend-desc {
+                font-size: 13px;
+            }
+
+            .urgency-title {
+                font-size: 20px;
+            }
+
+            .urgency-points {
+                font-size: 14px;
+            }
+
+            .urgency-footer {
+                padding: 35px 20px;
+                margin: 40px auto 0;
+            }
+
+            .urgency-footer-title {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .urgency-footer-text {
+                font-size: 14px;
+                line-height: 1.8;
+            }
+
+            .exit-title {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            .exit-desc {
+                font-size: 13px;
+            }
+
+            .ask-box {
+                padding: 40px 25px;
+                margin: 30px auto;
+            }
+
+            .ask-amount {
+                font-size: 64px;
+                margin-bottom: 20px;
+            }
+
+            .ask-subtitle {
+                font-size: 18px;
+                margin-bottom: 35px;
+            }
+
+            .proceeds-title {
+                font-size: 22px;
+                margin-bottom: 25px;
+            }
+
+            .proceed-box {
+                padding: 25px 15px;
+            }
+
+            .proceed-amount {
+                font-size: 28px;
+                margin-bottom: 12px;
+            }
+
+            .proceed-desc {
+                font-size: 12px;
+            }
+
+            .contact-box {
+                padding: 40px 25px;
+                margin: 60px auto;
+            }
+
+            .contact-title {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+
+            .contact-info {
+                font-size: 17px;
+                line-height: 2;
+            }
+
+            .slide-counter {
+                bottom: 15px;
+                left: 15px;
+                font-size: 13px;
+                padding: 8px 12px;
+            }
+
+            .scroll-hint {
+                bottom: 30px;
+                font-size: 12px;
+            }
+
+            /* Keep animations smooth on mobile */
+            .animate-title,
+            .animate-subtitle,
+            .animate-box,
+            .animate-fade {
+                animation-duration: 0.6s;
+            }
+
+            /* Reduce stagger on mobile for faster loading feel */
+            .stagger-1 { animation-delay: 0.05s; }
+            .stagger-2 { animation-delay: 0.1s; }
+            .stagger-3 { animation-delay: 0.15s; }
+            .stagger-4 { animation-delay: 0.2s; }
+            .stagger-5 { animation-delay: 0.25s; }
+            .stagger-6 { animation-delay: 0.3s; }
+            .stagger-7 { animation-delay: 0.35s; }
+            .stagger-8 { animation-delay: 0.4s; }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 40px 15px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .hero-tagline {
+                font-size: 15px;
+            }
+
+            .slide-title {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+
+            .slide-subtitle {
+                font-size: 16px;
+            }
+
+            .stat-value {
+                font-size: 40px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            .ask-amount {
+                font-size: 48px;
+            }
+
+            .contact-info {
+                font-size: 15px;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            /* Larger tap targets on mobile */
+            .stat-box,
+            .pillar-card,
+            .advantage-box,
+            .phase-box,
+            .investment-box,
+            .team-card,
+            .trend-box,
+            .urgency-box,
+            .exit-box {
+                min-height: 120px;
+            }
+
+            /* Remove hover effects on touch devices */
+            .stat-box:hover,
+            .pillar-card:hover,
+            .advantage-box:hover {
+                transform: none;
+            }
+
+            /* Add active state for touch feedback */
+            .stat-box:active,
+            .pillar-card:active,
+            .advantage-box:active,
+            .phase-box:active,
+            .investment-box:active,
+            .team-card:active,
+            .trend-box:active,
+            .urgency-box:active,
+            .exit-box:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+
+            /* Improve scroll snapping on mobile */
+            html {
+                scroll-snap-type: y proximity;
+            }
+
+            /* Better text selection on mobile */
+            * {
+                -webkit-tap-highlight-color: rgba(0, 255, 255, 0.2);
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .slide {
+                min-height: auto;
+                padding: 30px 20px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+
+            .slide-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            html {
+                scroll-snap-type: none;
             }
         }
     </style>
@@ -1532,7 +1992,7 @@
             <div class="contact-info">
                 <strong>Sumair Mitroo</strong><br>
                 Precision Exploration Corporation<br><br>
-                <a href="mailto:sumair@precisionexploration.com">sumair@precisionexploration.com</a><br>
+                <a href="/cdn-cgi/l/email-protection#4d3e38202c243f0d3d3f282e243e24222328353d21223f2c39242223632e2220"><span class="__cf_email__" data-cfemail="3c4f49515d554e7c4c4e595f554f55535259444c50534e5d48555352125f5351">[email&#160;protected]</span></a><br>
                 <a href="tel:+19549933091">+1 (954) 993-3091</a>
             </div>
         </div>
@@ -1543,7 +2003,7 @@
         <span id="currentSlide">1</span> / <span id="totalSlides">18</span>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Initialize
         const slides = document.querySelectorAll('.slide');
         const progressBar = document.getElementById('progress-bar');
@@ -1568,12 +2028,15 @@
             }
         });
 
-        // Intersection Observer for slide tracking
+        // Intersection Observer for slide tracking and animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const slideNum = Array.from(slides).indexOf(entry.target) + 1;
                     currentSlideSpan.textContent = slideNum;
+                    
+                    // Animate slide content
+                    animateSlideContent(entry.target);
                     
                     // Trigger animations based on slide
                     if (slideNum === 2) {
@@ -1586,9 +2049,41 @@
                     if (slideNum === 11) initializeFinancialChart();
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
         slides.forEach(slide => observer.observe(slide));
+
+        // Animate slide content when it enters viewport
+        function animateSlideContent(slide) {
+            // Animate titles
+            const title = slide.querySelector('.slide-title, .hero-title');
+            if (title && !title.classList.contains('animate-title')) {
+                title.classList.add('animate-title');
+            }
+
+            // Animate subtitles
+            const subtitle = slide.querySelector('.slide-subtitle, .hero-subtitle, .hero-tagline');
+            if (subtitle && !subtitle.classList.contains('animate-subtitle')) {
+                subtitle.classList.add('animate-subtitle');
+            }
+
+            // Animate boxes with stagger
+            const boxes = slide.querySelectorAll('.stat-box, .pillar-card, .advantage-box, .phase-box, .investment-box, .team-card, .trend-box, .urgency-box, .exit-box, .proceed-box');
+            boxes.forEach((box, index) => {
+                if (!box.classList.contains('animate-box')) {
+                    box.classList.add('animate-box', `stagger-${Math.min(index + 1, 8)}`);
+                }
+            });
+
+            // Animate other elements
+            const fadeElements = slide.querySelectorAll('.chart-section, .info-box, .chart-box, .vision-box, .data-table, .timeline-container, .ask-box, .contact-box, .urgency-footer');
+            fadeElements.forEach((el, index) => {
+                if (!el.classList.contains('animate-fade')) {
+                    el.classList.add('animate-fade');
+                    el.style.animationDelay = `${0.3 + index * 0.1}s`;
+                }
+            });
+        }
 
         // Counter animation
         function animateCounters() {
@@ -1624,6 +2119,11 @@
             if (productionChart) return;
             const ctx = document.getElementById('productionChart');
             if (ctx) {
+                // Create gradient
+                const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, 'rgba(0, 255, 255, 0.9)');
+                gradient.addColorStop(1, 'rgba(0, 255, 255, 0.2)');
+
                 productionChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -1631,29 +2131,48 @@
                         datasets: [{
                             label: 'Production (BOPD)',
                             data: [375, 900, 8500],
-                            backgroundColor: '#00ffff',
+                            backgroundColor: gradient,
                             borderColor: '#00ffff',
-                            borderWidth: 2
+                            borderWidth: 2,
+                            borderRadius: 8
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: true,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeInOutQuart'
+                        },
                         plugins: { 
                             legend: { display: false },
                             title: {
                                 display: true,
                                 text: 'Production Trajectory (BOPD)',
                                 color: '#00ffff',
-                                font: { size: 18, weight: 'bold' }
+                                font: { size: 20, weight: 'bold' },
+                                padding: 20
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y.toLocaleString() + ' BOPD';
+                                    }
+                                }
                             }
                         },
                         scales: {
                             y: { 
                                 beginAtZero: true, 
                                 max: 10000,
-                                ticks: { color: '#a0a0a0', font: { size: 12 } },
-                                grid: { color: '#333333' }
+                                ticks: { 
+                                    color: '#a0a0a0', 
+                                    font: { size: 12 },
+                                    callback: function(value) {
+                                        return value.toLocaleString();
+                                    }
+                                },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
                             },
                             x: { 
                                 ticks: { color: '#a0a0a0', font: { size: 12 } },
@@ -1669,6 +2188,11 @@
             if (hydrogenChart) return;
             const ctx = document.getElementById('hydrogenChart');
             if (ctx) {
+                // Create gradient
+                const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, 'rgba(255, 87, 34, 0.9)');
+                gradient.addColorStop(1, 'rgba(255, 87, 34, 0.2)');
+
                 hydrogenChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -1676,29 +2200,48 @@
                         datasets: [{
                             label: 'Revenue ($M)',
                             data: [76.7, 427.2, 142],
-                            backgroundColor: '#ff5722',
+                            backgroundColor: gradient,
                             borderColor: '#ff5722',
-                            borderWidth: 2
+                            borderWidth: 2,
+                            borderRadius: 8
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: true,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeInOutQuart'
+                        },
                         plugins: { 
                             legend: { display: false },
                             title: {
                                 display: true,
                                 text: 'Hydrogen Revenue Potential ($M)',
                                 color: '#ff5722',
-                                font: { size: 18, weight: 'bold' }
+                                font: { size: 20, weight: 'bold' },
+                                padding: 20
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return '$' + context.parsed.y.toFixed(1) + 'M';
+                                    }
+                                }
                             }
                         },
                         scales: {
                             y: { 
                                 beginAtZero: true, 
                                 max: 500,
-                                ticks: { color: '#a0a0a0', font: { size: 12 } },
-                                grid: { color: '#333333' }
+                                ticks: { 
+                                    color: '#a0a0a0', 
+                                    font: { size: 12 },
+                                    callback: function(value) {
+                                        return '$' + value + 'M';
+                                    }
+                                },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
                             },
                             x: { 
                                 ticks: { color: '#a0a0a0', font: { size: 12 } },
@@ -1745,7 +2288,7 @@
                                 ticks: { color: '#a0a0a0', font: { size: 14 } },
                                 grid: { color: '#333333' }
                             },
-                            x: { 
+                            x: {
                                 ticks: { color: '#a0a0a0', font: { size: 14 } },
                                 grid: { display: false }
                             }
@@ -1754,6 +2297,70 @@
                 });
             }
         }
+
+        // Mobile-specific optimizations
+        if ('ontouchstart' in window) {
+            // Detect mobile device
+            document.body.classList.add('touch-device');
+            
+            // Optimize scroll performance on mobile
+            let ticking = false;
+            let lastScrollY = window.scrollY;
+            
+            window.addEventListener('scroll', () => {
+                lastScrollY = window.scrollY;
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                        const scrolled = lastScrollY;
+                        const progress = (scrolled / scrollHeight) * 100;
+                        progressBar.style.width = progress + '%';
+                        
+                        if (scrolled > 100) {
+                            scrollHint.style.opacity = '0';
+                        } else {
+                            scrollHint.style.opacity = '0.8';
+                        }
+                        
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Prevent zoom on double-tap for better UX
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', (event) => {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+
+            // Optimize animations for mobile
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                // Reduce animation complexity on mobile
+                document.documentElement.style.setProperty('--animation-duration', '0.4s');
+            }
+        }
+
+        // Handle orientation changes
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                window.scrollTo(0, window.scrollY + 1);
+                window.scrollTo(0, window.scrollY - 1);
+            }, 100);
+        });
+
+        // Optimize for iOS
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.body.classList.add('ios-device');
+            // Fix iOS momentum scrolling
+            document.body.style.webkitOverflowScrolling = 'touch';
+        }
+
     </script>
 </body>
 </html>
