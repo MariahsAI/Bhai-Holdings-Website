@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrecisionX - Integrated Energy & AI Infrastructure Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #000000;
+            overflow-x: hidden;
+        }
+
+        /* Animated background effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.04) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 50%, rgba(255, 87, 34, 0.04) 0%, transparent 40%);
+            animation: pulseGlow 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            color: white;
+            padding: 80px 60px;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            box-shadow: 0 25px 80px rgba(0, 255, 255, 0.2), 0 0 100px rgba(255, 87, 34, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(255, 87, 34, 0.15) 0%, transparent 50%);
+            animation: headerGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes headerGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .header h1 {
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #00ffff 0%, #ff5722 50%, #00ffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .header .subtitle {
+            font-size: 1.6em;
+            opacity: 0.95;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+            color: #e0e0e0;
+        }
+
+        .header .tagline {
+            font-size: 1.3em;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(0, 255, 255, 0.4);
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .vision-section {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            padding: 50px;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .vision-section:hover {
+            box-shadow: 0 25px 80px rgba(255, 87, 34, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .vision-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #ffffff;
+            border-bottom: 4px solid #ff5722;
+            padding-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #ff5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .vision-section p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .highlights-section {
+            background: linear-gradient(135deg, #000000 0%, #050505 100%);
+            padding: 60px;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            color: white;
+            box-shadow: 0 25px 80px rgba(0, 255, 255, 0.3), 0 0 100px rgba(255, 87, 34, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .highlights-section h2 {
+            font-size: 3em;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #ff5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .highlight-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .highlight-card:nth-child(odd):hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00ffff;
+            transform: translateY(-15px);
+            box-shadow: 0 25px 80px rgba(0, 255, 255, 0.5);
+        }
+
+        .highlight-card:nth-child(even):hover {
+            background: rgba(255, 87, 34, 0.1);
+            border-color: #ff5722;
+            transform: translateY(-15px);
+            box-shadow: 0 25px 80px rgba(255, 87, 34, 0.5);
+        }
+
+        .highlight-card:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .highlight-card .title {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            color: #a0a0a0;
+        }
+
+        .highlight-card .value {
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-card:nth-child(odd) .value {
+            color: #00ffff;
+            text-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+        }
+
+        .highlight-card:nth-child(even) .value {
+            color: #ff5722;
+            text-shadow: 0 0 40px rgba(255, 87, 34, 0.8);
+        }
+
+        .highlight-card .unit {
+            font-size: 1.1em;
+            opacity: 0.85;
+            position: relative;
+            z-index: 1;
+            color: #e0e0e0;
+        }
+
+        .section {
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+            padding: 50px;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2), 0 0 80px rgba(255, 87, 34, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            box-shadow: 0 25px 80px rgba(0, 255, 255, 0.3), 0 0 100px rgba(255, 87, 34, 0.2);
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 35px;
+            color: #ffffff;
+            border-bottom: 4px solid transparent;
+            border-image: linear-gradient(90deg, #00ffff 0%, #ff5722 100%);
+            border-image-slice: 1;
+            padding-bottom: 20px;
+            background: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .section h3 {
+            font-size: 1.8em;
+            margin: 35px 0 25px 0;
+            color: #ff5722;
+            font-weight: 700;
+        }
+
+        .section p {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .pillar-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 6px solid;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s ease;
+        }
+
+        .pillar-card:nth-child(odd) {
+            border-left-color: #00ffff;
+        }
+
+        .pillar-card:nth-child(even) {
+            border-left-color: #ff5722;
+        }
+
+        .pillar-card:nth-child(odd):hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateX(15px);
+            box-shadow: -8px 0 40px rgba(0, 255, 255, 0.5);
+        }
+
+        .pillar-card:nth-child(even):hover {
+            background: rgba(255, 87, 34, 0.1);
+            transform: translateX(15px);
+            box-shadow: -8px 0 40px rgba(255, 87, 34, 0.5);
+        }
+
+        .pillar-card .pillar-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .pillar-card:nth-child(odd) .pillar-title {
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .pillar-card:nth-child(even) .pillar-title {
+            color: #ff5722;
+            text-shadow: 0 0 20px rgba(255, 87, 34, 0.5);
+        }
+
+        .pillar-card .pillar-subtitle {
+            font-size: 1.1em;
+            color: #a0a0a0;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .pillar-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .pillar-card ul li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #e0e0e0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pillar-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .pillar-card ul li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #ff5722;
+            font-size: 1.3em;
+        }
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 255, 255, 0.2), 0 0 80px rgba(255, 87, 34, 0.1);
+        }
+
+        .stats-table thead {
+            background: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            color: white;
+        }
+
+        .stats-table th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1.5px;
+        }
+
+        .stats-table td {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .stats-table tbody tr {
+            transition: background 0.3s ease;
+        }
+
+        .stats-table tbody tr:hover {
+            background: rgba(255, 87, 34, 0.15);
+        }
+
+        .phase-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border-left: 6px solid #ff5722;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .phase-card:hover {
+            background: rgba(255, 87, 34, 0.15);
+            transform: translateX(15px);
+            box-shadow: -8px 0 40px rgba(255, 87, 34, 0.4);
+        }
+
+        .phase-card .phase-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ff5722;
+        }
+
+        .phase-card .phase-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .phase-detail {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .phase-detail:hover {
+            background: rgba(255, 87, 34, 0.15);
+        }
+
+        .phase-detail .detail-label {
+            font-size: 0.85em;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .phase-detail .detail-value {
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 8px;
+            font-size: 1.1em;
+        }
+
+        .alert-box {
+            background: rgba(255, 193, 7, 0.15);
+            border-left: 6px solid #ffc107;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .alert-box .title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            color: #ffc107;
+        }
+
+        .alert-box p {
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        .advantage-card {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid #ff5722;
+            transition: all 0.4s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(255, 87, 34, 0.4);
+            background: rgba(255, 87, 34, 0.1);
+        }
+
+        .advantage-card h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #ff5722;
+            font-size: 1.4em;
+        }
+
+        .advantage-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .advantage-card ul li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            color: #e0e0e0;
+        }
+
+        .advantage-card ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #ff5722;
+            font-size: 1.3em;
+        }
+
+        .investment-box {
+            background: linear-gradient(135deg, #000000 0%, #050505 100%);
+            padding: 50px;
+            border-radius: 25px;
+            color: white;
+            margin: 40px 0;
+            box-shadow: 0 25px 80px rgba(0, 255, 255, 0.3), 0 0 100px rgba(255, 87, 34, 0.3);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            border-image-slice: 1;
+        }
+
+        .investment-box h2 {
+            color: white;
+            border: none;
+            background: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .investment-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .investment-highlight {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid;
+        }
+
+        .investment-highlight:nth-child(odd) {
+            border-left-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .investment-highlight:nth-child(even) {
+            border-left-color: #ff5722;
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.2);
+        }
+
+        .investment-highlight .label {
+            font-size: 0.9em;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .investment-highlight .value {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .investment-highlight:nth-child(odd) .value {
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .investment-highlight:nth-child(even) .value {
+            color: #ff5722;
+            text-shadow: 0 0 20px rgba(255, 87, 34, 0.5);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .team-card:hover {
+            background: rgba(255, 87, 34, 0.1);
+            border-color: #ff5722;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(255, 87, 34, 0.3);
+        }
+
+        .team-card .name {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #ff5722;
+            margin-bottom: 8px;
+        }
+
+        .team-card .title {
+            font-size: 1.1em;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        .team-card .bio {
+            color: #e0e0e0;
+            line-height: 1.7;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            padding: 60px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 50px 0;
+            box-shadow: 0 25px 80px rgba(0, 255, 255, 0.4), 0 0 120px rgba(255, 87, 34, 0.4);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            border-image-slice: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 40%),
+                        radial-gradient(circle, rgba(255, 87, 34, 0.1) 50%, transparent 80%);
+            animation: rotate 10s linear infinite;
+        }
+
+        .cta-section h2 {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-section p {
+            font-size: 1.3em;
+            color: white;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section .contact-info {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #00ffff;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #0a0a0a 0%, #16213e 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 25px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer h2 {
+            margin-bottom: 25px;
+            border: none;
+            color: white;
+            background: linear-gradient(135deg, #ffffff 0%, #ff5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2em;
+        }
+
+        .footer p {
+            margin: 12px 0;
+            opacity: 0.9;
+            color: #e0e0e0;
+        }
+
+        .footer .confidential {
+            margin-top: 25px;
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #ff5722;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header {
+                padding: 40px 30px;
+                border-radius: 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2em;
+                line-height: 1.2;
+            }
+
+            .header .subtitle {
+                font-size: 1.1em;
+            }
+
+            .header .tagline {
+                font-size: 1em;
+            }
+
+            .section {
+                padding: 30px 25px;
+                border-radius: 20px;
+            }
+
+            .section h2 {
+                font-size: 1.8em;
+            }
+
+            .highlights-section {
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+
+            .highlights-section h2 {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+
+            .highlight-card .value {
+                font-size: 3em;
+            }
+
+            .pillar-grid,
+            .highlights-grid,
+            .advantage-grid,
+            .team-grid,
+            .investment-highlights {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stats-table {
+                font-size: 0.85em;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PRECISION EXPLORATION</h1>
+            <div class="subtitle">Integrated Energy & AI Infrastructure Platform</div>
+            <div class="tagline">Building the Energy Backbone of America's AI Future</div>
+        </div>
+
+        <div class="vision-section">
+            <h2>Executive Vision</h2>
+            <p>Precision Exploration Corporation represents the convergence of three transformational opportunities: prolific Wolfcamp oil production, groundbreaking white hydrogen discovery, and next-generation AI data center infrastructure.</p>
+            <p>This integrated platform positions us at the intersection of traditional energy dominance and the clean energy revolution, powered by cutting-edge satellite NMR technology and serving the exponential demands of artificial intelligence.</p>
+            <p style="font-weight: 600; font-size: 1.4em; color: #ff5722; margin-top: 20px;">We are not just extracting resources—we are building the energy backbone of America's AI future.</p>
+        </div>
+
+        <div class="highlights-section">
+            <h2>The Opportunity at a Glance</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="title">Wolfcamp Oil</div>
+                    <div class="value">88M</div>
+                    <div class="unit">Barrels of Oil in Place</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="title">Natural Hydrogen</div>
+                    <div class="value">$5B</div>
+                    <div class="unit">Revenue Potential</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="title">AI Data Centers</div>
+                    <div class="value">8</div>
+                    <div class="unit">150,000 sq ft Facilities</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="title">Peak Production</div>
+                    <div class="value">8,500+</div>
+                    <div class="unit">Barrels Per Day</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="title">Total Investment</div>
+                    <div class="value">$2.2B</div>
+                    <div class="unit">Full Platform Buildout</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="title">ROI Potential</div>
+                    <div class="value">7-15x</div>
+                    <div class="unit">Over Project Life</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Three Revenue Pillars | One Integrated Platform</h2>
+            
+            <div class="pillar-grid">
+                <div class="pillar-card">
+                    <div class="pillar-title">PILLAR 1: Wolfcamp Oil Production</div>
+                    <div class="pillar-subtitle">Tier-1 Hydrocarbon Asset</div>
+                    <ul>
+                        <li><strong>Oil in Place:</strong> 88 Million Barrels</li>
+                        <li><strong>Natural Gas:</strong> 1.8 Trillion Cubic Feet</li>
+                        <li><strong>Initial Vertical:</strong> 300-450 BOPD</li>
+                        <li><strong>Horizontal Scale:</strong> 12 laterals @ 1,500+ BOPD each</li>
+                        <li><strong>Modeled NPV:</strong> Up to $333M (Scenario 3)</li>
+                        <li><strong>ROI:</strong> 7-9x over field life</li>
+                        <li><strong>Status:</strong> Well drilled, cased, logged - hydrocarbon zones confirmed</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-title">PILLAR 2: White Hydrogen Discovery</div>
+                    <div class="pillar-subtitle">North America's Natural Hydrogen Frontier</div>
+                    <ul>
+                        <li><strong>Resource:</strong> ~29,000 tons, 50+ year life</li>
+                        <li><strong>Discovery:</strong> Multi-Trillion cubic feet potential</li>
+                        <li><strong>Estimated Revenue:</strong> $5 Billion total</li>
+                        <li><strong>First Year Return:</strong> $76.65M (50% capacity)</li>
+                        <li><strong>Tax Credits:</strong> ~$142M annually at full production</li>
+                        <li><strong>Type:</strong> Natural hydrogen (zero-carbon, no production cost)</li>
+                        <li><strong>Application:</strong> Perfect fuel for AI data center operations</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-title">PILLAR 3: AI Data Centers</div>
+                    <div class="pillar-subtitle">Energy-Integrated Computing Platform</div>
+                    <ul>
+                        <li><strong>Scale:</strong> 8 facilities @ 150,000 sq ft each</li>
+                        <li><strong>Location:</strong> Nebraska (central U.S. positioning)</li>
+                        <li><strong>Energy:</strong> On-site generation from oil/gas/hydrogen</li>
+                        <li><strong>Cooling:</strong> Groundwater system + advanced HVAC</li>
+                        <li><strong>Construction:</strong> <90 days per building</li>
+                        <li><strong>Revenue:</strong> $80M annually at full capacity</li>
+                        <li><strong>Clients:</strong> OpenAI, Google, Microsoft, Amazon, NVIDIA</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>The Integrated Advantage</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Our three pillars create unprecedented competitive moats through synergistic value creation:</p>
+
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <h3>1. Energy Independence</h3>
+                    <ul>
+                        <li>Self-powered data centers (vs. grid dependency)</li>
+                        <li>Captive oil, gas & hydrogen reserves</li>
+                        <li>30-50% cost advantage over competitors</li>
+                        <li>Protection from utility rate increases</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>2. Carbon Neutrality Pathway</h3>
+                    <ul>
+                        <li>Phase 1: Clean oil revenue funds hydrogen development</li>
+                        <li>Phase 2: Transition to zero-carbon operations</li>
+                        <li>Premium positioning with ESG-focused AI companies</li>
+                        <li>Regulatory tailwinds from clean energy mandates</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>3. Vertical Integration</h3>
+                    <ul>
+                        <li>Control entire value chain: Discovery → Production → Power → Computing</li>
+                        <li>Maximum margin capture</li>
+                        <li>Eliminate intermediary costs</li>
+                        <li>Strategic flexibility across all assets</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>4. Proprietary Technology</h3>
+                    <ul>
+                        <li>Satellite NMR mapping de-risks drilling</li>
+                        <li>Magic Mud drilling fluid accelerates timelines</li>
+                        <li>Wellbore ablation increases production</li>
+                        <li>Clean oil refining minimizes impact</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>5. Market Timing Perfection</h3>
+                    <ul>
+                        <li>AI computing demand: Exponential growth</li>
+                        <li>Data center power costs: Rising dramatically</li>
+                        <li>Clean energy mandates: Tightening globally</li>
+                        <li>Natural hydrogen: Emerging mega-trend</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Phased Development Roadmap</h2>
+
+            <div class="phase-card">
+                <div class="phase-title">PHASE I: Immediate Cash Flow</div>
+                <p style="color: #e0e0e0; margin-bottom: 20px;">Vertical Well Completion & Initial Oil Production</p>
+                <div class="phase-details">
+                    <div class="phase-detail">
+                        <div class="detail-label">Timeline</div>
+                        <div class="detail-value">Q1 2025</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Investment</div>
+                        <div class="detail-value">$2.7M</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Output</div>
+                        <div class="detail-value">300-450 BOPD</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Cash Flow Start</div>
+                        <div class="detail-value">~10 days post-completion</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; color: #e0e0e0;"><strong>Activities:</strong> Complete Well #1 across J-Sand & Admire A/B/C formations, install production equipment, connect to existing pipeline infrastructure</p>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-title">PHASE II: Hydrogen Validation</div>
+                <p style="color: #e0e0e0; margin-bottom: 20px;">Deep Testing & Resource Confirmation</p>
+                <div class="phase-details">
+                    <div class="phase-detail">
+                        <div class="detail-label">Timeline</div>
+                        <div class="detail-value">Q2 2025</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Investment</div>
+                        <div class="detail-value">$0.3-0.55M</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Activity</div>
+                        <div class="detail-value">Extend 700-800 ft</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Strategic Value</div>
+                        <div class="detail-value">$300M+ partnerships</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; color: #e0e0e0;"><strong>Decision Point:</strong> Pivot to hydrogen sales if commercial thresholds met. Core sampling via Core Labs, Inc. for comprehensive analysis</p>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-title">PHASE III: Wolfcamp Horizontal Development</div>
+                <p style="color: #e0e0e0; margin-bottom: 20px;">Maximum Production Scale-Up</p>
+                <div class="phase-details">
+                    <div class="phase-detail">
+                        <div class="detail-label">Timeline</div>
+                        <div class="detail-value">Q3 2025 - Q4 2028</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Investment</div>
+                        <div class="detail-value">$20.4M total</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Wells</div>
+                        <div class="detail-value">12 horizontal laterals</div>
+                    </div>
+                    <div class="phase-detail">
+                        <div class="detail-label">Peak Production</div>
+                        <div class="detail-value">>8,500 BOPD</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; color: #e0e0e0;"><strong>Parallel Track:</strong> Data center construction begins Q3 2025, first facility operational Q4 2025, all facilities operational Q4 2028</p>
+            </div>
+        </div>
+
+        <div class="investment-box">
+            <h2>Investment Structure</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Multiple entry points and flexible participation structures designed for strategic investors</p>
+
+            <div class="investment-highlights">
+                <div class="investment-highlight">
+                    <div class="label">Initial Capital</div>
+                    <div class="value">$6.7-10M</div>
+                </div>
+                <div class="investment-highlight">
+                    <div class="label">Full Platform</div>
+                    <div class="value">$2.2B</div>
+                </div>
+                <div class="investment-highlight">
+                    <div class="label">Investor Share</div>
+                    <div class="value">25%</div>
+                </div>
+                <div class="investment-highlight">
+                    <div class="label">Break-Even</div>
+                    <div class="value">Year 7</div>
+                </div>
+            </div>
+
+            <h3 style="color: #ff5722; margin-top: 40px; margin-bottom: 20px;">Return Structure</h3>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Structure</th>
+                        <th>Peak Year One Cash Flow</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Oil & Hydrogen Assets</td>
+                        <td>50% NOI until payback, then 25% of all cash flow</td>
+                        <td>~$37.5M @ $50/bbl oil</td>
+                    </tr>
+                    <tr>
+                        <td>Data Center Assets</td>
+                        <td>25% of actual resources recovered + lease revenue</td>
+                        <td>Scales to $20M annually</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert-box" style="margin-top: 30px;">
+                <div class="title">Investor Protection</div>
+                <p>✓ Fully executed Exploration Agreement | ✓ Complete data room with title & permits | ✓ Bonded and permitted operations | ✓ Experienced management (200+ combined years) | ✓ Diversified revenue streams | ✓ Tangible assets: Land, wells, infrastructure, hydrogen reserves</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Management Excellence</h2>
+            <p style="font-size: 1.2em; margin-bottom: 35px;">World-class team with proven execution across energy, technology, legal, and political domains</p>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="name">James Franklin</div>
+                    <div class="title">Founder & Chief Executive Officer</div>
+                    <div class="bio">40+ years in mining & oil exploration. Major discoveries: Silver (Leadville, CO - sold to Exxon Minerals), Natural Gas (Cave Gulch, WY - sold to Barrett Resources). Inventor of clean oil refining, water purification, Magic Mud drilling fluid, wellbore ablation, and Satellite NMR mapping (developed with Russian scientists, 1998).</div>
+                </div>
+
+                <div class="team-card">
+                    <div class="name">James J. Santurro</div>
+                    <div class="title">Vice President</div>
+                    <div class="bio">Expanded company assets from $56M to $700M. Partner in Sunbelt Energy and Contour Drilling Company. Expertise in large-scale reserve acquisition/management, advanced drilling operations, hydrocarbons, mineral rights, renewable energy, and strategic leadership.</div>
+                </div>
+
+                <div class="team-card">
+                    <div class="name">John Jay LaValle</div>
+                    <div class="title">Vice President & General Counsel</div>
+                    <div class="bio">Currently Chief of Staff at U.S. Department of Energy (Trump Administration). 30+ years legal/political experience. Former youngest Supervisor in Brookhaven Town history, Chairman of Suffolk County Republican Committee, trusted Trump surrogate and influential political figure.</div>
+                </div>
+
+                <div class="team-card">
+                    <div class="name">Randi S. Miller, ESQ</div>
+                    <div class="title">Corporate Secretary</div>
+                    <div class="bio">New York licensed attorney specializing in corporate litigation & intellectual property. Extensive experience managing global trademark portfolios for major American multinationals. Former Director of Operations in China for US-China Business Connections.</div>
+                </div>
+
+                <div class="team-card">
+                    <div class="name">Horatio Treste de Caan</div>
+                    <div class="title">Petroleum Engineer</div>
+                    <div class="bio">10+ years drilling across Asia, Africa, Middle East. Experience from small portable rigs to deep water floating rigs. "Wildcatter" with exposure to global oil company & sovereign government energy divisions. IADC certified, degrees in Engineering from University of Auckland.</div>
+                </div>
+
+                <div class="team-card">
+                    <div class="name">Alberto Vasquez, PhD</div>
+                    <div class="title">Chief Financial Officer</div>
+                    <div class="bio">Ph.D. in Engineering Science (Decision Sciences & Engineering Systems) from Rensselaer Polytechnic Institute. M.S. in Operations Research, Statistics, Industrial & Management Engineering. Fluent in Spanish, Portuguese, and English.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Five Unstoppable Mega-Trends</h2>
+            <p style="font-size: 1.2em; margin-bottom: 35px;">PrecisionX sits at the exact intersection of all five simultaneously</p>
+
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <h3>1. AI Computing Explosion</h3>
+                    <ul>
+                        <li>ChatGPT: 100M users in 60 days (fastest ever)</li>
+                        <li>Global AI market: $200B (2023) → $2T+ (2030)</li>
+                        <li>Training GPT-5/6 requires 10-100x more compute</li>
+                        <li>Data center capacity shortage acute & worsening</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>2. Energy Crisis & Grid Instability</h3>
+                    <ul>
+                        <li>U.S. grid: Aging infrastructure, insufficient capacity</li>
+                        <li>Rolling brownouts increasingly common</li>
+                        <li>Industrial electricity prices up 30%+ (3 years)</li>
+                        <li>Energy independence = national security priority</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>3. Clean Energy Mandates</h3>
+                    <ul>
+                        <li>Paris Agreement commitments tightening</li>
+                        <li>Corporate net-zero pledges: 90% of Fortune 500</li>
+                        <li>Inflation Reduction Act: $369B incentives</li>
+                        <li>Hydrogen tax credits up to $3/kg</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>4. Natural Hydrogen Emergence</h3>
+                    <ul>
+                        <li>DOE prioritizing natural hydrogen R&D</li>
+                        <li>Recent discoveries: Mali, Australia, multiple U.S. states</li>
+                        <li>No production cost (vs. $5+/kg for green hydrogen)</li>
+                        <li>Industry consensus: "Will transform energy landscape"</li>
+                    </ul>
+                </div>
+
+                <div class="advantage-card">
+                    <h3>5. Reshoring & Domestic Manufacturing</h3>
+                    <ul>
+                        <li>Semiconductor Chips Act: $52B for U.S. production</li>
+                        <li>Supply chain resilience: Reducing China dependence</li>
+                        <li>"Made in America" premium pricing</li>
+                        <li>Domestic data infrastructure: National security</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Why Now? The Investment Imperative</h2>
+            <p style="font-size: 1.2em; margin-bottom: 35px;">This opportunity will not exist in 24 months. Here's why timing is critical:</p>
+
+            <div class="pillar-grid">
+                <div class="pillar-card">
+                    <div class="pillar-title">First-Mover Advantage Closing</div>
+                    <ul>
+                        <li>Other E&P companies discovering data center opportunity</li>
+                        <li>Big Tech starting in-house energy development</li>
+                        <li>Natural hydrogen discoveries accelerating</li>
+                        <li>Our NMR tech + permitted well = 18-month head start</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-title">Valuation Inflection Imminent</div>
+                    <ul>
+                        <li>Pre-production assets trade at discount</li>
+                        <li>Post-first-oil: 3-5x valuation re-rate immediately</li>
+                        <li>Hydrogen validation: Another step-change</li>
+                        <li>First data center lease: Premium valuation</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-title">Capital Efficiency Window</div>
+                    <ul>
+                        <li>Early investors get lowest entry price</li>
+                        <li>Phase I cash flow funds Phase II/III (dilution protection)</li>
+                        <li>Later investors pay premium for de-risked assets</li>
+                        <li>Current round: Best risk-adjusted returns</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert-box" style="margin-top: 35px;">
+                <div class="title">The Bottom Line</div>
+                <p style="font-size: 1.15em;"><strong>Early investors in this round will capture:</strong></p>
+                <ul style="margin-top: 15px; list-style: none; padding-left: 0;">
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative; color: #e0e0e0;">
+                        <span style="position: absolute; left: 0; color: #ffc107; font-weight: bold;">✓</span>
+                        Ground-floor entry in three high-growth markets simultaneously
+                    </li>
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative; color: #e0e0e0;">
+                        <span style="position: absolute; left: 0; color: #ffc107; font-weight: bold;">✓</span>
+                        Proven management team (200+ combined years, not a startup)
+                    </li>
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative; color: #e0e0e0;">
+                        <span style="position: absolute; left: 0; color: #ffc107; font-weight: bold;">✓</span>
+                        Tangible assets in production (not speculative exploration)
+                    </li>
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative; color: #e0e0e0;">
+                        <span style="position: absolute; left: 0; color: #ffc107; font-weight: bold;">✓</span>
+                        Multiple exit options (strategic, public, dividend recap)
+                    </li>
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative; color: #e0e0e0;">
+                        <span style="position: absolute; left: 0; color: #ffc107; font-weight: bold;">✓</span>
+                        Asymmetric return profile: Limited downside, exponential upside
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Join the Energy Revolution?</h2>
+            <p>Contact us today to schedule a management presentation, access our secure data room, and explore investment opportunities.</p>
+            <div class="contact-info">
+                <div style="margin: 15px 0;">Sumair Mitroo, Precision Exploration Corporation</div>
+                <div style="margin: 10px 0;">Email: smitroo@precisionexploration.com</div>
+                <div style="margin: 10px 0;">Phone: +1 (954) 993-3091</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h2>Document Information</h2>
+            <p><strong>Company:</strong> Precision Exploration Corporation</p>
+            <p><strong>Date:</strong> 2025 | <strong>Effective Date:</strong> Current</p>
+            <p style="margin-top: 25px;">This document contains forward-looking statements regarding expected financial performance, project timelines, resource estimates, and market conditions. Actual results may differ materially. Prospective investors should conduct independent due diligence and consult with financial, legal, and tax advisors.</p>
+            <p class="confidential">CONFIDENTIAL - FOR QUALIFIED INVESTORS ONLY</p>
+            <p style="margin-top: 25px; font-size: 0.95em;">© 2025 Precision Exploration Corporation. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
