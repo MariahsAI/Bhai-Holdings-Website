@@ -540,9 +540,11 @@
             animation: zoomIn 0.6s cubic-bezier(0.4, 0, 0.2, 1), cardPulse 3s ease-in-out infinite;
             border: 2px solid var(--planet-glow, rgba(255, 255, 255, 0.2));
             background-size: cover;
-            background-position: center;
+            background-position: center center;
+            background-repeat: no-repeat;
             background-blend-mode: overlay;
             overflow-y: auto;
+            overflow-x: hidden;
             transform-style: preserve-3d;
             transform: perspective(1500px) rotateX(0deg) rotateY(0deg);
             transition: transform 0.15s ease-out;
@@ -563,6 +565,7 @@
                 0 0 60px var(--planet-glow, rgba(255,255,255,0.4)),
                 inset 0 0 60px var(--planet-glow, rgba(255,255,255,0.1));
             animation: atmosphereGlow 2s ease-in-out infinite alternate;
+            pointer-events: none;
         }
         
         /* Energy wave effect */
@@ -581,6 +584,34 @@
             );
             z-index: 1;
             animation: energyWave 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes planetRotate {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+        
+        /* Atmospheric glow ring */
+        .planet-details-container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.95) 100%);
+            z-index: 0;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 60px var(--planet-glow, rgba(255,255,255,0.4)),
+                inset 0 0 60px var(--planet-glow, rgba(255,255,255,0.1));
+            animation: atmosphereGlow 2s ease-in-out infinite alternate;
+            pointer-events: none;
         }
         
         @keyframes cardPulse {
@@ -717,6 +748,8 @@
             color: #fff;
             position: relative;
             z-index: 2;
+            min-height: 150vh;
+            padding-bottom: 100vh;
         }
         
         .planet-detail-title {
@@ -778,8 +811,15 @@
         }
         
         @media (max-width: 768px) {
+            nav { padding: 20px 30px; }
+            .nav-logo { font-size: 18px; letter-spacing: 2px; }
+            .nav-back { font-size: 12px; padding: 8px 20px; }
+            
             .hero-title { font-size: 56px; }
+            .hero-subtitle { font-size: 24px; }
             .section-title { font-size: 42px; }
+            .section-subtitle { font-size: 14px; }
+            
             .earth-container { width: 300px; height: 300px; }
             .earth-text { font-size: 24px; }
             
@@ -790,6 +830,8 @@
             .venture-item {
                 flex-direction: column !important;
                 margin-bottom: 100px;
+                align-items: flex-start;
+                padding-left: 60px;
             }
             
             .venture-item:nth-child(odd),
@@ -803,37 +845,75 @@
                 margin-bottom: 30px;
             }
             
-            .venture-connector {
+            .venture-item::before {
                 left: 30px;
                 top: 100px;
             }
             
             .venture-info {
-                padding: 0 20px !important;
-                text-align: center !important;
+                padding: 0 20px 0 0 !important;
+                text-align: left !important;
             }
             
             .venture-item:nth-child(odd) .venture-info,
             .venture-item:nth-child(even) .venture-info {
-                text-align: center !important;
-                padding: 0 20px !important;
+                text-align: left !important;
+                padding: 0 20px 0 0 !important;
             }
             
             .venture-title { font-size: 32px; }
             .venture-description { font-size: 16px; }
             
-            .planet-details-container { 
-                padding: 60px 30px 40px; 
-                width: 95%;
+            /* Mobile-friendly planet details modal */
+            .planet-details-modal {
+                padding: 10px;
             }
-            .planet-detail-title { font-size: 42px; }
-            .planet-detail-desc { font-size: 18px; }
+            
+            .planet-details-container { 
+                width: 95%;
+                max-width: 100%;
+                max-height: 95vh;
+                padding: 60px 25px 30px;
+                margin: 0;
+            }
+            
+            .planet-detail-title { 
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+            
+            .planet-detail-desc { 
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+            
+            .planet-detail-section {
+                margin-bottom: 25px;
+            }
+            
+            .planet-detail-section h3 {
+                font-size: 24px;
+                margin-bottom: 12px;
+            }
+            
+            .planet-detail-section p {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            
+            .planet-detail-section li {
+                font-size: 15px;
+                padding: 10px 0;
+                padding-left: 25px;
+            }
+            
             .return-earth-btn {
                 top: 10px;
                 left: 10px;
                 padding: 10px 20px;
-                font-size: 14px;
+                font-size: 12px;
             }
+            
             .close-details {
                 top: 10px;
                 right: 10px;
@@ -841,9 +921,59 @@
                 height: 40px;
                 font-size: 24px;
             }
+            
             .nav-prev-planet,
             .nav-next-planet {
-                display: none;
+                width: 50px;
+                height: 50px;
+                font-size: 32px;
+            }
+            
+            .nav-prev-planet {
+                left: 10px;
+            }
+            
+            .nav-next-planet {
+                right: 10px;
+            }
+            
+            /* Roadmap mobile */
+            .roadmap-phase {
+                padding: 30px 20px;
+                margin-bottom: 40px;
+            }
+            
+            .phase-number { font-size: 48px; }
+            .phase-title { font-size: 24px; }
+            .phase-timeline { font-size: 12px; }
+            .phase-item { font-size: 14px; }
+        }
+        
+        /* Extra small mobile devices */
+        @media (max-width: 480px) {
+            .hero-title { font-size: 42px; }
+            .hero-subtitle { font-size: 18px; }
+            .section-title { font-size: 32px; }
+            
+            .earth-container { width: 250px; height: 250px; }
+            .earth-text { font-size: 20px; }
+            
+            .venture-planet {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .venture-title { font-size: 28px; }
+            .venture-description { font-size: 14px; }
+            
+            .planet-detail-title { font-size: 28px; }
+            .planet-detail-desc { font-size: 16px; }
+            .planet-detail-section h3 { font-size: 20px; }
+            .planet-detail-section p { font-size: 14px; }
+            .planet-detail-section li { font-size: 14px; }
+            
+            .planet-details-container {
+                padding: 50px 20px 25px;
             }
         }
     </style>
