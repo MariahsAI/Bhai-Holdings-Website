@@ -1351,6 +1351,12 @@
                 padding: 6px 12px;
             }
             
+            /* Keep nav link glow on mobile */
+            .nav-link:hover::before,
+            .nav-link:active::before {
+                opacity: 1;
+            }
+            
             /* Hide scroll progress on mobile */
             .scroll-progress {
                 display: none;
@@ -1376,8 +1382,34 @@
                 padding: 30px 20px;
             }
             
+            /* Ensure story border glow works on mobile */
+            .story-content::before {
+                animation: borderGlow 3s ease-in-out infinite;
+            }
+            
             .story-text {
                 font-size: 16px;
+            }
+            
+            /* Ensure founder link effects work on mobile */
+            .founder-link {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            
+            .founder-link:active {
+                transform: translateY(-3px) scale(1.03);
+                box-shadow: 
+                    0 8px 30px rgba(255, 255, 255, 0.3),
+                    0 0 50px rgba(255, 255, 255, 0.2);
+            }
+            
+            .founder-link:active::before {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+            
+            .founder-link:active::after {
+                opacity: 1;
             }
             
             .today-title {
@@ -1390,6 +1422,24 @@
             
             .today-stats {
                 grid-template-columns: 1fr;
+            }
+            
+            /* Ensure stat card glow works on mobile */
+            .today-stat:active {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 
+                    0 15px 50px rgba(0, 0, 0, 0.8),
+                    0 0 60px rgba(255, 255, 255, 0.25),
+                    0 0 100px rgba(255, 255, 255, 0.15);
+            }
+            
+            .today-stat:active::before {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            
+            .today-stat:active::after {
+                opacity: 1;
             }
             
             .stat-icon svg {
@@ -1405,6 +1455,11 @@
                 padding: 30px 20px;
             }
             
+            /* Ensure future focus border glow works */
+            .future-focus::before {
+                animation: borderGlow 3s ease-in-out infinite;
+            }
+            
             .focus-title {
                 font-size: 12px;
             }
@@ -1414,6 +1469,21 @@
                 padding: 12px 15px;
             }
             
+            /* Mobile touch effects for focus items */
+            .focus-item:active {
+                padding-left: 30px;
+                color: #FFFFFF;
+                border-left-color: rgba(255, 255, 255, 1);
+            }
+            
+            .focus-item:active::before {
+                opacity: 1;
+            }
+            
+            .focus-item:active::after {
+                width: 100%;
+            }
+            
             .timeline-item {
                 padding-left: 60px;
                 margin-bottom: 60px;
@@ -1421,6 +1491,34 @@
             
             .timeline-content {
                 padding: 30px 25px;
+            }
+            
+            /* Ensure timeline card border glow works on mobile */
+            .timeline-content {
+                animation: cardBorderGlow 3s ease-in-out infinite;
+            }
+            
+            /* Mobile touch effects for timeline cards */
+            .timeline-content:active {
+                transform: translateY(-3px);
+                box-shadow: 
+                    0 0 0 1px rgba(255, 255, 255, 0.7),
+                    0 0 30px rgba(255, 255, 255, 0.5),
+                    0 0 60px rgba(255, 255, 255, 0.3),
+                    0 15px 50px rgba(0, 0, 0, 0.8);
+            }
+            
+            /* Milestone cards enhanced on mobile */
+            .timeline-item.milestone .timeline-content {
+                animation: milestoneBorderGlow 2.5s ease-in-out infinite;
+            }
+            
+            .timeline-item.milestone .timeline-content:active {
+                box-shadow: 
+                    0 0 0 1px rgba(255, 255, 255, 0.9),
+                    0 0 40px rgba(255, 255, 255, 0.6),
+                    0 0 80px rgba(255, 255, 255, 0.4),
+                    0 20px 60px rgba(0, 0, 0, 0.9);
             }
             
             .timeline-year {
@@ -1487,6 +1585,13 @@
                 padding: 25px 15px;
             }
             
+            /* Keep border glow on small screens */
+            .story-content::before {
+                animation: borderGlow 3s ease-in-out infinite;
+                left: -3px;
+                width: 3px;
+            }
+            
             .story-text {
                 font-size: 15px;
             }
@@ -1497,6 +1602,12 @@
             
             .founders-label {
                 font-size: 9px;
+            }
+            
+            /* Founder links responsive on small screens */
+            .founder-link {
+                font-size: 13px;
+                padding: 8px 14px;
             }
             
             .today-title {
@@ -1518,6 +1629,48 @@
             .future-focus {
                 padding: 25px 15px;
             }
+            
+            /* Keep future focus glow on small screens */
+            .future-focus::before {
+                animation: borderGlow 3s ease-in-out infinite;
+                left: -3px;
+                width: 3px;
+            }
+            
+            .focus-item {
+                font-size: 13px;
+                padding: 10px 12px;
+            }
+            
+            .timeline-item {
+                padding-left: 50px;
+            }
+            
+            .timeline-content {
+                padding: 25px 20px;
+            }
+            
+            /* Keep all timeline animations on small screens */
+            .timeline-content {
+                animation: cardBorderGlow 3s ease-in-out infinite;
+            }
+            
+            .timeline-item.milestone .timeline-content {
+                animation: milestoneBorderGlow 2.5s ease-in-out infinite;
+            }
+            
+            .timeline-year {
+                font-size: 32px;
+            }
+            
+            .timeline-title {
+                font-size: 18px;
+            }
+            
+            .timeline-description {
+                font-size: 14px;
+            }
+        }
             
             .focus-item {
                 font-size: 13px;
@@ -1588,7 +1741,7 @@
                     BHAI Holdings LLC was established in 2020 to formalize and scale a portfolio of ventures spanning energy, mining, and financial technology. What began as independent projects across multiple sectors evolved into a unified holdings company with strategic oversight and disciplined capital allocation.
                 </p>
                 <p class="story-text">
-                    The company represents the convergence of complementary expertise: energy and mining operations, institutional banking and technology, and blockchain innovation. This combination enables BHAI Holdings to execute at both enterprise scale in traditional sectors and cutting-edge development in emerging technologies.
+                    The company represents the convergence of deep expertise: Jonathan J. Ferrucci and John Werth built successful ventures in oil & gas and gold mining, while Maaz Memon developed extensive experience in banking and financial technology. They each bring over 15 years of specialized experience to their respective domains—energy operations, mining development, and institutional finance—enabling BHAI Holdings to execute at both enterprise scale in traditional sectors and cutting-edge development in emerging technologies.
                 </p>
                 <div class="founders">
                     <div class="founders-label">Founded By</div>
