@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principles — BHAI Holdings</title>
+    
+    <meta name="description" content="The guiding principles that drive BHAI Holdings: Integrity, Excellence, Innovation, and Long-Term Value Creation.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100px 100px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 60px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: #AAAAAA;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            padding: 8px 16px;
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.6),
+                rgba(255, 255, 255, 0.3)
+            );
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            filter: blur(6px);
+        }
+        
+        .nav-link:hover::before {
+            opacity: 1;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 60px 80px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header */
+        .header-section {
+            text-align: center;
+            margin-bottom: 100px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .company-name {
+            font-size: 12px;
+            color: #888888;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .page-title {
+            font-size: 72px;
+            font-weight: 200;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        
+        .page-subtitle {
+            font-size: 20px;
+            color: #AAAAAA;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        /* Principles Section - Vertical Flow */
+        .principles-section {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .principle-item {
+            margin-bottom: 100px;
+            padding-left: 80px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+        
+        .principle-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Glowing number on the left */
+        .principle-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 64px;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.1);
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+        }
+        
+        .principle-item:hover .principle-number {
+            color: rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Vertical line with glow */
+        .principle-item::before {
+            content: '';
+            position: absolute;
+            left: 35px;
+            top: 0;
+            bottom: -100px;
+            width: 2px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.6),
+                rgba(255, 255, 255, 0.3)
+            );
+            box-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .principle-item:last-child::before {
+            display: none;
+        }
+        
+        /* Glowing dot on the line */
+        .principle-item::after {
+            content: '';
+            position: absolute;
+            left: 29px;
+            top: 30px;
+            width: 14px;
+            height: 14px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 255, 255, 0.5);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes dotPulse {
+            0%, 100% {
+                box-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 40px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                box-shadow: 
+                    0 0 30px rgba(255, 255, 255, 1),
+                    0 0 60px rgba(255, 255, 255, 0.8);
+                transform: scale(1.2);
+            }
+        }
+        
+        .principle-title {
+            font-size: 36px;
+            font-weight: 300;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+        
+        .principle-description {
+            font-size: 18px;
+            color: #AAAAAA;
+            line-height: 1.9;
+            font-weight: 300;
+            max-width: 700px;
+        }
+        
+        .principle-item:hover .principle-title {
+            color: #FFFFFF;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Core Values Section */
+        .values-section {
+            margin-top: 150px;
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-label {
+            font-size: 12px;
+            color: #666666;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .values-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .value-item {
+            padding: 40px 0;
+            padding-left: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .value-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Glowing left border on hover */
+        .value-item::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0.8)
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        .value-item:hover::before {
+            opacity: 1;
+        }
+        
+        .value-item:hover {
+            padding-left: 50px;
+            border-left-color: rgba(255, 255, 255, 1);
+        }
+        
+        .value-content {
+            flex: 1;
+        }
+        
+        .value-title {
+            font-size: 24px;
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .value-description {
+            font-size: 16px;
+            color: #888888;
+            line-height: 1.8;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-logo {
+                font-size: 12px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-link {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+            
+            .container {
+                padding: 100px 30px 60px;
+            }
+            
+            .page-title {
+                font-size: 42px;
+            }
+            
+            .page-subtitle {
+                font-size: 16px;
+            }
+            
+            .principle-item {
+                padding-left: 60px;
+                margin-bottom: 80px;
+            }
+            
+            .principle-number {
+                font-size: 48px;
+                left: 0;
+            }
+            
+            .principle-item::before {
+                left: 25px;
+            }
+            
+            .principle-item::after {
+                left: 19px;
+                top: 25px;
+            }
+            
+            .principle-title {
+                font-size: 28px;
+            }
+            
+            .principle-description {
+                font-size: 16px;
+            }
+            
+            .value-item {
+                padding: 30px 0 30px 30px;
+            }
+            
+            .value-item:hover {
+                padding-left: 35px;
+            }
+            
+            .value-title {
+                font-size: 20px;
+            }
+            
+            .value-description {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">BHAI HOLDINGS</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="explore.html" class="nav-link">Portfolio</a>
+            <a href="history.html" class="nav-link">History</a>
+            <a href="principles.html" class="nav-link active">Principles</a>
+            <a href="leadership.html" class="nav-link">Leadership</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header-section" role="banner">
+            <div class="company-name">BHAI Holdings</div>
+            <h1 class="page-title">Our Principles</h1>
+            <p class="page-subtitle">
+                The fundamental values and operating philosophy that guide every decision, investment, and partnership at BHAI Holdings.
+            </p>
+        </header>
+        
+        <!-- Principles Timeline -->
+        <section class="principles-section">
+            <!-- Principle 1 -->
+            <div class="principle-item">
+                <div class="principle-number">01</div>
+                <h2 class="principle-title">Integrity First</h2>
+                <p class="principle-description">
+                    We operate with unwavering ethical standards and transparency. Every transaction, partnership, and decision reflects our commitment to honest business practices and long-term trust building.
+                </p>
+            </div>
+            
+            <!-- Principle 2 -->
+            <div class="principle-item">
+                <div class="principle-number">02</div>
+                <h2 class="principle-title">Operational Excellence</h2>
+                <p class="principle-description">
+                    Excellence is not an aspiration—it's our baseline. We demand institutional-grade execution across all ventures, from oil field operations to AI trading systems, with zero tolerance for mediocrity.
+                </p>
+            </div>
+            
+            <!-- Principle 3 -->
+            <div class="principle-item">
+                <div class="principle-number">03</div>
+                <h2 class="principle-title">Strategic Innovation</h2>
+                <p class="principle-description">
+                    We bridge traditional industries with emerging technologies. Our portfolio combines proven asset classes—energy, mining—with cutting-edge AI and blockchain innovation, creating unique competitive advantages.
+                </p>
+            </div>
+            
+            <!-- Principle 4 -->
+            <div class="principle-item">
+                <div class="principle-number">04</div>
+                <h2 class="principle-title">Long-Term Value</h2>
+                <p class="principle-description">
+                    We build for decades, not quarters. Our investment horizon prioritizes sustainable growth, compounding returns, and generational wealth creation over short-term gains.
+                </p>
+            </div>
+            
+            <!-- Principle 5 -->
+            <div class="principle-item">
+                <div class="principle-number">05</div>
+                <h2 class="principle-title">Disciplined Capital</h2>
+                <p class="principle-description">
+                    Every dollar deployed undergoes rigorous analysis. We maintain strict allocation discipline, focusing on high-conviction opportunities with proven fundamentals and measurable risk-adjusted returns.
+                </p>
+            </div>
+            
+            <!-- Principle 6 -->
+            <div class="principle-item">
+                <div class="principle-number">06</div>
+                <h2 class="principle-title">Relentless Execution</h2>
+                <p class="principle-description">
+                    Strategy means nothing without execution. We combine strategic vision with operational intensity—scaling AERI to 450+ employees, executing $1B+ in trades, and converting oil assets to AI infrastructure demonstrates this commitment.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Core Values -->
+        <section class="values-section">
+            <div class="section-label">Core Values</div>
+            <div class="values-list">
+                <div class="value-item">
+                    <div class="value-content">
+                        <h3 class="value-title">Speed & Agility</h3>
+                        <p class="value-description">
+                            Markets move fast. We move faster. Decisive action backed by deep analysis.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-content">
+                        <h3 class="value-title">Results-Driven</h3>
+                        <p class="value-description">
+                            Performance is measured in outcomes, not activity. We deliver or we iterate.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-content">
+                        <h3 class="value-title">Partnership</h3>
+                        <p class="value-description">
+                            We build with the best. Strategic partnerships amplify our capabilities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // Scroll animation for principles
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.principle-item').forEach((item, index) => {
+            item.style.transitionDelay = (index * 0.15) + 's';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
