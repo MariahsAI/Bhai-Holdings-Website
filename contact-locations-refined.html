@@ -26,6 +26,79 @@
     <link rel="canonical" href="https://bhaiholdings.com/contact">
     
     <style>
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        
+        .preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .preloader-content {
+            text-align: center;
+        }
+        
+        .preloader-logo {
+            font-size: 36px;
+            font-weight: 500;
+            letter-spacing: 8px;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            animation: logoFadeIn 1.5s ease-in-out;
+        }
+        
+        .preloader-line {
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preloader-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 1), transparent);
+            animation: lineSlide 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes logoFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes lineSlide {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 200%;
+            }
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -332,6 +405,24 @@
             font-weight: 500;
         }
         
+        /* Live Clock Styling */
+        .live-clock {
+            font-size: 24px;
+            color: #FFFFFF;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .clock-label {
+            font-size: 10px;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+        
         .location-link {
             display: inline-block;
             font-size: 11px;
@@ -367,6 +458,30 @@
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.8);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Interactive Map */
+        .location-map {
+            width: 100%;
+            height: 300px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0;
+            overflow: hidden;
+            filter: grayscale(1) invert(1) contrast(0.9);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .location-map:hover {
+            opacity: 1;
+            filter: grayscale(0.8) invert(1) contrast(1);
+        }
+        
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
         
         /* Contact Section */
@@ -598,6 +713,14 @@
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">BHAI HOLDINGS</div>
+            <div class="preloader-line"></div>
+        </div>
+    </div>
+    
     <div class="container">
         <!-- Header -->
         <header class="header-section" role="banner">
@@ -635,15 +758,23 @@
                                 Midtown Manhattan
                             </div>
                             <div class="detail-item">
-                                <span class="detail-label">Timezone</span>
-                                Eastern (EST)
+                                <span class="detail-label">Local Time</span>
+                                <div class="live-clock" id="ny-clock">--:--:--</div>
+                                <div class="clock-label">Eastern Time (EST)</div>
                             </div>
                         </div>
                         
                         <a href="https://maps.google.com/?q=626+1st+Ave,+New+York,+NY+10016" 
                            target="_blank" 
                            rel="noopener"
-                           class="location-link">View Map</a>
+                           class="location-link">View on Google Maps</a>
+                        
+                        <div class="location-map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6744394618997!2d-73.97645708459395!3d40.74421797932847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2s626%201st%20Ave%2C%20New%20York%2C%20NY%2010016!5e0!3m2!1sen!2sus!4v1234567890" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
                 
@@ -667,15 +798,23 @@
                                 Al Muraqqabat, Deira
                             </div>
                             <div class="detail-item">
-                                <span class="detail-label">Timezone</span>
-                                Gulf Standard (GST)
+                                <span class="detail-label">Local Time</span>
+                                <div class="live-clock" id="dubai-clock">--:--:--</div>
+                                <div class="clock-label">Gulf Standard Time (GST)</div>
                             </div>
                         </div>
                         
                         <a href="https://maps.google.com/?q=K6+Al+Muraqqabat+Deira+Dubai+UAE" 
                            target="_blank" 
                            rel="noopener"
-                           class="location-link">View Map</a>
+                           class="location-link">View on Google Maps</a>
+                        
+                        <div class="location-map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7031234567!2d55.3284!3d25.2697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d1234567890%3A0x1234567890abcdef!2sAl%20Muraqqabat%2C%20Deira%20-%20Dubai!5e0!3m2!1sen!2sae!4v1234567890" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -707,4 +846,51 @@
                     <h3 class="contact-title">Strategic Partnerships</h3>
                     <a href="/cdn-cgi/l/email-protection#4d3d2c3f3923283f3e25243d3e0d2f252c242522212924232a3e632e2220" class="contact-email" aria-label="Email us about strategic partnerships">
                         <span class="__cf_email__" data-cfemail="a9d9c8dbddc7ccdbdac1c0d9dae9cbc1c8c0c1c6c5cdc0c7ceda87cac6c4">[email&#160;protected]</span>
- 
+                 </a>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer" role="contentinfo">
+            <p class="footer-text">© 2024 BHAI Holdings, LLC. All Rights Reserved.</p>
+        </footer>
+    </div>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(function() {
+                preloader.classList.add('fade-out');
+            }, 1500);
+        });
+        
+        // Live Clock Function
+        function updateClock(elementId, timezone) {
+            const clockElement = document.getElementById(elementId);
+            
+            function update() {
+                const now = new Date();
+                const options = {
+                    timeZone: timezone,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                };
+                
+                const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+                clockElement.textContent = timeString;
+            }
+            
+            update();
+            setInterval(update, 1000);
+        }
+        
+        // Initialize clocks
+        updateClock('ny-clock', 'America/New_York');
+        updateClock('dubai-clock', 'Asia/Dubai');
+    </script>
+</body>
+</html>
