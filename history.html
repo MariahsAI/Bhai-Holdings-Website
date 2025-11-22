@@ -126,13 +126,47 @@
             font-size: 12px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             font-weight: 400;
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        /* Glow effect on hover */
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.6),
+                rgba(255, 255, 255, 0.3)
+            );
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            filter: blur(6px);
+        }
+        
+        .nav-link:hover::before {
+            opacity: 1;
         }
         
         .nav-link:hover,
         .nav-link.active {
             color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-link.active::before {
+            opacity: 0.6;
         }
         
         * {
@@ -311,7 +345,45 @@
             padding: 60px 80px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            border-left: 4px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+        }
+        
+        /* Glowing left border effect */
+        .story-content::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0.4)
+            );
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 255, 255, 0.5),
+                0 0 60px rgba(255, 255, 255, 0.3);
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% {
+                opacity: 0.7;
+                box-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 40px rgba(255, 255, 255, 0.5),
+                    0 0 60px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                opacity: 1;
+                box-shadow: 
+                    0 0 30px rgba(255, 255, 255, 1),
+                    0 0 60px rgba(255, 255, 255, 0.8),
+                    0 0 90px rgba(255, 255, 255, 0.5);
+            }
         }
         
         .story-text {
@@ -339,6 +411,144 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 15px;
+        }
+        
+        .founder-link {
+            color: #E5E4E2;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        /* Shimmer effect on hover */
+        .founder-link::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.2) 50%,
+                transparent 70%
+            );
+            transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            transition: transform 0.6s ease;
+        }
+        
+        .founder-link:hover::before {
+            transform: translateX(100%) translateY(100%) rotate(45deg);
+        }
+        
+        /* Glow ring effect */
+        .founder-link::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 0.4)
+            );
+            border-radius: 25px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            filter: blur(8px);
+        }
+        
+        .founder-link:hover::after {
+            opacity: 1;
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                filter: blur(8px);
+                opacity: 0.6;
+            }
+            50% {
+                filter: blur(12px);
+                opacity: 1;
+            }
+        }
+        
+        .founder-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 10px 40px rgba(255, 255, 255, 0.4),
+                0 0 60px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Active/click effect */
+        .founder-link:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            z-index: 100;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        .scroll-progress::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.6),
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0.6)
+            );
+            border-radius: 2px;
+            transition: height 0.1s ease;
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 255, 255, 0.5);
+            animation: progressGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes progressGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 40px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                box-shadow: 
+                    0 0 30px rgba(255, 255, 255, 1),
+                    0 0 60px rgba(255, 255, 255, 0.8);
+            }
         }
         
         /* Timeline Section */
@@ -436,78 +646,184 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             position: relative;
             transition: all 0.4s ease;
-            overflow: hidden;
+            overflow: visible;
         }
         
-        /* Shimmer effect on hover */
+        /* Shimmer effect on hover - REMOVED (was annoying) */
         .timeline-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 30%,
-                rgba(255, 255, 255, 0.05) 50%,
-                transparent 70%
-            );
-            transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            transition: transform 0.8s ease;
+            display: none;
         }
         
-        .timeline-content:hover::before {
-            transform: translateX(100%) translateY(100%) rotate(45deg);
+        /* Ensure content is above any effects */
+        .timeline-year,
+        .timeline-title,
+        .timeline-description {
+            position: relative;
+            z-index: 1;
         }
         
         .timeline-item:nth-child(odd) .timeline-content {
             text-align: right;
-            border-right: 3px solid rgba(255, 255, 255, 0.3);
+            border-right: 4px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+        }
+        
+        /* Glowing right border for odd items */
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0.4)
+            );
+            box-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.5),
+                0 0 45px rgba(255, 255, 255, 0.3);
+            animation: borderGlow 3s ease-in-out infinite;
+            z-index: 2;
         }
         
         .timeline-item:nth-child(even) .timeline-content {
             text-align: left;
-            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            border-left: 4px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+        }
+        
+        /* Glowing left border for even items */
+        .timeline-item:nth-child(even) .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0.4)
+            );
+            box-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.5),
+                0 0 45px rgba(255, 255, 255, 0.3);
+            animation: borderGlow 3s ease-in-out infinite;
+            z-index: 2;
         }
         
         .timeline-content:hover {
             background: rgba(255, 255, 255, 0.04);
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-5px);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(255, 255, 255, 0.2),
+                0 0 120px rgba(255, 255, 255, 0.1);
         }
         
-        /* Vintage corner ornaments for milestones */
-        .timeline-item.milestone .timeline-content::before {
+        /* Glow effect on timeline cards */
+        .timeline-content::after {
             content: '';
             position: absolute;
-            top: -1px;
-            left: -1px;
-            width: 40px;
-            height: 40px;
-            border-top: 2px solid rgba(255, 255, 255, 0.4);
-            border-left: 2px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.4s ease;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.15),
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 0.15)
+            );
+            border-radius: 0;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            filter: blur(25px);
+            pointer-events: none;
+        }
+        
+        .timeline-content:hover::after {
+            opacity: 1;
+            animation: cardGlowPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes cardGlowPulse {
+            0%, 100% {
+                opacity: 0.8;
+                filter: blur(25px);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(35px);
+            }
+        }
+        
+        /* Enhanced glow for milestone cards */
+        .timeline-item.milestone .timeline-content {
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Enhanced glowing border for odd milestone cards */
+        .timeline-item.milestone:nth-child(odd) .timeline-content::before {
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 1),
+                0 0 40px rgba(255, 255, 255, 0.8),
+                0 0 60px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Enhanced glowing border for even milestone cards */
+        .timeline-item.milestone:nth-child(even) .timeline-content::before {
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 1),
+                0 0 40px rgba(255, 255, 255, 0.8),
+                0 0 60px rgba(255, 255, 255, 0.5);
         }
         
         .timeline-item.milestone .timeline-content::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            right: -1px;
-            width: 40px;
-            height: 40px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-            border-right: 2px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.4s ease;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.25),
+                rgba(255, 255, 255, 0.6),
+                rgba(255, 255, 255, 0.25)
+            );
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
         }
         
-        .timeline-item.milestone .timeline-content:hover::before,
-        .timeline-item.milestone .timeline-content:hover::after {
-            width: 50px;
-            height: 50px;
-            border-color: rgba(255, 255, 255, 0.8);
+        .timeline-item.milestone .timeline-content:hover {
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.9),
+                0 0 120px rgba(255, 255, 255, 0.5),
+                0 0 180px rgba(255, 255, 255, 0.3);
         }
+        
+        .timeline-item.milestone .timeline-content:hover::after {
+            opacity: 1;
+            filter: blur(40px);
+            animation: milestoneGlowPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes milestoneGlowPulse {
+            0%, 100% {
+                opacity: 0.9;
+                filter: blur(40px);
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(50px);
+                transform: scale(1.05);
+            }
+        }
+        
+        /* Vintage corner ornaments for milestones - REMOVED to avoid conflict with glowing borders */
+        /* Milestone cards now only have enhanced glow effects */
         
         .timeline-year {
             font-size: 48px;
@@ -682,13 +998,71 @@
             padding: 40px 30px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background glow effect */
+        .today-stat::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.6s ease;
+            opacity: 0;
+        }
+        
+        .today-stat:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        
+        /* Outer glow ring */
+        .today-stat::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.6),
+                rgba(255, 255, 255, 0.3)
+            );
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            filter: blur(12px);
+        }
+        
+        .today-stat:hover::after {
+            opacity: 1;
+            animation: glowRotate 3s linear infinite;
+        }
+        
+        @keyframes glowRotate {
+            0% {
+                filter: blur(12px) hue-rotate(0deg);
+            }
+            100% {
+                filter: blur(12px) hue-rotate(360deg);
+            }
         }
         
         .today-stat:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(255, 255, 255, 0.3),
+                0 0 120px rgba(255, 255, 255, 0.2);
         }
         
         .stat-icon {
@@ -749,6 +1123,29 @@
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-top: 3px solid rgba(255, 255, 255, 0.3);
+            border-left: 4px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+        }
+        
+        /* Glowing left border for future focus */
+        .future-focus::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0.4)
+            );
+            box-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.5),
+                0 0 45px rgba(255, 255, 255, 0.3);
+            animation: borderGlow 3s ease-in-out infinite;
+            z-index: 1;
         }
         
         .focus-title {
@@ -773,13 +1170,58 @@
             color: #CCCCCC;
             padding: 15px 20px;
             border-left: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        /* Glow bar on left */
+        .focus-item::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0.8)
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        .focus-item:hover::before {
+            opacity: 1;
+        }
+        
+        /* Background glow */
+        .focus-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: linear-gradient(90deg,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+        
+        .focus-item:hover::after {
+            width: 100%;
         }
         
         .focus-item:hover {
-            border-left-color: rgba(255, 255, 255, 0.6);
-            padding-left: 30px;
+            border-left-color: rgba(255, 255, 255, 1);
+            padding-left: 35px;
             color: #FFFFFF;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 30px rgba(255, 255, 255, 0.1);
         }
         
         /* Footer */
@@ -868,6 +1310,11 @@
             .nav-link {
                 font-size: 9px;
                 padding: 6px 12px;
+            }
+            
+            /* Hide scroll progress on mobile */
+            .scroll-progress {
+                display: none;
             }
             
             .container {
@@ -1081,6 +1528,9 @@
         </div>
     </nav>
     
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
     <div class="container">
         <!-- Header -->
         <header class="header-section" role="banner">
@@ -1096,17 +1546,18 @@
         <section class="story-section">
             <div class="story-content">
                 <p class="story-text">
-                    BHAI Holdings represents the culmination of over a decade of strategic investments and operational expertise across multiple sectors. The story begins with three accomplished professionals: Jonathan J. Ferrucci and John Werth built successful ventures in oil & gas and gold mining since 2010, while Maaz Memon developed an exceptional 14-year career in traditional banking and technology—working with OKTA, Federal Reserve Bank projects, leading HSBC's $450M Global Wallet transformation program, and consulting for Expedia to create their first multi-currency payment platform.
+                    BHAI Holdings LLC was established in 2020 to formalize and scale a portfolio of ventures spanning energy, mining, and financial technology. What began as independent projects across multiple sectors evolved into a unified holdings company with strategic oversight and disciplined capital allocation.
                 </p>
                 <p class="story-text">
-                    Maaz's journey from India to New York City included groundbreaking achievements: becoming the first international student elected to the SUNY Council Board of Trustees, managing a $4M+ student budget, and earning his MBA from NYU Stern School of Business. He became a recognized voice in the global blockchain and Web3 community, speaking at Austin Consensus, Bitcoin Conference, NFT NYC, NFT Miami, and the Metaverse Summit in Paris. In 2017, the three founders discovered a shared interest in cryptocurrency trading. This partnership evolved into multiple fintech ventures—GloFi (2022), RSVIP (2023), and MX1 (2024)—combining Jonathan and John's energy and mining expertise with Maaz's institutional banking experience and blockchain innovation credentials.
-                </p>
-                <p class="story-text">
-                    In 2020, they formalized their collective vision under BHAI Holdings LLC, creating a unified platform that brings enterprise-scale technology capabilities to traditional asset sectors.
+                    The company represents the convergence of complementary expertise: energy and mining operations, institutional banking and technology, and blockchain innovation. This combination enables BHAI Holdings to execute at both enterprise scale in traditional sectors and cutting-edge development in emerging technologies.
                 </p>
                 <div class="founders">
                     <div class="founders-label">Founded By</div>
-                    Jonathan J. Ferrucci, John Werth & Maaz Memon
+                    <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                        <a href="jonathan-ferrucci.html" class="founder-link">Jonathan J. Ferrucci</a>
+                        <a href="john-werth.html" class="founder-link">John Werth</a>
+                        <a href="maaz-memon.html" class="founder-link">Maaz Memon</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1122,9 +1573,9 @@
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2010</div>
-                        <h3 class="timeline-title">Oil & Gas Origins</h3>
+                        <h3 class="timeline-title">Oil & Gas Operations Begin</h3>
                         <p class="timeline-description">
-                            Jonathan J. Ferrucci and John Werth established strategic oil and gas exploration ventures. Initial investments focused on proven reserves and development opportunities in domestic markets, building the foundation for BHAI's energy portfolio.
+                            Strategic entry into oil and gas exploration. Initial investments focused on proven reserves and development opportunities in domestic markets, establishing the foundation for BHAI's energy portfolio.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -1137,9 +1588,9 @@
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2017</div>
-                        <h3 class="timeline-title">Blockchain & Cryptocurrency Trading Begins</h3>
+                        <h3 class="timeline-title">Cryptocurrency Trading & Blockchain Expertise</h3>
                         <p class="timeline-description">
-                            Jonathan J. Ferrucci, John Werth, and Maaz Memon began trading cryptocurrency together. Maaz brought deep blockchain expertise, having become a recognized speaker at major industry events including Austin Consensus, Bitcoin Conference, NFT NYC, NFT Miami, and the Metaverse Summit in Paris. This collaboration combined energy/mining market expertise with institutional finance and emerging technology innovation, laying the groundwork for future fintech ventures.
+                            Entry into cryptocurrency markets and blockchain technology. This marked the beginning of fintech operations that would evolve into proprietary trading platforms and financial technology infrastructure, combining traditional finance expertise with emerging digital asset innovation.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -1152,9 +1603,9 @@
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2018</div>
-                        <h3 class="timeline-title">Gold Mining Entry</h3>
+                        <h3 class="timeline-title">Gold Mining Expansion</h3>
                         <p class="timeline-description">
-                            Jonathan J. Ferrucci and John Werth expanded their energy expertise into precious metals mining with strategic investments in gold exploration and development projects. Focus on assets with proven geological potential and NI 43-101 compliant resources.
+                            Diversification into precious metals mining with strategic investments in gold exploration and development projects. Focus on assets with proven geological potential and NI 43-101 compliant resources, expanding the portfolio beyond energy.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -1169,7 +1620,7 @@
                         <div class="timeline-year">2020</div>
                         <h3 class="timeline-title">BHAI Holdings LLC Established</h3>
                         <p class="timeline-description">
-                            Jonathan J. Ferrucci, John Werth, and Maaz Memon unified their respective ventures under BHAI Holdings LLC. This consolidation brought together deep expertise in energy, mining, and financial technology, creating a diversified platform with strategic oversight and disciplined capital allocation.
+                            Formalization of the holdings company structure. Independent ventures across energy, mining, and emerging fintech operations unified under BHAI Holdings LLC, creating a diversified platform with strategic oversight, disciplined capital allocation, and institutional-grade operational capabilities.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -1183,9 +1634,9 @@
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2022</div>
-                        <h3 class="timeline-title">Fintech Expansion: GloFi</h3>
+                        <h3 class="timeline-title">Fintech Expansion: GloFi Launch</h3>
                         <p class="timeline-description">
-                            Maaz Memon founded GloFi after recognizing the gap between emerging blockchain technology and traditional financial systems through his 14 years building projects for major institutions including OKTA, Federal Reserve Bank, HSBC ($450M transformation program), and Expedia (first multi-currency payment platform). He assembled a talented team to build infrastructure seamlessly connecting blockchain payment systems with traditional finance, addressing the $100 trillion interoperability problem and enabling everyday consumers to utilize their digital and traditional assets to full potential.
+                            Launch of GloFi, a next-generation financial technology platform addressing the $100 trillion interoperability problem. Built to bridge blockchain payment infrastructure with traditional finance, enabling seamless cross-platform asset management and financial services integration for consumers and institutions.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -1200,7 +1651,7 @@
                         <div class="timeline-year">2023</div>
                         <h3 class="timeline-title">RSVIP Platform Launch</h3>
                         <p class="timeline-description">
-                            Maaz Memon and Jonathan J. Ferrucci co-founded RSVIP, a premium event management and networking platform for high-value communities. The platform streamlines exclusive events with intelligent automation and VIP experience management.
+                            Introduction of RSVIP, a premium event management and networking platform for high-value communities. Streamlines exclusive events with intelligent automation and VIP experience management, expanding the fintech portfolio into event technology.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -1213,9 +1664,9 @@
                 <div class="timeline-item milestone">
                     <div class="timeline-content">
                         <div class="timeline-year">2024</div>
-                        <h3 class="timeline-title">MX1 Trading Platform & 2.5M Barrels Proved</h3>
+                        <h3 class="timeline-title">MX1 Platform & Energy Milestone</h3>
                         <p class="timeline-description">
-                            Jonathan J. Ferrucci and John Werth founded MX1, an AI-powered cryptocurrency trading platform featuring Mariah™—13 specialized AI agents working 24/7. Simultaneously achieved major energy milestone with NI 51-101 compliant reserves report confirming 2.5 million barrels of proved oil reserves.
+                            Launch of MX1, an AI-powered cryptocurrency trading platform featuring Mariah™—13 specialized AI agents operating 24/7. Simultaneously achieved major energy portfolio milestone with NI 51-101 compliant reserves report confirming 2.5 million barrels of proved oil reserves, demonstrating technical capability across both traditional and emerging asset classes.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -1334,6 +1785,38 @@
         timelineItems.forEach(item => {
             observer.observe(item);
         });
+        
+        // Scroll Progress Indicator
+        window.addEventListener('scroll', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Calculate scroll percentage
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+            
+            // Update the progress bar height
+            if (scrollProgress) {
+                scrollProgress.style.setProperty('--scroll-height', scrollPercentage + '%');
+                scrollProgress.querySelector('::before') || 
+                    (scrollProgress.style.background = `linear-gradient(to bottom, 
+                        rgba(255, 255, 255, 0.6) ${scrollPercentage}%, 
+                        rgba(255, 255, 255, 0.1) ${scrollPercentage}%)`);
+            }
+        });
+        
+        // Alternative method using CSS custom property
+        const style = document.createElement('style');
+        style.textContent = `
+            .scroll-progress::before {
+                height: var(--scroll-height, 0%);
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Update on load
+        window.dispatchEvent(new Event('scroll'));
     </script>
 </body>
 </html>
