@@ -266,6 +266,7 @@
                 0 20px 60px rgba(0,0,0,0.8);
             overflow: hidden;
             flex-shrink: 0;
+            z-index: 5;
         }
         
         .venture-planet:hover {
@@ -290,22 +291,12 @@
             z-index: 2;
         }
         
-        /* Center dot connector */
-        .venture-connector {
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%);
-            border-radius: 50%;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-        }
         
         .venture-info {
             flex: 1;
             padding: 0 80px;
+            position: relative;
+            z-index: 10;
         }
         
         .venture-item:nth-child(odd) .venture-info {
@@ -329,6 +320,22 @@
             margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 2px;
+            position: relative;
+        }
+        
+        /* Connector dot aligned with title heading */
+        .venture-item::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #A8A8A8 0%, #FFF 50%, #A8A8A8 100%);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 90px;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
         }
         
         .venture-description {
@@ -882,7 +889,6 @@
             <!-- Venture 1: AI & ML -->
             <div class="venture-item">
                 <div class="venture-planet planet-ai" onclick="showPlanetDetails('ai')"></div>
-                <div class="venture-connector"></div>
                 <div class="venture-info">
                     <h3 class="venture-title">AI & ML</h3>
                     <p class="venture-description">Leveraging cutting-edge artificial intelligence and machine learning technologies to revolutionize industries and create unprecedented value.</p>
@@ -893,7 +899,6 @@
             <!-- Venture 2: Web3 -->
             <div class="venture-item">
                 <div class="venture-planet planet-web3" onclick="showPlanetDetails('web3')"></div>
-                <div class="venture-connector"></div>
                 <div class="venture-info">
                     <h3 class="venture-title">Web3</h3>
                     <p class="venture-description">Building the infrastructure for Web3, blockchain technology, and decentralized applications that will power the next generation of the internet.</p>
@@ -904,7 +909,6 @@
             <!-- Venture 3: Energy -->
             <div class="venture-item">
                 <div class="venture-planet planet-energy" onclick="showPlanetDetails('energy')"></div>
-                <div class="venture-connector"></div>
                 <div class="venture-info">
                     <h3 class="venture-title">Energy</h3>
                     <p class="venture-description">Investing in renewable energy infrastructure and innovative power generation technologies to create a sustainable future.</p>
@@ -915,7 +919,6 @@
             <!-- Venture 4: Space Tech -->
             <div class="venture-item">
                 <div class="venture-planet planet-space" onclick="showPlanetDetails('space')"></div>
-                <div class="venture-connector"></div>
                 <div class="venture-info">
                     <h3 class="venture-title">Space Tech</h3>
                     <p class="venture-description">Pioneering space technology and exploration initiatives to expand humanity's reach beyond our planet.</p>
@@ -926,7 +929,6 @@
             <!-- Venture 5: HealthTech -->
             <div class="venture-item">
                 <div class="venture-planet planet-health" onclick="showPlanetDetails('health')"></div>
-                <div class="venture-connector"></div>
                 <div class="venture-info">
                     <h3 class="venture-title">HealthTech</h3>
                     <p class="venture-description">Transforming healthcare through technology, improving patient outcomes, and making quality care accessible to all.</p>
@@ -937,7 +939,6 @@
             <!-- Venture 6: Smart Cities -->
             <div class="venture-item">
                 <div class="venture-planet planet-cities" onclick="showPlanetDetails('cities')"></div>
-                <div class="venture-connector"></div>
                 <div class="venture-info">
                     <h3 class="venture-title">Smart Cities</h3>
                     <p class="venture-description">Designing and implementing smart city solutions that make urban living more efficient, sustainable, and connected.</p>
