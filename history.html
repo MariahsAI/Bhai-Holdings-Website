@@ -90,6 +90,51 @@
             100% { left: 200%; }
         }
         
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 60px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: #AAAAAA;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-weight: 400;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #FFFFFF;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -237,6 +282,27 @@
         .story-section {
             margin-bottom: 120px;
             text-align: center;
+            position: relative;
+        }
+        
+        /* Decorative flourish after story */
+        .story-section::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 60px;
+            background-image: url("data:image/svg+xml,%3Csvg width='200' height='60' viewBox='0 0 200 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 30 Q40 15, 60 30 T100 30 Q120 15, 140 30 T180 30' stroke='rgba(255,255,255,0.2)' stroke-width='1' fill='none'/%3E%3Ccircle cx='100' cy='30' r='6' fill='rgba(255,255,255,0.15)'/%3E%3Cpath d='M95 25 L100 30 L105 25' stroke='rgba(255,255,255,0.3)' stroke-width='1' fill='none'/%3E%3Cpath d='M95 35 L100 30 L105 35' stroke='rgba(255,255,255,0.3)' stroke-width='1' fill='none'/%3E%3Cpath d='M15 30 L25 30 M175 30 L185 30' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: flourishFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes flourishFloat {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.9; transform: translateX(-50%) translateY(-5px); }
         }
         
         .story-content {
@@ -279,6 +345,21 @@
         .timeline-section {
             position: relative;
             padding: 60px 0;
+        }
+        
+        /* Decorative flourish before timeline */
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 80px;
+            background-image: url("data:image/svg+xml,%3Csvg width='150' height='80' viewBox='0 0 150 80' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 40 Q30 20, 50 40 T90 40 Q110 20, 130 40' stroke='rgba(255,255,255,0.2)' stroke-width='1' fill='none'/%3E%3Ccircle cx='75' cy='40' r='8' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='1'/%3E%3Cpath d='M70 35 L75 40 L80 35 M70 45 L75 40 L80 45' stroke='rgba(255,255,255,0.3)' stroke-width='1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.6;
         }
         
         .section-label {
@@ -355,6 +436,29 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             position: relative;
             transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        
+        /* Shimmer effect on hover */
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.05) 50%,
+                transparent 70%
+            );
+            transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            transition: transform 0.8s ease;
+        }
+        
+        .timeline-content:hover::before {
+            transform: translateX(100%) translateY(100%) rotate(45deg);
         }
         
         .timeline-item:nth-child(odd) .timeline-content {
@@ -373,12 +477,60 @@
             transform: translateY(-5px);
         }
         
+        /* Vintage corner ornaments for milestones */
+        .timeline-item.milestone .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 40px;
+            height: 40px;
+            border-top: 2px solid rgba(255, 255, 255, 0.4);
+            border-left: 2px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s ease;
+        }
+        
+        .timeline-item.milestone .timeline-content::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 40px;
+            height: 40px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+            border-right: 2px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s ease;
+        }
+        
+        .timeline-item.milestone .timeline-content:hover::before,
+        .timeline-item.milestone .timeline-content:hover::after {
+            width: 50px;
+            height: 50px;
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        
         .timeline-year {
             font-size: 48px;
             font-weight: 200;
             color: #FFFFFF;
             letter-spacing: 2px;
             margin-bottom: 15px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-content:hover .timeline-year {
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        /* Vintage letterpress effect on milestone years */
+        .timeline-item.milestone .timeline-year {
+            position: relative;
+            background: linear-gradient(135deg, #FFFFFF 0%, #E5E4E2 50%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
         
         .timeline-title {
@@ -422,6 +574,41 @@
             border-color: rgba(255, 255, 255, 1);
             box-shadow: 0 0 50px rgba(255, 255, 255, 0.8);
             animation: pulseDot 2s ease-in-out infinite;
+            position: relative;
+        }
+        
+        /* Wax seal effect */
+        .timeline-item.milestone .timeline-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 70%, transparent 100%);
+            border-radius: 50%;
+        }
+        
+        /* Decorative rays around milestone */
+        .timeline-item.milestone .timeline-dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L30 10 M30 50 L30 55 M5 30 L10 30 M50 30 L55 30 M12 12 L16 16 M44 44 L48 48 M12 48 L16 44 M44 16 L48 12' stroke='rgba(255,255,255,0.3)' stroke-width='1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: rotateSeal 8s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes rotateSeal {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
         @keyframes pulseDot {
@@ -449,6 +636,150 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
             white-space: nowrap;
+        }
+        
+        /* Today & Beyond Section */
+        .today-section {
+            margin: 120px 0 100px;
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .today-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .today-title {
+            font-size: 48px;
+            font-weight: 200;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .today-description {
+            font-size: 18px;
+            font-weight: 300;
+            color: #CCCCCC;
+            line-height: 1.9;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .today-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .today-stat {
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .today-stat:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+            animation: iconGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes iconGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.6));
+                transform: scale(1.05);
+            }
+        }
+        
+        .stat-icon svg {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .stat-icon svg circle,
+        .stat-icon svg path {
+            transition: all 0.4s ease;
+        }
+        
+        .today-stat:hover .stat-icon svg circle {
+            stroke: rgba(255, 255, 255, 0.8);
+        }
+        
+        .today-stat:hover .stat-icon svg path {
+            stroke: rgba(255, 255, 255, 1);
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: 200;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #AAAAAA;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .future-focus {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .focus-title {
+            font-size: 20px;
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        
+        .focus-items {
+            display: grid;
+            gap: 15px;
+            text-align: left;
+        }
+        
+        .focus-item {
+            font-size: 16px;
+            font-weight: 300;
+            color: #CCCCCC;
+            padding: 15px 20px;
+            border-left: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .focus-item:hover {
+            border-left-color: rgba(255, 255, 255, 0.6);
+            padding-left: 30px;
+            color: #FFFFFF;
         }
         
         /* Footer */
@@ -482,6 +813,23 @@
         
         /* Responsive */
         @media (max-width: 1024px) {
+            .nav {
+                padding: 15px 30px;
+            }
+            
+            .nav-links {
+                gap: 25px;
+            }
+            
+            .nav-link {
+                font-size: 11px;
+            }
+            
+            .today-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
             .timeline-line {
                 left: 30px;
             }
@@ -505,20 +853,79 @@
         }
         
         @media (max-width: 768px) {
+            .nav-logo {
+                font-size: 12px;
+                letter-spacing: 2px;
+            }
+            
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .nav-link {
+                font-size: 9px;
+                padding: 6px 12px;
+            }
+            
             .container {
-                padding: 80px 30px;
+                padding: 80px 20px;
             }
             
             .page-title {
-                font-size: 48px;
+                font-size: 36px;
+            }
+            
+            .page-subtitle {
+                font-size: 14px;
+            }
+            
+            .company-divider {
+                width: 250px;
             }
             
             .story-content {
-                padding: 40px 30px;
+                padding: 30px 20px;
             }
             
             .story-text {
-                font-size: 17px;
+                font-size: 16px;
+            }
+            
+            .today-title {
+                font-size: 32px;
+            }
+            
+            .today-description {
+                font-size: 16px;
+            }
+            
+            .today-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-icon svg {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .stat-number {
+                font-size: 36px;
+            }
+            
+            .future-focus {
+                padding: 30px 20px;
+            }
+            
+            .focus-title {
+                font-size: 12px;
+            }
+            
+            .focus-item {
+                font-size: 14px;
+                padding: 12px 15px;
             }
             
             .timeline-item {
@@ -537,6 +944,120 @@
             .timeline-title {
                 font-size: 20px;
             }
+            
+            .header-section {
+                margin-bottom: 80px;
+                padding-bottom: 40px;
+            }
+            
+            .today-section {
+                margin: 80px 0 60px;
+                padding: 50px 0;
+            }
+            
+            .section-label {
+                font-size: 9px;
+                letter-spacing: 3px;
+                margin-bottom: 60px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav {
+                padding: 12px 15px;
+            }
+            
+            .nav-logo {
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+            
+            .nav-links {
+                gap: 8px;
+            }
+            
+            .nav-link {
+                font-size: 8px;
+                padding: 5px 10px;
+            }
+            
+            .container {
+                padding: 60px 15px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .page-subtitle {
+                font-size: 13px;
+            }
+            
+            .company-divider {
+                width: 200px;
+            }
+            
+            .story-content {
+                padding: 25px 15px;
+            }
+            
+            .story-text {
+                font-size: 15px;
+            }
+            
+            .founders {
+                font-size: 14px;
+            }
+            
+            .founders-label {
+                font-size: 9px;
+            }
+            
+            .today-title {
+                font-size: 28px;
+            }
+            
+            .today-description {
+                font-size: 15px;
+            }
+            
+            .stat-number {
+                font-size: 32px;
+            }
+            
+            .stat-label {
+                font-size: 11px;
+            }
+            
+            .future-focus {
+                padding: 25px 15px;
+            }
+            
+            .focus-item {
+                font-size: 13px;
+                padding: 10px 12px;
+            }
+            
+            .timeline-content {
+                padding: 25px 20px;
+            }
+            
+            .timeline-year {
+                font-size: 32px;
+            }
+            
+            .timeline-title {
+                font-size: 18px;
+            }
+            
+            .timeline-description {
+                font-size: 14px;
+            }
+            
+            .milestone-badge {
+                font-size: 8px;
+                padding: 5px 10px;
+            }
         }
     </style>
 </head>
@@ -548,6 +1069,17 @@
             <div class="preloader-line"></div>
         </div>
     </div>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">BHAI HOLDINGS</div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="explore.html" class="nav-link">Portfolio</a>
+            <a href="history.html" class="nav-link active">History</a>
+            <a href="contact-locations-refined.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
     
     <div class="container">
         <!-- Header -->
@@ -564,10 +1096,13 @@
         <section class="story-section">
             <div class="story-content">
                 <p class="story-text">
-                    BHAI Holdings represents the culmination of over a decade of strategic investments and operational expertise across multiple sectors. The story begins with three accomplished professionals, each bringing deep domain expertise: Jonathan J. Ferrucci and John Werth built successful ventures in oil & gas and gold mining, while Maaz Memon developed extensive experience in banking and financial technology over 15 years.
+                    BHAI Holdings represents the culmination of over a decade of strategic investments and operational expertise across multiple sectors. The story begins with three accomplished professionals: Jonathan J. Ferrucci and John Werth built successful ventures in oil & gas and gold mining since 2010, while Maaz Memon developed an exceptional 14-year career in traditional banking and technology—working with OKTA, Federal Reserve Bank projects, leading HSBC's $450M Global Wallet transformation program, and consulting for Expedia to create their first multi-currency payment platform.
                 </p>
                 <p class="story-text">
-                    In 2020, these independent ventures and expertise were unified under BHAI Holdings LLC, creating a diversified platform to manage and scale their portfolio of wholly-owned subsidiaries and strategic partnerships across energy, mining, and fintech.
+                    Maaz's journey from India to New York City included groundbreaking achievements: becoming the first international student elected to the SUNY Council Board of Trustees, managing a $4M+ student budget, and earning his MBA from NYU Stern School of Business. He became a recognized voice in the global blockchain and Web3 community, speaking at Austin Consensus, Bitcoin Conference, NFT NYC, NFT Miami, and the Metaverse Summit in Paris. In 2017, the three founders discovered a shared interest in cryptocurrency trading. This partnership evolved into multiple fintech ventures—GloFi (2022), RSVIP (2023), and MX1 (2024)—combining Jonathan and John's energy and mining expertise with Maaz's institutional banking experience and blockchain innovation credentials.
+                </p>
+                <p class="story-text">
+                    In 2020, they formalized their collective vision under BHAI Holdings LLC, creating a unified platform that brings enterprise-scale technology capabilities to traditional asset sectors.
                 </p>
                 <div class="founders">
                     <div class="founders-label">Founded By</div>
@@ -602,9 +1137,9 @@
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <div class="timeline-year">2017</div>
-                        <h3 class="timeline-title">Fintech Expansion</h3>
+                        <h3 class="timeline-title">Blockchain & Cryptocurrency Trading Begins</h3>
                         <p class="timeline-description">
-                            Leveraging Maaz Memon's 15 years of banking and financial technology expertise, development began on proprietary trading platforms and financial services infrastructure. These ventures would evolve into MX1, GloFi, and RSVIP—transforming traditional finance through technology.
+                            Jonathan J. Ferrucci, John Werth, and Maaz Memon began trading cryptocurrency together. Maaz brought deep blockchain expertise, having become a recognized speaker at major industry events including Austin Consensus, Bitcoin Conference, NFT NYC, NFT Miami, and the Metaverse Summit in Paris. This collaboration combined energy/mining market expertise with institutional finance and emerging technology innovation, laying the groundwork for future fintech ventures.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -644,13 +1179,43 @@
                     <div style="width: calc(50% - 50px);"></div>
                 </div>
                 
+                <!-- 2022 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2022</div>
+                        <h3 class="timeline-title">Fintech Expansion: GloFi</h3>
+                        <p class="timeline-description">
+                            Maaz Memon founded GloFi after recognizing the gap between emerging blockchain technology and traditional financial systems through his 14 years building projects for major institutions including OKTA, Federal Reserve Bank, HSBC ($450M transformation program), and Expedia (first multi-currency payment platform). He assembled a talented team to build infrastructure seamlessly connecting blockchain payment systems with traditional finance, addressing the $100 trillion interoperability problem and enabling everyday consumers to utilize their digital and traditional assets to full potential.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div style="width: calc(50% - 50px);"></div>
+                </div>
+                
+                <!-- 2023 -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023</div>
+                        <h3 class="timeline-title">RSVIP Platform Launch</h3>
+                        <p class="timeline-description">
+                            Maaz Memon and Jonathan J. Ferrucci co-founded RSVIP, a premium event management and networking platform for high-value communities. The platform streamlines exclusive events with intelligent automation and VIP experience management.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div style="width: calc(50% - 50px);"></div>
+                </div>
+                
                 <!-- 2024 -->
                 <div class="timeline-item milestone">
                     <div class="timeline-content">
                         <div class="timeline-year">2024</div>
-                        <h3 class="timeline-title">2.5M Barrels Proved</h3>
+                        <h3 class="timeline-title">MX1 Trading Platform & 2.5M Barrels Proved</h3>
                         <p class="timeline-description">
-                            Achieved major milestone in oil & gas portfolio with NI 51-101 compliant reserves report confirming 2.5 million barrels of proved reserves. Demonstrated technical capability and asset quality.
+                            Jonathan J. Ferrucci and John Werth founded MX1, an AI-powered cryptocurrency trading platform featuring Mariah™—13 specialized AI agents working 24/7. Simultaneously achieved major energy milestone with NI 51-101 compliant reserves report confirming 2.5 million barrels of proved oil reserves.
                         </p>
                     </div>
                     <div class="timeline-marker">
@@ -674,6 +1239,63 @@
                         <div class="timeline-dot"></div>
                     </div>
                     <div style="width: calc(50% - 50px);"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Today & Beyond Section -->
+        <section class="today-section">
+            <div class="today-content">
+                <h2 class="today-title">Today & Beyond</h2>
+                <p class="today-description">
+                    BHAI Holdings continues to execute on a disciplined strategy of growth and operational excellence. Our portfolio spans three core sectors with proven revenue generation, institutional-grade infrastructure, and Fortune 100-level technology expertise.
+                </p>
+                
+                <div class="today-stats">
+                    <div class="today-stat">
+                        <div class="stat-icon">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="30" cy="30" r="28" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                <path d="M30 10 L32 20 L42 18 L34 28 L44 32 L34 36 L42 46 L32 44 L30 54 L28 44 L18 46 L26 36 L16 32 L26 28 L18 18 L28 20 Z" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+                                <circle cx="30" cy="30" r="8" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+                            </svg>
+                        </div>
+                        <div class="stat-number">$1B+</div>
+                        <div class="stat-label">Trading Volume</div>
+                    </div>
+                    <div class="today-stat">
+                        <div class="stat-icon">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="30" cy="30" r="28" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                <path d="M20 35 L25 25 L30 40 L35 20 L40 30" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
+                                <circle cx="30" cy="15" r="3" fill="rgba(255,255,255,0.8)"/>
+                                <path d="M25 45 L35 45 M30 42 L30 48" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <div class="stat-number">2.5M</div>
+                        <div class="stat-label">Barrels Proved</div>
+                    </div>
+                    <div class="today-stat">
+                        <div class="stat-icon">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="30" cy="30" r="28" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                <path d="M30 15 L35 25 L45 26 L37 34 L39 44 L30 39 L21 44 L23 34 L15 26 L25 25 Z" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"/>
+                                <circle cx="30" cy="30" r="5" fill="rgba(255,255,255,0.3)"/>
+                            </svg>
+                        </div>
+                        <div class="stat-number">30K+</div>
+                        <div class="stat-label">Oz Gold Discovered</div>
+                    </div>
+                </div>
+                
+                <div class="future-focus">
+                    <h3 class="focus-title">Strategic Focus</h3>
+                    <div class="focus-items">
+                        <div class="focus-item">Scaling MX1 platform to institutional clients</div>
+                        <div class="focus-item">Expanding Middle East operations from Dubai hub</div>
+                        <div class="focus-item">Developing oil & gas assets to production</div>
+                        <div class="focus-item">Advancing gold mining projects to feasibility</div>
+                    </div>
                 </div>
             </div>
         </section>
