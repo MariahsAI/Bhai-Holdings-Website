@@ -507,15 +507,14 @@
         /* Scroll Progress Indicator */
         .scroll-progress {
             position: fixed;
-            right: 30px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            width: 4px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
+            width: 2px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1px;
             z-index: 100;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
         
         .scroll-progress::before {
@@ -526,29 +525,15 @@
             width: 100%;
             height: 0%;
             background: linear-gradient(180deg,
-                rgba(255, 255, 255, 0.6),
+                rgba(255, 255, 255, 0.3),
                 rgba(255, 255, 255, 1),
-                rgba(255, 255, 255, 0.6)
+                rgba(255, 255, 255, 0.3)
             );
-            border-radius: 2px;
+            border-radius: 1px;
             transition: height 0.1s ease;
             box-shadow: 
-                0 0 20px rgba(255, 255, 255, 0.8),
-                0 0 40px rgba(255, 255, 255, 0.5);
-            animation: progressGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes progressGlow {
-            0%, 100% {
-                box-shadow: 
-                    0 0 20px rgba(255, 255, 255, 0.8),
-                    0 0 40px rgba(255, 255, 255, 0.5);
-            }
-            50% {
-                box-shadow: 
-                    0 0 30px rgba(255, 255, 255, 1),
-                    0 0 60px rgba(255, 255, 255, 0.8);
-            }
+                0 0 15px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.4);
         }
         
         /* Timeline Section */
@@ -647,6 +632,34 @@
             position: relative;
             transition: all 0.4s ease;
             overflow: visible;
+            box-shadow: 
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                0 0 20px rgba(255, 255, 255, 0.2),
+                0 0 40px rgba(255, 255, 255, 0.1);
+            animation: cardBorderGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes cardBorderGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 0 1px rgba(255, 255, 255, 0.3),
+                    0 0 20px rgba(255, 255, 255, 0.2),
+                    0 0 40px rgba(255, 255, 255, 0.1);
+            }
+            50% {
+                box-shadow: 
+                    0 0 0 1px rgba(255, 255, 255, 0.5),
+                    0 0 30px rgba(255, 255, 255, 0.4),
+                    0 0 60px rgba(255, 255, 255, 0.2);
+            }
+        }
+        
+        .timeline-content:hover {
+            box-shadow: 
+                0 0 0 1px rgba(255, 255, 255, 0.6),
+                0 0 40px rgba(255, 255, 255, 0.5),
+                0 0 80px rgba(255, 255, 255, 0.3),
+                0 20px 60px rgba(0, 0, 0, 0.8);
         }
         
         /* Shimmer effect on hover - REMOVED (was annoying) */
@@ -721,9 +734,11 @@
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-5px);
             box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.8),
-                0 0 80px rgba(255, 255, 255, 0.2),
-                0 0 120px rgba(255, 255, 255, 0.1);
+                0 0 0 1px rgba(255, 255, 255, 0.7),
+                0 0 40px rgba(255, 255, 255, 0.6),
+                0 0 80px rgba(255, 255, 255, 0.4),
+                0 0 120px rgba(255, 255, 255, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.8);
         }
         
         /* Glow effect on timeline cards */
@@ -735,9 +750,9 @@
             right: -5px;
             bottom: -5px;
             background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.08),
                 rgba(255, 255, 255, 0.15),
-                rgba(255, 255, 255, 0.4),
-                rgba(255, 255, 255, 0.15)
+                rgba(255, 255, 255, 0.08)
             );
             border-radius: 0;
             opacity: 0;
@@ -754,18 +769,39 @@
         
         @keyframes cardGlowPulse {
             0%, 100% {
-                opacity: 0.8;
+                opacity: 0.6;
                 filter: blur(25px);
             }
             50% {
-                opacity: 1;
-                filter: blur(35px);
+                opacity: 0.8;
+                filter: blur(30px);
             }
         }
         
         /* Enhanced glow for milestone cards */
         .timeline-item.milestone .timeline-content {
             border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 
+                0 0 0 1px rgba(255, 255, 255, 0.5),
+                0 0 30px rgba(255, 255, 255, 0.4),
+                0 0 60px rgba(255, 255, 255, 0.2);
+            animation: milestoneBorderGlow 2.5s ease-in-out infinite;
+        }
+        
+        @keyframes milestoneBorderGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 0 1px rgba(255, 255, 255, 0.5),
+                    0 0 30px rgba(255, 255, 255, 0.4),
+                    0 0 60px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow: 
+                    0 0 0 1px rgba(255, 255, 255, 0.8),
+                    0 0 50px rgba(255, 255, 255, 0.6),
+                    0 0 100px rgba(255, 255, 255, 0.4);
+            }
         }
         
         /* Enhanced glowing border for odd milestone cards */
@@ -786,9 +822,9 @@
         
         .timeline-item.milestone .timeline-content::after {
             background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.12),
                 rgba(255, 255, 255, 0.25),
-                rgba(255, 255, 255, 0.6),
-                rgba(255, 255, 255, 0.25)
+                rgba(255, 255, 255, 0.12)
             );
             top: -8px;
             left: -8px;
@@ -797,28 +833,31 @@
         }
         
         .timeline-item.milestone .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.05);
             box-shadow: 
-                0 25px 80px rgba(0, 0, 0, 0.9),
-                0 0 120px rgba(255, 255, 255, 0.5),
-                0 0 180px rgba(255, 255, 255, 0.3);
+                0 0 0 1px rgba(255, 255, 255, 0.9),
+                0 0 50px rgba(255, 255, 255, 0.7),
+                0 0 100px rgba(255, 255, 255, 0.5),
+                0 0 150px rgba(255, 255, 255, 0.3),
+                0 25px 80px rgba(0, 0, 0, 0.9);
         }
         
         .timeline-item.milestone .timeline-content:hover::after {
-            opacity: 1;
-            filter: blur(40px);
+            opacity: 0.8;
+            filter: blur(35px);
             animation: milestoneGlowPulse 1.5s ease-in-out infinite;
         }
         
         @keyframes milestoneGlowPulse {
             0%, 100% {
-                opacity: 0.9;
-                filter: blur(40px);
+                opacity: 0.7;
+                filter: blur(35px);
                 transform: scale(1);
             }
             50% {
-                opacity: 1;
-                filter: blur(50px);
-                transform: scale(1.05);
+                opacity: 0.9;
+                filter: blur(40px);
+                transform: scale(1.02);
             }
         }
         
