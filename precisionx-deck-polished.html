@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +28,12 @@
             overflow-x: hidden;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            scroll-padding-top: 0;
+        }
+
+        /* Enhanced smooth scrolling */
+        * {
+            scroll-behavior: smooth !important;
         }
 
         /* Custom Scrollbar */
@@ -138,7 +145,6 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 50px 30px;
             text-align: center;
             transition: all 0.3s ease;
@@ -156,7 +162,6 @@
         .stat-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .stat-box.orange:hover {
@@ -198,7 +203,6 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 40px 30px;
             transition: all 0.3s ease;
             display: flex;
@@ -213,7 +217,6 @@
         .pillar-card.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .pillar-title {
@@ -271,7 +274,6 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 40px;
             display: flex;
             align-items: center;
@@ -281,7 +283,6 @@
         .chart-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .chart-box canvas {
@@ -292,7 +293,6 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 40px;
             display: flex;
             flex-direction: column;
@@ -302,7 +302,6 @@
         .info-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .info-title {
@@ -439,7 +438,6 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 35px;
             transition: all 0.3s ease;
         }
@@ -452,7 +450,6 @@
         .advantage-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .advantage-title {
@@ -485,14 +482,12 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 40px 30px;
         }
 
         .phase-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .phase-name {
@@ -568,7 +563,6 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 40px 30px;
             text-align: center;
             display: flex;
@@ -579,7 +573,6 @@
         .investment-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .investment-label {
@@ -614,7 +607,6 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 35px;
             display: flex;
             flex-direction: column;
@@ -623,7 +615,6 @@
         .team-card.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .team-name {
@@ -668,14 +659,12 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 35px;
         }
 
         .trend-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .trend-title {
@@ -708,14 +697,12 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 35px;
         }
 
         .urgency-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .urgency-title {
@@ -774,14 +761,12 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
             padding: 35px;
         }
 
         .exit-box.orange {
             border-color: #ff5722;
             background: rgba(255, 87, 34, 0.05);
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
         }
 
         .exit-title {
@@ -1294,8 +1279,18 @@
             }
 
             .scroll-hint {
-                bottom: 30px;
+                bottom: 70px;
                 font-size: 12px;
+            }
+
+            /* Adjust disclaimer for mobile */
+            #disclaimer-footer {
+                padding: 12px 15px !important;
+            }
+
+            #disclaimer-footer p {
+                font-size: 9px !important;
+                line-height: 1.4 !important;
             }
 
             /* Keep animations smooth on mobile */
@@ -1396,9 +1391,10 @@
                 transition: transform 0.1s ease;
             }
 
-            /* Improve scroll snapping on mobile */
+            /* Smooth scroll on mobile */
             html {
-                scroll-snap-type: y proximity;
+                scroll-snap-type: none;
+                scroll-behavior: smooth;
             }
 
             /* Better text selection on mobile */
@@ -1426,6 +1422,7 @@
 
             html {
                 scroll-snap-type: none;
+                scroll-behavior: smooth;
             }
         }
     </style>
@@ -2033,7 +2030,7 @@
         <span id="currentSlide">1</span> / <span id="totalSlides">18</span>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Initialize
         const slides = document.querySelectorAll('.slide');
         const progressBar = document.getElementById('progress-bar');
@@ -2337,8 +2334,16 @@
             let ticking = false;
             let lastScrollY = window.scrollY;
             
+            // Ultra-smooth scroll tracking
+            let scrollTimeout;
             window.addEventListener('scroll', () => {
                 lastScrollY = window.scrollY;
+                
+                // Clear any pending update
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+                
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
                         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -2356,6 +2361,11 @@
                     });
                     ticking = true;
                 }
+                
+                // Smooth deceleration effect
+                scrollTimeout = setTimeout(() => {
+                    ticking = false;
+                }, 50);
             }, { passive: true });
 
             // Prevent zoom on double-tap for better UX
