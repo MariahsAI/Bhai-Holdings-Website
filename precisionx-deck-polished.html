@@ -18,6 +18,7 @@
         html {
             scroll-behavior: smooth;
             scroll-snap-type: none;
+            -webkit-overflow-scrolling: touch;
         }
 
         body {
@@ -1272,8 +1273,18 @@
             }
 
             .scroll-hint {
-                bottom: 30px;
+                bottom: 80px;
                 font-size: 12px;
+            }
+            
+            /* Mobile disclaimer adjustments */
+            #disclaimer-footer {
+                padding: 12px 15px !important;
+            }
+            
+            #disclaimer-footer p {
+                font-size: 9px !important;
+                line-height: 1.4 !important;
             }
 
             /* Keep animations smooth on mobile */
@@ -2455,6 +2466,47 @@
             // Fix iOS momentum scrolling
             document.body.style.webkitOverflowScrolling = 'touch';
         }
+
+        // Enhanced smooth scrolling for all devices
+        (function() {
+            // Smooth scroll with requestAnimationFrame for buttery performance
+            let isScrolling = false;
+            let scrollTimeout;
+            
+            // Passive scroll listener for better performance
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    window.requestAnimationFrame(function() {
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
+                }
+                
+                // Clear timeout for smooth deceleration
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(function() {
+                    isScrolling = false;
+                }, 66);
+            }, { passive: true });
+
+            // Smooth scroll for touch devices
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+            
+            document.addEventListener('touchmove', function(e) {
+                touchEndY = e.touches[0].clientY;
+            }, { passive: true });
+
+            // Prevent any scroll jank
+            document.addEventListener('touchend', function() {
+                touchStartY = 0;
+                touchEndY = 0;
+            }, { passive: true });
+        })();
 
     </script>
 </body>
