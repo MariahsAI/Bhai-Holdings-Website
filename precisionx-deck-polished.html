@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,12 +27,6 @@
             overflow-x: hidden;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
-            scroll-padding-top: 0;
-        }
-
-        /* Enhanced smooth scrolling */
-        * {
-            scroll-behavior: smooth !important;
         }
 
         /* Custom Scrollbar */
@@ -1279,18 +1272,8 @@
             }
 
             .scroll-hint {
-                bottom: 70px;
+                bottom: 30px;
                 font-size: 12px;
-            }
-
-            /* Adjust disclaimer for mobile */
-            #disclaimer-footer {
-                padding: 12px 15px !important;
-            }
-
-            #disclaimer-footer p {
-                font-size: 9px !important;
-                line-height: 1.4 !important;
             }
 
             /* Keep animations smooth on mobile */
@@ -1391,10 +1374,9 @@
                 transition: transform 0.1s ease;
             }
 
-            /* Smooth scroll on mobile */
+            /* Improve scroll snapping on mobile */
             html {
-                scroll-snap-type: none;
-                scroll-behavior: smooth;
+                scroll-snap-type: y proximity;
             }
 
             /* Better text selection on mobile */
@@ -1422,8 +1404,94 @@
 
             html {
                 scroll-snap-type: none;
-                scroll-behavior: smooth;
             }
+        }
+
+        /* Fade border effect - only for specific sections */
+        .pillar-card.fade-border,
+        .advantage-box.fade-border,
+        .phase-box.fade-border {
+            border-right: none;
+            position: relative;
+        }
+
+        .pillar-card.fade-border::after,
+        .advantage-box.fade-border::after,
+        .phase-box.fade-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: 0;
+            width: 50px;
+            height: calc(100% + 4px);
+            background: linear-gradient(to right, #00ffff 0%, transparent 100%);
+            border-radius: 0 15px 15px 0;
+        }
+
+        .pillar-card.orange.fade-border::after,
+        .advantage-box.orange.fade-border::after,
+        .phase-box.orange.fade-border::after {
+            background: linear-gradient(to right, #ff5722 0%, transparent 100%);
+        }
+
+        /* Double border effect - for specific sections */
+        .chart-box.double-border,
+        .info-box.double-border,
+        .investment-box.double-border {
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
+        }
+
+        .chart-box.orange.double-border,
+        .info-box.orange.double-border,
+        .investment-box.orange.double-border {
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
+        }
+
+        /* Left border only effect - for specific sections */
+        .info-box.left-border-only {
+            border: none;
+            border-left: 5px solid #00ffff;
+            border-radius: 0;
+        }
+
+        .info-box.orange.left-border-only {
+            border: none;
+            border-left: 5px solid #ff5722;
+            border-radius: 0;
+        }
+
+        /* Team cards - gradient border fading left to right */
+        .team-card.fade-border-lr {
+            border: none;
+            position: relative;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .team-card.fade-border-lr::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(to right, #00ffff 0%, #00ffff 20%, transparent 100%);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .team-card.orange.fade-border-lr {
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .team-card.orange.fade-border-lr::before {
+            background: linear-gradient(to right, #ff5722 0%, #ff5722 20%, transparent 100%);
         }
     </style>
 </head>
@@ -1488,7 +1556,7 @@
     <div class="slide" data-slide="4">
         <h2 class="slide-title">Three Revenue Pillars | One Integrated Platform</h2>
         <div class="pillars-container">
-            <div class="pillar-card">
+            <div class="pillar-card fade-border">
                 <div class="pillar-title">PILLAR 1<br>Wolfcamp Oil</div>
                 <ul>
                     <li>88M bbls oil in place</li>
@@ -1498,7 +1566,7 @@
                     <li>$333M NPV potential</li>
                 </ul>
             </div>
-            <div class="pillar-card orange">
+            <div class="pillar-card orange fade-border">
                 <div class="pillar-title">PILLAR 2<br>Hydrogen Discovery</div>
                 <ul>
                     <li>29,000 tons resource</li>
@@ -1508,7 +1576,7 @@
                     <li>Zero-carbon energy</li>
                 </ul>
             </div>
-            <div class="pillar-card">
+            <div class="pillar-card fade-border">
                 <div class="pillar-title">PILLAR 3<br>AI Data Centers</div>
                 <ul>
                     <li>8 facilities @ 150k sq ft</li>
@@ -1546,10 +1614,10 @@
     <div class="slide" data-slide="6">
         <h2 class="slide-title" style="color: #ff5722;">Pillar 2: White Hydrogen Discovery</h2>
         <div class="chart-section">
-            <div class="chart-box orange">
+            <div class="chart-box orange double-border">
                 <canvas id="hydrogenChart"></canvas>
             </div>
-            <div class="info-box orange">
+            <div class="info-box orange double-border">
                 <div class="info-title">The Mt. Hydrogen Project</div>
                 <div class="info-text">
                     <p>Resource: <span class="info-highlight">~29,000 tons, 50+ year life</span></p>
@@ -1567,7 +1635,7 @@
     <div class="slide" data-slide="7">
         <h2 class="slide-title">Pillar 3: AI Data Center Infrastructure</h2>
         <div class="chart-section">
-            <div class="info-box">
+            <div class="info-box left-border-only">
                 <div class="info-title">8 State-of-the-Art Facilities</div>
                 <div class="info-text">
                     <p>• Scale: 8 × 150,000 sq ft facilities</p>
@@ -1579,7 +1647,7 @@
                     <p>• Target Clients: OpenAI, Google, Microsoft, Amazon, NVIDIA</p>
                 </div>
             </div>
-            <div class="info-box orange">
+            <div class="info-box orange left-border-only">
                 <div class="info-title">Capital Investment</div>
                 <table class="data-table">
                     <thead>
@@ -1620,19 +1688,19 @@
         <h2 class="slide-title">The Integrated Advantage</h2>
         <p class="slide-subtitle">Our three pillars create unprecedented competitive moats</p>
         <div class="advantage-grid">
-            <div class="advantage-box">
+            <div class="advantage-box fade-border">
                 <div class="advantage-title">1. Energy Independence</div>
                 <div class="advantage-desc">Self-powered data centers with 30-50% cost advantage over grid-dependent competitors</div>
             </div>
-            <div class="advantage-box orange">
+            <div class="advantage-box orange fade-border">
                 <div class="advantage-title">2. Carbon Neutrality Pathway</div>
                 <div class="advantage-desc">Oil-to-hydrogen transition enables ESG premium positioning</div>
             </div>
-            <div class="advantage-box">
+            <div class="advantage-box fade-border">
                 <div class="advantage-title">3. Vertical Integration</div>
                 <div class="advantage-desc">Discovery through computing delivers maximum margin capture</div>
             </div>
-            <div class="advantage-box orange">
+            <div class="advantage-box orange fade-border">
                 <div class="advantage-title">4. Proprietary Technology</div>
                 <div class="advantage-desc">Satellite NMR mapping, Magic Mud drilling, and clean refining</div>
             </div>
@@ -1649,7 +1717,7 @@
     <div class="slide" data-slide="9">
         <h2 class="slide-title">Phased Development Roadmap</h2>
         <div class="phase-container">
-            <div class="phase-box">
+            <div class="phase-box fade-border">
                 <div class="phase-name">PHASE I</div>
                 <div class="phase-details">
                     <p><strong>Timeline:</strong> Q1 2026</p>
@@ -1658,7 +1726,7 @@
                     <p><strong>Cash Flow:</strong> ~10 days</p>
                 </div>
             </div>
-            <div class="phase-box orange">
+            <div class="phase-box orange fade-border">
                 <div class="phase-name">PHASE II</div>
                 <div class="phase-details">
                     <p><strong>Timeline:</strong> Q2 2026</p>
@@ -1667,7 +1735,7 @@
                     <p><strong>Value:</strong> $300M+ partnerships</p>
                 </div>
             </div>
-            <div class="phase-box">
+            <div class="phase-box fade-border">
                 <div class="phase-name">PHASE III</div>
                 <div class="phase-details">
                     <p><strong>Timeline:</strong> Q3 2026-Q4 2027</p>
@@ -1708,19 +1776,19 @@
     <div class="slide" data-slide="10">
         <h2 class="slide-title">Investment Structure</h2>
         <div class="investment-grid">
-            <div class="investment-box">
+            <div class="investment-box double-border">
                 <div class="investment-label">Initial Capital</div>
                 <div class="investment-value">$6.7-10M</div>
             </div>
-            <div class="investment-box orange">
+            <div class="investment-box orange double-border">
                 <div class="investment-label">Full Platform</div>
                 <div class="investment-value">$2.2B</div>
             </div>
-            <div class="investment-box">
+            <div class="investment-box double-border">
                 <div class="investment-label">Investor Share</div>
                 <div class="investment-value">25%</div>
             </div>
-            <div class="investment-box orange">
+            <div class="investment-box orange double-border">
                 <div class="investment-label">Break-Even</div>
                 <div class="investment-value">Year 7</div>
             </div>
@@ -1765,32 +1833,32 @@
     <div class="slide" data-slide="12">
         <h2 class="slide-title">World-Class Management Team</h2>
         <div class="team-grid">
-            <div class="team-card">
+            <div class="team-card fade-border-lr">
                 <div class="team-name">Sumair Mitroo</div>
                 <div class="team-title">President – Latin America</div>
                 <div class="team-bio">30+ years international oil & mining strategy. Led PEC expansion into Chile and rare-earth/precious-metal recovery initiatives across Latin America.</div>
             </div>
-            <div class="team-card orange">
+            <div class="team-card orange fade-border-lr">
                 <div class="team-name">James J. Santurro</div>
                 <div class="team-title">Vice President</div>
                 <div class="team-bio">Expanded assets from $56M to $700M. Partner: Sunbelt Energy, Contour Drilling.</div>
             </div>
-            <div class="team-card">
+            <div class="team-card fade-border-lr">
                 <div class="team-name">John Jay LaValle</div>
                 <div class="team-title">VP & General Counsel</div>
                 <div class="team-bio">Current: Chief of Staff, DOE (Trump Admin). 30+ years legal/political experience.</div>
             </div>
-            <div class="team-card orange">
+            <div class="team-card orange fade-border-lr">
                 <div class="team-name">Horatio T. de Caan</div>
                 <div class="team-title">Petroleum Engineer</div>
                 <div class="team-bio">10+ years drilling: Asia, Africa, Middle East. RNZAF Aviation Engineer.</div>
             </div>
-            <div class="team-card">
+            <div class="team-card fade-border-lr">
                 <div class="team-name">Alberto Vasquez, PhD</div>
                 <div class="team-title">Chief Financial Officer</div>
                 <div class="team-bio">PhD Engineering Science (RPI). Decision Sciences & Engineering Systems expert.</div>
             </div>
-            <div class="team-card orange">
+            <div class="team-card orange fade-border-lr">
                 <div style="text-align: center; padding: 40px 0; height: 100%; display: flex; flex-direction: column; justify-content: center;">
                     <div style="font-size: 56px; font-weight: 900; color: #ff5722; margin-bottom: 15px;">200+</div>
                     <div style="font-size: 18px; color: #a0a0a0; font-weight: 600;">Combined Years<br>of Experience</div>
@@ -2030,7 +2098,7 @@
         <span id="currentSlide">1</span> / <span id="totalSlides">18</span>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Initialize
         const slides = document.querySelectorAll('.slide');
         const progressBar = document.getElementById('progress-bar');
@@ -2334,16 +2402,8 @@
             let ticking = false;
             let lastScrollY = window.scrollY;
             
-            // Ultra-smooth scroll tracking
-            let scrollTimeout;
             window.addEventListener('scroll', () => {
                 lastScrollY = window.scrollY;
-                
-                // Clear any pending update
-                if (scrollTimeout) {
-                    clearTimeout(scrollTimeout);
-                }
-                
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
                         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -2361,11 +2421,6 @@
                     });
                     ticking = true;
                 }
-                
-                // Smooth deceleration effect
-                scrollTimeout = setTimeout(() => {
-                    ticking = false;
-                }, 50);
             }, { passive: true });
 
             // Prevent zoom on double-tap for better UX
