@@ -197,7 +197,7 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            padding: 40px 30px;
+            padding: 40px 45px 40px 30px;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -432,7 +432,7 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            padding: 35px;
+            padding: 35px 50px 35px 35px;
             transition: all 0.3s ease;
         }
 
@@ -476,7 +476,7 @@
             background: rgba(0, 255, 255, 0.05);
             border: 2px solid #00ffff;
             border-radius: 15px;
-            padding: 40px 30px;
+            padding: 40px 45px 40px 30px;
         }
 
         .phase-box.orange {
@@ -1432,11 +1432,12 @@
             content: '';
             position: absolute;
             top: -2px;
-            right: 0;
-            width: 50px;
+            right: -2px;
+            width: 25px;
             height: calc(100% + 4px);
             background: linear-gradient(to right, #00ffff 0%, transparent 100%);
             border-radius: 0 15px 15px 0;
+            pointer-events: none;
         }
 
         .pillar-card.orange.fade-border::after,
