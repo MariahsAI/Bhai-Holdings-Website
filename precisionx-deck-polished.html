@@ -678,6 +678,241 @@
             line-height: 1.6;
         }
 
+        /* Vertical Timeline Styles */
+        .timeline-vertical {
+            position: relative;
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding: 20px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .timeline-line-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, #00ffff 0%, #ff5722 100%);
+            border-radius: 2px;
+            transition: height 0.1s ease-out;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
+        }
+
+        .timeline-item-v {
+            position: relative;
+            width: 50%;
+            padding: 20px 60px;
+            box-sizing: border-box;
+        }
+
+        .timeline-item-v.right {
+            left: 50%;
+            padding-left: 60px;
+            padding-right: 20px;
+        }
+
+        .timeline-item-v.left {
+            left: 0;
+            padding-right: 60px;
+            padding-left: 20px;
+            text-align: right;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border: 3px solid #00ffff;
+            border-radius: 50%;
+            top: 35px;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .timeline-item-v.right .timeline-dot {
+            left: -10px;
+        }
+
+        .timeline-item-v.left .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item-v.left .timeline-card.orange + .timeline-dot,
+        .timeline-item-v:has(.timeline-card.orange) .timeline-dot {
+            border-color: #ff5722;
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.5);
+        }
+
+        /* Fix for orange dot - using adjacent approach */
+        .timeline-item-v.left .timeline-dot {
+            border-color: #ff5722;
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.5);
+        }
+
+        .timeline-item-v.right .timeline-dot {
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .timeline-dot.active {
+            background: #00ffff;
+            transform: scale(1.3);
+        }
+
+        .timeline-item-v.left .timeline-dot.active {
+            background: #ff5722;
+        }
+
+        .timeline-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+        }
+
+        .timeline-card.orange {
+            background: rgba(255, 87, 34, 0.05);
+            border-color: rgba(255, 87, 34, 0.3);
+        }
+
+        .timeline-card.orange:hover {
+            box-shadow: 0 15px 40px rgba(255, 87, 34, 0.2);
+            border-color: #ff5722;
+        }
+
+        .timeline-number {
+            display: block;
+            font-size: 12px;
+            color: #00ffff;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .timeline-card.orange .timeline-number {
+            color: #ff5722;
+        }
+
+        .timeline-card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .timeline-card-desc {
+            font-size: 15px;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        .timeline-item-v.left .timeline-card {
+            text-align: left;
+        }
+
+        /* Timeline Mobile Responsive */
+        @media (max-width: 768px) {
+            .timeline-vertical {
+                padding: 10px 0;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item-v,
+            .timeline-item-v.left,
+            .timeline-item-v.right {
+                width: 100%;
+                left: 0;
+                padding-left: 50px;
+                padding-right: 15px;
+                text-align: left;
+            }
+
+            .timeline-item-v .timeline-dot,
+            .timeline-item-v.left .timeline-dot,
+            .timeline-item-v.right .timeline-dot {
+                left: 10px;
+                right: auto;
+            }
+
+            .timeline-card {
+                padding: 20px;
+            }
+
+            .timeline-card-title {
+                font-size: 18px;
+            }
+
+            .timeline-card-desc {
+                font-size: 14px;
+            }
+
+            .timeline-item-v.left .timeline-card {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-line {
+                left: 15px;
+                width: 3px;
+            }
+
+            .timeline-item-v,
+            .timeline-item-v.left,
+            .timeline-item-v.right {
+                padding-left: 40px;
+                padding-right: 10px;
+            }
+
+            .timeline-dot {
+                width: 16px;
+                height: 16px;
+            }
+
+            .timeline-item-v .timeline-dot,
+            .timeline-item-v.left .timeline-dot,
+            .timeline-item-v.right .timeline-dot {
+                left: 7px;
+            }
+
+            .timeline-card {
+                padding: 15px;
+            }
+
+            .timeline-card-title {
+                font-size: 16px;
+            }
+
+            .timeline-card-desc {
+                font-size: 13px;
+            }
+        }
+
         /* Urgency Grid */
         .urgency-grid {
             display: grid;
@@ -685,6 +920,48 @@
             gap: 30px;
             margin: 40px auto;
             max-width: 1400px;
+        }
+
+        /* Starfield Background */
+        .starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        .star.cyan {
+            background: #00ffff;
+            box-shadow: 0 0 6px #00ffff;
+        }
+
+        .star.orange {
+            background: #ff5722;
+            box-shadow: 0 0 6px #ff5722;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Ensure content is above starfield */
+        .timeline-vertical,
+        .slide-title,
+        .slide-subtitle {
+            position: relative;
+            z-index: 1;
         }
 
         .urgency-box {
@@ -2079,31 +2356,59 @@
     </div>
 
     <!-- SLIDE 13: Five Mega-Trends -->
-    <div class="slide" data-slide="13">
+    <div class="slide" data-slide="13" style="position: relative; overflow: hidden;">
+        <div class="starfield" id="starfield-13"></div>
         <h2 class="slide-title">Five Unstoppable Mega-Trends</h2>
         <p class="slide-subtitle" style="color: #ff5722;">PrecisionX sits at the exact intersection of all five simultaneously</p>
-        <div class="trend-grid">
-            <div class="trend-box">
-                <div class="trend-title">1. AI Computing Explosion</div>
-                <div class="trend-desc">Global AI market: $200B → $2T+ by 2030. Data center shortage acute.</div>
+        
+        <div class="timeline-vertical">
+            <div class="timeline-line">
+                <div class="timeline-line-fill"></div>
             </div>
-            <div class="trend-box orange">
-                <div class="trend-title">2. Energy Crisis & Grid Instability</div>
-                <div class="trend-desc">Industrial electricity up 30%+. Energy independence priority.</div>
+            
+            <div class="timeline-item-v right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <span class="timeline-number">01</span>
+                    <h3 class="timeline-card-title">AI Computing Explosion</h3>
+                    <p class="timeline-card-desc">Global AI market: $200B → $2T+ by 2030. Data center shortage acute.</p>
+                </div>
             </div>
-            <div class="trend-box">
-                <div class="trend-title">3. Clean Energy Mandates</div>
-                <div class="trend-desc">90% Fortune 500 net-zero pledges. $369B IRA incentives.</div>
+            
+            <div class="timeline-item-v left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card orange">
+                    <span class="timeline-number">02</span>
+                    <h3 class="timeline-card-title">Energy Crisis & Grid Instability</h3>
+                    <p class="timeline-card-desc">Industrial electricity up 30%+. Energy independence priority.</p>
+                </div>
             </div>
-            <div class="trend-box orange">
-                <div class="trend-title">4. Natural Hydrogen Emergence</div>
-                <div class="trend-desc">DOE priority. Zero production cost. Game-changer for energy.</div>
+            
+            <div class="timeline-item-v right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <span class="timeline-number">03</span>
+                    <h3 class="timeline-card-title">Clean Energy Mandates</h3>
+                    <p class="timeline-card-desc">90% Fortune 500 net-zero pledges. $369B IRA incentives.</p>
+                </div>
             </div>
-        </div>
-        <div style="text-align: center; margin-top: 30px;">
-            <div class="trend-box" style="display: inline-block; max-width: 700px;">
-                <div class="trend-title">5. Reshoring & Domestic Manufacturing</div>
-                <div class="trend-desc">$52B Chips Act. Domestic data infrastructure = national security.</div>
+            
+            <div class="timeline-item-v left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card orange">
+                    <span class="timeline-number">04</span>
+                    <h3 class="timeline-card-title">Natural Hydrogen Emergence</h3>
+                    <p class="timeline-card-desc">DOE priority. Zero production cost. Game-changer for energy.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item-v right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <span class="timeline-number">05</span>
+                    <h3 class="timeline-card-title">Reshoring & Domestic Manufacturing</h3>
+                    <p class="timeline-card-desc">$52B Chips Act. Domestic data infrastructure = national security.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -2315,11 +2620,112 @@
                     if (slideNum === 11) initializeFinancialChart();
                     if (slideNum === 14) initializeRadarChart();
                     if (slideNum === 17) initializeProceedsChart();
+                    
+                    // Initialize timeline scroll effect
+                    if (slideNum === 13) {
+                        initializeTimelineScroll();
+                        generateStarfield();
+                    }
                 }
             });
         }, { threshold: 0.3 });
 
         slides.forEach(slide => observer.observe(slide));
+
+        // Timeline scroll fill effect
+        function initializeTimelineScroll() {
+            const timelineVertical = document.querySelector('.timeline-vertical');
+            const timelineFill = document.querySelector('.timeline-line-fill');
+            const timelineDots = document.querySelectorAll('.timeline-dot');
+            const timelineItems = document.querySelectorAll('.timeline-item-v');
+            
+            if (!timelineVertical || !timelineFill) return;
+            
+            // Already initialized
+            if (timelineVertical.dataset.initialized) return;
+            timelineVertical.dataset.initialized = 'true';
+
+            function updateTimeline() {
+                const timelineRect = timelineVertical.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // Calculate how much of the timeline is visible/scrolled past
+                const timelineTop = timelineRect.top;
+                const timelineHeight = timelineRect.height;
+                
+                // Start filling when timeline enters viewport
+                const startPoint = windowHeight * 0.7;
+                const scrollProgress = (startPoint - timelineTop) / timelineHeight;
+                const fillPercentage = Math.min(Math.max(scrollProgress * 100, 0), 100);
+                
+                timelineFill.style.height = fillPercentage + '%';
+                
+                // Activate dots as the line passes them
+                timelineItems.forEach((item, index) => {
+                    const itemRect = item.getBoundingClientRect();
+                    const itemCenter = itemRect.top + itemRect.height / 2;
+                    const dot = item.querySelector('.timeline-dot');
+                    
+                    if (itemCenter < startPoint) {
+                        dot.classList.add('active');
+                        item.querySelector('.timeline-card').style.opacity = '1';
+                        item.querySelector('.timeline-card').style.transform = 'translateY(0)';
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Set initial state for cards
+            timelineItems.forEach(item => {
+                const card = item.querySelector('.timeline-card');
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+            });
+            
+            // Listen for scroll
+            window.addEventListener('scroll', updateTimeline, { passive: true });
+            
+            // Initial update
+            setTimeout(updateTimeline, 100);
+        }
+
+        // Generate starfield background
+        function generateStarfield() {
+            const starfield = document.getElementById('starfield-13');
+            if (!starfield || starfield.children.length > 0) return;
+            
+            const numStars = 80;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // Random size (1-3px)
+                const size = Math.random() * 2 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                
+                // Random animation delay
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                // Some colored stars
+                const colorChance = Math.random();
+                if (colorChance > 0.92) {
+                    star.classList.add('cyan');
+                } else if (colorChance > 0.85) {
+                    star.classList.add('orange');
+                }
+                
+                starfield.appendChild(star);
+            }
+        }
 
         // Animate slide content when it enters viewport
         function animateSlideContent(slide) {
