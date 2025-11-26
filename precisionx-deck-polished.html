@@ -2235,6 +2235,504 @@
         .team-card.orange.fade-border-lr::before {
             background: linear-gradient(to right, #ff5722 0%, #ff5722 20%, transparent 100%);
         }
+
+        /* ============================================
+           COMPREHENSIVE MOBILE OPTIMIZATION
+           ============================================ */
+
+        /* Tablet Styles */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 60px 50px;
+            }
+
+            .hero-title {
+                font-size: 64px;
+            }
+
+            .slide-title {
+                font-size: 36px;
+            }
+
+            .chart-section {
+                gap: 30px;
+            }
+
+            .stats-grid {
+                gap: 20px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            /* Base layout */
+            .slide {
+                padding: 40px 20px;
+                min-height: auto;
+                padding-top: 60px;
+                padding-bottom: 80px;
+            }
+
+            /* Typography */
+            .hero-title {
+                font-size: 36px;
+                line-height: 1.1;
+                margin-bottom: 15px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .hero-tagline {
+                font-size: 14px;
+            }
+
+            .slide-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+                line-height: 1.2;
+            }
+
+            .slide-subtitle {
+                font-size: 14px;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            /* Navigation */
+            .slide-counter {
+                bottom: 15px;
+                left: 15px;
+                font-size: 14px;
+            }
+
+            .scroll-hint {
+                bottom: 15px;
+                font-size: 12px;
+            }
+
+            #progress-bar {
+                height: 3px;
+            }
+
+            /* Grids - Stack everything */
+            .stats-grid,
+            .pillars-container,
+            .chart-section,
+            .advantage-grid,
+            .phase-container,
+            .investment-grid,
+            .urgency-grid,
+            .exit-grid,
+            .team-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 15px !important;
+            }
+
+            /* Cards and boxes */
+            .stat-box,
+            .pillar-card,
+            .chart-box,
+            .info-box,
+            .advantage-box,
+            .phase-box,
+            .investment-box,
+            .urgency-box,
+            .exit-box,
+            .team-card {
+                width: 100% !important;
+                padding: 20px !important;
+                min-height: auto !important;
+            }
+
+            .stat-value {
+                font-size: 36px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            /* Chart sizing */
+            .chart-box {
+                height: 250px !important;
+                min-height: 250px !important;
+            }
+
+            .chart-box canvas {
+                max-height: 220px !important;
+            }
+
+            /* Info boxes */
+            .info-title {
+                font-size: 18px;
+            }
+
+            .info-text {
+                font-size: 13px;
+            }
+
+            .info-text p {
+                margin-bottom: 8px;
+            }
+
+            /* Ask box */
+            .ask-box {
+                padding: 30px 20px;
+            }
+
+            .ask-amount {
+                font-size: 48px;
+            }
+
+            .ask-subtitle {
+                font-size: 14px;
+            }
+
+            .proceeds-title {
+                font-size: 18px;
+            }
+
+            /* Vision box */
+            .vision-box {
+                padding: 25px 20px;
+            }
+
+            .vision-text {
+                font-size: 16px;
+            }
+
+            /* Tables */
+            .data-table {
+                font-size: 12px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 10px 8px;
+            }
+
+            /* Timeline horizontal */
+            .timeline-container {
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .timeline {
+                min-width: 500px;
+            }
+
+            .timeline-title {
+                font-size: 16px;
+            }
+
+            /* Team cards */
+            .team-name {
+                font-size: 16px;
+            }
+
+            .team-title {
+                font-size: 12px;
+            }
+
+            .team-bio {
+                font-size: 12px;
+            }
+
+            /* Urgency section */
+            .urgency-title {
+                font-size: 16px;
+            }
+
+            .urgency-points {
+                font-size: 13px;
+            }
+
+            .urgency-footer {
+                padding: 20px 15px;
+            }
+
+            .urgency-footer-title {
+                font-size: 16px;
+            }
+
+            .urgency-footer-text {
+                font-size: 12px;
+            }
+
+            /* Exit boxes */
+            .exit-title {
+                font-size: 16px;
+            }
+
+            .exit-desc {
+                font-size: 13px;
+            }
+
+            /* Contact slide */
+            .contact-title {
+                font-size: 28px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .contact-item {
+                font-size: 14px;
+            }
+
+            .cta-box {
+                padding: 30px 20px;
+            }
+
+            .cta-title {
+                font-size: 20px;
+            }
+
+            .cta-text {
+                font-size: 14px;
+            }
+
+            /* Divider adjustments */
+            .slide-divider {
+                height: 60px;
+            }
+
+            .slide-divider .energy-line path {
+                stroke-width: 2;
+            }
+
+            /* Reflection effects - reduce intensity */
+            .reflect::after {
+                height: 40%;
+                opacity: 0.7;
+            }
+
+            .reflect-premium::after {
+                height: 50%;
+            }
+        }
+
+        /* Small Mobile Styles */
+        @media (max-width: 480px) {
+            .slide {
+                padding: 30px 15px;
+                padding-top: 50px;
+                padding-bottom: 70px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+            }
+
+            .slide-title {
+                font-size: 20px;
+            }
+
+            .slide-subtitle {
+                font-size: 13px;
+            }
+
+            .stat-value {
+                font-size: 28px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+            }
+
+            .chart-box {
+                height: 200px !important;
+                min-height: 200px !important;
+            }
+
+            .info-title {
+                font-size: 16px;
+            }
+
+            .info-text {
+                font-size: 12px;
+            }
+
+            .ask-amount {
+                font-size: 36px;
+            }
+
+            .ask-subtitle {
+                font-size: 12px;
+            }
+
+            /* Data tables - make scrollable */
+            .data-table {
+                display: block;
+                overflow-x: auto;
+                font-size: 11px;
+            }
+
+            /* Pillar cards */
+            .pillar-title {
+                font-size: 16px;
+            }
+
+            .pillar-card ul {
+                font-size: 12px;
+            }
+
+            .pillar-card li {
+                margin-bottom: 6px;
+            }
+
+            /* Phase boxes */
+            .phase-name {
+                font-size: 14px;
+            }
+
+            .phase-details {
+                font-size: 12px;
+            }
+
+            /* Investment boxes */
+            .investment-label {
+                font-size: 12px;
+            }
+
+            .investment-value {
+                font-size: 28px;
+            }
+
+            /* Advantage boxes */
+            .advantage-title {
+                font-size: 14px;
+            }
+
+            .advantage-desc {
+                font-size: 12px;
+            }
+
+            /* Divider - even smaller */
+            .slide-divider {
+                height: 40px;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            /* Disable hover effects that don't work well on touch */
+            .stat-box:hover,
+            .pillar-card:hover,
+            .advantage-box:hover,
+            .team-card:hover,
+            .exit-box:hover,
+            .urgency-box:hover {
+                transform: none;
+            }
+
+            /* Add active states instead */
+            .stat-box:active,
+            .pillar-card:active,
+            .advantage-box:active,
+            .team-card:active,
+            .exit-box:active,
+            .urgency-box:active {
+                transform: scale(0.98);
+                opacity: 0.9;
+            }
+
+            /* Ensure tap targets are large enough */
+            .contact-item,
+            .timeline-item {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            /* Reduce animation intensity for performance */
+            .star {
+                animation-duration: 4s !important;
+            }
+
+            /* Disable energy line continuous pulse on mobile for performance */
+            .slide-divider.active.complete .energy-line path {
+                animation: none;
+                stroke-opacity: 0.3;
+            }
+        }
+
+        /* Landscape mobile */
+        @media (max-width: 896px) and (orientation: landscape) {
+            .slide {
+                min-height: auto;
+                padding: 30px 40px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .slide-title {
+                font-size: 24px;
+            }
+
+            .stats-grid,
+            .pillars-container {
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+            }
+
+            .stat-box,
+            .pillar-card {
+                width: calc(50% - 10px) !important;
+            }
+
+            .chart-section {
+                flex-direction: row !important;
+            }
+
+            .chart-box,
+            .info-box {
+                width: 50% !important;
+            }
+        }
+
+        /* High DPI / Retina optimizations */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .slide-divider .energy-line path {
+                stroke-width: 2;
+            }
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .star {
+                animation: none !important;
+            }
+
+            .slide-divider .energy-line path {
+                animation: none !important;
+                stroke-dashoffset: 0 !important;
+                stroke-opacity: 0.4 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3182,7 +3680,9 @@
             const starfield = document.getElementById('starfield-13');
             if (!starfield || starfield.children.length > 0) return;
             
-            const numStars = 100;
+            // Reduce stars on mobile for performance
+            const isMobile = window.innerWidth <= 768;
+            const numStars = isMobile ? 40 : 100;
             
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
@@ -3192,19 +3692,19 @@
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 
-                // Random size (1-3px)
-                const size = Math.random() * 2 + 1;
+                // Random size (1-3px, smaller on mobile)
+                const size = isMobile ? (Math.random() * 1.5 + 0.5) : (Math.random() * 2 + 1);
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 
                 // Random animation delay
                 star.style.animationDelay = Math.random() * 5 + 's, ' + Math.random() * 30 + 's';
                 
-                // Random speed class
+                // Random speed class (fewer fast stars on mobile)
                 const speedChance = Math.random();
                 if (speedChance > 0.7) {
                     star.classList.add('slow');
-                } else if (speedChance < 0.2) {
+                } else if (speedChance < 0.1 && !isMobile) {
                     star.classList.add('fast');
                 }
                 
@@ -3343,6 +3843,12 @@
         let radarChart = null;
         let proceedsChart = null;
 
+        // Mobile detection for chart optimizations
+        const isMobileDevice = window.innerWidth <= 768;
+        const chartAnimationDuration = isMobileDevice ? 1000 : 2000;
+        const chartFontSize = isMobileDevice ? 10 : 12;
+        const chartTitleSize = isMobileDevice ? 14 : 20;
+
         function initializeProductionChart() {
             if (productionChart) return;
             const ctx = document.getElementById('productionChart');
@@ -3355,7 +3861,7 @@
                 productionChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Phase I\nVertical', 'Phase II\nEOR', 'Phase III\nHorizontals'],
+                        labels: isMobileDevice ? ['Phase I', 'Phase II', 'Phase III'] : ['Phase I\nVertical', 'Phase II\nEOR', 'Phase III\nHorizontals'],
                         datasets: [{
                             label: 'Production (BOPD)',
                             data: [375, 900, 8500],
@@ -3367,19 +3873,19 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: true,
+                        maintainAspectRatio: false,
                         animation: {
-                            duration: 2000,
+                            duration: chartAnimationDuration,
                             easing: 'easeInOutQuart'
                         },
                         plugins: { 
                             legend: { display: false },
                             title: {
                                 display: true,
-                                text: 'Production Trajectory (BOPD)',
+                                text: isMobileDevice ? 'Production (BOPD)' : 'Production Trajectory (BOPD)',
                                 color: '#00ffff',
-                                font: { size: 20, weight: 'bold' },
-                                padding: 20
+                                font: { size: chartTitleSize, weight: 'bold' },
+                                padding: isMobileDevice ? 10 : 20
                             },
                             tooltip: {
                                 callbacks: {
@@ -3395,7 +3901,7 @@
                                 max: 10000,
                                 ticks: { 
                                     color: '#a0a0a0', 
-                                    font: { size: 12 },
+                                    font: { size: chartFontSize },
                                     callback: function(value) {
                                         return value.toLocaleString();
                                     }
@@ -3403,7 +3909,7 @@
                                 grid: { color: 'rgba(255, 255, 255, 0.1)' }
                             },
                             x: { 
-                                ticks: { color: '#a0a0a0', font: { size: 12 } },
+                                ticks: { color: '#a0a0a0', font: { size: chartFontSize } },
                                 grid: { display: false }
                             }
                         }
@@ -3424,7 +3930,7 @@
                 hydrogenChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Year 1\nReturn', '25% of\nReserves', 'Tax Credits\n(Annual)'],
+                        labels: isMobileDevice ? ['Year 1', '25% Reserves', 'Tax Credits'] : ['Year 1\nReturn', '25% of\nReserves', 'Tax Credits\n(Annual)'],
                         datasets: [{
                             label: 'Revenue ($M)',
                             data: [76.7, 427.2, 142],
@@ -3436,19 +3942,19 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: true,
+                        maintainAspectRatio: false,
                         animation: {
-                            duration: 2000,
+                            duration: chartAnimationDuration,
                             easing: 'easeInOutQuart'
                         },
                         plugins: { 
                             legend: { display: false },
                             title: {
                                 display: true,
-                                text: 'Hydrogen Revenue Potential ($M)',
+                                text: isMobileDevice ? 'H₂ Revenue ($M)' : 'Hydrogen Revenue Potential ($M)',
                                 color: '#ff5722',
-                                font: { size: 20, weight: 'bold' },
-                                padding: 20
+                                font: { size: chartTitleSize, weight: 'bold' },
+                                padding: isMobileDevice ? 10 : 20
                             },
                             tooltip: {
                                 callbacks: {
@@ -3464,7 +3970,7 @@
                                 max: 500,
                                 ticks: { 
                                     color: '#a0a0a0', 
-                                    font: { size: 12 },
+                                    font: { size: chartFontSize },
                                     callback: function(value) {
                                         return '$' + value + 'M';
                                     }
@@ -3472,7 +3978,7 @@
                                 grid: { color: 'rgba(255, 255, 255, 0.1)' }
                             },
                             x: { 
-                                ticks: { color: '#a0a0a0', font: { size: 12 } },
+                                ticks: { color: '#a0a0a0', font: { size: chartFontSize } },
                                 grid: { display: false }
                             }
                         }
@@ -3488,7 +3994,7 @@
                 financialChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Year 1-2', 'Year 3-5', 'Year 7-10', '10-Year Total'],
+                        labels: isMobileDevice ? ['Yr 1-2', 'Yr 3-5', 'Yr 7-10', 'Total'] : ['Year 1-2', 'Year 3-5', 'Year 7-10', '10-Year Total'],
                         datasets: [{
                             label: 'Investor 25% Share ($M)',
                             data: [75, 204, 496, 1000],
@@ -3499,25 +4005,29 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: chartAnimationDuration,
+                            easing: 'easeInOutQuart'
+                        },
                         plugins: { 
                             legend: { display: false },
                             title: {
                                 display: true,
-                                text: 'Cumulative Cash Flow to Investors ($M)',
+                                text: isMobileDevice ? 'Cash Flow to Investors ($M)' : 'Cumulative Cash Flow to Investors ($M)',
                                 color: '#00ffff',
-                                font: { size: 20, weight: 'bold' }
+                                font: { size: chartTitleSize, weight: 'bold' }
                             }
                         },
                         scales: {
                             y: { 
                                 beginAtZero: true, 
                                 max: 1200,
-                                ticks: { color: '#a0a0a0', font: { size: 14 } },
+                                ticks: { color: '#a0a0a0', font: { size: chartFontSize } },
                                 grid: { color: '#333333' }
                             },
                             x: {
-                                ticks: { color: '#a0a0a0', font: { size: 14 } },
+                                ticks: { color: '#a0a0a0', font: { size: chartFontSize } },
                                 grid: { display: false }
                             }
                         }
@@ -3570,9 +4080,9 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: true,
+                        maintainAspectRatio: false,
                         animation: {
-                            duration: 2000,
+                            duration: chartAnimationDuration,
                             easing: 'easeInOutQuart'
                         },
                         plugins: {
@@ -3641,10 +4151,10 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: true,
+                        maintainAspectRatio: false,
                         cutout: isMobile ? '50%' : '55%',
                         animation: {
-                            duration: 2000,
+                            duration: chartAnimationDuration,
                             easing: 'easeInOutQuart'
                         },
                         plugins: {
