@@ -4903,7 +4903,7 @@
                 controls.maxPolarAngle = Math.PI / 1.8;
                 controls.minPolarAngle = Math.PI / 4;
                 controls.autoRotate = true;
-                controls.autoRotateSpeed = 0.08;
+                controls.autoRotateSpeed = 0.015;
 
                 // Lighting
                 setupLighting();
@@ -4996,25 +4996,84 @@
                     bevelSegments: 8
                 };
 
-                const textGeo1 = new THREE.TextGeometry('PRECISIONX', textOptions);
-
-                textGeo1.computeBoundingBox();
+                // Create "PRECISION" text
+                const precisionGeo = new THREE.TextGeometry('PRECISION', textOptions);
+                precisionGeo.computeBoundingBox();
                 
-                const centerOffset1 = -0.5 * (textGeo1.boundingBox.max.x - textGeo1.boundingBox.min.x);
+                // Create "X" text
+                const xGeo = new THREE.TextGeometry('X', textOptions);
+                xGeo.computeBoundingBox();
+                
+                // Calculate total width for centering
+                const precisionWidth = precisionGeo.boundingBox.max.x - precisionGeo.boundingBox.min.x;
+                const xWidth = xGeo.boundingBox.max.x - xGeo.boundingBox.min.x;
+                const totalWidth = precisionWidth + xWidth;
+                const centerOffset = -0.5 * totalWidth;
 
+                // Chrome cyan material for PRECISION
                 const chromeMaterial = new THREE.MeshStandardMaterial({
                     color: 0x88cccc,
                     metalness: 0.9,
                     roughness: 0.1,
                     envMapIntensity: 1.5
                 });
+                
+                // Orange material for X
+                const orangeMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xff5722,
+                    metalness: 0.9,
+                    roughness: 0.1,
+                    emissive: 0xff5722,
+                    emissiveIntensity: 0.2,
+                    envMapIntensity: 1.5
+                });
 
-                textMesh = new THREE.Mesh(textGeo1, chromeMaterial);
-                textMesh.position.set(centerOffset1, 0, 0);
+                // Create PRECISION mesh
+                textMesh = new THREE.Mesh(precisionGeo, chromeMaterial);
+                textMesh.position.set(centerOffset, 0, 0);
                 textMesh.castShadow = true;
                 scene.add(textMesh);
+                
+                // Create X mesh
+                const xMesh = new THREE.Mesh(xGeo, orangeMaterial);
+                xMesh.position.set(centerOffset + precisionWidth, 0, 0);
+                xMesh.castShadow = true;
+                scene.add(xMesh);
+                scene.userData.xMesh = xMesh;
+                
+                // Create reflection of PRECISION
+                const reflectionMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x88cccc,
+                    metalness: 0.9,
+                    roughness: 0.1,
+                    transparent: true,
+                    opacity: 0.25,
+                    envMapIntensity: 0.5
+                });
+                const textReflection = new THREE.Mesh(precisionGeo, reflectionMaterial);
+                textReflection.position.set(centerOffset, -8, 0);
+                textReflection.scale.y = -1;
+                textReflection.rotation.x = 0.15;
+                scene.add(textReflection);
+                scene.userData.textReflection = textReflection;
+                
+                // Create reflection of X
+                const xReflectionMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xff5722,
+                    metalness: 0.9,
+                    roughness: 0.1,
+                    transparent: true,
+                    opacity: 0.25,
+                    envMapIntensity: 0.5
+                });
+                const xReflection = new THREE.Mesh(xGeo, xReflectionMaterial);
+                xReflection.position.set(centerOffset + precisionWidth, -8, 0);
+                xReflection.scale.y = -1;
+                xReflection.rotation.x = 0.15;
+                scene.add(xReflection);
+                scene.userData.xReflection = xReflection;
 
-                addEdgeGlow(textGeo1, centerOffset1, 0);
+                addEdgeGlow(precisionGeo, centerOffset, 0);
                 
                 // Add 3D target rings
                 createTargetRings();
@@ -5033,60 +5092,61 @@
                 const ringGroup = new THREE.Group();
                 scene.userData.ringGroup = ringGroup;
                 
-                // Ring 1 - innermost (cyan)
-                const ring1Geo = new THREE.TorusGeometry(12, 0.08, 16, 100);
+                // Ring 1 - smallest (cyan)
+                const ring1Geo = new THREE.TorusGeometry(6, 0.12, 16, 100);
                 const ring1Mat = new THREE.MeshStandardMaterial({
                     color: 0x00ffff,
                     metalness: 0.8,
                     roughness: 0.2,
                     emissive: 0x00ffff,
-                    emissiveIntensity: 0.3,
+                    emissiveIntensity: 0.4,
                     transparent: true,
-                    opacity: 0.7
+                    opacity: 0.8
                 });
                 const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
-                ring1.rotation.x = Math.PI / 2;
-                ring1.userData.rotationSpeed = 0.001;
-                ring1.userData.wobbleSpeed = 0.0005;
-                ring1.userData.wobbleAmount = 0.1;
+                ring1.rotation.x = Math.PI / 2; // Lay flat
+                ring1.position.y = -20; // Start below
+                ring1.userData.speed = 0.035;
+                ring1.userData.targetY = 15;
+                ring1.userData.startOpacity = 0.8;
                 ringGroup.add(ring1);
                 
-                // Ring 2 - middle (gradient cyan to orange)
-                const ring2Geo = new THREE.TorusGeometry(16, 0.06, 16, 100);
+                // Ring 2 - medium (teal)
+                const ring2Geo = new THREE.TorusGeometry(10, 0.1, 16, 100);
                 const ring2Mat = new THREE.MeshStandardMaterial({
-                    color: 0x44aaaa,
+                    color: 0x00aaaa,
                     metalness: 0.8,
                     roughness: 0.2,
-                    emissive: 0x226666,
-                    emissiveIntensity: 0.2,
+                    emissive: 0x008888,
+                    emissiveIntensity: 0.3,
                     transparent: true,
-                    opacity: 0.5
+                    opacity: 0.6
                 });
                 const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
                 ring2.rotation.x = Math.PI / 2;
-                ring2.rotation.y = 0.3;
-                ring2.userData.rotationSpeed = -0.0008;
-                ring2.userData.wobbleSpeed = 0.0003;
-                ring2.userData.wobbleAmount = 0.15;
+                ring2.position.y = -30;
+                ring2.userData.speed = 0.035;
+                ring2.userData.targetY = 15;
+                ring2.userData.startOpacity = 0.6;
                 ringGroup.add(ring2);
                 
-                // Ring 3 - outermost (orange)
-                const ring3Geo = new THREE.TorusGeometry(20, 0.05, 16, 100);
+                // Ring 3 - largest (orange)
+                const ring3Geo = new THREE.TorusGeometry(14, 0.08, 16, 100);
                 const ring3Mat = new THREE.MeshStandardMaterial({
                     color: 0xff5722,
                     metalness: 0.8,
                     roughness: 0.2,
                     emissive: 0xff5722,
-                    emissiveIntensity: 0.2,
+                    emissiveIntensity: 0.3,
                     transparent: true,
-                    opacity: 0.4
+                    opacity: 0.5
                 });
                 const ring3 = new THREE.Mesh(ring3Geo, ring3Mat);
                 ring3.rotation.x = Math.PI / 2;
-                ring3.rotation.y = -0.2;
-                ring3.userData.rotationSpeed = 0.0005;
-                ring3.userData.wobbleSpeed = 0.0002;
-                ring3.userData.wobbleAmount = 0.2;
+                ring3.position.y = -40;
+                ring3.userData.speed = 0.035;
+                ring3.userData.targetY = 15;
+                ring3.userData.startOpacity = 0.5;
                 ringGroup.add(ring3);
                 
                 scene.add(ringGroup);
@@ -5251,7 +5311,8 @@
                 const time = performance.now() * 0.001;
 
                 if (controls) controls.update();
-
+                
+                // Animate moving lights
                 if (scene && scene.userData.movingLights) {
                     scene.userData.movingLights.forEach((light, i) => {
                         light.userData.angle += 0.003;
@@ -5260,7 +5321,8 @@
                         light.position.y = 5 + Math.sin(time * 2 + i) * 3;
                     });
                 }
-
+                
+                // Animate text glow planes
                 if (scene && scene.userData.glowPlanes) {
                     scene.userData.glowPlanes.forEach(mat => {
                         mat.uniforms.time.value = time;
@@ -5269,17 +5331,39 @@
 
                 if (textMesh) {
                     textMesh.position.y = Math.sin(time * 0.5) * 0.15;
+                    
+                    // Animate X mesh
+                    if (scene && scene.userData.xMesh) {
+                        scene.userData.xMesh.position.y = Math.sin(time * 0.5) * 0.15;
+                    }
+                    
+                    // Animate reflections
+                    if (scene && scene.userData.textReflection) {
+                        scene.userData.textReflection.position.y = -8 - Math.sin(time * 0.5) * 0.15;
+                    }
+                    if (scene && scene.userData.xReflection) {
+                        scene.userData.xReflection.position.y = -8 - Math.sin(time * 0.5) * 0.15;
+                    }
                 }
                 
-                // Animate target rings
+                // Animate target rings - simple slow sweep upward
                 if (scene && scene.userData.targetRings) {
                     scene.userData.targetRings.forEach((ring, i) => {
-                        // Slow rotation around Z axis
-                        ring.rotation.z += ring.userData.rotationSpeed;
+                        // Very slow rotation
+                        ring.rotation.z += 0.0015 * (i % 2 === 0 ? 1 : -1);
                         
-                        // Subtle wobble/tilt animation
-                        ring.rotation.x = Math.PI / 2 + Math.sin(time * ring.userData.wobbleSpeed * 100 + i) * ring.userData.wobbleAmount;
-                        ring.rotation.y = Math.cos(time * ring.userData.wobbleSpeed * 80 + i * 2) * ring.userData.wobbleAmount * 0.5;
+                        // Move upward slowly
+                        if (ring.position.y < ring.userData.targetY) {
+                            ring.position.y += ring.userData.speed;
+                            
+                            // Fade out as it rises past the logo
+                            if (ring.position.y > 5) {
+                                const fadeProgress = (ring.position.y - 5) / (ring.userData.targetY - 5);
+                                ring.material.opacity = ring.userData.startOpacity * (1 - fadeProgress);
+                            }
+                        } else {
+                            ring.visible = false;
+                        }
                     });
                 }
 
