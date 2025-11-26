@@ -778,28 +778,98 @@
         }
 
         .timeline-card {
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             padding: 30px;
             position: relative;
             transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* Frosted glass shine effect */
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+            border-radius: 20px 20px 0 0;
+            pointer-events: none;
+        }
+
+        /* Bottom reflection/mirror effect */
+        .timeline-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(0deg, rgba(0, 255, 255, 0.08) 0%, transparent 100%);
+            border-radius: 0 0 20px 20px;
+            pointer-events: none;
         }
 
         .timeline-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.2);
-            border-color: #00ffff;
+            box-shadow: 
+                0 20px 60px rgba(0, 255, 255, 0.2),
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 255, 255, 0.4);
         }
 
         .timeline-card.orange {
-            background: rgba(255, 87, 34, 0.05);
-            border-color: rgba(255, 87, 34, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .timeline-card.orange::after {
+            background: linear-gradient(0deg, rgba(255, 87, 34, 0.1) 0%, transparent 100%);
         }
 
         .timeline-card.orange:hover {
-            box-shadow: 0 15px 40px rgba(255, 87, 34, 0.2);
-            border-color: #ff5722;
+            box-shadow: 
+                0 20px 60px rgba(255, 87, 34, 0.2),
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 87, 34, 0.4);
+        }
+
+        /* 3D floating content */
+        .timeline-card-content {
+            transform: translateZ(30px);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Glare/light reflection on hover */
+        .timeline-card .card-glare {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .timeline-card:hover .card-glare {
+            opacity: 1;
         }
 
         .timeline-number {
@@ -809,10 +879,12 @@
             letter-spacing: 3px;
             margin-bottom: 10px;
             font-weight: 600;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         .timeline-card.orange .timeline-number {
             color: #ff5722;
+            text-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
         }
 
         .timeline-card-title {
@@ -820,16 +892,26 @@
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 12px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .timeline-card-desc {
             font-size: 15px;
-            color: #a0a0a0;
+            color: #b0b0b0;
             line-height: 1.6;
         }
 
         .timeline-item-v.left .timeline-card {
             text-align: left;
+        }
+
+        /* Edge glow effect */
+        .timeline-card.edge-glow::before {
+            box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.1);
+        }
+
+        .timeline-card.orange.edge-glow::before {
+            box-shadow: inset 0 0 30px rgba(255, 87, 34, 0.1);
         }
 
         /* Timeline Mobile Responsive */
@@ -861,6 +943,7 @@
 
             .timeline-card {
                 padding: 20px;
+                transform: none !important;
             }
 
             .timeline-card-title {
@@ -873,6 +956,11 @@
 
             .timeline-item-v.left .timeline-card {
                 text-align: left;
+            }
+
+            /* Disable 3D tilt on mobile */
+            .timeline-card[data-tilt] {
+                transform: none !important;
             }
         }
 
@@ -902,6 +990,8 @@
 
             .timeline-card {
                 padding: 15px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
 
             .timeline-card-title {
@@ -910,6 +1000,17 @@
 
             .timeline-card-desc {
                 font-size: 13px;
+            }
+        }
+
+        /* Touch device adjustments */
+        @media (hover: none) and (pointer: coarse) {
+            .timeline-card {
+                transform: none !important;
+            }
+            
+            .timeline-card .card-glare {
+                display: none;
             }
         }
 
@@ -2368,46 +2469,61 @@
             
             <div class="timeline-item-v right">
                 <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <span class="timeline-number">01</span>
-                    <h3 class="timeline-card-title">AI Computing Explosion</h3>
-                    <p class="timeline-card-desc">Global AI market: $200B → $2T+ by 2030. Data center shortage acute.</p>
+                <div class="timeline-card" data-tilt>
+                    <div class="card-glare"></div>
+                    <div class="timeline-card-content">
+                        <span class="timeline-number">01</span>
+                        <h3 class="timeline-card-title">AI Computing Explosion</h3>
+                        <p class="timeline-card-desc">Global AI market: $200B → $2T+ by 2030. Data center shortage acute.</p>
+                    </div>
                 </div>
             </div>
             
             <div class="timeline-item-v left">
                 <div class="timeline-dot"></div>
-                <div class="timeline-card orange">
-                    <span class="timeline-number">02</span>
-                    <h3 class="timeline-card-title">Energy Crisis & Grid Instability</h3>
-                    <p class="timeline-card-desc">Industrial electricity up 30%+. Energy independence priority.</p>
+                <div class="timeline-card orange" data-tilt>
+                    <div class="card-glare"></div>
+                    <div class="timeline-card-content">
+                        <span class="timeline-number">02</span>
+                        <h3 class="timeline-card-title">Energy Crisis & Grid Instability</h3>
+                        <p class="timeline-card-desc">Industrial electricity up 30%+. Energy independence priority.</p>
+                    </div>
                 </div>
             </div>
             
             <div class="timeline-item-v right">
                 <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <span class="timeline-number">03</span>
-                    <h3 class="timeline-card-title">Clean Energy Mandates</h3>
-                    <p class="timeline-card-desc">90% Fortune 500 net-zero pledges. $369B IRA incentives.</p>
+                <div class="timeline-card" data-tilt>
+                    <div class="card-glare"></div>
+                    <div class="timeline-card-content">
+                        <span class="timeline-number">03</span>
+                        <h3 class="timeline-card-title">Clean Energy Mandates</h3>
+                        <p class="timeline-card-desc">90% Fortune 500 net-zero pledges. $369B IRA incentives.</p>
+                    </div>
                 </div>
             </div>
             
             <div class="timeline-item-v left">
                 <div class="timeline-dot"></div>
-                <div class="timeline-card orange">
-                    <span class="timeline-number">04</span>
-                    <h3 class="timeline-card-title">Natural Hydrogen Emergence</h3>
-                    <p class="timeline-card-desc">DOE priority. Zero production cost. Game-changer for energy.</p>
+                <div class="timeline-card orange" data-tilt>
+                    <div class="card-glare"></div>
+                    <div class="timeline-card-content">
+                        <span class="timeline-number">04</span>
+                        <h3 class="timeline-card-title">Natural Hydrogen Emergence</h3>
+                        <p class="timeline-card-desc">DOE priority. Zero production cost. Game-changer for energy.</p>
+                    </div>
                 </div>
             </div>
             
             <div class="timeline-item-v right">
                 <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <span class="timeline-number">05</span>
-                    <h3 class="timeline-card-title">Reshoring & Domestic Manufacturing</h3>
-                    <p class="timeline-card-desc">$52B Chips Act. Domestic data infrastructure = national security.</p>
+                <div class="timeline-card" data-tilt>
+                    <div class="card-glare"></div>
+                    <div class="timeline-card-content">
+                        <span class="timeline-number">05</span>
+                        <h3 class="timeline-card-title">Reshoring & Domestic Manufacturing</h3>
+                        <p class="timeline-card-desc">$52B Chips Act. Domestic data infrastructure = national security.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2725,6 +2841,65 @@
                 
                 starfield.appendChild(star);
             }
+            
+            // Initialize 3D tilt effect on cards
+            init3DTiltEffect();
+        }
+
+        // 3D Tilt Effect for Timeline Cards
+        function init3DTiltEffect() {
+            // Skip on touch devices
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                return;
+            }
+            
+            const cards = document.querySelectorAll('[data-tilt]');
+            
+            cards.forEach(card => {
+                if (card.dataset.tiltInitialized) return;
+                card.dataset.tiltInitialized = 'true';
+                
+                const glare = card.querySelector('.card-glare');
+                
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 12;
+                    const rotateY = (centerX - x) / 12;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03) translateZ(10px)`;
+                    
+                    // Move glare with mouse
+                    if (glare) {
+                        const glareX = (x / rect.width) * 100;
+                        const glareY = (y / rect.height) * 100;
+                        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.25) 0%, transparent 50%)`;
+                        glare.style.opacity = '1';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)';
+                    card.style.transition = 'transform 0.5s ease-out';
+                    
+                    if (glare) {
+                        glare.style.opacity = '0';
+                    }
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.1s ease-out';
+                    }, 500);
+                });
+                
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'all 0.1s ease-out';
+                });
+            });
         }
 
         // Animate slide content when it enters viewport
