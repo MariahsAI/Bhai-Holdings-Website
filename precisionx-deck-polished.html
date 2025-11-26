@@ -146,6 +146,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .stat-box:hover {
@@ -162,16 +164,158 @@
             box-shadow: 0 20px 60px rgba(255, 87, 34, 0.4);
         }
 
+        /* Matrix Decode Effect Styles */
         .stat-value {
             font-size: 72px;
             font-weight: 900;
             color: #00ffff;
             line-height: 1;
             margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            min-width: 200px;
+            letter-spacing: 2px;
         }
 
         .stat-box.orange .stat-value {
             color: #ff5722;
+        }
+
+        /* Matrix decode animation states */
+        .stat-value.decoding {
+            animation: matrixGlow 0.1s ease-in-out infinite alternate;
+        }
+
+        .stat-value.decoding::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.15) 0%, transparent 70%);
+            animation: pulseGlow 0.3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .stat-box.orange .stat-value.decoding::before {
+            background: radial-gradient(ellipse at center, rgba(255, 87, 34, 0.15) 0%, transparent 70%);
+        }
+
+        @keyframes matrixGlow {
+            0% { 
+                text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+                filter: brightness(1);
+            }
+            100% { 
+                text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Locked digit styling */
+        .digit-locked {
+            display: inline-block;
+            animation: lockIn 0.3s ease-out forwards;
+        }
+
+        @keyframes lockIn {
+            0% { 
+                transform: scale(1.3);
+                filter: brightness(2);
+            }
+            50% {
+                transform: scale(0.95);
+            }
+            100% { 
+                transform: scale(1);
+                filter: brightness(1);
+            }
+        }
+
+        /* Scanning line effect during decode */
+        .stat-box.decoding-active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            animation: scanLine 0.8s linear infinite;
+        }
+
+        .stat-box.orange.decoding-active::after {
+            background: linear-gradient(90deg, transparent, #ff5722, transparent);
+        }
+
+        @keyframes scanLine {
+            0% { top: 0; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* Data stream particles */
+        .data-particle {
+            position: absolute;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            color: #00ffff;
+            opacity: 0;
+            pointer-events: none;
+            animation: particleFall 1s linear forwards;
+        }
+
+        .stat-box.orange .data-particle {
+            color: #ff5722;
+        }
+
+        @keyframes particleFall {
+            0% {
+                opacity: 0.8;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+        }
+
+        /* Final flash effect when decode completes */
+        .stat-box.decode-complete {
+            animation: completeFlash 0.5s ease-out forwards;
+        }
+
+        @keyframes completeFlash {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 40px 10px rgba(0, 255, 255, 0.4);
+            }
+            100% {
+                box-shadow: none;
+            }
+        }
+
+        .stat-box.orange.decode-complete {
+            animation: completeFlashOrange 0.5s ease-out forwards;
+        }
+
+        @keyframes completeFlashOrange {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.8);
+            }
+            50% {
+                box-shadow: 0 0 40px 10px rgba(255, 87, 34, 0.4);
+            }
+            100% {
+                box-shadow: none;
+            }
         }
 
         .stat-label {
@@ -1045,95 +1189,6 @@
             }
         }
 
-        /* Urgency Grid */
-        .urgency-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin: 40px auto;
-            max-width: 1400px;
-        }
-
-        /* Starfield Background */
-        .starfield {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            background: #ffffff;
-            border-radius: 50%;
-            animation: twinkle 3s infinite ease-in-out, floatStar 60s infinite linear;
-        }
-
-        .star.cyan {
-            background: #00ffff;
-            box-shadow: 0 0 6px #00ffff;
-        }
-
-        .star.orange {
-            background: #ff5722;
-            box-shadow: 0 0 6px #ff5722;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        @keyframes floatStar {
-            0% {
-                transform: translate(0, 0);
-            }
-            25% {
-                transform: translate(10px, -15px);
-            }
-            50% {
-                transform: translate(-5px, -25px);
-            }
-            75% {
-                transform: translate(-15px, -10px);
-            }
-            100% {
-                transform: translate(0, 0);
-            }
-        }
-
-        /* Different float speeds for variety */
-        .star.slow { animation: twinkle 4s infinite ease-in-out, floatStarSlow 90s infinite linear; }
-        .star.fast { animation: twinkle 2s infinite ease-in-out, floatStarFast 40s infinite linear; }
-
-        @keyframes floatStarSlow {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(5px, -8px); }
-            50% { transform: translate(-3px, -15px); }
-            75% { transform: translate(-8px, -5px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        @keyframes floatStarFast {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(15px, -20px); }
-            50% { transform: translate(-8px, -35px); }
-            75% { transform: translate(-20px, -15px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        /* Ensure content is above starfield */
-        .timeline-vertical,
-        .slide-title,
-        .slide-subtitle {
-            position: relative;
-            z-index: 1;
-        }
-
         /* Slide Dividers/Transitions */
         .slide-divider {
             position: absolute;
@@ -1215,8 +1270,6 @@
             }
         }
 
-        /* Glowing orb - REMOVED for cleaner look */
-
         /* Continuous subtle pulse after initial animation */
         .slide-divider.active.complete .energy-line path {
             stroke-dashoffset: 0;
@@ -1247,6 +1300,15 @@
             .slide-divider.active .energy-line path {
                 animation: drawEnergy 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             }
+        }
+
+        /* Urgency Grid */
+        .urgency-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px auto;
+            max-width: 1400px;
         }
 
         .urgency-box {
@@ -1510,6 +1572,229 @@
         .stagger-7 { animation-delay: 0.7s; }
         .stagger-8 { animation-delay: 0.8s; }
 
+        /* Starfield Background */
+        .starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out, floatStar 60s infinite linear;
+        }
+
+        .star.cyan {
+            background: #00ffff;
+            box-shadow: 0 0 6px #00ffff;
+        }
+
+        .star.orange {
+            background: #ff5722;
+            box-shadow: 0 0 6px #ff5722;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes floatStar {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(10px, -15px);
+            }
+            50% {
+                transform: translate(-5px, -25px);
+            }
+            75% {
+                transform: translate(-15px, -10px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        /* Different float speeds for variety */
+        .star.slow { animation: twinkle 4s infinite ease-in-out, floatStarSlow 90s infinite linear; }
+        .star.fast { animation: twinkle 2s infinite ease-in-out, floatStarFast 40s infinite linear; }
+
+        @keyframes floatStarSlow {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(5px, -8px); }
+            50% { transform: translate(-3px, -15px); }
+            75% { transform: translate(-8px, -5px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes floatStarFast {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(15px, -20px); }
+            50% { transform: translate(-8px, -35px); }
+            75% { transform: translate(-20px, -15px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Ensure content is above starfield */
+        .timeline-vertical,
+        .slide-title,
+        .slide-subtitle {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mirror/Reflection Effect - Inside Box at Bottom */
+        .reflect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reflect::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 50%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.08) 60%, rgba(0, 255, 255, 0.15) 100%);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 0 0 13px 13px;
+        }
+
+        /* Cyan reflection glow */
+        .reflect-cyan::after {
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.06) 50%, rgba(0, 255, 255, 0.12) 80%, rgba(0, 255, 255, 0.18) 100%);
+        }
+
+        /* Orange reflection glow */
+        .reflect-orange::after {
+            background: linear-gradient(to bottom, transparent 0%, rgba(255, 87, 34, 0.06) 50%, rgba(255, 87, 34, 0.12) 80%, rgba(255, 87, 34, 0.18) 100%);
+        }
+
+        /* Premium reflection for ask box */
+        .reflect-premium::after {
+            height: 60%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.05) 40%, rgba(0, 255, 255, 0.1) 70%, rgba(0, 255, 255, 0.2) 100%);
+            border-radius: 0 0 18px 18px;
+        }
+
+        /* Add subtle top shine for glass effect */
+        .reflect::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 13px 13px 0 0;
+        }
+
+        .reflect-premium::before {
+            height: 30%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+            border-radius: 18px 18px 0 0;
+        }
+
+        .pillar-card.fade-border,
+        .advantage-box.fade-border,
+        .phase-box.fade-border {
+            border-right: none;
+            position: relative;
+        }
+
+        .pillar-card.fade-border::after,
+        .advantage-box.fade-border::after,
+        .phase-box.fade-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 25px;
+            height: calc(100% + 4px);
+            background: linear-gradient(to right, #00ffff 0%, transparent 100%);
+            border-radius: 0 15px 15px 0;
+            pointer-events: none;
+        }
+
+        .pillar-card.orange.fade-border::after,
+        .advantage-box.orange.fade-border::after,
+        .phase-box.orange.fade-border::after {
+            background: linear-gradient(to right, #ff5722 0%, transparent 100%);
+        }
+
+        /* Double border effect - for specific sections */
+        .chart-box.double-border,
+        .info-box.double-border,
+        .investment-box.double-border {
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
+        }
+
+        .chart-box.orange.double-border,
+        .info-box.orange.double-border,
+        .investment-box.orange.double-border {
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
+        }
+
+        /* Left border only effect - for specific sections */
+        .info-box.left-border-only {
+            border: none;
+            border-left: 5px solid #00ffff;
+            border-radius: 0;
+        }
+
+        .info-box.orange.left-border-only {
+            border: none;
+            border-left: 5px solid #ff5722;
+            border-radius: 0;
+        }
+
+        /* Team cards - gradient border fading left to right */
+        .team-card.fade-border-lr {
+            border: none;
+            position: relative;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .team-card.fade-border-lr::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(to right, #00ffff 0%, #00ffff 20%, transparent 100%);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .team-card.orange.fade-border-lr {
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .team-card.orange.fade-border-lr::before {
+            background: linear-gradient(to right, #ff5722 0%, #ff5722 20%, transparent 100%);
+        }
+
         /* Mobile Responsive */
         @media (max-width: 1024px) {
             .slide {
@@ -1622,6 +1907,7 @@
             .stat-value {
                 font-size: 48px;
                 margin-bottom: 15px;
+                min-width: auto;
             }
 
             .stat-label {
@@ -2125,652 +2411,6 @@
                 scroll-snap-type: none;
             }
         }
-
-        /* Fade border effect - only for specific sections */
-        .pillar-card.fade-border,
-        .advantage-box.fade-border,
-        .phase-box.fade-border {
-            border-right: none;
-            position: relative;
-        }
-
-        /* Mirror/Reflection Effect - Inside Box at Bottom */
-        .reflect {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .reflect::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 50%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.08) 60%, rgba(0, 255, 255, 0.15) 100%);
-            pointer-events: none;
-            z-index: 1;
-            border-radius: 0 0 13px 13px;
-        }
-
-        /* Cyan reflection glow */
-        .reflect-cyan::after {
-            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.06) 50%, rgba(0, 255, 255, 0.12) 80%, rgba(0, 255, 255, 0.18) 100%);
-        }
-
-        /* Orange reflection glow */
-        .reflect-orange::after {
-            background: linear-gradient(to bottom, transparent 0%, rgba(255, 87, 34, 0.06) 50%, rgba(255, 87, 34, 0.12) 80%, rgba(255, 87, 34, 0.18) 100%);
-        }
-
-        /* Premium reflection for ask box */
-        .reflect-premium::after {
-            height: 60%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.05) 40%, rgba(0, 255, 255, 0.1) 70%, rgba(0, 255, 255, 0.2) 100%);
-            border-radius: 0 0 18px 18px;
-        }
-
-        /* Add subtle top shine for glass effect */
-        .reflect::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            height: 40%;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 1;
-            border-radius: 13px 13px 0 0;
-        }
-
-        .reflect-premium::before {
-            height: 30%;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
-            border-radius: 18px 18px 0 0;
-        }
-
-        .pillar-card.fade-border::after,
-        .advantage-box.fade-border::after,
-        .phase-box.fade-border::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 25px;
-            height: calc(100% + 4px);
-            background: linear-gradient(to right, #00ffff 0%, transparent 100%);
-            border-radius: 0 15px 15px 0;
-            pointer-events: none;
-        }
-
-        .pillar-card.orange.fade-border::after,
-        .advantage-box.orange.fade-border::after,
-        .phase-box.orange.fade-border::after {
-            background: linear-gradient(to right, #ff5722 0%, transparent 100%);
-        }
-
-        /* Double border effect - for specific sections */
-        .chart-box.double-border,
-        .info-box.double-border,
-        .investment-box.double-border {
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #00ffff;
-        }
-
-        .chart-box.orange.double-border,
-        .info-box.orange.double-border,
-        .investment-box.orange.double-border {
-            box-shadow: 0 0 0 4px rgba(0, 0, 0, 1), 0 0 0 6px #ff5722;
-        }
-
-        /* Left border only effect - for specific sections */
-        .info-box.left-border-only {
-            border: none;
-            border-left: 5px solid #00ffff;
-            border-radius: 0;
-        }
-
-        .info-box.orange.left-border-only {
-            border: none;
-            border-left: 5px solid #ff5722;
-            border-radius: 0;
-        }
-
-        /* Team cards - gradient border fading left to right */
-        .team-card.fade-border-lr {
-            border: none;
-            position: relative;
-            background: rgba(0, 255, 255, 0.05);
-            border-radius: 15px;
-        }
-
-        .team-card.fade-border-lr::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 15px;
-            padding: 2px;
-            background: linear-gradient(to right, #00ffff 0%, #00ffff 20%, transparent 100%);
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-        }
-
-        .team-card.orange.fade-border-lr {
-            background: rgba(255, 87, 34, 0.05);
-        }
-
-        .team-card.orange.fade-border-lr::before {
-            background: linear-gradient(to right, #ff5722 0%, #ff5722 20%, transparent 100%);
-        }
-
-        /* ============================================
-           COMPREHENSIVE MOBILE OPTIMIZATION
-           ============================================ */
-
-        /* Tablet Styles */
-        @media (max-width: 1024px) {
-            .slide {
-                padding: 60px 50px;
-            }
-
-            .hero-title {
-                font-size: 64px;
-            }
-
-            .slide-title {
-                font-size: 36px;
-            }
-
-            .chart-section {
-                gap: 30px;
-            }
-
-            .stats-grid {
-                gap: 20px;
-            }
-
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            /* Base layout */
-            .slide {
-                padding: 40px 20px;
-                min-height: auto;
-                padding-top: 60px;
-                padding-bottom: 80px;
-            }
-
-            /* Typography */
-            .hero-title {
-                font-size: 36px;
-                line-height: 1.1;
-                margin-bottom: 15px;
-            }
-
-            .hero-subtitle {
-                font-size: 16px;
-                margin-bottom: 10px;
-            }
-
-            .hero-tagline {
-                font-size: 14px;
-            }
-
-            .slide-title {
-                font-size: 24px;
-                margin-bottom: 20px;
-                line-height: 1.2;
-            }
-
-            .slide-subtitle {
-                font-size: 14px;
-                line-height: 1.5;
-                margin-bottom: 20px;
-            }
-
-            /* Navigation */
-            .slide-counter {
-                bottom: 15px;
-                left: 15px;
-                font-size: 14px;
-            }
-
-            .scroll-hint {
-                bottom: 15px;
-                font-size: 12px;
-            }
-
-            #progress-bar {
-                height: 3px;
-            }
-
-            /* Grids - Stack everything */
-            .stats-grid,
-            .pillars-container,
-            .chart-section,
-            .advantage-grid,
-            .phase-container,
-            .investment-grid,
-            .urgency-grid,
-            .exit-grid,
-            .team-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 15px !important;
-            }
-
-            /* Cards and boxes */
-            .stat-box,
-            .pillar-card,
-            .chart-box,
-            .info-box,
-            .advantage-box,
-            .phase-box,
-            .investment-box,
-            .urgency-box,
-            .exit-box,
-            .team-card {
-                width: 100% !important;
-                padding: 20px !important;
-                min-height: auto !important;
-            }
-
-            .stat-value {
-                font-size: 36px;
-            }
-
-            .stat-label {
-                font-size: 12px;
-            }
-
-            /* Chart sizing */
-            .chart-box {
-                height: 250px !important;
-                min-height: 250px !important;
-            }
-
-            .chart-box canvas {
-                max-height: 220px !important;
-            }
-
-            /* Info boxes */
-            .info-title {
-                font-size: 18px;
-            }
-
-            .info-text {
-                font-size: 13px;
-            }
-
-            .info-text p {
-                margin-bottom: 8px;
-            }
-
-            /* Ask box */
-            .ask-box {
-                padding: 30px 20px;
-            }
-
-            .ask-amount {
-                font-size: 48px;
-            }
-
-            .ask-subtitle {
-                font-size: 14px;
-            }
-
-            .proceeds-title {
-                font-size: 18px;
-            }
-
-            /* Vision box */
-            .vision-box {
-                padding: 25px 20px;
-            }
-
-            .vision-text {
-                font-size: 16px;
-            }
-
-            .typewriter-container {
-                min-height: 80px;
-            }
-
-            /* Tables */
-            .data-table {
-                font-size: 12px;
-            }
-
-            .data-table th,
-            .data-table td {
-                padding: 10px 8px;
-            }
-
-            /* Timeline horizontal */
-            .timeline-container {
-                overflow-x: auto;
-                padding-bottom: 10px;
-            }
-
-            .timeline {
-                min-width: 500px;
-            }
-
-            .timeline-title {
-                font-size: 16px;
-            }
-
-            /* Team cards */
-            .team-name {
-                font-size: 16px;
-            }
-
-            .team-title {
-                font-size: 12px;
-            }
-
-            .team-bio {
-                font-size: 12px;
-            }
-
-            /* Urgency section */
-            .urgency-title {
-                font-size: 16px;
-            }
-
-            .urgency-points {
-                font-size: 13px;
-            }
-
-            .urgency-footer {
-                padding: 20px 15px;
-            }
-
-            .urgency-footer-title {
-                font-size: 16px;
-            }
-
-            .urgency-footer-text {
-                font-size: 12px;
-            }
-
-            /* Exit boxes */
-            .exit-title {
-                font-size: 16px;
-            }
-
-            .exit-desc {
-                font-size: 13px;
-            }
-
-            /* Contact slide */
-            .contact-title {
-                font-size: 28px;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .contact-item {
-                font-size: 14px;
-            }
-
-            .cta-box {
-                padding: 30px 20px;
-            }
-
-            .cta-title {
-                font-size: 20px;
-            }
-
-            .cta-text {
-                font-size: 14px;
-            }
-
-            /* Divider adjustments */
-            .slide-divider {
-                height: 60px;
-            }
-
-            .slide-divider .energy-line path {
-                stroke-width: 2;
-            }
-
-            /* Reflection effects - reduce intensity */
-            .reflect::after {
-                height: 40%;
-                opacity: 0.7;
-            }
-
-            .reflect-premium::after {
-                height: 50%;
-            }
-        }
-
-        /* Small Mobile Styles */
-        @media (max-width: 480px) {
-            .slide {
-                padding: 30px 15px;
-                padding-top: 50px;
-                padding-bottom: 70px;
-            }
-
-            .hero-title {
-                font-size: 28px;
-            }
-
-            .hero-subtitle {
-                font-size: 14px;
-            }
-
-            .slide-title {
-                font-size: 20px;
-            }
-
-            .slide-subtitle {
-                font-size: 13px;
-            }
-
-            .stat-value {
-                font-size: 28px;
-            }
-
-            .stat-label {
-                font-size: 11px;
-            }
-
-            .chart-box {
-                height: 200px !important;
-                min-height: 200px !important;
-            }
-
-            .info-title {
-                font-size: 16px;
-            }
-
-            .info-text {
-                font-size: 12px;
-            }
-
-            .ask-amount {
-                font-size: 36px;
-            }
-
-            .ask-subtitle {
-                font-size: 12px;
-            }
-
-            /* Data tables - make scrollable */
-            .data-table {
-                display: block;
-                overflow-x: auto;
-                font-size: 11px;
-            }
-
-            /* Pillar cards */
-            .pillar-title {
-                font-size: 16px;
-            }
-
-            .pillar-card ul {
-                font-size: 12px;
-            }
-
-            .pillar-card li {
-                margin-bottom: 6px;
-            }
-
-            /* Phase boxes */
-            .phase-name {
-                font-size: 14px;
-            }
-
-            .phase-details {
-                font-size: 12px;
-            }
-
-            /* Investment boxes */
-            .investment-label {
-                font-size: 12px;
-            }
-
-            .investment-value {
-                font-size: 28px;
-            }
-
-            /* Advantage boxes */
-            .advantage-title {
-                font-size: 14px;
-            }
-
-            .advantage-desc {
-                font-size: 12px;
-            }
-
-            /* Divider - even smaller */
-            .slide-divider {
-                height: 40px;
-            }
-        }
-
-        /* Touch device optimizations */
-        @media (hover: none) and (pointer: coarse) {
-            /* Disable hover effects that don't work well on touch */
-            .stat-box:hover,
-            .pillar-card:hover,
-            .advantage-box:hover,
-            .team-card:hover,
-            .exit-box:hover,
-            .urgency-box:hover {
-                transform: none;
-            }
-
-            /* Add active states instead */
-            .stat-box:active,
-            .pillar-card:active,
-            .advantage-box:active,
-            .team-card:active,
-            .exit-box:active,
-            .urgency-box:active {
-                transform: scale(0.98);
-                opacity: 0.9;
-            }
-
-            /* Ensure tap targets are large enough */
-            .contact-item,
-            .timeline-item {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-            }
-
-            /* Reduce animation intensity for performance */
-            .star {
-                animation-duration: 4s !important;
-            }
-
-            /* Disable energy line continuous pulse on mobile for performance */
-            .slide-divider.active.complete .energy-line path {
-                animation: none;
-                stroke-opacity: 0.3;
-            }
-        }
-
-        /* Landscape mobile */
-        @media (max-width: 896px) and (orientation: landscape) {
-            .slide {
-                min-height: auto;
-                padding: 30px 40px;
-            }
-
-            .hero-title {
-                font-size: 32px;
-            }
-
-            .slide-title {
-                font-size: 24px;
-            }
-
-            .stats-grid,
-            .pillars-container {
-                flex-direction: row !important;
-                flex-wrap: wrap !important;
-            }
-
-            .stat-box,
-            .pillar-card {
-                width: calc(50% - 10px) !important;
-            }
-
-            .chart-section {
-                flex-direction: row !important;
-            }
-
-            .chart-box,
-            .info-box {
-                width: 50% !important;
-            }
-        }
-
-        /* High DPI / Retina optimizations */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .slide-divider .energy-line path {
-                stroke-width: 2;
-            }
-        }
-
-        /* Reduced motion preference */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-
-            .star {
-                animation: none !important;
-            }
-
-            .slide-divider .energy-line path {
-                animation: none !important;
-                stroke-dashoffset: 0 !important;
-                stroke-opacity: 0.4 !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -2812,31 +2452,30 @@
         <h2 class="slide-title">The Opportunity at a Glance</h2>
         <div class="stats-grid">
             <div class="stat-box reflect reflect-cyan">
-                <div class="stat-value counter" data-target="88">0</div>
+                <div class="stat-value matrix-decode" data-target="88" data-suffix="">88</div>
                 <div class="stat-label">Million Barrels Oil in Place</div>
             </div>
             <div class="stat-box orange reflect reflect-orange">
-                <div class="stat-value counter" data-target="5">0</div>
+                <div class="stat-value matrix-decode" data-target="5" data-suffix="">5</div>
                 <div class="stat-label">Billion Hydrogen Resource</div>
             </div>
             <div class="stat-box reflect reflect-cyan">
-                <div class="stat-value counter" data-target="8">0</div>
+                <div class="stat-value matrix-decode" data-target="8" data-suffix="">8</div>
                 <div class="stat-label">AI Data Centers</div>
             </div>
             <div class="stat-box orange reflect reflect-orange">
-                <div class="stat-value counter" data-target="8500">0</div>
+                <div class="stat-value matrix-decode" data-target="8500" data-suffix="">8,500</div>
                 <div class="stat-label">Peak BOPD Production</div>
             </div>
             <div class="stat-box reflect reflect-cyan">
-                <div class="stat-value counter" data-target="2.2">0</div>
+                <div class="stat-value matrix-decode" data-target="2.2" data-suffix="">2.2</div>
                 <div class="stat-label">Billion Total Investment</div>
             </div>
             <div class="stat-box orange reflect reflect-orange">
-                <div class="stat-value">7-15x</div>
+                <div class="stat-value matrix-decode" data-target="7" data-suffix="-15x" data-prefix="">7-15x</div>
                 <div class="stat-label">ROI Potential</div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 3: Executive Vision -->
@@ -2852,7 +2491,6 @@
                 <span class="typewriter-cursor">|</span>
             </p>
         </div>
-        
     </div>
 
     <!-- SLIDE 4: Three Pillars -->
@@ -2890,7 +2528,6 @@
                 </ul>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 5: Wolfcamp Oil Production -->
@@ -2912,7 +2549,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 6: Hydrogen Discovery -->
@@ -2934,7 +2570,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 7: AI Data Centers -->
@@ -2987,7 +2622,6 @@
                 </table>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 8: Integrated Advantage -->
@@ -3018,7 +2652,6 @@
                 <div class="advantage-desc">Convergence of AI boom, energy crisis, clean mandates, and H₂ emergence</div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 9: Phased Roadmap -->
@@ -3078,7 +2711,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 10: Investment Structure -->
@@ -3126,7 +2758,6 @@
                 </tbody>
             </table>
         </div>
-        
     </div>
 
     <!-- SLIDE 11: Financial Projections -->
@@ -3137,7 +2768,6 @@
                 <canvas id="financialChart"></canvas>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 12: Management Team -->
@@ -3176,7 +2806,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 13: Five Mega-Trends -->
@@ -3250,7 +2879,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 14: Competitive Positioning -->
@@ -3273,7 +2901,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 15: Why Now? -->
@@ -3314,7 +2941,6 @@
                 ✓ Asymmetric returns: Limited downside, exponential upside
             </p>
         </div>
-        
     </div>
 
     <!-- SLIDE 16: Exit Strategies -->
@@ -3362,7 +2988,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <!-- SLIDE 17: The Ask -->
@@ -3385,6 +3010,9 @@
                         <p><span style="display: inline-block; width: 16px; height: 16px; background: #ff5722; border-radius: 3px; margin-right: 10px; vertical-align: middle;"></span><span style="color: #ff5722; font-weight: bold;">$0.55M (5.5%)</span> — Phase II: Hydrogen validation → Strategic optionality</p>
                         <p><span style="display: inline-block; width: 16px; height: 16px; background: #9c27b0; border-radius: 3px; margin-right: 10px; vertical-align: middle;"></span><span style="color: #9c27b0; font-weight: bold;">$6.75M (67.5%)</span> — Phase III: Horizontal drilling → Scale to 8,500+ BOPD</p>
                     </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- SLIDE 18: Contact -->
@@ -3439,6 +3067,156 @@
             }
         });
 
+        // =============================================
+        // MATRIX DECODE NUMBER ANIMATION
+        // =============================================
+        
+        class MatrixDecoder {
+            constructor(element) {
+                this.element = element;
+                this.target = parseFloat(element.dataset.target);
+                this.suffix = element.dataset.suffix || '';
+                this.prefix = element.dataset.prefix || '';
+                this.isDecimal = this.target % 1 !== 0;
+                this.hasComma = this.target >= 1000;
+                this.decoded = false;
+                this.characters = '0123456789';
+                this.scrambleSpeed = 30; // ms between scrambles
+                this.lockDelay = 150; // ms before locking each digit
+                this.totalDuration = 2000; // total animation duration
+            }
+            
+            formatNumber(num) {
+                if (this.hasComma) {
+                    return num.toLocaleString();
+                }
+                return this.isDecimal ? num.toFixed(1) : num.toString();
+            }
+            
+            getTargetString() {
+                return this.prefix + this.formatNumber(this.target) + this.suffix;
+            }
+            
+            getRandomDigit() {
+                return this.characters[Math.floor(Math.random() * this.characters.length)];
+            }
+            
+            createDataParticles() {
+                const box = this.element.closest('.stat-box');
+                if (!box) return;
+                
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const particle = document.createElement('span');
+                        particle.className = 'data-particle';
+                        particle.textContent = this.getRandomDigit();
+                        particle.style.left = Math.random() * 80 + 10 + '%';
+                        particle.style.top = Math.random() * 30 + '%';
+                        particle.style.animationDelay = Math.random() * 0.3 + 's';
+                        box.appendChild(particle);
+                        
+                        setTimeout(() => particle.remove(), 1000);
+                    }, i * 100);
+                }
+            }
+            
+            async decode() {
+                if (this.decoded) return;
+                this.decoded = true;
+                
+                const box = this.element.closest('.stat-box');
+                const targetString = this.getTargetString();
+                const digits = targetString.split('');
+                
+                // Add decoding state
+                this.element.classList.add('decoding');
+                if (box) box.classList.add('decoding-active');
+                
+                // Create particle effect
+                this.createDataParticles();
+                
+                // Initial scramble phase
+                let currentDisplay = digits.map(char => {
+                    if (/[0-9]/.test(char)) {
+                        return this.getRandomDigit();
+                    }
+                    return char;
+                });
+                
+                // Scramble animation
+                const scrambleInterval = setInterval(() => {
+                    currentDisplay = currentDisplay.map((char, i) => {
+                        if (/[0-9]/.test(digits[i]) && !currentDisplay[i].locked) {
+                            return this.getRandomDigit();
+                        }
+                        return char;
+                    });
+                    this.element.textContent = currentDisplay.join('');
+                }, this.scrambleSpeed);
+                
+                // Lock digits one by one (left to right)
+                const digitIndices = digits.map((char, i) => ({ char, i }))
+                    .filter(item => /[0-9]/.test(item.char))
+                    .map(item => item.i);
+                
+                const lockInterval = this.totalDuration / (digitIndices.length + 1);
+                
+                for (let j = 0; j < digitIndices.length; j++) {
+                    await new Promise(resolve => setTimeout(resolve, lockInterval));
+                    
+                    const idx = digitIndices[j];
+                    currentDisplay[idx] = digits[idx];
+                    currentDisplay[idx] = { toString: () => digits[idx], locked: true };
+                    
+                    // Flash effect on lock
+                    this.element.style.textShadow = '0 0 30px currentColor, 0 0 60px currentColor';
+                    setTimeout(() => {
+                        this.element.style.textShadow = '';
+                    }, 100);
+                }
+                
+                // Final cleanup
+                clearInterval(scrambleInterval);
+                this.element.textContent = targetString;
+                this.element.classList.remove('decoding');
+                
+                if (box) {
+                    box.classList.remove('decoding-active');
+                    box.classList.add('decode-complete');
+                    setTimeout(() => box.classList.remove('decode-complete'), 500);
+                }
+            }
+        }
+        
+        // Store decoder instances
+        const decoders = new Map();
+        
+        // Initialize matrix decoders
+        function initMatrixDecoders() {
+            document.querySelectorAll('.matrix-decode').forEach(element => {
+                const decoder = new MatrixDecoder(element);
+                decoders.set(element, decoder);
+                // Show initial scrambled state
+                element.textContent = '---';
+            });
+        }
+        
+        // Trigger matrix decode animation
+        function triggerMatrixDecode() {
+            document.querySelectorAll('.matrix-decode').forEach((element, index) => {
+                const decoder = decoders.get(element);
+                if (decoder && !decoder.decoded) {
+                    // Stagger the start of each decode
+                    setTimeout(() => {
+                        decoder.decode();
+                    }, index * 200);
+                }
+            });
+        }
+        
+        // Initialize decoders on load
+        initMatrixDecoders();
+
         // Intersection Observer for slide tracking and animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -3449,9 +3227,9 @@
                     // Animate slide content
                     animateSlideContent(entry.target);
                     
-                    // Trigger animations based on slide
+                    // Trigger Matrix Decode on slide 2
                     if (slideNum === 2) {
-                        animateCounters();
+                        triggerMatrixDecode();
                     }
                     
                     // Typewriter effect for vision statement
@@ -3752,8 +3530,8 @@
                 subtitle.classList.add('animate-subtitle');
             }
 
-            // Animate boxes with stagger
-            const boxes = slide.querySelectorAll('.stat-box, .pillar-card, .advantage-box, .phase-box, .investment-box, .team-card, .trend-box, .urgency-box, .exit-box, .proceed-box');
+            // Animate boxes with stagger (but NOT stat-boxes - they stay visible for matrix decode effect)
+            const boxes = slide.querySelectorAll('.pillar-card, .advantage-box, .phase-box, .investment-box, .team-card, .trend-box, .urgency-box, .exit-box, .proceed-box');
             boxes.forEach((box, index) => {
                 if (!box.classList.contains('animate-box')) {
                     box.classList.add('animate-box', `stagger-${Math.min(index + 1, 8)}`);
@@ -3803,31 +3581,6 @@
             
             // Start typing after a short delay
             setTimeout(typeNextChar, 500);
-        }
-
-        // Counter animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                if (counter.dataset.animated) return;
-                counter.dataset.animated = 'true';
-                
-                const target = parseFloat(counter.getAttribute('data-target'));
-                const duration = 2000;
-                const increment = target / (duration / 16);
-                let current = 0;
-                
-                const updateCounter = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.textContent = Math.floor(current).toLocaleString();
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target >= 1000 ? target.toLocaleString() : target;
-                    }
-                };
-                updateCounter();
-            });
         }
 
         // Chart initialization
