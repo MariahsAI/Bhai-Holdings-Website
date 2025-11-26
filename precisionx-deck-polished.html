@@ -1569,6 +1569,62 @@
             position: relative;
         }
 
+        /* Mirror/Reflection Effect - Inside Box at Bottom */
+        .reflect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reflect::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 50%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.08) 60%, rgba(0, 255, 255, 0.15) 100%);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 0 0 13px 13px;
+        }
+
+        /* Cyan reflection glow */
+        .reflect-cyan::after {
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.06) 50%, rgba(0, 255, 255, 0.12) 80%, rgba(0, 255, 255, 0.18) 100%);
+        }
+
+        /* Orange reflection glow */
+        .reflect-orange::after {
+            background: linear-gradient(to bottom, transparent 0%, rgba(255, 87, 34, 0.06) 50%, rgba(255, 87, 34, 0.12) 80%, rgba(255, 87, 34, 0.18) 100%);
+        }
+
+        /* Premium reflection for ask box */
+        .reflect-premium::after {
+            height: 60%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.05) 40%, rgba(0, 255, 255, 0.1) 70%, rgba(0, 255, 255, 0.2) 100%);
+            border-radius: 0 0 18px 18px;
+        }
+
+        /* Add subtle top shine for glass effect */
+        .reflect::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 13px 13px 0 0;
+        }
+
+        .reflect-premium::before {
+            height: 30%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+            border-radius: 18px 18px 0 0;
+        }
+
         .pillar-card.fade-border::after,
         .advantage-box.fade-border::after,
         .phase-box.fade-border::after {
@@ -1665,27 +1721,27 @@
     <div class="slide" data-slide="2">
         <h2 class="slide-title">The Opportunity at a Glance</h2>
         <div class="stats-grid">
-            <div class="stat-box">
+            <div class="stat-box reflect reflect-cyan">
                 <div class="stat-value counter" data-target="88">0</div>
                 <div class="stat-label">Million Barrels Oil in Place</div>
             </div>
-            <div class="stat-box orange">
+            <div class="stat-box orange reflect reflect-orange">
                 <div class="stat-value counter" data-target="5">0</div>
                 <div class="stat-label">Billion Hydrogen Resource</div>
             </div>
-            <div class="stat-box">
+            <div class="stat-box reflect reflect-cyan">
                 <div class="stat-value counter" data-target="8">0</div>
                 <div class="stat-label">AI Data Centers</div>
             </div>
-            <div class="stat-box orange">
+            <div class="stat-box orange reflect reflect-orange">
                 <div class="stat-value counter" data-target="8500">0</div>
                 <div class="stat-label">Peak BOPD Production</div>
             </div>
-            <div class="stat-box">
+            <div class="stat-box reflect reflect-cyan">
                 <div class="stat-value counter" data-target="2.2">0</div>
                 <div class="stat-label">Billion Total Investment</div>
             </div>
-            <div class="stat-box orange">
+            <div class="stat-box orange reflect reflect-orange">
                 <div class="stat-value">7-15x</div>
                 <div class="stat-label">ROI Potential</div>
             </div>
@@ -1931,19 +1987,19 @@
     <div class="slide" data-slide="10">
         <h2 class="slide-title">Investment Structure</h2>
         <div class="investment-grid">
-            <div class="investment-box double-border">
+            <div class="investment-box double-border reflect reflect-cyan">
                 <div class="investment-label">Initial Capital</div>
                 <div class="investment-value">$6.7-10M</div>
             </div>
-            <div class="investment-box orange double-border">
+            <div class="investment-box orange double-border reflect reflect-orange">
                 <div class="investment-label">Full Platform</div>
                 <div class="investment-value">$2.2B</div>
             </div>
-            <div class="investment-box double-border">
+            <div class="investment-box double-border reflect reflect-cyan">
                 <div class="investment-label">Investor Share</div>
                 <div class="investment-value">25%</div>
             </div>
-            <div class="investment-box orange double-border">
+            <div class="investment-box orange double-border reflect reflect-orange">
                 <div class="investment-label">Break-Even</div>
                 <div class="investment-value">Year 7</div>
             </div>
@@ -2164,7 +2220,7 @@
     <!-- SLIDE 17: The Ask -->
     <div class="slide" data-slide="17">
         <h2 class="slide-title">Investment Opportunity</h2>
-        <div class="ask-box">
+        <div class="ask-box reflect reflect-premium">
             <div class="ask-amount">$10M</div>
             <div class="ask-subtitle">Initial Capital to Launch Phase I-III</div>
         </div>
