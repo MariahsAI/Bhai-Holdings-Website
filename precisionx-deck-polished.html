@@ -3082,11 +3082,12 @@
                 this.prefix = element.dataset.prefix || '';
                 this.isDecimal = this.target % 1 !== 0;
                 this.hasComma = this.target >= 1000;
-                this.decoded = false;
+                this.decoding = false;
                 this.characters = '0123456789';
                 this.scrambleSpeed = 30; // ms between scrambles
                 this.lockDelay = 150; // ms before locking each digit
                 this.totalDuration = 2000; // total animation duration
+                this.scrambleInterval = null;
             }
             
             formatNumber(num) {
@@ -3123,9 +3124,27 @@
                 }
             }
             
+            reset() {
+                // Stop any ongoing animation
+                if (this.scrambleInterval) {
+                    clearInterval(this.scrambleInterval);
+                    this.scrambleInterval = null;
+                }
+                this.decoding = false;
+                
+                const box = this.element.closest('.stat-box');
+                this.element.classList.remove('decoding');
+                if (box) {
+                    box.classList.remove('decoding-active', 'decode-complete');
+                }
+                
+                // Reset to scrambled placeholder
+                this.element.textContent = '---';
+            }
+            
             async decode() {
-                if (this.decoded) return;
-                this.decoded = true;
+                if (this.decoding) return;
+                this.decoding = true;
                 
                 const box = this.element.closest('.stat-box');
                 const targetString = this.getTargetString();
@@ -3146,13 +3165,16 @@
                     return char;
                 });
                 
+                // Track locked state separately
+                const lockedIndices = new Set();
+                
                 // Scramble animation
-                const scrambleInterval = setInterval(() => {
+                this.scrambleInterval = setInterval(() => {
                     currentDisplay = currentDisplay.map((char, i) => {
-                        if (/[0-9]/.test(digits[i]) && !currentDisplay[i].locked) {
+                        if (/[0-9]/.test(digits[i]) && !lockedIndices.has(i)) {
                             return this.getRandomDigit();
                         }
-                        return char;
+                        return digits[i];
                     });
                     this.element.textContent = currentDisplay.join('');
                 }, this.scrambleSpeed);
@@ -3168,8 +3190,8 @@
                     await new Promise(resolve => setTimeout(resolve, lockInterval));
                     
                     const idx = digitIndices[j];
+                    lockedIndices.add(idx);
                     currentDisplay[idx] = digits[idx];
-                    currentDisplay[idx] = { toString: () => digits[idx], locked: true };
                     
                     // Flash effect on lock
                     this.element.style.textShadow = '0 0 30px currentColor, 0 0 60px currentColor';
@@ -3179,7 +3201,10 @@
                 }
                 
                 // Final cleanup
-                clearInterval(scrambleInterval);
+                if (this.scrambleInterval) {
+                    clearInterval(this.scrambleInterval);
+                    this.scrambleInterval = null;
+                }
                 this.element.textContent = targetString;
                 this.element.classList.remove('decoding');
                 
@@ -3188,6 +3213,8 @@
                     box.classList.add('decode-complete');
                     setTimeout(() => box.classList.remove('decode-complete'), 500);
                 }
+                
+                this.decoding = false;
             }
         }
         
@@ -3208,11 +3235,21 @@
         function triggerMatrixDecode() {
             document.querySelectorAll('.matrix-decode').forEach((element, index) => {
                 const decoder = decoders.get(element);
-                if (decoder && !decoder.decoded) {
+                if (decoder && !decoder.decoding) {
                     // Stagger the start of each decode
                     setTimeout(() => {
                         decoder.decode();
                     }, index * 200);
+                }
+            });
+        }
+        
+        // Reset matrix decoders when leaving slide
+        function resetMatrixDecoders() {
+            document.querySelectorAll('.matrix-decode').forEach(element => {
+                const decoder = decoders.get(element);
+                if (decoder) {
+                    decoder.reset();
                 }
             });
         }
@@ -3223,8 +3260,9 @@
         // Intersection Observer for slide tracking and animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const slideNum = Array.from(slides).indexOf(entry.target) + 1;
+                
                 if (entry.isIntersecting) {
-                    const slideNum = Array.from(slides).indexOf(entry.target) + 1;
                     currentSlideSpan.textContent = slideNum;
                     
                     // Animate slide content
@@ -3251,6 +3289,11 @@
                     if (slideNum === 13) {
                         initializeTimelineScroll();
                         generateStarfield();
+                    }
+                } else {
+                    // Reset Matrix Decode when leaving slide 2
+                    if (slideNum === 2) {
+                        resetMatrixDecoders();
                     }
                 }
             });
