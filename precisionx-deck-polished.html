@@ -1039,7 +1039,7 @@
             position: absolute;
             background: #ffffff;
             border-radius: 50%;
-            animation: twinkle 3s infinite ease-in-out;
+            animation: twinkle 3s infinite ease-in-out, floatStar 60s infinite linear;
         }
 
         .star.cyan {
@@ -1057,12 +1057,108 @@
             50% { opacity: 1; }
         }
 
+        @keyframes floatStar {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(10px, -15px);
+            }
+            50% {
+                transform: translate(-5px, -25px);
+            }
+            75% {
+                transform: translate(-15px, -10px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        /* Different float speeds for variety */
+        .star.slow { animation: twinkle 4s infinite ease-in-out, floatStarSlow 90s infinite linear; }
+        .star.fast { animation: twinkle 2s infinite ease-in-out, floatStarFast 40s infinite linear; }
+
+        @keyframes floatStarSlow {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(5px, -8px); }
+            50% { transform: translate(-3px, -15px); }
+            75% { transform: translate(-8px, -5px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes floatStarFast {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(15px, -20px); }
+            50% { transform: translate(-8px, -35px); }
+            75% { transform: translate(-20px, -15px); }
+            100% { transform: translate(0, 0); }
+        }
+
         /* Ensure content is above starfield */
         .timeline-vertical,
         .slide-title,
         .slide-subtitle {
             position: relative;
             z-index: 1;
+        }
+
+        /* Slide Dividers/Transitions */
+        .slide-divider {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 150px;
+            z-index: 50;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .slide-divider svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide-divider.wave path {
+            fill: #000000;
+        }
+
+        .slide-divider.curve path {
+            fill: #000000;
+        }
+
+        /* Different divider styles */
+        .slide-divider.cyan-glow path {
+            fill: #000000;
+            filter: drop-shadow(0 -5px 15px rgba(0, 255, 255, 0.3));
+        }
+
+        .slide-divider.orange-glow path {
+            fill: #000000;
+            filter: drop-shadow(0 -5px 15px rgba(255, 87, 34, 0.3));
+        }
+
+        /* Divider with gradient line */
+        .slide-divider-line {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #00ffff 30%, #ff5722 70%, transparent 100%);
+            z-index: 51;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .slide-divider {
+                height: 80px;
+            }
         }
 
         .urgency-box {
@@ -2089,14 +2185,20 @@
     <div class="scroll-hint">SCROLL DOWN ↓</div>
     
     <!-- SLIDE 1: Title -->
-    <div class="slide title-slide" data-slide="1">
+    <div class="slide title-slide" data-slide="1" style="position: relative;">
         <h1 class="hero-title">PRECISION EXPLORATION</h1>
         <p class="hero-subtitle">Integrated Energy & AI Infrastructure Platform</p>
         <p class="hero-tagline">Building the Energy Backbone of America's AI Future</p>
+        
+        <div class="slide-divider wave cyan-glow">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path d="M0,50 C360,150 1080,-50 1440,50 L1440,150 L0,150 Z"></path>
+            </svg>
+        </div>
     </div>
 
     <!-- SLIDE 2: Key Metrics -->
-    <div class="slide" data-slide="2">
+    <div class="slide" data-slide="2" style="position: relative;">
         <h2 class="slide-title">The Opportunity at a Glance</h2>
         <div class="stats-grid">
             <div class="stat-box reflect reflect-cyan">
@@ -2124,10 +2226,16 @@
                 <div class="stat-label">ROI Potential</div>
             </div>
         </div>
+        
+        <div class="slide-divider wave orange-glow">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path d="M0,80 C240,20 480,120 720,60 C960,0 1200,100 1440,50 L1440,150 L0,150 Z"></path>
+            </svg>
+        </div>
     </div>
 
     <!-- SLIDE 3: Executive Vision -->
-    <div class="slide" data-slide="3">
+    <div class="slide" data-slide="3" style="position: relative;">
         <h2 class="slide-title">Executive Vision</h2>
         <p class="slide-subtitle">
             Precision Exploration represents the convergence of <span style="color: #ff5722; font-weight: bold;">three transformational opportunities</span>: 
@@ -2138,6 +2246,12 @@
                 We are not just extracting resources—<br>
                 we are building the energy backbone of America's AI future.
             </p>
+        </div>
+        
+        <div class="slide-divider wave orange-glow">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path d="M0,100 C480,0 960,150 1440,50 L1440,150 L0,150 Z"></path>
+            </svg>
         </div>
     </div>
 
@@ -2221,7 +2335,7 @@
     </div>
 
     <!-- SLIDE 7: AI Data Centers -->
-    <div class="slide" data-slide="7">
+    <div class="slide" data-slide="7" style="position: relative;">
         <h2 class="slide-title">Pillar 3: AI Data Center Infrastructure</h2>
         <div class="chart-section">
             <div class="info-box left-border-only">
@@ -2269,6 +2383,12 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        
+        <div class="slide-divider wave cyan-glow">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path d="M0,80 C320,150 720,0 1080,100 C1260,140 1380,80 1440,60 L1440,150 L0,150 Z"></path>
+            </svg>
         </div>
     </div>
 
@@ -2409,17 +2529,23 @@
     </div>
 
     <!-- SLIDE 11: Financial Projections -->
-    <div class="slide" data-slide="11">
+    <div class="slide" data-slide="11" style="position: relative;">
         <h2 class="slide-title">10-Year Financial Projections (Conservative)</h2>
         <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
             <div style="width: 90%; max-width: 1200px; height: 500px;">
                 <canvas id="financialChart"></canvas>
             </div>
         </div>
+        
+        <div class="slide-divider wave orange-glow">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path d="M0,30 C200,100 400,0 600,80 C800,150 1000,50 1200,90 C1350,120 1400,70 1440,50 L1440,150 L0,150 Z"></path>
+            </svg>
+        </div>
     </div>
 
     <!-- SLIDE 12: Management Team -->
-    <div class="slide" data-slide="12">
+    <div class="slide" data-slide="12" style="position: relative;">
         <h2 class="slide-title">World-Class Management Team</h2>
         <div class="team-grid">
             <div class="team-card fade-border-lr">
@@ -2453,6 +2579,12 @@
                     <div style="font-size: 18px; color: #a0a0a0; font-weight: 600;">Combined Years<br>of Experience</div>
                 </div>
             </div>
+        </div>
+        
+        <div class="slide-divider wave cyan-glow">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path d="M0,60 C240,120 480,20 720,80 C960,140 1200,40 1440,80 L1440,150 L0,150 Z"></path>
+            </svg>
         </div>
     </div>
 
@@ -2552,7 +2684,7 @@
     </div>
 
     <!-- SLIDE 15: Why Now? -->
-    <div class="slide" data-slide="15">
+    <div class="slide" data-slide="15" style="position: relative;">
         <h2 class="slide-title" style="color: #ff5722;">Why Now? The Investment Imperative</h2>
         <p class="slide-subtitle" style="color: #00ffff;">This opportunity will not exist in 24 months</p>
         <div class="urgency-grid">
@@ -2589,10 +2721,16 @@
                 ✓ Asymmetric returns: Limited downside, exponential upside
             </p>
         </div>
+        
+        <div class="slide-divider wave orange-glow">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path d="M0,100 C360,30 720,130 1080,50 C1260,10 1380,70 1440,40 L1440,150 L0,150 Z"></path>
+            </svg>
+        </div>
     </div>
 
     <!-- SLIDE 16: Exit Strategies -->
-    <div class="slide" data-slide="16">
+    <div class="slide" data-slide="16" style="position: relative;">
         <h2 class="slide-title">Exit Strategies & Liquidity</h2>
         <div class="exit-grid">
             <div class="exit-box">
@@ -2635,6 +2773,12 @@
                     <strong>Advantage:</strong> Best of both worlds
                 </div>
             </div>
+        </div>
+        
+        <div class="slide-divider wave cyan-glow">
+            <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+                <path d="M0,50 C180,100 360,20 540,70 C720,120 900,40 1080,80 C1260,120 1380,60 1440,40 L1440,150 L0,150 Z"></path>
+            </svg>
         </div>
     </div>
 
@@ -2812,7 +2956,7 @@
             const starfield = document.getElementById('starfield-13');
             if (!starfield || starfield.children.length > 0) return;
             
-            const numStars = 80;
+            const numStars = 100;
             
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
@@ -2828,8 +2972,15 @@
                 star.style.height = size + 'px';
                 
                 // Random animation delay
-                star.style.animationDelay = Math.random() * 3 + 's';
-                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                star.style.animationDelay = Math.random() * 5 + 's, ' + Math.random() * 30 + 's';
+                
+                // Random speed class
+                const speedChance = Math.random();
+                if (speedChance > 0.7) {
+                    star.classList.add('slow');
+                } else if (speedChance < 0.2) {
+                    star.classList.add('fast');
+                }
                 
                 // Some colored stars
                 const colorChance = Math.random();
