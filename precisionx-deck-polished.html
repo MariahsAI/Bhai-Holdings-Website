@@ -3002,12 +3002,12 @@
                         animateCounters();
                     }
                     
-                    // Initialize charts
-                    if (slideNum === 5) initializeProductionChart();
-                    if (slideNum === 6) initializeHydrogenChart();
-                    if (slideNum === 11) initializeFinancialChart();
-                    if (slideNum === 14) initializeRadarChart();
-                    if (slideNum === 17) initializeProceedsChart();
+                    // Initialize/Re-animate charts
+                    if (slideNum === 5) reAnimateChart('production');
+                    if (slideNum === 6) reAnimateChart('hydrogen');
+                    if (slideNum === 11) reAnimateChart('financial');
+                    if (slideNum === 14) reAnimateChart('radar');
+                    if (slideNum === 17) reAnimateChart('proceeds');
                     
                     // Initialize timeline scroll effect
                     if (slideNum === 13) {
@@ -3019,6 +3019,47 @@
         }, { threshold: 0.3 });
 
         slides.forEach(slide => observer.observe(slide));
+
+        // Re-animate chart function
+        function reAnimateChart(chartName) {
+            switch(chartName) {
+                case 'production':
+                    if (productionChart) {
+                        productionChart.destroy();
+                        productionChart = null;
+                    }
+                    initializeProductionChart();
+                    break;
+                case 'hydrogen':
+                    if (hydrogenChart) {
+                        hydrogenChart.destroy();
+                        hydrogenChart = null;
+                    }
+                    initializeHydrogenChart();
+                    break;
+                case 'financial':
+                    if (financialChart) {
+                        financialChart.destroy();
+                        financialChart = null;
+                    }
+                    initializeFinancialChart();
+                    break;
+                case 'radar':
+                    if (radarChart) {
+                        radarChart.destroy();
+                        radarChart = null;
+                    }
+                    initializeRadarChart();
+                    break;
+                case 'proceeds':
+                    if (proceedsChart) {
+                        proceedsChart.destroy();
+                        proceedsChart = null;
+                    }
+                    initializeProceedsChart();
+                    break;
+            }
+        }
 
         // Divider energy flow effect on scroll
         function initializeDividerEffects() {
