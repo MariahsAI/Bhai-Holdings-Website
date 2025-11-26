@@ -419,6 +419,37 @@
             line-height: 1.6;
         }
 
+        /* Typewriter Effect */
+        .typewriter-container {
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .typewriter-text {
+            display: inline;
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            color: #00ffff;
+            font-weight: 400;
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+        }
+
+        .typewriter-cursor.hidden {
+            opacity: 0;
+            animation: none;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
         /* Advantage Grid */
         .advantage-grid {
             display: grid;
@@ -1384,8 +1415,9 @@
             border-radius: 20px;
             padding: 60px;
             text-align: center;
-            margin: 80px auto;
+            margin: 0 auto;
             max-width: 800px;
+            width: 100%;
         }
 
         .contact-title {
@@ -1393,12 +1425,14 @@
             font-weight: 900;
             color: #ff5722;
             margin-bottom: 35px;
+            text-align: center;
         }
 
         .contact-info {
             font-size: 20px;
             color: #e0e0e0;
             line-height: 2.2;
+            text-align: center;
         }
 
         .contact-info a {
@@ -2410,6 +2444,10 @@
                 font-size: 16px;
             }
 
+            .typewriter-container {
+                min-height: 80px;
+            }
+
             /* Tables */
             .data-table {
                 font-size: 12px;
@@ -2809,9 +2847,9 @@
             prolific Wolfcamp oil production, groundbreaking white hydrogen discovery, and next-generation AI data center infrastructure.
         </p>
         <div class="vision-box">
-            <p class="vision-text">
-                We are not just extracting resources—<br>
-                we are building the energy backbone of America's AI future.
+            <p class="vision-text typewriter-container">
+                <span class="typewriter-text" data-text="We are not just extracting resources—we are building the energy backbone of America's AI future."></span>
+                <span class="typewriter-cursor">|</span>
             </p>
         </div>
         
@@ -3350,8 +3388,8 @@
     </div>
 
     <!-- SLIDE 18: Contact -->
-    <div class="slide" data-slide="18">
-        <h2 class="slide-title" style="text-align: center; margin-bottom: 60px;">Ready to Join the Energy Revolution?</h2>
+    <div class="slide" data-slide="18" style="align-items: center;">
+        <h2 class="slide-title" style="text-align: center; margin-bottom: 60px; width: 100%;">Ready to Join the Energy Revolution?</h2>
         <div class="contact-box">
             <div class="contact-title">Contact Information</div>
             <div class="contact-info">
@@ -3414,6 +3452,11 @@
                     // Trigger animations based on slide
                     if (slideNum === 2) {
                         animateCounters();
+                    }
+                    
+                    // Typewriter effect for vision statement
+                    if (slideNum === 3) {
+                        triggerTypewriter();
                     }
                     
                     // Initialize/Re-animate charts
@@ -3725,6 +3768,41 @@
                     el.style.animationDelay = `${0.3 + index * 0.1}s`;
                 }
             });
+        }
+
+        // Typewriter effect for vision statement
+        let typewriterTriggered = false;
+        function triggerTypewriter() {
+            if (typewriterTriggered) return;
+            typewriterTriggered = true;
+            
+            const typewriterElement = document.querySelector('.typewriter-text');
+            const cursorElement = document.querySelector('.typewriter-cursor');
+            if (!typewriterElement) return;
+            
+            const text = typewriterElement.getAttribute('data-text');
+            let charIndex = 0;
+            typewriterElement.textContent = '';
+            
+            const typingSpeed = 65; // milliseconds per character
+            
+            function typeNextChar() {
+                if (charIndex < text.length) {
+                    typewriterElement.textContent += text.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeNextChar, typingSpeed);
+                } else {
+                    // Hide cursor after typing is complete
+                    setTimeout(() => {
+                        if (cursorElement) {
+                            cursorElement.classList.add('hidden');
+                        }
+                    }, 1500);
+                }
+            }
+            
+            // Start typing after a short delay
+            setTimeout(typeNextChar, 500);
         }
 
         // Counter animation
