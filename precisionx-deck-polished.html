@@ -76,6 +76,11 @@
         .loader-logo {
             position: relative;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .loader-logo-text {
@@ -83,6 +88,7 @@
             font-size: 72px;
             font-weight: 900;
             letter-spacing: 20px;
+            padding-left: 20px; /* Compensate for letter-spacing on last letter */
             background: linear-gradient(135deg, #00ffff 0%, #ff5722 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -90,6 +96,7 @@
             opacity: 0;
             transform: scale(0.8);
             animation: logoReveal 1.5s ease-out 0.5s forwards;
+            text-align: center;
         }
 
         @keyframes logoReveal {
@@ -113,6 +120,7 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 14px;
             letter-spacing: 8px;
+            margin-left: 8px; /* Compensate for letter-spacing */
             color: #00ffff;
             text-transform: uppercase;
             margin-top: 30px;
