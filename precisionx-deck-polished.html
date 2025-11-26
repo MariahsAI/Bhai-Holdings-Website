@@ -1127,37 +1127,94 @@
             fill: #000000;
         }
 
-        .slide-divider.curve path {
-            fill: #000000;
-        }
-
-        /* Different divider styles */
-        .slide-divider.cyan-glow path {
-            fill: #000000;
+        /* Base glow */
+        .slide-divider.cyan-glow > svg:first-of-type path {
             filter: drop-shadow(0 -5px 15px rgba(0, 255, 255, 0.3));
         }
 
-        .slide-divider.orange-glow path {
-            fill: #000000;
+        .slide-divider.orange-glow > svg:first-of-type path {
             filter: drop-shadow(0 -5px 15px rgba(255, 87, 34, 0.3));
         }
 
-        /* Divider with gradient line */
-        .slide-divider-line {
+        /* Energy flow line that traces the wave */
+        .slide-divider .energy-line {
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, #00ffff 30%, #ff5722 70%, transparent 100%);
-            z-index: 51;
-            opacity: 0.6;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 52;
+        }
+
+        .slide-divider .energy-line path {
+            fill: none;
+            stroke: #00ffff;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 1)) 
+                    drop-shadow(0 0 20px rgba(0, 255, 255, 0.8))
+                    drop-shadow(0 0 40px rgba(0, 255, 255, 0.5));
+        }
+
+        .slide-divider.orange-glow .energy-line path {
+            stroke: #ff5722;
+            filter: drop-shadow(0 0 10px rgba(255, 87, 34, 1)) 
+                    drop-shadow(0 0 20px rgba(255, 87, 34, 0.8))
+                    drop-shadow(0 0 40px rgba(255, 87, 34, 0.5));
+        }
+
+        .slide-divider.active .energy-line path {
+            animation: drawEnergy 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes drawEnergy {
+            0% {
+                stroke-dashoffset: 2000;
+                stroke-opacity: 1;
+            }
+            80% {
+                stroke-opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                stroke-opacity: 0.4;
+            }
+        }
+
+        /* Glowing orb - REMOVED for cleaner look */
+
+        /* Continuous subtle pulse after initial animation */
+        .slide-divider.active.complete .energy-line path {
+            stroke-dashoffset: 0;
+            stroke-opacity: 0.3;
+            animation: energyPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes energyPulse {
+            0%, 100% {
+                stroke-opacity: 0.2;
+                stroke-width: 2;
+            }
+            50% {
+                stroke-opacity: 0.5;
+                stroke-width: 4;
+            }
         }
 
         @media (max-width: 768px) {
             .slide-divider {
                 height: 80px;
+            }
+
+            .slide-divider .energy-line path {
+                stroke-width: 2;
+            }
+
+            .slide-divider.active .energy-line path {
+                animation: drawEnergy 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             }
         }
 
@@ -2181,6 +2238,23 @@
     </style>
 </head>
 <body>
+    <!-- SVG Gradient Definitions -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <linearGradient id="energyGradientCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0" />
+                <stop offset="30%" style="stop-color:#00ffff;stop-opacity:1" />
+                <stop offset="70%" style="stop-color:#00ffff;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#00ffff;stop-opacity:0" />
+            </linearGradient>
+            <linearGradient id="energyGradientOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#ff5722;stop-opacity:0" />
+                <stop offset="30%" style="stop-color:#ff5722;stop-opacity:1" />
+                <stop offset="70%" style="stop-color:#ff5722;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#ff5722;stop-opacity:0" />
+            </linearGradient>
+        </defs>
+    </svg>
     <div id="progress-bar"></div>
     <div class="scroll-hint">SCROLL DOWN ↓</div>
     
@@ -2945,6 +3019,63 @@
         }, { threshold: 0.3 });
 
         slides.forEach(slide => observer.observe(slide));
+
+        // Divider energy flow effect on scroll
+        function initializeDividerEffects() {
+            const dividers = document.querySelectorAll('.slide-divider');
+            
+            // Add energy line SVG to each divider
+            dividers.forEach(divider => {
+                const mainSvg = divider.querySelector('svg');
+                if (mainSvg) {
+                    const path = mainSvg.querySelector('path');
+                    if (path) {
+                        const pathD = path.getAttribute('d');
+                        
+                        // Create energy line SVG overlay
+                        const energySvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                        energySvg.classList.add('energy-line');
+                        energySvg.setAttribute('viewBox', '0 0 1440 150');
+                        energySvg.setAttribute('preserveAspectRatio', 'none');
+                        
+                        // Extract just the top curve part for the energy line
+                        const energyPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        // Get the curve part (before L commands)
+                        const curvePart = pathD.split(' L')[0];
+                        energyPath.setAttribute('d', curvePart);
+                        
+                        energySvg.appendChild(energyPath);
+                        divider.appendChild(energySvg);
+                    }
+                }
+            });
+            
+            function updateDividers() {
+                const windowHeight = window.innerHeight;
+                
+                dividers.forEach(divider => {
+                    const rect = divider.getBoundingClientRect();
+                    
+                    // Trigger when divider enters bottom 25% of viewport
+                    const triggerPoint = windowHeight * 0.75;
+                    
+                    if (rect.top < triggerPoint && !divider.classList.contains('active')) {
+                        divider.classList.add('active');
+                        
+                        // Add complete class after animation ends for continuous pulse
+                        setTimeout(() => {
+                            divider.classList.add('complete');
+                        }, 1600);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateDividers, { passive: true });
+            updateDividers(); // Initial check
+        }
+
+        // Initialize divider effects on load
+        initializeDividerEffects();
 
         // Timeline scroll fill effect
         function initializeTimelineScroll() {
