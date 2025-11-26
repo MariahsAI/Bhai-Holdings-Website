@@ -287,6 +287,13 @@
             80% { transform: translate(0, -5%); }
             90% { transform: translate(5%, 5%); }
         }
+        
+        /* Hide noise overlay on mobile for performance */
+        @media (max-width: 768px) {
+            .noise-overlay {
+                display: none;
+            }
+        }
 
         /* =============================================
            ANIMATED GRADIENT BACKGROUNDS
@@ -3454,15 +3461,48 @@
                 min-height: 120px;
             }
 
-            /* Remove hover effects on touch devices */
-            .stat-box:hover,
+            /* Remove hover effects on touch devices - preserve base shadows */
+            .stat-box:hover {
+                transform: none;
+                box-shadow:
+                    0 0 0 1px rgba(0, 255, 255, 0.1),
+                    0 20px 40px -20px rgba(0, 0, 0, 0.8),
+                    0 40px 80px -40px rgba(0, 255, 255, 0.15),
+                    inset 0 0 60px rgba(0, 255, 255, 0.03);
+            }
+            
+            .stat-box.orange:hover {
+                box-shadow:
+                    0 0 0 1px rgba(255, 87, 34, 0.1),
+                    0 20px 40px -20px rgba(0, 0, 0, 0.8),
+                    0 40px 80px -40px rgba(255, 87, 34, 0.15),
+                    inset 0 0 60px rgba(255, 87, 34, 0.03);
+            }
+            
             .pillar-card:hover,
             .advantage-box:hover {
                 transform: none;
             }
 
             /* Add active state for touch feedback */
-            .stat-box:active,
+            .stat-box:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+                box-shadow:
+                    0 0 0 2px rgba(0, 255, 255, 0.5),
+                    0 10px 20px -10px rgba(0, 0, 0, 0.8),
+                    0 0 30px rgba(0, 255, 255, 0.2),
+                    inset 0 0 60px rgba(0, 255, 255, 0.05);
+            }
+            
+            .stat-box.orange:active {
+                box-shadow:
+                    0 0 0 2px rgba(255, 87, 34, 0.5),
+                    0 10px 20px -10px rgba(0, 0, 0, 0.8),
+                    0 0 30px rgba(255, 87, 34, 0.2),
+                    inset 0 0 60px rgba(255, 87, 34, 0.05);
+            }
+            
             .pillar-card:active,
             .advantage-box:active,
             .phase-box:active,
@@ -3505,6 +3545,327 @@
 
             html {
                 scroll-snap-type: none;
+            }
+        }
+
+        /* =============================================
+           MOBILE OPTIMIZATIONS FOR PREMIUM EFFECTS
+           ============================================= */
+        
+        /* Loader mobile styles */
+        @media (max-width: 768px) {
+            .loader-logo-text {
+                font-size: 42px;
+                letter-spacing: 10px;
+                padding-left: 10px;
+            }
+            
+            .loader-tagline {
+                font-size: 10px;
+                letter-spacing: 4px;
+                margin-left: 4px;
+            }
+            
+            .loader-progress {
+                width: 200px;
+            }
+            
+            .energy-ring {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .energy-ring:nth-child(2) {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .energy-ring:nth-child(3) {
+                width: 350px;
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .loader-logo-text {
+                font-size: 32px;
+                letter-spacing: 6px;
+                padding-left: 6px;
+            }
+            
+            .loader-tagline {
+                font-size: 8px;
+                letter-spacing: 3px;
+                margin-left: 3px;
+            }
+            
+            .loader-progress {
+                width: 160px;
+            }
+            
+            .loader-percentage {
+                font-size: 12px;
+            }
+            
+            .energy-ring {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .energy-ring:nth-child(2) {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .energy-ring:nth-child(3) {
+                width: 260px;
+                height: 260px;
+            }
+        }
+
+        /* 3D Wave mobile styles */
+        @media (max-width: 768px) {
+            .slide-divider.divider-3d {
+                height: 150px;
+            }
+            
+            .wave-particles {
+                display: none; /* Hide particles on mobile for performance */
+            }
+            
+            .wave-scanner {
+                display: none;
+            }
+            
+            .slide-divider.divider-3d .wave-glow path {
+                stroke-width: 2;
+                filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.8))
+                        drop-shadow(0 0 12px rgba(0, 255, 255, 0.5));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide-divider.divider-3d {
+                height: 100px;
+            }
+        }
+
+        /* Holographic stat boxes mobile optimization */
+        @media (max-width: 768px) {
+            .stats-grid {
+                gap: 25px;
+                perspective: none;
+            }
+            
+            .stat-box {
+                padding: 40px 25px;
+                border-radius: 16px;
+                
+                /* Simplified effects for performance */
+                animation: none;
+                transform: none;
+                
+                box-shadow:
+                    0 0 0 1px rgba(0, 255, 255, 0.2),
+                    0 10px 30px -10px rgba(0, 0, 0, 0.6),
+                    inset 0 0 40px rgba(0, 255, 255, 0.03);
+            }
+            
+            .stat-box.orange {
+                box-shadow:
+                    0 0 0 1px rgba(255, 87, 34, 0.2),
+                    0 10px 30px -10px rgba(0, 0, 0, 0.6),
+                    inset 0 0 40px rgba(255, 87, 34, 0.03);
+            }
+            
+            /* Simplified rotating border */
+            .stat-box::before {
+                animation-duration: 8s;
+            }
+            
+            /* Hide reflection on mobile */
+            .stat-box .reflection {
+                display: none;
+            }
+            
+            /* Smaller corners */
+            .stat-box .corner {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .stat-box .corner::before {
+                width: 15px;
+                height: 2px;
+            }
+            
+            .stat-box .corner::after {
+                width: 2px;
+                height: 15px;
+            }
+            
+            /* Simplified scan line */
+            .stat-box .scan-line {
+                animation-duration: 5s;
+            }
+            
+            /* Reduce inner glow intensity */
+            .stat-box .inner-glow {
+                animation: none;
+                opacity: 0.3;
+            }
+            
+            .stat-value {
+                font-size: 52px;
+            }
+            
+            .stat-label {
+                font-size: 13px;
+                letter-spacing: 1px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                gap: 20px;
+            }
+            
+            .stat-box {
+                padding: 30px 20px;
+                border-radius: 14px;
+            }
+            
+            /* Even simpler effects on small phones */
+            .stat-box::before {
+                display: none; /* Hide rotating border on very small screens */
+            }
+            
+            .stat-box .scan-line {
+                display: none;
+            }
+            
+            .stat-box .inner-glow {
+                display: none;
+            }
+            
+            /* Keep just the corners for that tech look */
+            .stat-box .corner {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .stat-box .corner::before {
+                width: 12px;
+            }
+            
+            .stat-box .corner::after {
+                height: 12px;
+            }
+            
+            .stat-value {
+                font-size: 40px;
+                margin-bottom: 12px;
+            }
+            
+            .stat-label {
+                font-size: 11px;
+            }
+        }
+
+        /* Hero section mobile enhancements */
+        @media (max-width: 768px) {
+            .title-slide {
+                padding-top: 80px;
+                padding-bottom: 120px;
+            }
+            
+            .hero-title {
+                font-size: 38px;
+                letter-spacing: 2px;
+                line-height: 1.1;
+                animation-delay: 3s;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+                letter-spacing: 1px;
+                animation-delay: 3.3s;
+            }
+            
+            .hero-tagline {
+                font-size: 16px;
+                margin-top: 25px;
+                animation-delay: 3.6s;
+            }
+            
+            .mesh-gradient {
+                opacity: 0.3;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title-slide {
+                padding-top: 60px;
+                padding-bottom: 100px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+                letter-spacing: 1px;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .hero-tagline {
+                font-size: 13px;
+                margin-top: 20px;
+            }
+        }
+
+        /* Touch device specific - disable heavy animations */
+        @media (hover: none) and (pointer: coarse) {
+            .stat-box {
+                animation: none !important;
+                transform: none !important;
+            }
+            
+            .stat-box:hover {
+                transform: none !important;
+            }
+            
+            .stat-box:active {
+                transform: scale(0.98) !important;
+            }
+            
+            /* Reduce glow intensity on touch for battery */
+            .stat-box .corner::before,
+            .stat-box .corner::after {
+                box-shadow: 0 0 5px currentColor;
+            }
+            
+            .stat-box::after {
+                box-shadow: 0 0 10px 1px rgba(0, 255, 255, 0.3);
+            }
+            
+            .stat-box.orange::after {
+                box-shadow: 0 0 10px 1px rgba(255, 87, 34, 0.3);
+            }
+            
+            /* Disable floating animation */
+            @keyframes float {
+                0%, 100% { transform: none; }
+            }
+            
+            /* Slower scan line for battery */
+            .stat-box .scan-line {
+                animation-duration: 6s;
+            }
+            
+            /* Disable wave motion */
+            .slide-divider.divider-3d .wave-glow path {
+                animation: glowPulse 4s ease-in-out infinite;
             }
         }
     </style>
@@ -4293,9 +4654,11 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             
-            // Particle system
+            // Particle system - reduce count on mobile for performance
             const particles = [];
-            const particleCount = 100;
+            const isMobile = window.innerWidth < 768;
+            const particleCount = isMobile ? 40 : 100;
+            const burstCount = isMobile ? 40 : 80;
             let burst = false;
             let burstTime = 0;
             let animationRunning = true;
@@ -4375,7 +4738,7 @@
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
                 
-                for (let i = 0; i < 80; i++) {
+                for (let i = 0; i < burstCount; i++) {
                     particles.push(new Particle(centerX, centerY, true));
                 }
             }
